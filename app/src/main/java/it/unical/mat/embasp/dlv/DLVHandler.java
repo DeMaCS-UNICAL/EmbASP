@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -13,32 +12,20 @@ import it.unical.mat.embasp.base.AnswerSetCallback;
 import it.unical.mat.embasp.mapper.ASPMapper;
 
 /**
- * <p>DLVHandler is an implementation of an {@link it.unical.mat.andlv.base.ASPHandler} used for a DLV ASP solver execution handling.It uses
- * an class that notify a result from a {@link it.unical.mat.andlv.base.ASPService} implementation class that provides a native method invoching DLV in an appropriate
- * working thread. An {@link it.unical.mat.andlv.base.AnswerSetCallback} class is used for result handling.
+ * <p>DLVHandler is an implementation of an {@link it.unical.mat.embasp.base.ASPHandler} used for a DLV ASP solver execution handling.
  * .</p>
- * @see android.app.IntentService
- * @see android.content.BroadcastReceiver
  */
 public class DLVHandler extends ASPHandler{
     private AnswerSetCallback asCallback; //callback for result
 
     private StringBuilder predicateToFilter;
 
-    /**
-     * Constructor inizialize the {@link DLVService}
-     */
     public DLVHandler(){
         super();
         predicateToFilter=new StringBuilder();
     }
 
-    /** Starts DLVService and initialize Application {@link android.content.Context} and {@link it.unical.mat.andlv.base.AnswerSetCallback}
-     * @param asCallback AnswerSetCallback object
-     * @param context Context object
-     * @see it.unical.mat.andlv.base.AnswerSetCallback
-     * @see android.content.Context
-     */
+
     @Override
     public void start(Context context, AnswerSetCallback asCallback) {
         this.asCallback = asCallback;
@@ -51,7 +38,6 @@ public class DLVHandler extends ASPHandler{
         intent.putExtra(DLVService.FILES, (ArrayList<String>)this.filesPaths);
         intent.putExtra(DLVService.OPTION, this.options.toString());
         context.registerReceiver(this, new IntentFilter(DLVService.RESULT_NOTIFICATION));
-        Log.i(getClass().getName(), " start service");
         context.startService(intent);
     }
 
@@ -96,20 +82,11 @@ public class DLVHandler extends ASPHandler{
             predicateToFilter.append(","+mapper.registerClass(aClass));
     }
 
-    /**
-     * Calls the {@link it.unical.mat.andlv.base.AnswerSetCallback} callback function for result handling.
-     * @param aspServiceOut
-     * @see it.unical.mat.andlv.base.AnswerSetCallback
-     */
     @Override
     protected void receive(String aspServiceOut){
         asCallback.callback(new DLVAnswerSets(aspServiceOut));
     }
 
-    /**
-     * Check if a service is already running and waits until service is stopped.
-     * @see android.app.ActivityManager
-     */
     void stopDlvService(Context context){
 
         boolean isServiceRunning = true;

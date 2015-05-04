@@ -16,7 +16,6 @@ public class DLVAnswerSets extends AnswerSets{
     /**
      * Constructor initialize AnswerSets object with a String that contains ALL Answer Set generated from ASPService.
      *
-     * @param answerSets
      */
     public DLVAnswerSets(String answerSets) {
         super(answerSets);

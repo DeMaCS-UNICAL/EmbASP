@@ -10,28 +10,19 @@ import java.util.Set;
 import it.unical.mat.embasp.mapper.ASPMapper;
 
 /**
- * <p>AnswerSet class rapresents an Answer Set and contains get and set methods to handle it.</p>
- * @see java.util.HashMap
+ * <p>AnswerSet class represents an Answer Set and contains get and set methods to handle it.</p>
+ *
  */
 public class AnswerSet {
     private List<String> answerSet;//String representing the Answer Set
     private HashMap<Integer,Integer> weightMap;//Answer sets weights
     private Set<Object> objectsAtoms;
 
-    /**
-     * Constructor intialize an AnswerSet object with a String containing the Answer Set
-     * and an {@link java.util.HashMap} containing Answer Set weight
-     * @param outputString String representing an Answer Set
-     */
     public AnswerSet(List<String> outputString){
         this.answerSet = outputString;
         this.weightMap = new HashMap<Integer, Integer>();
     }
 
-    /**
-     * Get function for the Answer Set in String format
-     * @return answerSet Answer Set in String format
-     */
     public List<String> getAnswerSet(){
         return Collections.unmodifiableList(this.answerSet);
     }
