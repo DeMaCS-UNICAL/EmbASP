@@ -33,7 +33,7 @@ public class MainActivity extends Activity implements AnswerSetCallback{
 
         handler.addRawInput("col(N,red) | col(N,green) | col(N,blue) :- node(N).");
         handler.addRawInput(":- col(N1,C1), col(N2,C1), edge(N1,N2).");
-        String filepath=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+ "edb_edge.txt";
+        String edb_edge="node(node_1).node(node_2).node(node_3).";
         /*
             edb_edge.txt:
             node("node_1").
@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements AnswerSetCallback{
             handler.addFileInput(filepath);
             handler.setFilter(Col.class);
 
-
+            handler.addRawInput(edb_edge);
 
             Edge edge1 = new Edge("node_1","node_2");
             Edge edge2 = new Edge("node_1","node_3");
