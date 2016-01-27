@@ -62,6 +62,28 @@ public abstract class ASPHandler extends BroadcastReceiver {
             throw new FileNotFoundException();
     }
 
+    public void clearProgram(){
+        program.setLength(0);
+        program.trimToSize();
+    }
+
+
+    public void clearOptions(){
+        options.setLength(0);
+        options.trimToSize();
+    }
+
+
+    public void clearFilesPaths(){
+        filesPaths.clear();
+    }
+
+    public void clearALl(){
+        clearOptions();
+        clearFilesPaths();
+        clearProgram();
+    }
+
     public void addRawInput(String rawInput){
         program.append(rawInput);
     }
