@@ -100,6 +100,4 @@ public abstract class ASPHandler extends BroadcastReceiver {
         clearFilesPaths();
         clearProgram();
     }
-
-
 }
