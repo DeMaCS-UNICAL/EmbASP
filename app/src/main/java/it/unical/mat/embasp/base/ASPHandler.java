@@ -80,5 +80,26 @@ public abstract class ASPHandler extends BroadcastReceiver {
 
     abstract protected void receive(String aspServiceOut);
 
+    public void clearProgram(){
+        program.setLength(0);
+        program.trimToSize();
+    }
+
+    public void clearOptions(){
+        options.setLength(0);
+        options.trimToSize();
+    }
+
+    public void clearFilesPaths(){
+    filesPaths.clear();
+    }
+
+
+    public void clearAll(){
+        clearOptions();
+        clearFilesPaths();
+        clearProgram();
+    }
+
 
 }
