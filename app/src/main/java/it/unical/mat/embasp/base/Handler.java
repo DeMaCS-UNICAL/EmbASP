@@ -13,24 +13,27 @@ public abstract class Handler {
 		options = new HashMap<>();
 	}
 
-	public int addProgram(InputProgram p){
+	public int addProgram(InputProgram i){
 
 		int last_index = programs.size();
-		programs.put(last_index++, p);
+		programs.put(last_index++, i);
 		return last_index;
 	}
 
 	public int addOption(OptionDescriptor o){
+		
 		int last_index = options.size();
 		options.put(last_index++, o);
 		return last_index;
 	}
 
 	public void removeProgram(int program_id){
+		
 		programs.remove(program_id);
 	}
 
 	public int removeProgram(InputProgram p){
+		
 		int key = -1;
 		for( Map.Entry<Integer, InputProgram> entry : programs.entrySet()){
 			if(entry.getValue().equals(p)){
@@ -43,13 +46,17 @@ public abstract class Handler {
 
 		}
 		return key;
+		
 	}
 
 	public void removeOption(int option_id){
+		
 		options.remove(option_id);
+		
 	}
 
 	public int removeOption(OptionDescriptor o){
+		
 		int key = -1;
 		for( Map.Entry<Integer, OptionDescriptor> entry : options.entrySet()){
 			if(entry.getValue().equals(o)){
@@ -62,11 +69,14 @@ public abstract class Handler {
 
 		}
 		return key;
+		
 	}
 
 	public void removeAll(){
+		
 		programs.clear();
 		options.clear();
+		
 	}
 
 	public void startSync(){} // TODO

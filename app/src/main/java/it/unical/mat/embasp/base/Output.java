@@ -4,8 +4,8 @@ public abstract class Output {
 
 	protected String Output;
 
-	public Output(String o) {
-		Output = o;
+	public Output(String initial_output) {
+		Output = initial_output;
 	}
 
 	public Output(){

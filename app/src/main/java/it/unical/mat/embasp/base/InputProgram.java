@@ -10,20 +10,20 @@ public abstract class InputProgram {
 		files_paths = new StringBuilder();
 	}
 
-	InputProgram (String s ){
-		program = new StringBuilder(s);
+	InputProgram (String initial_program ){
+		program = new StringBuilder(initial_program);
 		files_paths = new StringBuilder();
 	}
 
-	public void addRawInput(String s){
-		program.append(s);
+	public void addRawInput(String raw_input){
+		program.append(raw_input);
 	}
 
-	public void addFilesPath(String s){
-		files_paths.append(s);
+	public void addFilesPath(String file_path){
+		files_paths.append(file_path);
 	}
-	public void addProgram(String s){
-		program.append(s);
+	public void addProgram(String program){
+		this.program.append(program);
 	}
 
 	public void clearFilesPaths(){

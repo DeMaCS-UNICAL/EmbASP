@@ -4,8 +4,8 @@ public abstract class OptionDescriptor {
 	
 	protected StringBuilder options;
 
-	OptionDescriptor(String s) {
-		options = new StringBuilder(s);
+	OptionDescriptor(String initial_option) {
+		options = new StringBuilder(initial_option);
 	}
 	
 	public OptionDescriptor() {
@@ -13,8 +13,8 @@ public abstract class OptionDescriptor {
 	}
 	
 	
-	public void addOption(String s){
-		options.append(s);
+	public void addOption(String option){
+		options.append(option);
 	}
 	
 	public void removeOption(String option){
