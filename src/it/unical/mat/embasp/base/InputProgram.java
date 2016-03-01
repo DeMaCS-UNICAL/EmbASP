@@ -5,13 +5,14 @@ public abstract class InputProgram {
 	protected StringBuilder program;
 	protected StringBuilder files_paths;
 
-	public InputProgram() {
+	InputProgram() {
 		program = new StringBuilder();
 		files_paths = new StringBuilder();
 	}
 
 	InputProgram (String s ){
-		program.append(s); //TODO now is just an example
+		program = new StringBuilder(s);
+		files_paths = new StringBuilder();
 	}
 
 	public void addRawInput(String s){
