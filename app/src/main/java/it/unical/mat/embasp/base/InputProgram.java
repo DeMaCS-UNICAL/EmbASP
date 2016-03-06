@@ -1,39 +1,44 @@
 package it.unical.mat.embasp.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class InputProgram {
 
-	protected StringBuilder program;
-	protected StringBuilder files_paths;
+	protected String program; 
+	protected List<String> files_paths; 
 
-	InputProgram() {
-		program = new StringBuilder();
-		files_paths = new StringBuilder();
+	public InputProgram() {
+		init();
 	}
 
-	InputProgram (String initial_program ){
-		program = new StringBuilder(initial_program);
-		files_paths = new StringBuilder();
+	public InputProgram (String initial_program ){
+		init();
+		program = initial_program;
+	}
+	
+	private void init(){
+		program = new String();
+		files_paths = new ArrayList<>();
 	}
 
 	public void addRawInput(String raw_input){
-		program.append(raw_input);
+		program += raw_input;
 	}
 
 	public void addFilesPath(String file_path){
-		files_paths.append(file_path);
+		files_paths.add(file_path);
 	}
 	public void addProgram(String program){
-		this.program.append(program);
+		this.program = program;
 	}
 
 	public void clearFilesPaths(){
-		files_paths.setLength(0);
-		files_paths.trimToSize();
+		files_paths.clear();
 	}
 
 	public void clearProgram(){
-		program.setLength(0);
-		program.trimToSize();
+		program = "";
 	}
 
 	public void clearAll(){
