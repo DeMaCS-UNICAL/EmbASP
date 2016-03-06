@@ -5,8 +5,8 @@ import java.util.Map;
 
 public abstract class Handler {
 
-	private Map<Integer, InputProgram> programs;
-	private Map<Integer, OptionDescriptor> options;
+	protected Map<Integer, InputProgram> programs;
+	protected Map<Integer, OptionDescriptor> options;
 
 	public Handler() {
 		programs = new HashMap<>();
@@ -32,20 +32,20 @@ public abstract class Handler {
 		programs.remove(program_id);
 	}
 
-	public int removeProgram(InputProgram p){
-		
-		int key = -1;
+	public boolean removeProgram(InputProgram p){
+
+		boolean result = false;
 		for( Map.Entry<Integer, InputProgram> entry : programs.entrySet()){
 			if(entry.getValue().equals(p)){
-				key = entry.getKey();
-				break;
+				programs.remove(entry.getKey());
+				result=true;
 			}
 		}
-		if(key != -1){
-			programs.remove(key);
+		return result;
+			
 
-		}
-		return key;
+		
+		
 		
 	}
 
@@ -55,20 +55,17 @@ public abstract class Handler {
 		
 	}
 
-	public int removeOption(OptionDescriptor o){
+	public boolean removeOption(OptionDescriptor o){ 
 		
-		int key = -1;
+		boolean result = false;
 		for( Map.Entry<Integer, OptionDescriptor> entry : options.entrySet()){
 			if(entry.getValue().equals(o)){
-				key = entry.getKey();
-				break;
+				options.remove(entry.getKey());
+				result = true;
 			}
 		}
-		if(key != -1){
-			programs.remove(key);
 
-		}
-		return key;
+		return result;
 		
 	}
 
