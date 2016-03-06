@@ -2,29 +2,27 @@ package it.unical.mat.embasp.base;
 
 public abstract class OptionDescriptor {
 	
-	protected StringBuilder options;
+	protected String options;
 
 	OptionDescriptor(String initial_option) {
-		options = new StringBuilder(initial_option);
+		options = new String(initial_option);
 	}
 	
 	public OptionDescriptor() {
-		options = new StringBuilder();
+		options = new String();
 	}
 	
 	
-	public void addOption(String option){
-		options.append(option);
+	public void setOption(String option){ 
+		options = option;
 	}
 	
 	public void removeOption(String option){
-		int start_point = options.indexOf(option);
-		int end_point = start_point + option.length();
-		options.delete(start_point, end_point);
+		
+		options = "";
 	}
 	
 	public void clearAll(){
-		options.setLength(0);
-		options.trimToSize();
+		options = "";
 	}
 }
