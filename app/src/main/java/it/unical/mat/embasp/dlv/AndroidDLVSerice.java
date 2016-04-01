@@ -13,9 +13,13 @@ import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
- /*AndroidDLVService is used in android applications to start the service that is used to compute DLV directlry into the device.
- * The IBinder interface , gives the user the possibility to comunicate with the service in a client/server way
- * By defaults Services run in the same process of the application , to bypass this behaivior need to add a tag <name> to AndroidManifest*/
+
+ /* AndroidDLVService is used in android applications to start the service that is used to compute DLV directlry into the device.
+ *  The IBinder interface , gives the user the possibility to comunicate with the service in a client/server way
+ *  By defaults Services run in the same process of the application , to bypass this behaivior need to add a tag <name> to AndroidManifest
+ */
+
+// TODO check about Process , static libary names.
 public class AndroidDLVSerice extends Service implements it.unical.mat.embasp.base.Service {
 
     private IBinder binder = new DLVBinder();
@@ -32,14 +36,12 @@ public class AndroidDLVSerice extends Service implements it.unical.mat.embasp.ba
         }
     }
 
-
-    /*Is called when an activity calls onBind function*/
+    /*used when an activity calls onBind function*/
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
     }
-
 
      //TO FINISH
     @Override

@@ -85,12 +85,10 @@ public abstract class Handler {
 	}
 
 	public void startSync(){
-
 	}
 
 
 	public void startAsync(){
-
     }
 }
 

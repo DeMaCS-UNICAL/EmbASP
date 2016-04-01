@@ -43,7 +43,6 @@ public class DLVService extends ASPService implements Service{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         StringBuilder completeProgram = new StringBuilder();
         completeProgram.append(options).append(" ");
         completeProgram.append(file.getAbsolutePath()).append(" ");

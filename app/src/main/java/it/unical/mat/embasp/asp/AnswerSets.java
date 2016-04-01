@@ -3,7 +3,7 @@ package it.unical.mat.embasp.asp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+// TODO extend OUTPUT
 public abstract class AnswerSets {
 
 	protected String output;

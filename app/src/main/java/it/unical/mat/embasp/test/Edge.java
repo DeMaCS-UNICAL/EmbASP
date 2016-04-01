@@ -1,6 +1,6 @@
 package it.unical.mat.embasp.test;
 
-import it.unical.mat.embasp.mapper.Predicate;
+import it.unical.mat.embasp.asp.Predicate;
 import it.unical.mat.embasp.mapper.Term;
 
 /**
