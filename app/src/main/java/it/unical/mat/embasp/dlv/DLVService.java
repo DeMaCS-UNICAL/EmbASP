@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import it.unical.mat.embasp.base.ASPService;
+import it.unical.mat.embasp.base.Service;
 
 /**
  */
@@ -15,7 +16,7 @@ import it.unical.mat.embasp.base.ASPService;
  */
 
 
-public class DLVService extends ASPService {
+public class DLVService extends ASPService implements Service{
 
     private static final String FILENAME = "tmp_program";
 
@@ -65,5 +66,6 @@ public class DLVService extends ASPService {
         super.onDestroy();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
+
 }
 
