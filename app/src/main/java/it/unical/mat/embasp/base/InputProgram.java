@@ -5,7 +5,7 @@ import java.util.List;
 /*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
 * and a list of files */
 
-public abstract class InputProgram {
+public class InputProgram {
 	/*The variable in wich ASP program is stored*/
 	protected String program;
 	/*The varible in wich ASP files are stored*/

@@ -2,7 +2,7 @@ package it.unical.mat.embasp.base;
 
 
 /* This class rapresents options for a program */
-public abstract class OptionDescriptor {
+public class OptionDescriptor {
 	/*Variable in wich options are stored*/
 	protected String options;
 
