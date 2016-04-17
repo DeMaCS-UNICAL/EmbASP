@@ -7,7 +7,7 @@ import java.util.List;
 public interface Service{
 
 	/* starSync() starts ASP computation Syncronously , the parameters are a list of programs and option to be processed.
-	* Return an Output (class) filled with computation's results */
+	* Return an output (class) filled with computation's results */
 	public Output startSync(List<InputProgram> programs , List<OptionDescriptor> options);
 
 	/* startAsync() starts ASP computation Asyncronously , the parameters are the a list of programs and options to be processed and

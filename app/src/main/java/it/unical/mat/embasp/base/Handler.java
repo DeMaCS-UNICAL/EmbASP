@@ -1,6 +1,7 @@
 package it.unical.mat.embasp.base;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /*
 *   The Handler class substitute the previously ASPHandler class.
@@ -84,11 +85,11 @@ public abstract class Handler {
 		
 	}
 
-	public void startSync(){
+	public void startSync(List<Integer> program_index,List<Integer> option_index){
 	}
 
 
-	public void startAsync(){
+	public void startAsync(Callback c ,List<Integer> program_index,List<Integer> option_index){
     }
 }
 

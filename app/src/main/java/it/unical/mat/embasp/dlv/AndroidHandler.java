@@ -59,7 +59,5 @@ public class AndroidHandler extends Handler {
             }
 
         }
-        co.bindService();
-        service.startAsync(c,input_programs,input_option_index);
     }
 }

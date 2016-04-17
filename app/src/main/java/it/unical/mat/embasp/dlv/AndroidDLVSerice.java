@@ -8,11 +8,11 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
-
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
+import java.util.List;
 
  /* AndroidDLVService is used in android applications to start the service that is used to compute DLV directlry into the device.
  *  The IBinder interface , gives the user the possibility to comunicate with the service in a client/server way
@@ -43,9 +43,15 @@ public class AndroidDLVSerice extends Service implements it.unical.mat.embasp.ba
         return binder;
     }
 
-     //TO FINISH
+
     @Override
-    public void startAsync(Callback callback, final List <InputProgram> programs, final List<OptionDescriptor> options) {
+    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
+        return null;
+    }
+
+    //TO FINISH
+    @Override
+    public void startAsync(Callback callback,final List <InputProgram> programs, final List<OptionDescriptor> options) {
         new Thread(new Runnable() {
             public void run() {
 
@@ -64,4 +70,11 @@ public class AndroidDLVSerice extends Service implements it.unical.mat.embasp.ba
         }).start();
 
     }
+
+    /**
+     * Native function for DLV invocation
+     * @param filePath the path of a temporary file storing DLV program
+     * @return String result computed from DLV
+     */
+    private native String dlvMain(String filePath);
 }
