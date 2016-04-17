@@ -4,6 +4,7 @@ package it.unical.mat.embasp.dlv;
  * Created by haze on 4/17/16.
  */
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +14,43 @@ import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
-import it.unical.mat.embasp.base.Service;
-import it.unical.mat.embasp.dlv.AndroidDLVSerice;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 
 public class AndroidHandler extends Handler {
 
-    private Context co;
-    private Service s;
+    private Context context;
+    private AndroidDLVService mService;
+    private boolean bound;
+
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            AndroidDLVService.DLVBinder binder = (AndroidDLVService.DLVBinder) service;
+            mService = binder.getService();
+            bound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            bound = false;
+        }
+    };
+
+
     public AndroidHandler(Context c) {
-        this.co = c;
+        this.context = c;
+
+        Intent intent = new Intent(context, AndroidDLVService.class);
+        context.bindService(intent, mConnection, context.BIND_AUTO_CREATE);
+
+
+
     }
 
     //TODO check null
@@ -44,20 +73,23 @@ public class AndroidHandler extends Handler {
             }
         }
 
-        List<OptionDescriptor> input_option_index = new ArrayList<OptionDescriptor>();
+        List<OptionDescriptor> input_option = new ArrayList<OptionDescriptor>();
 
         if(option_index.isEmpty()){
 
             for (Map.Entry<Integer, OptionDescriptor> option: this.options.entrySet()) {
-                input_option_index.add(this.options.get(option.getKey()));
+                input_option.add(this.options.get(option.getKey()));
             }
 
         }else{
 
             for(int index : option_index){
-                input_option_index.add(this.options.get(index));
+                input_option.add(this.options.get(index));
             }
 
         }
+
+        mService.startAsync(c,input_programs,input_option);
+
     }
 }
