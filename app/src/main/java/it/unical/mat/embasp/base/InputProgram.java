@@ -5,6 +5,8 @@ import java.util.List;
 /*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
 * and a list of files */
 
+
+//TODO SUBCLASS with ojbects
 public class InputProgram {
 	/*The variable in wich ASP program is stored*/
 	protected String program;
