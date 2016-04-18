@@ -20,20 +20,22 @@ public abstract class Handler {
 		options = new HashMap<>();
 	}
 
-    /*This method is used to add a new program to the programs set.*/
+	/*This method is used to add a new program to the programs set.*/
 	public int addProgram(InputProgram i){
 
 		int last_index = programs.size();
+		int current_value = last_index;
 		programs.put(last_index++, i);
-		return last_index;
+		return current_value;
 	}
 
-    /*This method is used to add a new option to the options set.*/
+	/*This method is used to add a new option to the options set.*/
 	public int addOption(OptionDescriptor o){
-		
+
 		int last_index = options.size();
+		int current_value = last_index;
 		options.put(last_index++, o);
-		return last_index;
+		return current_value;
 	}
 
     /* This method is used to remove a single program from the programs set.*/
