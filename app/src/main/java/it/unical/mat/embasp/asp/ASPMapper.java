@@ -30,6 +30,33 @@ public class ASPMapper {
 	}
 
 
+
+	public String getString(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+		String predicate=registerClass(obj.getClass());
+		String atom=predicate+"(";
+		HashMap<Integer, Object> mapTerm=new HashMap<>();
+		for(Field field:obj.getClass().getDeclaredFields()){
+			if(field.isAnnotationPresent(Term.class)){
+				Object value=obj.getClass().getMethod("get"+ Character.toUpperCase(field.getName().charAt(0))+field.getName().substring(1)).invoke(obj);
+				mapTerm.put(field.getAnnotation(Term.class).value(), value);
+			}
+		}
+		for(int i=0;i<mapTerm.size();i++){
+			if(i!=0)
+				atom+=",";
+			Object objectTerm=mapTerm.get(i);
+			if(objectTerm==null)throw new IllegalTermException("Wrong term number of class "+obj.getClass().getName());
+			if(objectTerm instanceof Integer){
+				atom+=objectTerm+"";
+			}else
+				atom+="\""+objectTerm.toString()+"\"";
+
+		}
+		atom+=")";
+		return atom;
+	}
+
+
 	public Object getObject(String atom) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException { // TODO
 		String predicate;
 
