@@ -85,6 +85,11 @@ public abstract class Handler {
 		
 	}
 
+
+	public InputProgram getINInputProgram (int key){
+	return programs.get(key);
+	}
+
 	public void startSync(List<Integer> program_index,List<Integer> option_index){
 	}
 
