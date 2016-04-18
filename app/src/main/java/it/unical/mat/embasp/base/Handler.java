@@ -86,7 +86,7 @@ public abstract class Handler {
 	}
 
 
-	public InputProgram getINInputProgram (int key){
+	public InputProgram getInputProgram (int key){
 	return programs.get(key);
 	}
 
