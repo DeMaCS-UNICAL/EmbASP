@@ -2,6 +2,8 @@ package it.unical.mat.embasp.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.unical.mat.embasp.asp.ASPMapper;
 /*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
 * and a list of files */
 
@@ -25,6 +27,11 @@ public class InputProgram {
 	private void init(){
 		program = new String();
 		files_paths = new ArrayList<>();
+	}
+
+
+	public void addObjectInput(Object inputObj){
+		program += " " + ASPMapper.getInstance().getString();
 	}
 
 	public String getProgram (){
