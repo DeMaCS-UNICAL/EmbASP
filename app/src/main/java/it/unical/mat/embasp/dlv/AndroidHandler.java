@@ -1,8 +1,5 @@
 package it.unical.mat.embasp.dlv;
 
-/**
- * Created by haze on 4/17/16.
- */
 import android.content.Context;
 import android.content.Intent;
 
@@ -60,7 +57,7 @@ public class AndroidHandler extends Handler {
 
         List<InputProgram> input_programs = new ArrayList<InputProgram>();
 
-        if(program_index.isEmpty()) {
+        if(program_index.isEmpty() || program_index == null) {
 
             for (Map.Entry<Integer, InputProgram> program : this.programs.entrySet()) {
                 input_programs.add(this.programs.get(program.getKey()));
@@ -83,7 +80,7 @@ public class AndroidHandler extends Handler {
 
         }else{
 
-            for(int index : option_index){
+            for(int index : option_index || option_index == null){
                 input_option.add(this.options.get(index));
             }
 
