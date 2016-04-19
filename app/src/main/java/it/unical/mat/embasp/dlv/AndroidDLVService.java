@@ -29,10 +29,10 @@ public class AndroidDLVService extends Service implements it.unical.mat.embasp.b
         System.loadLibrary("dlvJNI");
     }
 
-     /*Returns the current Service class , can be used to interact directly with the Service*/
+    /*Returns the current Service class , can be used to interact directly with the Service*/
     public class DLVBinder extends Binder{
         AndroidDLVService getService(){
-            return new AndroidDLVService();
+            return AndroidDLVService.this;
         }
     }
 
@@ -40,6 +40,7 @@ public class AndroidDLVService extends Service implements it.unical.mat.embasp.b
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+
         return binder;
     }
 
@@ -57,10 +58,10 @@ public class AndroidDLVService extends Service implements it.unical.mat.embasp.b
 
                 StringBuilder finalProgram = new StringBuilder();
                 for (InputProgram p : programs) {
-                finalProgram.append(p.getProgram()).append(" ");
+                    finalProgram.append(p.getProgram()).append(" ");
                 }
                 for (OptionDescriptor o :options) {
-                finalProgram.append(o.getOptions()).append(" ");
+                    finalProgram.append(o.getOptions()).append(" ");
                 }
                 long startTime = System.nanoTime();
                 String result = dlvMain(finalProgram.toString());
