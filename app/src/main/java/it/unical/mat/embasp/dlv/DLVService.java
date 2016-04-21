@@ -31,7 +31,7 @@ public class DLVService extends Service implements it.unical.mat.embasp.base.Ser
 
     /*Returns the current Service class , can be used to interact directly with the Service*/
     public class DLVBinder extends Binder{
-        DLVService getService(){
+      public  DLVService getService(){
             return DLVService.this;
         }
     }
