@@ -18,7 +18,7 @@ import android.os.IBinder;
 public class AndroidHandler extends Handler {
 
     private Context context;
-    private AndroidDLVService mService;
+    private DLVService mService;
     private boolean bound;
 
 
@@ -28,7 +28,7 @@ public class AndroidHandler extends Handler {
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
-            AndroidDLVService.DLVBinder binder = (AndroidDLVService.DLVBinder) service;
+            DLVService.DLVBinder binder = (DLVService.DLVBinder) service;
             mService = binder.getService();
             bound = true;
         }
@@ -43,7 +43,7 @@ public class AndroidHandler extends Handler {
     public AndroidHandler(Context c) {
         this.context = c;
 
-        Intent intent = new Intent(context, AndroidDLVService.class);
+        Intent intent = new Intent(context, DLVService.class);
         context.bindService(intent, mConnection, context.BIND_AUTO_CREATE);
 
 
@@ -72,7 +72,7 @@ public class AndroidHandler extends Handler {
 
         List<OptionDescriptor> input_option = new ArrayList<OptionDescriptor>();
 
-        if(option_index.isEmpty()){
+        if(option_index.isEmpty()|| option_index == null){
 
             for (Map.Entry<Integer, OptionDescriptor> option: this.options.entrySet()) {
                 input_option.add(this.options.get(option.getKey()));
@@ -80,7 +80,7 @@ public class AndroidHandler extends Handler {
 
         }else{
 
-            for(int index : option_index || option_index == null){
+            for(int index : option_index ){
                 input_option.add(this.options.get(index));
             }
 
