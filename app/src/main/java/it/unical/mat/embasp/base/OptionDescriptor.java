@@ -23,7 +23,7 @@ public class OptionDescriptor {
 	}
 
 	/*Clears options variable*/
-	public void removeOption(String option){
+	public void clear(){
 		
 		options = "";
 	}
