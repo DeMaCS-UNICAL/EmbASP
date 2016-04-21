@@ -5,17 +5,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import it.unical.mat.embasp.base.AnswerSet;
-import it.unical.mat.embasp.base.AnswerSets;
+import it.unical.mat.embasp.asp.AnswerSets;
 
-/**
- *
- */
-public class DLVAnswerSets extends AnswerSets{
 
+public class DLVAnswerSets extends AnswerSets {
     /**
      * Constructor initialize AnswerSets object with a String that contains ALL Answer Set generated from ASPService.
      *
+     * @param answerSets
      */
     public DLVAnswerSets(String answerSets) {
         super(answerSets);

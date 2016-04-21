@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-import it.unical.mat.embasp.mapper.ASPMapper;
+import it.unical.mat.embasp.asp.ASPMapper;
 
 public abstract class AnswerSet {
 
