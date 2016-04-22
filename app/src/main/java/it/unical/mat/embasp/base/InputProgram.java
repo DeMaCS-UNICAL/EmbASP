@@ -1,9 +1,12 @@
 package it.unical.mat.embasp.base;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import it.unical.mat.embasp.asp.ASPMapper;
+import it.unical.mat.embasp.asp.IllegalTermException;
 /*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
 * and a list of files */
 
@@ -29,17 +32,33 @@ public class InputProgram {
 		files_paths = new ArrayList<>();
 	}
 
-
-	public void addObjectInput(Object inputObj){
-		program += " " + ASPMapper.getInstance().getString();
+    /*This function is used to add a single Object as input */
+	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+		program += ASPMapper.getInstance().getString(inputObj)+".";
 	}
 
+    /*This function is used to add a set of Objects as input*/
+    public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+        for(Object inputObj:inputObjs)
+            addObjectInput(inputObj);
+    }
+
+    /*Returns the stored program*/
 	public String getProgram (){
 		return program;
 	}
 
+    /*Returns a string rapresentigs all files paths for this program*/
 	public String getFiles(){
-	return files_paths.toString();
+
+		StringBuilder to_return = new StringBuilder();
+		for(String paths : files_paths)
+		to_return.append(paths).append(" ");
+        if(to_return.length() >0)
+		return to_return.toString();
+
+        return null;
+
 	}
 
 	/*Add a new istruction directly into program */

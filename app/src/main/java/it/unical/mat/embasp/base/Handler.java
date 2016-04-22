@@ -44,7 +44,7 @@ public abstract class Handler {
 		programs.remove(program_id);
 	}
 
-    /* Given an InputProgram P this method removes every InputProgram that returns equals to P.*/
+    /* Given an InputProgram P this method removes every InputProgram instance that returns equals to P.*/
 	public boolean removeProgram(InputProgram p){
 
 		boolean result = false;
@@ -64,7 +64,7 @@ public abstract class Handler {
 		
 	}
 
-    /*Given an OptionDescriptor O this method removes every OptionDescriptor that results equal to O.*/
+    /*Given an OptionDescriptor O this method removes every OptionDescriptor instance that results equal to O.*/
 	public boolean removeOption(OptionDescriptor o){ 
 		
 		boolean result = false;
@@ -87,15 +87,16 @@ public abstract class Handler {
 		
 	}
 
-
+	/*Returns program associated with the key value*/
 	public InputProgram getInputProgram (int key){
 	return programs.get(key);
 	}
 
+	/*This method have to be implemented by subclasses to execute solver in a syncronous way*/
 	public void startSync(List<Integer> program_index,List<Integer> option_index){
 	}
 
-
+	/*This method have to be implemented by subclasses to execute solver in a asyncronous way*/
 	public void startAsync(Callback c ,List<Integer> program_index,List<Integer> option_index){
     }
 }

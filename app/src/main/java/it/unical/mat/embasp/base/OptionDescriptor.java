@@ -14,10 +14,12 @@ public class OptionDescriptor {
 		options = new String();
 	}
 
+	/*Returns options stored for this istance*/
 	public String getOptions(){
 		return options;
 	}
 
+	/*substitue current option value*/
 	public void setOption(String option){ 
 		options = option;
 	}
