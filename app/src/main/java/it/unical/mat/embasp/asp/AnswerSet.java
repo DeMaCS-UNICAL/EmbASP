@@ -11,7 +11,7 @@ import java.util.Set;
 
 import it.unical.mat.embasp.asp.ASPMapper;
 
-public abstract class AnswerSet {
+public class AnswerSet {
 
 	private List<String> value;
 	private Map<Integer,Integer> weight_map;
@@ -40,4 +40,9 @@ public abstract class AnswerSet {
 		return atoms;
 	}
 
+	@Override
+	public String toString() {
+
+		return value.toString();
+	}
 }
