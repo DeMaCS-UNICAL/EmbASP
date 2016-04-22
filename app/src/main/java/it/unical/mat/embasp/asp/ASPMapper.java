@@ -29,7 +29,17 @@ public class ASPMapper {
 		return predicateClass.get(predicate);
 	}
 
-
+	public String registerClass(Class<?> cl){
+		String predicate = cl.getAnnotation(Predicate.class).value();
+		predicateClass.put(predicate,cl);
+		Map<String,Method> namesMethods = new HashMap<>();
+		for(Method method:cl.getMethods()){
+			if(method.getName().startsWith("set"))
+				namesMethods.put(method.getName(),method);
+		}
+		classSetterMethod.put(cl,namesMethods);
+		return predicate;
+	}
 
 	public String getString(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
 		String predicate=registerClass(obj.getClass());
