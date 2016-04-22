@@ -1,28 +1,30 @@
 package it.unical.mat.embasp.dlv;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+
+import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
-import it.unical.mat.embasp.base.Output;
-import java.util.List;
+import it.unical.mat.embasp.platforms.android.AndroidService;
 
- /* DLVService is used in android applications to start the service that is used to compute DLV directlry into the device.
- *  The IBinder interface , gives the user the possibility to comunicate with the service in a client/server way
- *  By defaults Services run in the same process of the application , to bypass this behaivior need to add a tag <name> to AndroidManifest
+/**
+ * Created by haze on 4/22/16.
  */
+public class DLVService extends AndroidService {
 
-// TODO check about Process , static libary names.
-public class DLVService extends Service implements it.unical.mat.embasp.base.Service {
+    public DLVService() {
+        binder = new DLVBinder();
 
-    private IBinder binder = new DLVBinder();
+    }
 
     //load the static library that contains DLV code compiled for arm processors
     static{
@@ -30,44 +32,74 @@ public class DLVService extends Service implements it.unical.mat.embasp.base.Ser
     }
 
     /*Returns the current Service class , can be used to interact directly with the Service*/
-    public class DLVBinder extends Binder{
-      public  DLVService getService(){
+    public class DLVBinder extends AndroidBinder {
+        public AndroidService getService(){
             return DLVService.this;
         }
     }
-
-    /*used when an activity calls onBind function*/
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-
-        return binder;
-    }
-
 
     @Override
     public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
         return null;
     }
-
-    //TO FINISH
+//    check multiple execution
     @Override
     public void startAsync(final Callback callback,final List <InputProgram> programs, final List<OptionDescriptor> options) {
         new Thread(new Runnable() {
             public void run() {
 
-                StringBuilder finalProgram = new StringBuilder();
-                for (InputProgram p : programs) {
-                    finalProgram.append(p.getProgram()).append(" ");
-                }
+                StringBuilder input_data = new StringBuilder();
+
+                input_data.append("-silent ");
+
                 for (OptionDescriptor o :options) {
-                    finalProgram.append(o.getOptions()).append(" ");
+
+                    input_data.append(o.getOptions()).append(" ");
+
                 }
+
+
+                String final_program = new String();
+
+                for (InputProgram p : programs) {
+                    final_program += p.getProgram();
+                    String program_file = p.getFiles();
+
+                    if(program_file != null) {
+                        if(input_data.length()==0) {
+
+                            input_data.append(program_file);
+
+                        }else{
+
+                            input_data.append(program_file).append(" ");
+
+                        }
+
+                    }
+                }
+
+                System.out.println(final_program);
+                File tmp_file = new File(getFilesDir(),"tmp_file");
+                Writer outputStream;
+
+                try {
+                    outputStream = new BufferedWriter(new FileWriter(tmp_file));
+                    outputStream.append(final_program);
+                    outputStream.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                input_data.append(tmp_file.getAbsolutePath());
+
                 long startTime = System.nanoTime();
-                String result = dlvMain(finalProgram.toString());
+                String result = dlvMain(input_data.toString());
                 long stopTime = System.nanoTime();
                 Log.i("DLV Execution Time", Long.toString(TimeUnit.NANOSECONDS.toMillis(stopTime - startTime)));
-                callback.callback(result);
+                callback.callback(new DLVAnswerSets(result));
             }
         }).start();
 
@@ -79,4 +111,5 @@ public class DLVService extends Service implements it.unical.mat.embasp.base.Ser
      * @return String result computed from DLV
      */
     private native String dlvMain(String filePath);
+
 }
