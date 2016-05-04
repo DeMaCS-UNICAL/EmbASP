@@ -8,7 +8,7 @@ import java.util.Set;
 import it.unical.mat.embasp.asp.ASPMapper;
 import it.unical.mat.embasp.asp.IllegalTermException;
 /*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
-* and a list of files */
+ * and a list of files */
 
 
 //TODO SUBCLASS with ojbects
@@ -21,44 +21,51 @@ public class InputProgram {
 	public InputProgram() {
 		init();
 	}
+	
+	
+	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException{
+		init();
+		program += ASPMapper.getInstance().getString(inputObj)+".";
+	}
 
 	public InputProgram (String initial_program ){
 		init();
 		program = initial_program;
 	}
-	
+
 	private void init(){
 		program = new String();
 		files_paths = new ArrayList<>();
 	}
 
-    /*This function is used to add a single Object as input */
+	//TODO constructor with objects
+
+	/*This function is used to add a single Object as input */
 	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
 		program += ASPMapper.getInstance().getString(inputObj)+".";
 	}
 
-    /*This function is used to add a set of Objects as input*/
-    public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
-        for(Object inputObj:inputObjs)
-            addObjectInput(inputObj);
-    }
+	/*This function is used to add a set of Objects as input*/
+	public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+		for(Object inputObj:inputObjs)
+			addObjectInput(inputObj);
+	}
 
-    /*Returns the stored program*/
+	/*Returns the stored program*/
 	public String getProgram (){
 		return program;
 	}
 
-    /*Returns a string rapresentigs all files paths for this program*/
+	/*Returns a string rapresentigs all files paths for this program*/
 	public String getFiles(){
 
 		StringBuilder to_return = new StringBuilder();
+		
 		for(String paths : files_paths)
-		to_return.append(paths).append(" ");
-        if(to_return.length() >0)
-		return to_return.toString();
-
-        return null;
-
+			if(paths.length()!= 0)
+			to_return.append(paths).append(" ");
+		
+			return to_return.toString();
 	}
 
 	/*Add a new istruction directly into program */

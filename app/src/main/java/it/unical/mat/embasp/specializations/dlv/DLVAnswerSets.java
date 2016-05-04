@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.dlv;
+package it.unical.mat.embasp.specializations.dlv;
 
 import java.util.ArrayList;
 import java.util.List;

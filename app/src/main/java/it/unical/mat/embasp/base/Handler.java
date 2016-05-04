@@ -93,7 +93,8 @@ public abstract class Handler {
 	}
 
 	/*This method have to be implemented by subclasses to execute solver in a syncronous way*/
-	public void startSync(List<Integer> program_index,List<Integer> option_index){
+	public Output startSync(List<Integer> program_index,List<Integer> option_index){
+	return null;
 	}
 
 	/*This method have to be implemented by subclasses to execute solver in a asyncronous way*/

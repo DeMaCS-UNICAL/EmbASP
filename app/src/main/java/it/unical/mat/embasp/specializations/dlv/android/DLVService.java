@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.dlv;
+package it.unical.mat.embasp.specializations.dlv.android;
 
 import android.util.Log;
 
@@ -15,10 +15,9 @@ import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.platforms.android.AndroidService;
+import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
-/**
- * Created by haze on 4/22/16.
- */
+
 public class DLVService extends AndroidService {
 
     public DLVService() {

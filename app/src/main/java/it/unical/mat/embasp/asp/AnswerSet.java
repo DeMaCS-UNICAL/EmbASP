@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-import it.unical.mat.embasp.asp.ASPMapper;
-
 public class AnswerSet {
 
 	private List<String> value;
@@ -33,7 +30,7 @@ public class AnswerSet {
 			ASPMapper mapper = ASPMapper.getInstance();
 			for(String atom : value){
 				Object obj = mapper.getObject(atom);
-				if(obj ==null )
+				if(obj !=null )
 					atoms.add(obj);
 			}
 		}
