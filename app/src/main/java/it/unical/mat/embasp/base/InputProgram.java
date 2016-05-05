@@ -1,14 +1,14 @@
 package it.unical.mat.embasp.base;
 
+import it.unical.mat.embasp.asp.ASPMapper;
+import it.unical.mat.embasp.asp.IllegalTermException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import it.unical.mat.embasp.asp.ASPMapper;
-import it.unical.mat.embasp.asp.IllegalTermException;
-/*This class rappresents a generic ASP program, it have a string rapresenting the entire ASP program
- * and a list of files */
+
 
 
 //TODO SUBCLASS with ojbects
@@ -16,13 +16,13 @@ public class InputProgram {
 	/*The variable in wich ASP program is stored*/
 	protected String program;
 	/*The varible in wich ASP files are stored*/
-	protected List<String> files_paths; 
+	protected List<String> files_paths;
 
 	public InputProgram() {
 		init();
 	}
-	
-	
+
+
 	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException{
 		init();
 		program += ASPMapper.getInstance().getString(inputObj)+".";
@@ -60,12 +60,12 @@ public class InputProgram {
 	public String getFiles(){
 
 		StringBuilder to_return = new StringBuilder();
-		
+
 		for(String paths : files_paths)
 			if(paths.length()!= 0)
-			to_return.append(paths).append(" ");
-		
-			return to_return.toString();
+				to_return.append(paths).append(" ");
+
+		return to_return.toString();
 	}
 
 	/*Add a new istruction directly into program */
