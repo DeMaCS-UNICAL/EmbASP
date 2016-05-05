@@ -25,7 +25,7 @@ public class InputProgram {
 
 	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException{
 		init();
-		program += ASPMapper.getInstance().getString(inputObj)+".";
+		addObjectInput(inputObj);
 	}
 
 	public InputProgram (String initial_program ){

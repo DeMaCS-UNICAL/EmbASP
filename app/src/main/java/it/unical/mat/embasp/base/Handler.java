@@ -117,7 +117,7 @@ public abstract class Handler {
 
 
 
-	protected List<InputProgram> collect_programs(){
+	protected List<InputProgram> collect_programs(List<Integer> program_index){
 
 		List<InputProgram> input_programs = new ArrayList<InputProgram>();
 
@@ -137,7 +137,7 @@ public abstract class Handler {
 	}
 
 
-	protected List<OptionDescriptor> collect_options(){
+	protected List<OptionDescriptor> collect_options(List<Integer> option_index){
 		List<OptionDescriptor> input_option = new ArrayList<OptionDescriptor>();
 
 		if(option_index == null){

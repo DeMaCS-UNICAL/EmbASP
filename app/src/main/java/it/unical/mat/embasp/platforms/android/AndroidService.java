@@ -6,9 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-/**
- * Created by haze on 4/22/16.
- */
+
 public abstract class AndroidService extends Service implements it.unical.mat.embasp.base.Service{
 
     protected IBinder binder;
