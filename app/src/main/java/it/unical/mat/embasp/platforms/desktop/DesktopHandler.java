@@ -1,8 +1,6 @@
 package it.unical.mat.embasp.platforms.desktop;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
@@ -26,7 +24,7 @@ public class DesktopHandler extends Handler{
 
 
 
-		service.startAsync(c, input_programs, input_option);
+		service.startAsync(c, input_programs, input_options);
 
 	}
 
@@ -39,6 +37,6 @@ public class DesktopHandler extends Handler{
 		List<InputProgram>input_programs = collect_programs(program_index);
 		List<OptionDescriptor> input_options = collect_options(option_index);
 
-		return service.startSync(input_programs, input_option);
+		return service.startSync(input_programs, input_options);
 	}
 }
