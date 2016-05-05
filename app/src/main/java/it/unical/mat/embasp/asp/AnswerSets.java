@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AnswerSets {
+import it.unical.mat.embasp.base.Output;
 
-	protected String output;
+public abstract class AnswerSets extends Output {
+
 	protected List<AnswerSet> answersets;
 
 	public AnswerSets(String answersets) {
 		this.answersets = new ArrayList<>();
-		output = answersets;
+		this.output = answersets;
 		parse();
 	}
 
 	abstract protected void parse();
 
-	public String getAnswerSetsString()  { return output;}
+	public String getAnswerSetsString()  { return this.output;}
 
 	public List<AnswerSet> getAnswersets(){
 		return Collections.unmodifiableList(answersets);
