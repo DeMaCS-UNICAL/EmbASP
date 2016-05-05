@@ -20,7 +20,15 @@ public class AnswerSet {
 		weight_map = new HashMap<>();
 	}
 
-	public List<String> getAnswerSet() { 
+
+
+	public AnswerSet(List<String> value, Map<Integer, Integer> weightMap) {
+		this.value = value;
+		this.weight_map = weightMap;
+	}
+
+
+	public List<String> getAnswerSet() {
 		return Collections.unmodifiableList(value);
 	}
 
@@ -34,6 +42,7 @@ public class AnswerSet {
 					atoms.add(obj);
 			}
 		}
+
 		return atoms;
 	}
 
