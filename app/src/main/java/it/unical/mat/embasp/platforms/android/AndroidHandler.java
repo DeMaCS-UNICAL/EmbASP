@@ -22,7 +22,7 @@ public class AndroidHandler extends Handler {
 
     /*Contex used to start the DVLService*/
     private Context context;
-    /*DLVService istance , used to start computation*/
+    /*DLVAndroidService istance , used to start computation*/
     private AndroidService mService;
 
     private boolean bound;
@@ -33,7 +33,7 @@ public class AndroidHandler extends Handler {
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            // We've bound to DLVService, cast the IBinder and get DLVService instance
+            // We've bound to DLVAndroidService, cast the IBinder and get DLVAndroidService instance
             AndroidService.AndroidBinder binder = (AndroidService.AndroidBinder) service;
             mService = binder.getService();
             bound = true;
@@ -62,7 +62,7 @@ public class AndroidHandler extends Handler {
         List<InputProgram>input_programs = collect_programs(program_index);
         List<OptionDescriptor> input_options = collect_options(option_index);
 
-        mService.startAsync(c,input_programs,input_option);
+        mService.startAsync(c,input_programs,input_options);
 
     }
 }
