@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.mapper;
+package it.unical.mat.embasp.asp;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
