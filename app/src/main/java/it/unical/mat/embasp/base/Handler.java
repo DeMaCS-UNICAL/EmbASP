@@ -1,5 +1,6 @@
 package it.unical.mat.embasp.base;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +96,7 @@ public abstract class Handler {
 
 	public Output startSync(){
 
-		return startSync((List<Integer>) null , (List<Integer>)null );
+		return startSync((List<Integer>) null, (List<Integer>) null);
 	}
 
 
@@ -112,6 +113,47 @@ public abstract class Handler {
 	}
 	/*This method have to be implemented by subclasses to execute solver in a asyncronous way*/
 	public void startAsync(Callback c ,List<Integer> program_index,List<Integer> option_index){
+	}
+
+
+
+	protected List<InputProgram> collect_programs(){
+
+		List<InputProgram> input_programs = new ArrayList<InputProgram>();
+
+		if(program_index == null) {
+
+			for (Map.Entry<Integer, InputProgram> program : this.programs.entrySet()) {
+				input_programs.add(this.programs.get(program.getKey()));
+			}
+
+		}else{
+			for(int index : program_index){
+				input_programs.add(this.programs.get(index));
+
+			}
+		}
+		return input_programs;
+	}
+
+
+	protected List<OptionDescriptor> collect_options(){
+		List<OptionDescriptor> input_option = new ArrayList<OptionDescriptor>();
+
+		if(option_index == null){
+
+			for (Map.Entry<Integer, OptionDescriptor> option: this.options.entrySet()) {
+				input_option.add(this.options.get(option.getKey()));
+			}
+
+		}else{
+
+			for(int index : option_index ){
+				input_option.add(this.options.get(index));
+			}
+
+		}
+		return input_option;
 	}
 }
 
