@@ -59,8 +59,8 @@ public class AndroidHandler extends Handler {
     @Override
     public void startAsync(Callback c,List<Integer> program_index, List<Integer> option_index ) {
 
-        List<InputProgram>input_programs = collect_programs();
-        List<OptionDescriptor> input_options = collect_options();
+        List<InputProgram>input_programs = collect_programs(program_index);
+        List<OptionDescriptor> input_options = collect_options(option_index);
 
         mService.startAsync(c,input_programs,input_option);
 
