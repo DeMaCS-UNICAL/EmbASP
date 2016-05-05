@@ -1,13 +1,12 @@
-package it.unical.mat.embasp.mapper;
+package it.unical.mat.embasp.asp;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Term {
-
-	int value();
+public @interface Predicate {
+	String value();
 }

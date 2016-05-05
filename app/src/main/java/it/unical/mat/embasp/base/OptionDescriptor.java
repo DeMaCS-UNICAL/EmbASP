@@ -1,28 +1,36 @@
 package it.unical.mat.embasp.base;
 
-public abstract class OptionDescriptor {
-	
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+
+/* This class rapresents options for a program */
+public class OptionDescriptor {
+	/*Variable in wich options are stored*/
 	protected String options;
 
-	OptionDescriptor(String initial_option) {
+	public OptionDescriptor(String initial_option) {
 		options = new String(initial_option);
 	}
-	
+
 	public OptionDescriptor() {
 		options = new String();
 	}
-	
-	
-	public void setOption(String option){ 
+
+	/*Returns options stored for this istance*/
+	public String getOptions(){
+
+		return options+" ";
+	}
+
+	/*substitue current option value*/
+	public void setOption(String option){
 		options = option;
 	}
-	
-	public void removeOption(String option){
-		
-		options = "";
-	}
-	
-	public void clearAll(){
+
+	/*Clears options variable*/
+	public void clear(){
+
 		options = "";
 	}
 }

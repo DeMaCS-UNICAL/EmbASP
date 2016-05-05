@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-import it.unical.mat.embasp.mapper.ASPMapper;
-
-public abstract class AnswerSet {
+public class AnswerSet {
 
 	private List<String> value;
 	private Map<Integer,Integer> weight_map;
@@ -23,7 +20,15 @@ public abstract class AnswerSet {
 		weight_map = new HashMap<>();
 	}
 
-	public List<String> getAnswerSet() { 
+
+
+	public AnswerSet(List<String> value, Map<Integer, Integer> weightMap) {
+		this.value = value;
+		this.weight_map = weightMap;
+	}
+
+
+	public List<String> getAnswerSet() {
 		return Collections.unmodifiableList(value);
 	}
 
@@ -33,11 +38,17 @@ public abstract class AnswerSet {
 			ASPMapper mapper = ASPMapper.getInstance();
 			for(String atom : value){
 				Object obj = mapper.getObject(atom);
-				if(obj ==null )
+				if(obj !=null )
 					atoms.add(obj);
 			}
 		}
+
 		return atoms;
 	}
 
+	@Override
+	public String toString() {
+
+		return value.toString();
+	}
 }
