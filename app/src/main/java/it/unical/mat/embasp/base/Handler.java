@@ -10,16 +10,15 @@ import java.util.Map;
 * */
 
 public abstract class Handler {
-    /*The variable in which programs are stored*/
+	/*The variable in which programs are stored*/
 	protected Map<Integer, InputProgram> programs;
-    /*The variable in wich options are stored*/
+	/*The variable in wich options are stored*/
 	protected Map<Integer, OptionDescriptor> options;
 
 	public Handler() {
 		programs = new HashMap<>();
 		options = new HashMap<>();
 	}
-
 	/*This method is used to add a new program to the programs set.*/
 	public int addProgram(InputProgram i){
 
@@ -38,13 +37,13 @@ public abstract class Handler {
 		return current_value;
 	}
 
-    /* This method is used to remove a single program from the programs set.*/
+	/* This method is used to remove a single program from the programs set.*/
 	public void removeProgram(int program_id){
-		
+
 		programs.remove(program_id);
 	}
 
-    /* Given an InputProgram P this method removes every InputProgram instance that returns equals to P.*/
+	/* Given an InputProgram P this method removes every InputProgram instance that returns equals to P.*/
 	public boolean removeProgram(InputProgram p){
 
 		boolean result = false;
@@ -57,16 +56,16 @@ public abstract class Handler {
 		return result;
 	}
 
-    /* This method removes a single options from the options set.*/
+	/* This method removes a single options from the options set.*/
 	public void removeOption(int option_id){
-		
+
 		options.remove(option_id);
-		
+
 	}
 
-    /*Given an OptionDescriptor O this method removes every OptionDescriptor instance that results equal to O.*/
-	public boolean removeOption(OptionDescriptor o){ 
-		
+	/*Given an OptionDescriptor O this method removes every OptionDescriptor instance that results equal to O.*/
+	public boolean removeOption(OptionDescriptor o){
+
 		boolean result = false;
 		for( Map.Entry<Integer, OptionDescriptor> entry : options.entrySet()){
 			if(entry.getValue().equals(o)){
@@ -76,29 +75,43 @@ public abstract class Handler {
 		}
 
 		return result;
-		
+
 	}
 
-    /* Clear every element in InputProgram and OptionDescriptor sets.*/
+	/* Clear every element in InputProgram and OptionDescriptor sets.*/
 	public void removeAll(){
-		
+
 		programs.clear();
 		options.clear();
-		
+
 	}
 
 	/*Returns program associated with the key value*/
 	public InputProgram getInputProgram (int key){
-	return programs.get(key);
+		return programs.get(key);
 	}
 
+
+
+	public Output startSync(){
+
+		return startSync((List<Integer>) null , (List<Integer>)null );
+	}
+
+
+	//TO EXPORT
 	/*This method have to be implemented by subclasses to execute solver in a syncronous way*/
 	public Output startSync(List<Integer> program_index,List<Integer> option_index){
-	return null;
+		return null;
 	}
 
+
+
+	public void startAsync(Callback c){
+		startAsync(c, (List<Integer>)null, (List<Integer>)null);
+	}
 	/*This method have to be implemented by subclasses to execute solver in a asyncronous way*/
 	public void startAsync(Callback c ,List<Integer> program_index,List<Integer> option_index){
-    }
+	}
 }
 
