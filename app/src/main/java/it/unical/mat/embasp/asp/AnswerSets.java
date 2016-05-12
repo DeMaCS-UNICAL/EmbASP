@@ -6,7 +6,7 @@ import java.util.List;
 
 import it.unical.mat.embasp.base.Output;
 
-public class AnswerSets extends Output {
+public abstract class AnswerSets extends Output {
 
 	protected List<AnswerSet> answersets;
 
@@ -16,7 +16,7 @@ public class AnswerSets extends Output {
 		parse();
 	}
 
-	protected void parse(){};
+	protected abstract void parse();
 
 	public String getAnswerSetsString()  { return this.output;}
 
