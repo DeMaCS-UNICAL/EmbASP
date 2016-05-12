@@ -1,6 +1,8 @@
 package it.unical.mat.embasp.specializations.clingo.desktop;
 
 import java.util.List;
+
+import it.unical.mat.embasp.asp.AnswerSets;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
@@ -17,7 +19,12 @@ public class ClingoDesktopService extends DesktopService {
     @Override
     public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
 
-        return new ClingoAnswerSets(super.startSync(programs, options).getOutput());
+        return super.startSync(programs, options);
+    }
+
+    @Override
+    protected AnswerSets getAnswerSet(String output) {
+        return new ClingoAnswerSets(output);
     }
 
     @Override
