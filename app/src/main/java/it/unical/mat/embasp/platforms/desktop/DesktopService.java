@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
-
 import it.unical.mat.embasp.asp.AnswerSets;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
@@ -29,7 +28,7 @@ public abstract class DesktopService implements Service{
 
 	@Override
 	public void startAsync(final Callback callback, final List<InputProgram> programs,
-			final List<OptionDescriptor> options) {
+						   final List<OptionDescriptor> options) {
 
 
 		Thread thread = new Thread(new Runnable() {
@@ -82,9 +81,8 @@ public abstract class DesktopService implements Service{
 
 					long stopTime = System.nanoTime();
 					System.out.println("Total time : " + (stopTime - startTime));
-					callback.callback(new AnswerSets(output));
+					callback.callback(getAnswerSet(output));
 				} catch (IOException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 
@@ -97,7 +95,7 @@ public abstract class DesktopService implements Service{
 
 	@Override
 	public Output startSync(List<InputProgram> programs,
-			List<OptionDescriptor> options) {
+							List<OptionDescriptor> options) {
 
 		Output to_return = null;
 
@@ -146,9 +144,8 @@ public abstract class DesktopService implements Service{
 
 			long stopTime = System.nanoTime();
 			System.out.println("Total time : " + (stopTime - startTime));
-			to_return = new AnswerSets(output);
+			to_return = getAnswerSet(output);
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 
@@ -156,6 +153,12 @@ public abstract class DesktopService implements Service{
 		return to_return;
 
 	}
+
+
+
+	protected abstract AnswerSets getAnswerSet(String output);
+
+
 
 
 
