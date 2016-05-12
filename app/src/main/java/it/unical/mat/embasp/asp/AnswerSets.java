@@ -16,7 +16,7 @@ public abstract class AnswerSets extends Output {
 		parse();
 	}
 
-	abstract protected void parse();
+	protected abstract void parse();
 
 	public String getAnswerSetsString()  { return this.output;}
 
