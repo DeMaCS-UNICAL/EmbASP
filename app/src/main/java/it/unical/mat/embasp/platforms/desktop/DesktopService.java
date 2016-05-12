@@ -155,8 +155,7 @@ public abstract class DesktopService implements Service{
 	}
 
 
-
-	protected abstract AnswerSets getAnswerSet(String output);
+abstract protected AnswerSets getAnswerSet(String output);
 
 
 
