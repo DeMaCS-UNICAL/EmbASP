@@ -15,17 +15,11 @@ public class DLVDesktopService extends DesktopService{
 
 
 	public DLVDesktopService(String exe_path) {
-		this.exe_path = exe_path;
+		super(exe_path);
 	}
 
 
 
-	@Override
-	public Output startSync(List<InputProgram> programs,
-			List<OptionDescriptor> options) {
-
-		return super.startSync(programs, options);
-	}
 
 	@Override
 	protected AnswerSets getAnswerSet(String output) {
@@ -33,10 +27,4 @@ public class DLVDesktopService extends DesktopService{
 	}
 
 
-	@Override
-	public void startAsync(final Callback callback, final List<InputProgram> programs,
-			final List<OptionDescriptor> options) {
-
-		super.startAsync(callback, programs, options);
-	}
 }

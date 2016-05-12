@@ -15,6 +15,10 @@ import it.unical.mat.embasp.base.Service;
 public abstract class DesktopService implements Service{
 	protected String exe_path;
 
+	public DesktopService(String exe_path){
+		this.exe_path=exe_path;
+	}
+
 	public String getExePath(){
 		return exe_path;
 	}
@@ -72,7 +76,7 @@ public abstract class DesktopService implements Service{
 					String output = new String();
 					try {
 						while((output_line = output_reader.readLine()) != null){
-							output += output_line;
+							output += output_line+"\n";
 						}
 					} catch (IOException e) {
 
@@ -135,7 +139,7 @@ public abstract class DesktopService implements Service{
 			String output = new String();
 			try {
 				while((output_line = output_reader.readLine()) != null){
-					output += output_line;
+					output += output_line+"\n";
 				}
 			} catch (IOException e) {
 
