@@ -1,14 +1,11 @@
 package it.unical.mat.embasp.specializations.dlv.android;
 
-import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
@@ -26,9 +23,11 @@ public class DLVServiceReasoner extends AndroidService {
         System.loadLibrary("dlvJNI");
     }
 
-    public DLVServiceReasoner(String name) {
-        super(name);
+    public DLVServiceReasoner() {
+        super("dlv_service");
     }
+
+
 
     //Intent messages/actions/extras for ASPService start and BroadcastReceiver communication
     // TODO change package name
@@ -52,7 +51,7 @@ public class DLVServiceReasoner extends AndroidService {
                 //Send the result with a Broadcast Intent
                 final String program = intent.getStringExtra(PROGRAM);
                 final String options = intent.getStringExtra(OPTION);
-                final ArrayList<String> files = intent.getStringArrayListExtra(FILES);
+                final String files = intent.getStringExtra(FILES);
                 final String result = handleActionSolve(program, options, files);
                 Log.i("result", result);
                 publishResults(result);
@@ -66,7 +65,7 @@ public class DLVServiceReasoner extends AndroidService {
         sendBroadcast(intent);
     }
 
-    protected String handleActionSolve(String program, String options, List<String> filesPath) {
+    protected String handleActionSolve(String program, String options, String filesPath) {
         Log.i("DlvSevice", "Launch service");
         File file = new File(this.getFilesDir(), FILENAME);
 
@@ -85,8 +84,7 @@ public class DLVServiceReasoner extends AndroidService {
         completeProgram.append(options).append(" ");
         completeProgram.append(file.getAbsolutePath()).append(" ");
 
-        for(String s:filesPath)
-            completeProgram.append(s).append(" ");
+            completeProgram.append(filesPath).append(" ");
 
         long startTime = System.nanoTime();
         String result = dlvMain(completeProgram.toString());
