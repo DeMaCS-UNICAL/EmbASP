@@ -1,120 +1,88 @@
 package it.unical.mat.embasp.specializations.dlv.android;
 
-import android.content.BroadcastReceiver;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.util.Log;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
-import it.unical.mat.embasp.platforms.android.AndroidService;
+import it.unical.mat.embasp.base.Service;
+import it.unical.mat.embasp.platforms.android.AndroidReciver;
 import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
 //TODO Extend broadCast
-public class DLVAndroidService extends BroadcastReceiver {
+public class DLVAndroidService extends AndroidReciver implements Service {
 
-    public DLVAndroidService() {
-
+    private Callback asCallback;
+    private Context c;
+    public DLVAndroidService(Callback callback,Context c) {
+        super(new DLVServiceReasoner("solver"));
+        asCallback = callback;
+        this.c = c;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            String ASPResult = bundle.getString(DLVServiceReasoner.SOLVER_RESULT);
+            if (ASPResult != null) {
+                asCallback.callback(new DLVAnswerSets(ASPResult));
+            }
+        }
+    }
+
+    @Override
+    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
+        return null;
+    }
+
+    @Override
+    public void startAsync(Callback callback, List<InputProgram> programs, List<OptionDescriptor> options) {
+        stopDlvService(c);
+        asCallback = callback;
+        Intent intent = new Intent(c, DLVServiceReasoner.class);
+        intent.setAction(DLVServiceReasoner.ACTION_SOLVE);
+        intent.putExtra(DLVServiceReasoner.PROGRAM, programs.toString());
+        intent.putExtra(DLVServiceReasoner.OPTION,options.toString());
+        c.registerReceiver(this, new IntentFilter(DLVServiceReasoner.RESULT_NOTIFICATION));
+        Log.i(getClass().getName(), " start service");
+        c.startService(intent);
 
     }
 
-    //load the static library that contains DLV code compiled for arm processors
-    static{
-        System.loadLibrary("dlvJNI");
+
+    void stopDlvService(Context context){
+
+        boolean isServiceRunning = true;
+
+        while (isServiceRunning) {
+
+            //get device active service list
+            ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+            isServiceRunning = false;
+            //see if DLVService is in running service list
+            for (ActivityManager.RunningServiceInfo processInfo : manager.getRunningServices(Integer.MAX_VALUE)) {
+                if (processInfo.service.getClassName().equals(DLVServiceReasoner.class.getName())) {
+                    isServiceRunning = true;
+                    break;
+                }
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
-
-    /*Returns the current Service class , can be used to interact directly with the Service*/
-//    public class DLVBinder extends AndroidBinder {
-//        public AndroidService getService(){
-//            return DLVAndroidService.this;
-//        }
-//    }
-
-//    @Override
-//    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
-//        return null;
-//    }
-//    check multiple execution
-//    @Override
-//    public void startAsync(final Callback callback,final List <InputProgram> programs, final List<OptionDescriptor> options) {
-//        new Thread(new Runnable() {
-//            public void run() {
-//
-//                StringBuilder input_data = new StringBuilder();
-//
-//                input_data.append("-silent ");
-//
-//                for (OptionDescriptor o :options) {
-//
-//                    input_data.append(o.getOptions());
-//
-//                }
-//
-//
-//                String final_program = new String();
-//
-//                for (InputProgram p : programs) {
-//                    final_program += p.getProgram();
-//                    String program_file = p.getFiles();
-//
-//                    if(program_file != null) {
-//                        if(input_data.length()==0) {
-//
-//                            input_data.append(program_file);
-//
-//                        }else{
-//
-//                            input_data.append(program_file);
-//
-//                        }
-//
-//                    }
-//                }
-//
-//                System.out.println(final_program);
-//                File tmp_file = new File(getFilesDir(),"tmp_file");
-//                Writer outputStream;
-//
-//                try {
-//                    outputStream = new BufferedWriter(new FileWriter(tmp_file));
-//                    outputStream.append(final_program);
-//                    outputStream.close();
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                input_data.append(tmp_file.getAbsolutePath());
-//
-//                long startTime = System.nanoTime();
-//                String result = dlvMain(input_data.toString());
-//                long stopTime = System.nanoTime();
-//                Log.i("DLV Execution Time", Long.toString(TimeUnit.NANOSECONDS.toMillis(stopTime - startTime)));
-//                callback.callback(new DLVAnswerSets(result));
-//                stopSelf();
-//            }
-//        }).start();
-//
-//    }
-
-    /**
-     * Native function for DLV invocation
-     * @param filePath the path of a temporary file storing DLV program
-     * @return String result computed from DLV
-     */
-    private native String dlvMain(String filePath);
-
 }
