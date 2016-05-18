@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.mapper;
+package it.unical.mat.embasp.asp;
 
 public class IllegalTermException extends Exception {
 
