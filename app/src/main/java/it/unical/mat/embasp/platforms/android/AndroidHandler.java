@@ -22,7 +22,7 @@ public class AndroidHandler extends Handler {
     public AndroidHandler(Context c , Class<?> b) {
         try {
 
-            service = (AndroidService) ClassLoader.getSystemClassLoader().loadClass(b.getName()).getDeclaredConstructor(Context.class).newInstance(c);
+            service = (AndroidService) Class.forName(b.getName()).getDeclaredConstructor(Context.class).newInstance(c);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
