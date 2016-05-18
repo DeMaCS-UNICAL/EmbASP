@@ -1,13 +1,13 @@
 package it.unical.mat.embasp.specializations.dlv.android;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.util.Log;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
@@ -15,98 +15,93 @@ import it.unical.mat.embasp.platforms.android.AndroidService;
 import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
 
-public class DLVAndroidService extends AndroidService {
+public class DLVAndroidService extends AndroidService{
 
-    public DLVAndroidService() {
-        binder = new DLVBinder();
-
+    public DLVAndroidService(Context c) {
+        super(c);
     }
 
-    //load the static library that contains DLV code compiled for arm processors
-    static{
-        System.loadLibrary("dlvJNI");
-    }
+    private class Receiver extends BroadcastReceiver {
+    private Callback asCallback;
+        public Receiver(Callback callback){
+           asCallback = callback;
+        }
 
-    /*Returns the current Service class , can be used to interact directly with the Service*/
-    public class DLVBinder extends AndroidBinder {
-        public AndroidService getService(){
-            return DLVAndroidService.this;
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                String ASPResult = bundle.getString(DLVAndroidReasoner.SOLVER_RESULT);
+                if (ASPResult != null) {
+                    asCallback.callback(new DLVAnswerSets(ASPResult));
+                }
+            }
         }
     }
 
+
     @Override
-    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
-        return null;
-    }
-//    check multiple execution
-    @Override
-    public void startAsync(final Callback callback,final List <InputProgram> programs, final List<OptionDescriptor> options) {
-        new Thread(new Runnable() {
-            public void run() {
+    public void startAsync(Callback callback, List<InputProgram> programs, List<OptionDescriptor> options) {
+        stopDlvService(context);
+        Intent intent = new Intent(context, DLVAndroidReasoner.class);
+        String input_options = new String();
 
-                StringBuilder input_data = new StringBuilder();
+        input_options+="-silent ";
 
-                input_data.append("-silent ");
+        for (OptionDescriptor o : options) {
 
-                for (OptionDescriptor o :options) {
+            input_options+= o.getOptions();
+        }
 
-                    input_data.append(o.getOptions());
+        intent.putExtra(DLVAndroidReasoner.OPTION,input_options);
 
+
+        String final_program = new String();
+        String files = new String();
+
+        for (InputProgram p : programs) {
+            final_program += p.getProgram();
+            String program_file = p.getFiles();
+
+            if (program_file != null) {
+                files+= program_file;
                 }
-
-
-                String final_program = new String();
-
-                for (InputProgram p : programs) {
-                    final_program += p.getProgram();
-                    String program_file = p.getFiles();
-
-                    if(program_file != null) {
-                        if(input_data.length()==0) {
-
-                            input_data.append(program_file);
-
-                        }else{
-
-                            input_data.append(program_file);
-
-                        }
-
-                    }
-                }
-
-                System.out.println(final_program);
-                File tmp_file = new File(getFilesDir(),"tmp_file");
-                Writer outputStream;
-
-                try {
-                    outputStream = new BufferedWriter(new FileWriter(tmp_file));
-                    outputStream.append(final_program);
-                    outputStream.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-                input_data.append(tmp_file.getAbsolutePath());
-
-                long startTime = System.nanoTime();
-                String result = dlvMain(input_data.toString());
-                long stopTime = System.nanoTime();
-                Log.i("DLV Execution Time", Long.toString(TimeUnit.NANOSECONDS.toMillis(stopTime - startTime)));
-                callback.callback(new DLVAnswerSets(result));
-                stopSelf();
             }
-        }).start();
+
+        intent.setAction(DLVAndroidReasoner.ACTION_SOLVE);
+        intent.putExtra(DLVAndroidReasoner.PROGRAM, final_program);
+        intent.putExtra(DLVAndroidReasoner.FILES, files);
+        context.registerReceiver(new Receiver(callback), new IntentFilter(DLVAndroidReasoner.RESULT_NOTIFICATION));
+        Log.i(getClass().getName(), " start service");
+        context.startService(intent);
 
     }
 
-    /**
-     * Native function for DLV invocation
-     * @param filePath the path of a temporary file storing DLV program
-     * @return String result computed from DLV
-     */
-    private native String dlvMain(String filePath);
 
+    void stopDlvService(Context context){
+
+        boolean isServiceRunning = true;
+
+        while (isServiceRunning) {
+
+            //get device active service list
+            ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+            isServiceRunning = false;
+            //see if DLVService is in running service list
+            for (ActivityManager.RunningServiceInfo processInfo : manager.getRunningServices(Integer.MAX_VALUE)) {
+                if (processInfo.service.getClassName().equals(DLVAndroidReasoner.class.getName())) {
+                    isServiceRunning = true;
+                    break;
+                }
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

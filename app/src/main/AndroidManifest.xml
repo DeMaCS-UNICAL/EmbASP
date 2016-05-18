@@ -9,9 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".specializations.dlv.android.DLVAndroidService"
+            android:name=".specializations.dlv.android.DLVAndroidReasoner"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+
+        </service>
     </application>
 
 </manifest>
