@@ -1,31 +1,23 @@
 package it.unical.mat.embasp.platforms.android;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 
+import android.content.Context;
 
-public abstract class AndroidService extends Service implements it.unical.mat.embasp.base.Service{
+import java.util.List;
 
-    protected IBinder binder;
+import it.unical.mat.embasp.base.InputProgram;
+import it.unical.mat.embasp.base.OptionDescriptor;
+import it.unical.mat.embasp.base.Output;
 
+public abstract class AndroidService implements it.unical.mat.embasp.base.Service{
+   protected Context context;
 
-    /*Returns the current Service class , can be used to interact directly with the Service*/
-    public class AndroidBinder extends Binder {
-        public AndroidService getService(){
-            return AndroidService.this;
-        }
+    public AndroidService (Context c ){
+    context = c;
     }
 
-    /*used when an activity calls onBind function*/
-    @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
-
-        return binder;
+    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
+        return null;
     }
-
-
 }
