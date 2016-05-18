@@ -8,12 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <service
             android:name=".specializations.dlv.android.DLVAndroidReasoner"
             android:enabled="true"
-            android:exported="true">
-
+            android:exported="false"
+            android:process=":remote">
         </service>
+
     </application>
 
 </manifest>
