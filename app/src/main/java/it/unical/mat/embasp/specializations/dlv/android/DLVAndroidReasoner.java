@@ -1,18 +1,13 @@
 package it.unical.mat.embasp.specializations.dlv.android;
 
+import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import it.unical.mat.embasp.base.Callback;
-import it.unical.mat.embasp.base.InputProgram;
-import it.unical.mat.embasp.base.OptionDescriptor;
-import it.unical.mat.embasp.base.Output;
-import it.unical.mat.embasp.platforms.android.AndroidService;
 
-public class DLVServiceReasoner extends AndroidService {
+public class DLVAndroidReasoner extends IntentService {
 
 
     private static final String FILENAME = "tmp_program";
@@ -23,7 +18,7 @@ public class DLVServiceReasoner extends AndroidService {
         System.loadLibrary("dlvJNI");
     }
 
-    public DLVServiceReasoner() {
+    public DLVAndroidReasoner() {
         super("dlv_service");
     }
 
@@ -31,14 +26,12 @@ public class DLVServiceReasoner extends AndroidService {
 
     //Intent messages/actions/extras for ASPService start and BroadcastReceiver communication
     // TODO change package name
-    public static final String ACTION_SOLVE = "it.unical.mat.it.unical.mat.andlv.SOLVE";
-
-    public static final String PROGRAM = "it.unical.mat.it.unical.mat.andlv.PROGRAM";
-    public static final String OPTION = "it.unical.mat.it.unical.mat.andlv.OPTION";
-    public static final String FILES = "it.unical.mat.it.unical.mat.andlv.FILES";
-    public static final String SOLVER_RESULT = "it.unical.mat.it.unical.mat.andlv.SOLVER_RESULT";
-
-    public static final String RESULT_NOTIFICATION = "it.unical.mat.it.unical.mat.andlv.RESULT_NOTIFICATION";
+    public static final String ACTION_SOLVE = "it.unical.mat.embasp.SOLVE";
+    public static final String PROGRAM = "it.unical.mat.embasp.PROGRAM";
+    public static final String OPTION = "it.unical.mat.embasp.OPTION";
+    public static final String FILES = "it.unical.mat.embasp.FILES";
+    public static final String SOLVER_RESULT = "it.unical.mat.embasp.SOLVER_RESULT";
+    public static final String RESULT_NOTIFICATION = "it.unical.mat.embasp.RESULT_NOTIFICATION";
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -93,6 +86,7 @@ public class DLVServiceReasoner extends AndroidService {
         return result;
     }
 
+
     private native String dlvMain(String filePath);
 
     @Override
@@ -101,13 +95,4 @@ public class DLVServiceReasoner extends AndroidService {
         android.os.Process.killProcess(android.os.Process.myPid());//kill the process corresponding to this DLVService
     }
 
-    @Override
-    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
-        return null;
-    }
-
-    @Override
-    public void startAsync(Callback callback, List<InputProgram> programs, List<OptionDescriptor> options) {
-
-    }
 }
