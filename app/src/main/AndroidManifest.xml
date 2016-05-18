@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".specializations.dlv.android.DLVServiceReasoner"
+            android:name=".specializations.dlv.android.DLVAndroidReasoner"
             android:enabled="true"
             android:exported="true">
 
