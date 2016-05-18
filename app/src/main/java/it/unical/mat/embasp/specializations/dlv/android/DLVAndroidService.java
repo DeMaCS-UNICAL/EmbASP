@@ -8,46 +8,42 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import java.util.List;
-import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
-import it.unical.mat.embasp.base.Service;
+import it.unical.mat.embasp.platforms.android.AndroidService;
 import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
-//TODO Extend broadCast
-public class DLVAndroidService extends BroadcastReceiver implements Service {
 
-    private Callback asCallback;
-    private Context c;
+public class DLVAndroidService extends AndroidService{
 
-    public DLVAndroidService(Callback callback,Context c) {
-        asCallback = callback;
-        this.c = c;
+    public DLVAndroidService(Context c) {
+        super(c);
     }
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
+    private class Receiver extends BroadcastReceiver {
+    private Callback asCallback;
+        public Receiver(Callback callback){
+           asCallback = callback;
+        }
 
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            String ASPResult = bundle.getString(DLVServiceReasoner.SOLVER_RESULT);
-            if (ASPResult != null) {
-                asCallback.callback(new DLVAnswerSets(ASPResult));
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                String ASPResult = bundle.getString(DLVAndroidReasoner.SOLVER_RESULT);
+                if (ASPResult != null) {
+                    asCallback.callback(new DLVAnswerSets(ASPResult));
+                }
             }
         }
     }
 
-    @Override
-    public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
-        return null;
-    }
 
     @Override
     public void startAsync(Callback callback, List<InputProgram> programs, List<OptionDescriptor> options) {
-        stopDlvService(c);
-        asCallback = callback;
-        Intent intent = new Intent(c, DLVServiceReasoner.class);
+        stopDlvService(context);
+        Intent intent = new Intent(context, DLVAndroidReasoner.class);
         String input_options = new String();
 
         input_options+="-silent ";
@@ -57,7 +53,7 @@ public class DLVAndroidService extends BroadcastReceiver implements Service {
             input_options+= o.getOptions();
         }
 
-        intent.putExtra(DLVServiceReasoner.OPTION,input_options.toString());
+        intent.putExtra(DLVAndroidReasoner.OPTION,input_options);
 
 
         String final_program = new String();
@@ -72,13 +68,12 @@ public class DLVAndroidService extends BroadcastReceiver implements Service {
                 }
             }
 
-        intent.setAction(DLVServiceReasoner.ACTION_SOLVE);
-        intent.putExtra(DLVServiceReasoner.PROGRAM, final_program);
-        intent.putExtra(DLVServiceReasoner.FILES, files);
-
-        c.registerReceiver(this, new IntentFilter(DLVServiceReasoner.RESULT_NOTIFICATION));
+        intent.setAction(DLVAndroidReasoner.ACTION_SOLVE);
+        intent.putExtra(DLVAndroidReasoner.PROGRAM, final_program);
+        intent.putExtra(DLVAndroidReasoner.FILES, files);
+        context.registerReceiver(new Receiver(callback), new IntentFilter(DLVAndroidReasoner.RESULT_NOTIFICATION));
         Log.i(getClass().getName(), " start service");
-        c.startService(intent);
+        context.startService(intent);
 
     }
 
@@ -95,7 +90,7 @@ public class DLVAndroidService extends BroadcastReceiver implements Service {
             isServiceRunning = false;
             //see if DLVService is in running service list
             for (ActivityManager.RunningServiceInfo processInfo : manager.getRunningServices(Integer.MAX_VALUE)) {
-                if (processInfo.service.getClassName().equals(DLVServiceReasoner.class.getName())) {
+                if (processInfo.service.getClassName().equals(DLVAndroidReasoner.class.getName())) {
                     isServiceRunning = true;
                     break;
                 }
