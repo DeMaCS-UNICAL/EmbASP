@@ -10,11 +10,8 @@ import it.unical.mat.embasp.asp.AnswerSet;
 
 
 public class DLVAnswerSets extends AnswerSets {
-    /**
-     * Constructor initialize AnswerSets object with a String that contains ALL Answer Set generated from ASPService.
-     *
-     * @param answerSets
-     */
+    /**Represent an AnswerSet specific for DLV*/
+
     public DLVAnswerSets(String answerSets) {
         super(answerSets);
     }

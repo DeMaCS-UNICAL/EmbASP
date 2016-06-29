@@ -15,6 +15,8 @@ import it.unical.mat.embasp.platforms.android.AndroidService;
 import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
 
+/**DLV solver for Android platforms*/
+
 public class DLVAndroidService extends AndroidService{
 
     public DLVAndroidService(Context c) {
@@ -60,8 +62,8 @@ public class DLVAndroidService extends AndroidService{
         String files = new String();
 
         for (InputProgram p : programs) {
-            final_program += p.getProgram();
-            String program_file = p.getFiles();
+            final_program += p.getPrograms();
+            String program_file = p.getFilesPaths();
 
             if (program_file != null) {
                 files+= program_file;

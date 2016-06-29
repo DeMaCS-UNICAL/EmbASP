@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 import it.unical.mat.embasp.asp.AnswerSet;
 import it.unical.mat.embasp.asp.AnswerSets;
 
+/**represents Clingo's answersets*/
+
 public class ClingoAnswerSets extends AnswerSets {
 
 	public ClingoAnswerSets(String answersets) {
@@ -59,9 +61,8 @@ public class ClingoAnswerSets extends AnswerSets {
 				answersets.add(new AnswerSet(answerSetList));
 		}
 
-		
-	}
 
+	}
 
 
 }

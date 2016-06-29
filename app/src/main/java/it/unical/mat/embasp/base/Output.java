@@ -1,16 +1,18 @@
 package it.unical.mat.embasp.base;
-/* output class rapresents a generic output */
-public abstract class Output {
 
+/** represents a generic output for a solver*/
+public abstract class Output implements Cloneable {
+	/**Variable in witch results are stored*/
 	protected String output;
 
 	public Output(String initial_output) {
 		output = initial_output;
 	}
 
-	public Output(){
+	public Output() {
 		output = new String();
 	}
+
 
 	public String getOutput() {
 		return output;
@@ -20,4 +22,9 @@ public abstract class Output {
 		this.output = output;
 	}
 
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

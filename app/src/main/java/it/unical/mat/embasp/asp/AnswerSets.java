@@ -6,8 +6,10 @@ import java.util.List;
 
 import it.unical.mat.embasp.base.Output;
 
-public abstract class AnswerSets extends Output {
+/**A collection of {@link AnswerSet}*/
 
+public abstract class AnswerSets extends Output implements Cloneable {
+	/**Where Answer Sets are stored*/
 	protected List<AnswerSet> answersets;
 
 	public AnswerSets(String answersets) {
@@ -16,11 +18,19 @@ public abstract class AnswerSets extends Output {
 		parse();
 	}
 
+	/**Sub classes have to implement this function in order to provide different AnswerSets*/
 	protected abstract void parse();
 
-	public String getAnswerSetsString()  { return this.output;}
+	public String getAnswerSetsString() {
+		return this.output;
+	}
 
-	public List<AnswerSet> getAnswersets(){
+	public List<AnswerSet> getAnswersets() {
 		return Collections.unmodifiableList(answersets);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

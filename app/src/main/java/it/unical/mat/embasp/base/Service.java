@@ -1,17 +1,26 @@
 package it.unical.mat.embasp.base;
 
-import java.io.InputStream;
 import java.util.List;
 
-/*Rapresents a group of functions used to execute solver , consists in two types of methods.*/
-public interface Service{
+/**
+ * Contains generic methods for ASP Solver execution .
+ * @see List
+ * */
+public interface Service {
 
-	/* starSync() starts computation Syncronously , the parameters are a list of programs and option to be processed.
-	* Return an output (class) filled with computation's results */
-	public Output startSync(List<InputProgram> programs , List<OptionDescriptor> options);
+	/** Starts ASP solving Syncronously on a subset of data and options.
+	 * @param programs a list of {@link InputProgram} used as data.
+	 * @param options a list of {@link OptionDescriptor} used as options.
+	 * @return {@link Output} element filled with results*/
 
-	/* startAsync() starts computation Asyncronously , the parameters are a list of programs and options to be processed and
-	* a callback used to notify the user when computation is completed*/
-	public void startAsync(Callback callback , List<InputProgram>programs , List<OptionDescriptor> options);
-	
+	public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options);
+
+	/** Starts ASP solving Asyncronously on a subset of data and options.
+	 * @param programs a list of {@link InputProgram} used as data.
+	 * @param options a list of {@link OptionDescriptor} used as options.
+	 * @param callback interface used to interact with user
+	 * @see Callback*/
+
+	public void startAsync(Callback callback, List<InputProgram> programs, List<OptionDescriptor> options);
+
 }
