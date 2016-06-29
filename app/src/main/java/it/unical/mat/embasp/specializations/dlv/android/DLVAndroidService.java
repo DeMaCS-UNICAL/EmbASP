@@ -15,6 +15,8 @@ import it.unical.mat.embasp.platforms.android.AndroidService;
 import it.unical.mat.embasp.specializations.dlv.DLVAnswerSets;
 
 
+/**DLV solver for Android platforms*/
+
 public class DLVAndroidService extends AndroidService{
 
     public DLVAndroidService(Context c) {
