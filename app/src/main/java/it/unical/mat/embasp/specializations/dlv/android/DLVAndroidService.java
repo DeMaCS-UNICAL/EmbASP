@@ -23,6 +23,7 @@ public class DLVAndroidService extends AndroidService{
         super(c);
     }
 
+
     private class Receiver extends BroadcastReceiver {
     private Callback asCallback;
         public Receiver(Callback callback){
@@ -31,6 +32,7 @@ public class DLVAndroidService extends AndroidService{
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            context.unregisterReceiver(this);
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 String ASPResult = bundle.getString(DLVAndroidReasoner.SOLVER_RESULT);
@@ -40,6 +42,7 @@ public class DLVAndroidService extends AndroidService{
             }
         }
     }
+
 
 
     @Override
@@ -66,9 +69,9 @@ public class DLVAndroidService extends AndroidService{
             String program_file = p.getFilesPaths();
 
             if (program_file != null) {
-                files+= program_file;
-                }
+                files += program_file;
             }
+        }
 
         intent.setAction(DLVAndroidReasoner.ACTION_SOLVE);
         intent.putExtra(DLVAndroidReasoner.PROGRAM, final_program);
@@ -83,9 +86,7 @@ public class DLVAndroidService extends AndroidService{
     void stopDlvService(Context context){
 
         boolean isServiceRunning = true;
-
         while (isServiceRunning) {
-
             //get device active service list
             ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 
