@@ -4,6 +4,7 @@ import it.unical.mat.embasp.asp.ASPFilterOption;
 
 public class DLVFilterOption extends ASPFilterOption{
     public DLVFilterOption(String initial_option) {
-        super(initial_option);
+        super();
+        options+=initial_option;
     }
 }
