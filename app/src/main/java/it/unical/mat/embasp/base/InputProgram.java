@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import it.unical.mat.embasp.asp.ASPMapper;
+import it.unical.mat.embasp.asp.IllegalAnnotationException;
 import it.unical.mat.embasp.asp.IllegalTermException;
+import it.unical.mat.embasp.asp.PredicateNotValidException;
 
 
-/**Represents a generic ASP option*/
+/**Represents a generic option*/
 
 public class InputProgram {
-	/**where ASP programs data is stored*/
+	/**where programs data is stored*/
 	protected String programs;
 	/**where associated files are stored*/
 	protected List<String> files_paths;
@@ -20,7 +21,7 @@ public class InputProgram {
 	protected String separator;
 
 
-	/**Creates a new programs , setting space " " as separator*/
+	/**Creates a new programs , setting space as default separator*/
 	public InputProgram() {
 		init();
 		separator = " ";
@@ -29,7 +30,7 @@ public class InputProgram {
 	/**instantiate a new {@link InputProgram}
 	 * @param inputObj Object used to retrieve data from
 	 * @see #addObjectInput(Object) */
-	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
 		init();
 		addObjectInput(inputObj);
 	}
@@ -58,19 +59,13 @@ public class InputProgram {
 	}
 
 
-	/**transforms a given Object class into a {@link InputProgram} and adds it to the current {@link #programs}
-	 * @param inputObj an object to be transformed
-	 * @see ASPMapper
-	 * @throws IllegalAccessException , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException*/
-	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+	/**@throws IllegalAccessException , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException*/
+	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, IllegalAnnotationException, PredicateNotValidException {
 		throw new UnsupportedOperationException("functionality not implemented");
 	}
 
-	/**transforms a set of Object class into a {@link InputProgram} and adds them to the current {@link #programs}
-	 * @param inputObjs a set of Objects to be transformed
-	 * @see #addObjectInput(Object)
-	 */
-	public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
+	/**@see #addObjectInput(Object)*/
+	public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
 		for (Object inputObj : inputObjs)
 			addObjectInput(inputObj);
 	}
