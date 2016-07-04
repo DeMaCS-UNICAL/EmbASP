@@ -1,102 +1,130 @@
 package it.unical.mat.embasp.base;
 
-import it.unical.mat.embasp.asp.ASPMapper;
-import it.unical.mat.embasp.asp.IllegalTermException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import it.unical.mat.embasp.asp.IllegalAnnotationException;
+import it.unical.mat.embasp.asp.IllegalTermException;
+import it.unical.mat.embasp.asp.PredicateNotValidException;
 
 
+/**Represents a generic option*/
 
-//TODO SUBCLASS with ojbects
 public class InputProgram {
-	/*The variable in wich ASP program is stored*/
-	protected String program;
-	/*The varible in wich ASP files are stored*/
+	/**where programs data is stored*/
+	protected String programs;
+	/**where associated files are stored*/
 	protected List<String> files_paths;
+	/**used as separator for programs*/
+	protected String separator;
 
+
+	/**Creates a new programs , setting space as default separator*/
 	public InputProgram() {
 		init();
+		separator = " ";
 	}
 
-
-	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException{
+	/**instantiate a new {@link InputProgram}
+	 * @param inputObj Object used to retrieve data from
+	 * @see #addObjectInput(Object) */
+	public InputProgram(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
 		init();
 		addObjectInput(inputObj);
 	}
 
-	public InputProgram (String initial_program ){
+	public InputProgram(String initial_program) {
 		init();
-		program = initial_program;
+		programs = initial_program;
 	}
 
-	private void init(){
-		program = new String();
+	private void init() {
+		programs = new String();
 		files_paths = new ArrayList<>();
 	}
 
-	//TODO constructor with objects
-
-	/*This function is used to add a single Object as input */
-	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
-		program += ASPMapper.getInstance().getString(inputObj)+".";
+	/**Set programs separator to current value
+	 * @param separator used as new separator*/
+	public void setSeparator(String separator){
+		this.separator = separator;
 	}
 
-	/*This function is used to add a set of Objects as input*/
-	public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException {
-		for(Object inputObj:inputObjs)
+
+	/**get separator character
+	 * @return separator*/
+	public String getSeparator(){
+		return separator;
+	}
+
+
+	/**@throws IllegalAccessException , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException*/
+	public void addObjectInput(Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, IllegalAnnotationException, PredicateNotValidException {
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+
+	/**@see #addObjectInput(Object)*/
+	public void addObjectsInput(Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
+		for (Object inputObj : inputObjs)
 			addObjectInput(inputObj);
 	}
 
-	/*Returns the stored program*/
-	public String getProgram (){
-		return program;
+	/**Returns data stored in {@link #programs}*/
+	public String getPrograms() {
+		return programs;
 	}
 
-	/*Returns a string rapresentigs all files paths for this program*/
-	public String getFiles(){
+	/** Returns files paths for this programs
+	 * @return String concatenating files paths*/
+	public String getFilesPaths() {
 
 		StringBuilder to_return = new StringBuilder();
 
-		for(String paths : files_paths)
-			if(paths.length()!= 0)
+		for (String paths : files_paths)
+			if (paths.length() != 0)
 				to_return.append(paths).append(" ");
 
 		return to_return.toString();
 	}
 
-	/*Add a new istruction directly into program */
-	public void addRawInput(String raw_input){
-		program += raw_input;
+	/**Adds a new instruction directly into {@link #programs}
+	 * @param new_instruction a new programs instruction*/
+	public void addProgram(String new_instruction) {
+		if(programs.isEmpty()){
+			programs = new_instruction;
+		}else{
+			programs +=separator+new_instruction;
+		}
 	}
 
-	/* add a new file to be processed with the program*/
-	public void addFilesPath(String file_path){
+	/** add a new file path into {@link #files_paths}
+	 * @param file_path a new file path*/
+	public void addFilesPath(String file_path) {
 		files_paths.add(file_path);
 	}
 
-	/*change program value to the new one*/
-	public void addProgram(String program){
-		this.program = program;
+	/**sets {@link #programs } value to the new given one
+	 * @parm programs new value
+	 */
+	public void setPrograms(String programs) {
+		this.programs = programs;
 	}
 
-	/*clears file's list*/
-	public void clearFilesPaths(){
+	/**After this method {@link #files_paths} will be empty*/
+	public void clearFilesPaths() {
 		files_paths.clear();
 	}
 
-	/*clears files value*/
-	public void clearProgram(){
-		program = "";
+	/**After this method {@link #programs} will be empty*/
+	public void clearPrograms() {
+		programs = "";
 	}
 
-	/*clears both program and files_paths*/
-	public void clearAll(){
+	/**After this method both {@link #files_paths} and {@link #programs} will be empty*/
+	public void clearAll() {
 		clearFilesPaths();
-		clearProgram();
+		clearPrograms();
 	}
 
 }

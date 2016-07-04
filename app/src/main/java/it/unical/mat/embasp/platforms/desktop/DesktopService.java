@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
+
 import it.unical.mat.embasp.asp.AnswerSets;
 import it.unical.mat.embasp.base.Callback;
 import it.unical.mat.embasp.base.InputProgram;
@@ -12,24 +13,31 @@ import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.base.Service;
 
-public abstract class DesktopService implements Service{
+/**is a specialization for a Desktop platform
+ * @see Service*/
+
+public abstract class DesktopService implements Service {
+	/**Stores solver's executable path*/
 	protected String exe_path;
 
 	public DesktopService(String exe_path){
-		this.exe_path=exe_path;
+		this.exe_path = exe_path;
 	}
 
-	public String getExePath(){
+	public String getExePath() {
 		return exe_path;
 	}
 
-
-	public void setExePath(String exe_path){
+	/**set {@link #exe_path} to a new path*
+	 * @param exe_path a string representing the path for the new solver
+	 */
+	public void setExePath(String exe_path) {
 		this.exe_path = exe_path;
 	}
 
 
-
+	/**Start a new process for the {@link #exe_path} and starts solving
+	 * @see it.unical.mat.embasp.base.Service#startAsync(Callback, List, List) */
 	@Override
 	public void startAsync(final Callback callback, final List<InputProgram> programs,
 						   final List<OptionDescriptor> options) {
@@ -44,9 +52,9 @@ public abstract class DesktopService implements Service{
 
 
 					String option = new String();
-					for (OptionDescriptor o :options) {
+					for (OptionDescriptor o : options) {
 
-						option +=o.getOptions();
+						option += o.getOptions();
 
 					}
 
@@ -54,9 +62,9 @@ public abstract class DesktopService implements Service{
 					String final_program = new String();
 
 					for (InputProgram p : programs) {
-						final_program += p.getProgram();
-						String program_file = p.getFiles();
-						if(program_file != null) {
+						final_program += p.getPrograms();
+						String program_file = p.getFilesPaths();
+						if (program_file != null) {
 							files_paths += program_file;
 						}
 					}
@@ -64,7 +72,7 @@ public abstract class DesktopService implements Service{
 
 					long startTime = System.nanoTime();
 
-					Process solver_process = Runtime.getRuntime().exec(exe_path+" "+option +files_paths+"--");
+					Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + "--");
 
 					PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
 					writer.println(final_program);
@@ -75,8 +83,8 @@ public abstract class DesktopService implements Service{
 					String output_line = new String();
 					String output = new String();
 					try {
-						while((output_line = output_reader.readLine()) != null){
-							output += output_line+"\n";
+						while ((output_line = output_reader.readLine()) != null) {
+							output += output_line;
 						}
 					} catch (IOException e) {
 
@@ -97,6 +105,8 @@ public abstract class DesktopService implements Service{
 
 	}
 
+	/**Start a new process for the {@link #exe_path} and starts solving
+	 * @see it.unical.mat.embasp.base.Service#startSync(List, List)*/
 	@Override
 	public Output startSync(List<InputProgram> programs,
 							List<OptionDescriptor> options) {
@@ -107,9 +117,9 @@ public abstract class DesktopService implements Service{
 
 
 			String option = new String();
-			for (OptionDescriptor o :options) {
+			for (OptionDescriptor o : options) {
 
-				option +=o.getOptions();
+				option += o.getOptions();
 
 			}
 
@@ -117,9 +127,9 @@ public abstract class DesktopService implements Service{
 			String final_program = new String();
 
 			for (InputProgram p : programs) {
-				final_program += p.getProgram();
-				String program_file = p.getFiles();
-				if(program_file != null) {
+				final_program += p.getPrograms();
+				String program_file = p.getFilesPaths();
+				if (program_file != null) {
 					files_paths += program_file;
 				}
 			}
@@ -127,7 +137,7 @@ public abstract class DesktopService implements Service{
 
 			long startTime = System.nanoTime();
 
-			Process solver_process = Runtime.getRuntime().exec(exe_path+" "+option +files_paths+"--");
+			Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + "--");
 
 			PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
 			writer.println(final_program);
@@ -138,8 +148,8 @@ public abstract class DesktopService implements Service{
 			String output_line = new String();
 			String output = new String();
 			try {
-				while((output_line = output_reader.readLine()) != null){
-					output += output_line+"\n";
+				while ((output_line = output_reader.readLine()) != null) {
+					output += output_line;
 				}
 			} catch (IOException e) {
 
@@ -159,11 +169,7 @@ public abstract class DesktopService implements Service{
 	}
 
 
-abstract protected AnswerSets getAnswerSet(String output);
-
-
-
-
+	abstract protected AnswerSets getAnswerSet(String output);
 
 
 }
