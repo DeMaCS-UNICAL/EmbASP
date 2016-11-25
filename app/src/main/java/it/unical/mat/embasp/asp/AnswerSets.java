@@ -12,10 +12,12 @@ public abstract class AnswerSets extends Output implements Cloneable {
 	/**Where Answer Sets are stored*/
 	protected List<AnswerSet> answersets;
 
-	public AnswerSets(String answersets) {
-		this.answersets = new ArrayList<>();
-		this.output = answersets;
-		parse();
+	public AnswerSets(String out) {
+		super(out);
+	}
+
+	public AnswerSets(String out, String err) {
+		super(out, err);
 	}
 
 	/**Sub classes have to implement this function in order to provide different AnswerSets*/
@@ -26,7 +28,12 @@ public abstract class AnswerSets extends Output implements Cloneable {
 	}
 
 	public List<AnswerSet> getAnswersets() {
-		return Collections.unmodifiableList(answersets);
+		if(answersets == null) {
+			this.answersets = new ArrayList<>();
+			parse();
+		}
+
+		return Collections.unmodifiableList(this.answersets);
 	}
 
 	@Override

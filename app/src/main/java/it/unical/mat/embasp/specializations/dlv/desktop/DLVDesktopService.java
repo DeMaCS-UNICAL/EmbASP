@@ -15,14 +15,15 @@ public class DLVDesktopService extends DesktopService{
 
 	public DLVDesktopService(String exe_path) {
 		super(exe_path);
+		this.load_from_STDIN_option = "--";
 	}
 
 
 
 
 	@Override
-	protected AnswerSets getAnswerSet(String output) {
-		return new DLVAnswerSets(output);
+	protected Output getOutput(String output, String error) {
+		return new DLVAnswerSets(output, error);
 	}
 
 

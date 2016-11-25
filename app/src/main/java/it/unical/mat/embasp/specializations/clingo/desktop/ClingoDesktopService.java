@@ -16,6 +16,7 @@ public class ClingoDesktopService extends DesktopService {
 
     public ClingoDesktopService(String exe_path) {
         super(exe_path);
+		this.load_from_STDIN_option = "";
     }
 
     @Override
@@ -25,8 +26,8 @@ public class ClingoDesktopService extends DesktopService {
     }
 
     @Override
-    protected AnswerSets getAnswerSet(String output) {
-        return new ClingoAnswerSets(output);
+    protected Output getOutput(String output, String error) {
+        return new ClingoAnswerSets(output, error);
     }
 
     @Override

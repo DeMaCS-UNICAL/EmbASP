@@ -19,6 +19,7 @@ import it.unical.mat.embasp.base.Service;
 public abstract class DesktopService implements Service {
 	/**Stores solver's executable path*/
 	protected String exe_path;
+	protected String load_from_STDIN_option;
 
 	public DesktopService(String exe_path){
 		this.exe_path = exe_path;
@@ -43,64 +44,12 @@ public abstract class DesktopService implements Service {
 						   final List<OptionDescriptor> options) {
 
 
-		Thread thread = new Thread(new Runnable() {
-
+		new Thread() {
 			@Override
 			public void run() {
-
-				try {
-
-
-					String option = new String();
-					for (OptionDescriptor o : options) {
-
-						option += o.getOptions();
-
-					}
-
-					String files_paths = new String();
-					String final_program = new String();
-
-					for (InputProgram p : programs) {
-						final_program += p.getPrograms();
-						String program_file = p.getFilesPaths();
-						if (program_file != null) {
-							files_paths += program_file;
-						}
-					}
-
-
-					long startTime = System.nanoTime();
-
-					Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + "--");
-
-					PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
-					writer.println(final_program);
-					writer.flush();
-					writer.close();
-
-					BufferedReader output_reader = new BufferedReader(new InputStreamReader(solver_process.getInputStream()));
-					String output_line = new String();
-					String output = new String();
-					try {
-						while ((output_line = output_reader.readLine()) != null) {
-							output += output_line;
-						}
-					} catch (IOException e) {
-
-						e.printStackTrace();
-					}
-
-					long stopTime = System.nanoTime();
-					System.out.println("Total time : " + (stopTime - startTime));
-					callback.callback(getAnswerSet(output));
-				} catch (IOException e2) {
-					e2.printStackTrace();
-				}
-
+				callback.callback(startSync(programs, options));
 			}
-		});
-		thread.start();
+		}.start();
 
 
 	}
@@ -110,8 +59,6 @@ public abstract class DesktopService implements Service {
 	@Override
 	public Output startSync(List<InputProgram> programs,
 							List<OptionDescriptor> options) {
-
-		Output to_return = null;
 
 		try {
 
@@ -137,39 +84,70 @@ public abstract class DesktopService implements Service {
 
 			long startTime = System.nanoTime();
 
-			Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + "--");
+			Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + load_from_STDIN_option);
+
+			final StringBuffer solverOutput = new StringBuffer();
+			final StringBuffer solverError = new StringBuffer();
+
+			new Thread() {
+				@Override
+				public void run() {
+					try {
+
+						final BufferedReader bufferedReaderOutput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+						// Read output of the solver and store in solverOutput
+						String currentLine;
+						while ((currentLine = bufferedReaderOutput.readLine()) != null)
+							solverOutput.append(currentLine + "\n");
+
+					} catch (final IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}.start();
+
+			new Thread() {
+				@Override
+				public void run() {
+					try {
+
+						final BufferedReader bufferedReaderError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+						String currentErrLine;
+						while ((currentErrLine = bufferedReaderError.readLine()) != null)
+							solverError.append(currentErrLine + "\n");
+
+					} catch (final IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}.start();
 
 			PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
 			writer.println(final_program);
-			writer.flush();
-			writer.close();
+			if (writer != null)
+				writer.close();
 
-			BufferedReader output_reader = new BufferedReader(new InputStreamReader(solver_process.getInputStream()));
-			String output_line = new String();
-			String output = new String();
-			try {
-				while ((output_line = output_reader.readLine()) != null) {
-					output += output_line;
-				}
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
+			process.waitFor(timeout, TimeUnit.SECONDS);
 
 			long stopTime = System.nanoTime();
 			System.out.println("Total time : " + (stopTime - startTime));
-			to_return = getAnswerSet(output);
+
+			return getOutput(solverOutput.toString(), solverError.toString());
+
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
 
-
-		return to_return;
-
 	}
 
 
-	abstract protected AnswerSets getAnswerSet(String output);
+	abstract protected Output getOutput(String output, String error);
 
 
 }
