@@ -22,7 +22,7 @@ public class DLVAnswerSets extends AnswerSets {
         Matcher matcher = pattern.matcher(output);
         while (matcher.find()) {
             String answerSet=matcher.group();
-            Pattern patternAnswerSet = Pattern.compile("(-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?)(, |\\})");
+            Pattern patternAnswerSet = Pattern.compile("(-?[a-z][A-Za-z0-9_]*(\\(.+?\\))?)(, |\\})");
             Matcher matcherAnswerSet = patternAnswerSet.matcher(answerSet);
             List<String> answerSetList=new ArrayList<>();
             while (matcherAnswerSet.find()) {
