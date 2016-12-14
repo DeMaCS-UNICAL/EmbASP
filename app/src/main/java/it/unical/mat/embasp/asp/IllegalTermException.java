@@ -2,7 +2,13 @@ package it.unical.mat.embasp.asp;
 
 public class IllegalTermException extends Exception {
 
-	public IllegalTermException(String msg) {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public IllegalTermException(final String msg) {
 		super(msg);
 	}
+
 }

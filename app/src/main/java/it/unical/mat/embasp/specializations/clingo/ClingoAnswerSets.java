@@ -10,35 +10,34 @@ import java.util.regex.Pattern;
 import it.unical.mat.embasp.asp.AnswerSet;
 import it.unical.mat.embasp.asp.AnswerSets;
 
-/**represents Clingo's answersets*/
+/** represents Clingo's answersets */
 
 public class ClingoAnswerSets extends AnswerSets {
 
-	public ClingoAnswerSets(String answersets) {
+	public ClingoAnswerSets(final String answersets) {
 		super(answersets);
+	}
+
+	public ClingoAnswerSets(final String out, final String err) {
+		super(out, err);
 	}
 
 	@Override
 	protected void parse() {
-		final Pattern pattern = Pattern
-				.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))?");
+		final Pattern pattern = Pattern.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))?");
 		final Matcher matcher = pattern.matcher(output);
 		while (matcher.find()) {
 
 			try {
-				if (matcher.group(1) == null
-						|| Integer.parseInt(matcher.group(1)) <= answersets
-						.size())
+				if (matcher.group(1) == null || Integer.parseInt(matcher.group(1)) <= answersets.size())
 					continue;
 			} catch (final NumberFormatException e1) {
 				e1.printStackTrace();
 				break;
 			}
 
-			final Pattern patternAnswerSet = Pattern
-					.compile("-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?");
-			final Matcher matcherAnswerSet = patternAnswerSet.matcher(matcher
-					.group(2));
+			final Pattern patternAnswerSet = Pattern.compile("-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?");
+			final Matcher matcherAnswerSet = patternAnswerSet.matcher(matcher.group(2));
 			final List<String> answerSetList = new ArrayList<>();
 			while (matcherAnswerSet.find())
 				answerSetList.add(matcherAnswerSet.group());
@@ -61,8 +60,6 @@ public class ClingoAnswerSets extends AnswerSets {
 				answersets.add(new AnswerSet(answerSetList));
 		}
 
-
 	}
-
 
 }

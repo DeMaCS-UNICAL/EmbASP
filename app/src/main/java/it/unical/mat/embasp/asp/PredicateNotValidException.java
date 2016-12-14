@@ -1,8 +1,14 @@
 package it.unical.mat.embasp.asp;
 
-public class PredicateNotValidException extends Exception{
+public class PredicateNotValidException extends Exception {
 
-    public PredicateNotValidException(){
-        super("Value of predicate is not valid");
-    }
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public PredicateNotValidException() {
+		super("Value of predicate is not valid");
+	}
+
 }
