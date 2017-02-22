@@ -10,6 +10,7 @@ import it.unical.mat.embasp.base.InputProgram;
 public class ASPInputProgram extends InputProgram {
 
 	public ASPInputProgram() {
+		super();
 	}
 
 	public ASPInputProgram(final Object inputObj) throws InvocationTargetException, NoSuchMethodException, IllegalTermException, IllegalAccessException,
@@ -23,7 +24,7 @@ public class ASPInputProgram extends InputProgram {
 
 	/**
 	 * transforms a given Object class into a {@link InputProgram} and adds it to the current {@link #programs}
-	 * 
+	 *
 	 * @param inputObj
 	 *            an object to be transformed
 	 * @see ASPMapper
