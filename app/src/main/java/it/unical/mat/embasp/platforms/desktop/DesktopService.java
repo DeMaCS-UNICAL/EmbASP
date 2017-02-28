@@ -70,7 +70,7 @@ public abstract class DesktopService implements Service {
 
 		String option = new String();
 		for (final OptionDescriptor o : options)
-			option += o.getOptions();
+			option += o.getOptions()+" ";
 
 		String files_paths = new String();
 		String final_program = new String();

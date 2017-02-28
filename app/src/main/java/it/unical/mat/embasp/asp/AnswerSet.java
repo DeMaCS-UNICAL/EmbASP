@@ -62,9 +62,14 @@ public class AnswerSet {
 
 		return atoms;
 	}
+	
 
 	@Override
 	public String toString() {
 		return value.toString();
+	}
+
+	public Map<Integer, Integer> getLevelWeight() {
+		return weight_map;
 	}
 }
