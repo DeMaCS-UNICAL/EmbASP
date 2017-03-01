@@ -138,7 +138,7 @@ public abstract class DesktopService implements Service {
 			solver_process.waitFor();
 
 			final long stopTime = System.nanoTime();
-			System.out.println("Total time : " + (stopTime - startTime));
+			System.err.println("Total time : " + (stopTime - startTime));
 
 			return getOutput(solverOutput.toString(), solverError.toString());
 

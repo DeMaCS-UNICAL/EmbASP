@@ -24,10 +24,13 @@ public class ClingoAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		final Pattern pattern = Pattern.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))?");
+		boolean optimum=output.contains("OPTIMUM");
+		final Pattern pattern = (!optimum) 
+				?Pattern.compile("Answer: (\\d+)\\r?\\n(.*)")
+				:Pattern.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))");
 		final Matcher matcher = pattern.matcher(output);
 		while (matcher.find()) {
-
+			
 			try {
 				if (matcher.group(1) == null || Integer.parseInt(matcher.group(1)) <= answersets.size())
 					continue;
@@ -35,6 +38,8 @@ public class ClingoAnswerSets extends AnswerSets {
 				e1.printStackTrace();
 				break;
 			}
+			
+
 
 			final Pattern patternAnswerSet = Pattern.compile("-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?");
 			final Matcher matcherAnswerSet = patternAnswerSet.matcher(matcher.group(2));
@@ -42,7 +47,7 @@ public class ClingoAnswerSets extends AnswerSets {
 			while (matcherAnswerSet.find())
 				answerSetList.add(matcherAnswerSet.group());
 
-			if (matcher.group(4) != null) {
+			if (optimum) {
 
 				final Map<Integer, Integer> weightMap = new HashMap<>();
 				try {
