@@ -151,5 +151,32 @@ public class InputProgram {
 	public void setSeparator(final String separator) {
 		this.separator = separator;
 	}
+	
+	
+	public void setPDDLDomainAndProblemFiles(final String d,final String s){
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+	
+	public void setPDDLDomainAndProblemAsStrings(final String p,final String d){
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+	
+	public String getPDDLProblemString() {
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+
+	public String getPDDLDomainString() {
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+	
+	public String getPDDLProblemFile() {
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+
+	public String getPDDLDomainFile() {
+		throw new UnsupportedOperationException("functionality not implemented");
+	}
+	
+	
 
 }
