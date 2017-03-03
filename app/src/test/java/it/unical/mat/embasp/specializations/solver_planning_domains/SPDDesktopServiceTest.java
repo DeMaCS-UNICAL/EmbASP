@@ -22,10 +22,7 @@ import it.unical.mat.embasp.languages.pddl.Plan;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
 import it.unical.mat.embasp.specializations.solver_planning_domains.desktop.SolverPlanningDomainsServiceDesktop;
 
-/**
- * @author Stefano
- */
-public class SPDDesktopTest {
+public class SPDDesktopServiceTest {
 
 	/**
 	 * @throws java.lang.Exception
