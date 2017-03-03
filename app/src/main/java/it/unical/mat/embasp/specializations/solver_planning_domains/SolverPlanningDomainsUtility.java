@@ -80,7 +80,7 @@ public class SolverPlanningDomainsUtility {
 			// con.setRequestProperty("Accept", "application/json,text/plain");
 			con.setRequestProperty("Method", "POST");
 			final OutputStream os = con.getOutputStream();
-			os.write(json.toString().getBytes("UTF-8"));
+			os.write(json.getBytes("UTF-8"));
 			os.flush();
 			os.close();
 

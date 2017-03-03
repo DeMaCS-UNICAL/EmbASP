@@ -2,8 +2,6 @@ package it.unical.mat.embasp.specializations.solver_planning_domains.desktop;
 
 import java.util.List;
 
-import org.json.simple.JSONObject;
-
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
@@ -41,8 +39,7 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
 		final PDDLInputProgram pddlIp = (PDDLInputProgram) ip;
 		try {
-			final JSONObject json = spdu.createJson(pddlIp);
-			return getOutput(spdu.postJsonToURL(json.toString()), "");
+			return getOutput(spdu.postJsonToURL(spdu.createJson(pddlIp).toString()), "");
 		} catch (final Exception e) {
 			return getOutput("", "Error : " + e.getMessage());
 		}
