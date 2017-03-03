@@ -23,7 +23,7 @@ public class ASPMapper {
 
 	private final Map<String, Class<?>> predicateClass;
 
-	private final Map<Class, Map<String, Method>> classSetterMethod;
+	private final Map<Class<?>, Map<String, Method>> classSetterMethod;
 
 	private ASPMapper() {
 		predicateClass = new HashMap<>();

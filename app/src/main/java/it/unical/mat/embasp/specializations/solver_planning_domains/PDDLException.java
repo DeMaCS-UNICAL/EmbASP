@@ -1,15 +1,14 @@
-package it.unical.mat.embasp.specializations.SolverPlanningDomains;
+package it.unical.mat.embasp.specializations.solver_planning_domains;
 
 public class PDDLException extends Exception {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	public PDDLException(String error) {
+
+	public PDDLException(final String error) {
 		super(error);
 	}
-	
-	
 
 }

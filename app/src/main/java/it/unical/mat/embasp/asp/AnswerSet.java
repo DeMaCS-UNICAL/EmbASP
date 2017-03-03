@@ -63,6 +63,13 @@ public class AnswerSet {
 		return atoms;
 	}
 
+	/**
+	 * @return the weight_map
+	 */
+	public Map<Integer, Integer> getWeights() {
+		return Collections.unmodifiableMap(weight_map);
+	}
+
 	@Override
 	public String toString() {
 		return value.toString();
