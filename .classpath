@@ -2,6 +2,5 @@
 <classpath>
 	<classpathentry excluding="it/unical/mat/embasp/platforms/android/|it/unical/mat/embasp/specializations/dlv/android/" kind="src" path="app/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/pddl4j-3.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
