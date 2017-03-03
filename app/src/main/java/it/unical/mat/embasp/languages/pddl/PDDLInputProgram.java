@@ -14,12 +14,16 @@ public class PDDLInputProgram extends InputProgram {
 		super();
 		files_paths.add("");
 		files_paths.add("");
+		PDDLdomain="";
+		PDDLproblem="";
 	}
 	
 	public PDDLInputProgram(final String domainFilePath, final String problemFilePath) {
 		super();
 		addFilesPath(domainFilePath);
 		addFilesPath(problemFilePath);
+		PDDLdomain="";
+		PDDLproblem="";
 	}
 	
 	@Override
@@ -42,7 +46,8 @@ public class PDDLInputProgram extends InputProgram {
 	@Override
 	public void clearAll() {
 		super.clearAll();
-		PDDLdomain=PDDLproblem="";
+		PDDLdomain="";
+		PDDLproblem="";
 	}
 
 	@Override

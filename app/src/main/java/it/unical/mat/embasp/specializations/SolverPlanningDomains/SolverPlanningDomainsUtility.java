@@ -77,7 +77,6 @@ public class SolverPlanningDomainsUtility {
 	public JSONObject createJson(final PDDLInputProgram pddlInputProgram) throws PDDLException{
 		String problem=pddlInputProgram.getPDDLProblemString();
 		String domain=pddlInputProgram.getPDDLDomainString();
-		
 		if(problem==""){
 			String problemFile=pddlInputProgram.getPDDLProblemFile();
 			if(problemFile=="")
@@ -93,7 +92,7 @@ public class SolverPlanningDomainsUtility {
 			if(domainFile=="")
 				throw new PDDLException("Domain file not specified");
 			try {
-				problem=getFileAsString(domainFile);
+				domain=getFileAsString(domainFile);
 			} catch (Exception e) {
 				throw new PDDLException("Domain file : " + domainFile+" not found.");
 			}
