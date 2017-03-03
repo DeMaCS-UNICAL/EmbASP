@@ -16,7 +16,6 @@ public abstract class Plan extends Output implements Cloneable {
 		actionSequence = new ArrayList<>();
 	}
 	
-	protected  abstract void parse();
 
 	public List<Action> getActions() {
 		parse();

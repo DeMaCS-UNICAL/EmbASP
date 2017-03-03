@@ -38,6 +38,5 @@ public abstract class AnswerSets extends Output implements Cloneable {
 		return output;
 	}
 
-	/** Sub classes have to implement this function in order to provide different AnswerSets */
-	protected abstract void parse();
+
 }

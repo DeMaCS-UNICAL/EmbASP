@@ -40,4 +40,7 @@ public abstract class Output implements Cloneable {
 	public void setOutput(final String output) {
 		this.output = output;
 	}
+	
+	/** Sub classes have to implement this function in order to provide different AnswerSets */
+	protected abstract void parse();
 }

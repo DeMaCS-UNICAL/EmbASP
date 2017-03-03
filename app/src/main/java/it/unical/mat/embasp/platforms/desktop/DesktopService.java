@@ -149,8 +149,7 @@ public abstract class DesktopService implements Service {
 			e.printStackTrace();
 		}
 
-		return new Output() {
-		};
+		return getOutput("", "");
 
 	}
 
