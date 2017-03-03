@@ -78,7 +78,7 @@ public class SolverPlanningDomainsUtility {
 		String problem=pddlInputProgram.getPDDLProblemString();
 		String domain=pddlInputProgram.getPDDLDomainString();
 		
-		if(problem!=""){
+		if(problem==""){
 			String problemFile=pddlInputProgram.getPDDLProblemFile();
 			if(problemFile=="")
 				throw new PDDLException("Problem file not specified");
@@ -88,7 +88,7 @@ public class SolverPlanningDomainsUtility {
 				throw new PDDLException("Problem file : " + problemFile+" not found.");
 			}
 		}
-		if(domain!=""){
+		if(domain==""){
 			String domainFile=pddlInputProgram.getPDDLDomainFile();
 			if(domainFile=="")
 				throw new PDDLException("Domain file not specified");

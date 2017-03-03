@@ -18,14 +18,18 @@ public class SolverPlanningDomainPlan extends Plan {
 	@Override
 	protected void parse(){
 		if(errors!="" || output=="")return;
-		
 		JSONParser parser=new JSONParser();
-		Object obj;
+		JSONObject obj;
 		try {
-			obj = parser.parse(output);
-			JSONArray arrayPlan = (JSONArray) ((JSONObject) ((JSONObject)obj).get("result")).get("plan");
-			for(int i=0;i<arrayPlan.size();i++)
-				actionSequence.add(new Action(((JSONObject)arrayPlan.get(i)).get("name").toString()));
+			obj = (JSONObject) parser.parse(output);
+			String status = (String) obj.get("status");
+			if(status.contains("ok")){
+				JSONArray arrayPlan = (JSONArray) ((JSONObject) obj.get("result")).get("plan");
+				for(int i=0;i<arrayPlan.size();i++)
+					actionSequence.add(new Action(((JSONObject)arrayPlan.get(i)).get("name").toString()));
+			}else{
+				errors+=" "+((String)((JSONObject) obj.get("result")).get("error"));
+			}
 		} catch (ParseException e) {
 			errors+=" ParseException : "+e.getMessage();
 		}
