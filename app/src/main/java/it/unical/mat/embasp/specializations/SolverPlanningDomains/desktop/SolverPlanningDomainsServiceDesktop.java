@@ -23,22 +23,24 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
 	@Override
 	public Output startSync(List<InputProgram> programs, List<OptionDescriptor> options) {
-		//TODO DOMANI LO SISTEMIAMO
+		String error="";
 		if(programs.isEmpty())
-			return null;
+			return getOutput("","PDDLInputProgram not defined");
+		
+		if(programs.size()>1)
+			return getOutput("", "For PDDL you must specify just a PDDLInputProgram");
+		
 		InputProgram ip = programs.get(0);
 		if(!(ip instanceof PDDLInputProgram))
-			return null;
+			return getOutput("", "InputProgram is not of type PDDLInputProgram");
 
 		PDDLInputProgram pddlIp = (PDDLInputProgram) ip;
 		try {
 			JSONObject json =  spdu.createJson(pddlIp);
 			return getOutput(spdu.postJsonToURL(json.toString()),"");
 		} catch (Exception e) {
-			e.printStackTrace();
+			return getOutput("", "Error : "+e.getMessage());
 		}
-		
-		return null;
 	}
 
 	@Override

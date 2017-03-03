@@ -10,11 +10,9 @@ import it.unical.mat.embasp.base.Output;
 
 public abstract class Plan extends Output implements Cloneable {
 	protected List<Action> actionSequence;
-	protected String plan;
 
-	public Plan(final String plan) {
-		super();
-		this.plan = plan;
+	public Plan(final String plan,final String error) {
+		super(plan,error);
 		actionSequence = new ArrayList<>();
 	}
 	

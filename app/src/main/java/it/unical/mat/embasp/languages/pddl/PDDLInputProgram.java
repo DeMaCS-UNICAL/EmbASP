@@ -7,9 +7,13 @@ public class PDDLInputProgram extends InputProgram {
 	
 	private String PDDLproblem;
 	private String PDDLdomain;
+	private final int DOMAIN_INDEX=0;
+	private final int PROBLEM_INDEX=1;
 
 	public PDDLInputProgram() {
 		super();
+		files_paths.add("");
+		files_paths.add("");
 	}
 	
 	public PDDLInputProgram(final String domainFilePath, final String problemFilePath) {
@@ -29,6 +33,19 @@ public class PDDLInputProgram extends InputProgram {
 	}
 
 	@Override
+	public void clearFilesPaths() {
+		super.clearFilesPaths();
+		files_paths.add("");
+		files_paths.add("");
+	}
+	
+	@Override
+	public void clearAll() {
+		super.clearAll();
+		PDDLdomain=PDDLproblem="";
+	}
+
+	@Override
 	public String getPrograms() {
 		throw new UnsupportedOperationException("functionality not implemented");
 	}
@@ -37,19 +54,24 @@ public class PDDLInputProgram extends InputProgram {
 	public void setPrograms(final String programs) {
 		throw new UnsupportedOperationException("functionality not implemented");
 	}
-
-	@Override
-	public void setPDDLDomainAndProblemFiles(final String d,final String s){
-		clearFilesPaths();
-		addFilesPath(d);
-		addFilesPath(s);
-	}
 	
 	@Override
-	public void setPDDLDomainAndProblemAsStrings(final String p,final String d){
-		PDDLproblem=p;
-		PDDLdomain=d;
+	public void setPDDLDomainFile(final String domain){
+		files_paths.set(DOMAIN_INDEX, domain);
 	}
+	@Override
+	public void setPDDLProblemFile(final String problem){
+		files_paths.set(PROBLEM_INDEX, problem);
+	}
+	@Override
+	public void setPDDLDomainAsString(final String domain){
+		PDDLdomain=domain;
+	}
+	@Override
+	public void setPDDLProblemAsString(final String problem){
+		PDDLproblem=problem;
+	}
+
 
 	@Override
 	public String getPDDLProblemString() {
@@ -64,12 +86,12 @@ public class PDDLInputProgram extends InputProgram {
 
 	@Override
 	public String getPDDLProblemFile() {
-		return (files_paths.size()>1)?files_paths.get(1):"";
+		return (files_paths.size()>PROBLEM_INDEX)?files_paths.get(PROBLEM_INDEX):"";
 	}
 
 	@Override
 	public String getPDDLDomainFile() {
-		return (files_paths.size()>0)?files_paths.get(0):"";
+		return (files_paths.size()>DOMAIN_INDEX)?files_paths.get(DOMAIN_INDEX):"";
 	}
 
 }

@@ -10,25 +10,24 @@ import it.unical.mat.embasp.languages.pddl.Action;
 import it.unical.mat.embasp.languages.pddl.Plan;
 
 public class SolverPlanningDomainPlan extends Plan {
-
-	String error;
 	
 	public SolverPlanningDomainPlan(String plan,String error) {
-		super(plan);
-		this.error = error;
+		super(plan,error);
 	}
 	
 	@Override
 	protected void parse(){
+		if(errors!="" || output=="")return;
+		
 		JSONParser parser=new JSONParser();
 		Object obj;
 		try {
-			obj = parser.parse(plan);
+			obj = parser.parse(output);
 			JSONArray arrayPlan = (JSONArray) ((JSONObject) ((JSONObject)obj).get("result")).get("plan");
 			for(int i=0;i<arrayPlan.size();i++)
 				actionSequence.add(new Action(((JSONObject)arrayPlan.get(i)).get("name").toString()));
 		} catch (ParseException e) {
-			e.printStackTrace();
+			errors+=" ParseException : "+e.getMessage();
 		}
 	}
 

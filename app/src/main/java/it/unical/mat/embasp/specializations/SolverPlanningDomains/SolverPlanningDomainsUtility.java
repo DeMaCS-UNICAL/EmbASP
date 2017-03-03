@@ -17,7 +17,7 @@ import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 public class SolverPlanningDomainsUtility {
 	
 	
-	static String getStringFile(String s) throws Exception {
+	static String getFileAsString(String s) throws Exception {
 		String everything = "";
 		BufferedReader br = new BufferedReader(new FileReader(s));
 		try {
@@ -36,7 +36,7 @@ public class SolverPlanningDomainsUtility {
 		return everything;
 	}
 
-	private final String solverUrl ="http://solver.planning.domains/solve";;
+	private final String solverUrl ="http://solver.planning.domains/solve";
 	
 	public SolverPlanningDomainsUtility() {}
 
@@ -74,15 +74,29 @@ public class SolverPlanningDomainsUtility {
     }
 
 	
-	public JSONObject createJson(final PDDLInputProgram pddlInputProgram) throws Exception{
+	public JSONObject createJson(final PDDLInputProgram pddlInputProgram) throws PDDLException{
 		String problem=pddlInputProgram.getPDDLProblemString();
 		String domain=pddlInputProgram.getPDDLDomainString();
 		
 		if(problem!=""){
-			problem=getStringFile(pddlInputProgram.getPDDLProblemFile());
+			String problemFile=pddlInputProgram.getPDDLProblemFile();
+			if(problemFile=="")
+				throw new PDDLException("Problem file not specified");
+			try {
+				problem=getFileAsString(problemFile);
+			} catch (Exception e) {
+				throw new PDDLException("Problem file : " + problemFile+" not found.");
+			}
 		}
 		if(domain!=""){
-			domain=getStringFile(pddlInputProgram.getPDDLDomainFile());
+			String domainFile=pddlInputProgram.getPDDLDomainFile();
+			if(domainFile=="")
+				throw new PDDLException("Domain file not specified");
+			try {
+				problem=getFileAsString(domainFile);
+			} catch (Exception e) {
+				throw new PDDLException("Domain file : " + domainFile+" not found.");
+			}
 		}
 		JSONObject obj = new JSONObject();
 		obj.put("problem", problem);
