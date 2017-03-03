@@ -40,35 +40,39 @@ public class SolverPlanningDomainsUtility {
 	
 	public SolverPlanningDomainsUtility() {}
 
-	public String postJsonToURL(String json) throws MalformedURLException, IOException, PDDLException {
+	public String postJsonToURL(String json) throws  PDDLException {
 	     
 		String result="";
-        URL myurl = new URL(solverUrl);
-        HttpURLConnection con = (HttpURLConnection)myurl.openConnection();
-        con.setDoOutput(true);
-        con.setDoInput(true);
- 
-        con.setRequestProperty("Content-Type", "application/json");
-//        con.setRequestProperty("Accept", "application/json,text/plain");
-        con.setRequestProperty("Method", "POST");
-        OutputStream os = con.getOutputStream();
-        os.write(json.toString().getBytes("UTF-8"));
-        os.flush();
-        os.close();
- 
-        StringBuilder sb = new StringBuilder();  
-        int HttpResult =con.getResponseCode();
-        if(HttpResult ==HttpURLConnection.HTTP_OK){
-	        BufferedReader br = new BufferedReader(new   InputStreamReader(con.getInputStream(),"utf-8"));  
-	        String line = null;
-	        while ((line = br.readLine()) != null) {  
-	        	sb.append(line + "\n");  
+		try{
+	        URL myurl = new URL(solverUrl);
+	        HttpURLConnection con = (HttpURLConnection)myurl.openConnection();
+	        con.setDoOutput(true);
+	        con.setDoInput(true);
+	 
+	        con.setRequestProperty("Content-Type", "application/json");
+	//        con.setRequestProperty("Accept", "application/json,text/plain");
+	        con.setRequestProperty("Method", "POST");
+	        OutputStream os = con.getOutputStream();
+	        os.write(json.toString().getBytes("UTF-8"));
+	        os.flush();
+	        os.close();
+	 
+	        StringBuilder sb = new StringBuilder();  
+	        int HttpResult =con.getResponseCode();
+	        if(HttpResult ==HttpURLConnection.HTTP_OK){
+		        BufferedReader br = new BufferedReader(new   InputStreamReader(con.getInputStream(),"utf-8"));  
+		        String line = null;
+		        while ((line = br.readLine()) != null) {  
+		        	sb.append(line + "\n");  
+		        }
+		        br.close(); 
+		        result=sb.toString();
+	        }else{
+	        	throw new PDDLException("HTTP connection error, response code : "+con.getResponseCode()+" response message : "+con.getResponseMessage());
 	        }
-	        br.close(); 
-	        result=sb.toString();
-        }else{
-        	throw new PDDLException("HTTP connection error, response code : "+con.getResponseCode()+" response message : "+con.getResponseMessage());
-        }  
+		}catch (Exception e) {
+			throw new PDDLException("Conncetion Error");
+		}
         return result;
  
     }
