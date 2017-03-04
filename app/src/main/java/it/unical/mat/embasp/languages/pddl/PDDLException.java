@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.specializations.solver_planning_domains;
+package it.unical.mat.embasp.languages.pddl;
 
 public class PDDLException extends Exception {
 

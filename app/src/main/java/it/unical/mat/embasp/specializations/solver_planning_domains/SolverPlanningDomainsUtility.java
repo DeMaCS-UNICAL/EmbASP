@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.json.simple.JSONObject;
 
+import it.unical.mat.embasp.languages.pddl.PDDLException;
 import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 
 public class SolverPlanningDomainsUtility {
