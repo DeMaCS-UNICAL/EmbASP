@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.dlv;
 
-import it.unical.mat.embasp.asp.Predicate;
-import it.unical.mat.embasp.asp.Term;
+import it.unical.mat.embasp.languages.Predicate;
+import it.unical.mat.embasp.languages.Term;
 
 @Predicate("cell")
 public class Cell {

@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.asp;
+package it.unical.mat.embasp.languages.asp;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;

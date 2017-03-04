@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import it.unical.mat.embasp.asp.AnswerSet;
-import it.unical.mat.embasp.asp.AnswerSets;
+import it.unical.mat.embasp.languages.asp.AnswerSet;
+import it.unical.mat.embasp.languages.asp.AnswerSets;
 
 /** represents Clingo's answersets */
 

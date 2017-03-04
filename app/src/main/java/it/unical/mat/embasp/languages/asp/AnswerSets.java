@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.asp;
+package it.unical.mat.embasp.languages.asp;
 
 import java.util.ArrayList;
 import java.util.Collections;

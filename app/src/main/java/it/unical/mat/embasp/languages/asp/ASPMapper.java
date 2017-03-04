@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.asp;
+package it.unical.mat.embasp.languages.asp;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -6,6 +6,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
+import it.unical.mat.embasp.languages.Predicate;
+import it.unical.mat.embasp.languages.Term;
 
 /**
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}

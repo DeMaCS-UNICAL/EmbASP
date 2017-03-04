@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import it.unical.mat.embasp.asp.AnswerSet;
-import it.unical.mat.embasp.asp.AnswerSets;
+import it.unical.mat.embasp.languages.asp.AnswerSet;
+import it.unical.mat.embasp.languages.asp.AnswerSets;
 
 public class DLVAnswerSets extends AnswerSets {
 	/** Represent an AnswerSet specific for DLV */

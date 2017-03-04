@@ -96,7 +96,7 @@ public class SolverPlanningDomainsUtility {
 			} else
 				throw new PDDLException("HTTP connection error, response code : " + con.getResponseCode() + " response message : " + con.getResponseMessage());
 		} catch (final Exception e) {
-			throw new PDDLException("Conncetion Error");
+			throw new PDDLException("Impossible to perform HTTP connection");
 		}
 		return result;
 

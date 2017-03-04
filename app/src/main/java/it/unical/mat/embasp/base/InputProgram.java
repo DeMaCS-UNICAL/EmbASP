@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import it.unical.mat.embasp.asp.IllegalAnnotationException;
-import it.unical.mat.embasp.asp.IllegalTermException;
-import it.unical.mat.embasp.asp.PredicateNotValidException;
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
+import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.languages.asp.PredicateNotValidException;
 
 /** Represents a generic option */
 
