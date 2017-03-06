@@ -66,7 +66,7 @@ public class DLVAndroidService extends AndroidService{
 
         for (InputProgram p : programs) {
             final_program += p.getPrograms();
-            String program_file = p.getFilesPaths();
+            String program_file = p.getStringOfFilesPaths();
 
             if (program_file != null) {
                 files += program_file;
