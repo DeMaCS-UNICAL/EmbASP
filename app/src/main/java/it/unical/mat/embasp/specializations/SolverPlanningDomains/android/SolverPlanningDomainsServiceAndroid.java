@@ -1,4 +1,4 @@
-package it.unical.mat.embasp.specializations.solver_planning_domains.desktop;
+package it.unical.mat.embasp.specializations.SolverPlanningDomains.android;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,13 +13,13 @@ import it.unical.mat.embasp.platforms.desktop.DesktopService;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainPlan;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainsUtility;
 
-public class SolverPlanningDomainsServiceDesktop extends DesktopService {
+public class SolverPlanningDomainsServiceAndroid  {
 
 	
 	
 	private final SolverPlanningDomainsUtility spdu;
 
-	public SolverPlanningDomainsServiceDesktop() {
+	public SolverPlanningDomainsServiceAndroid() {
 		super("");
 		spdu = new SolverPlanningDomainsUtility() {
 			@Override
@@ -57,7 +57,6 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
 		if (programs.isEmpty())
 			return getOutput("", "PDDLInputProgram not defined");
-
 
 		try {
 			return getOutput(spdu.postJsonToURL(spdu.createJson(programs).toString()), "");
