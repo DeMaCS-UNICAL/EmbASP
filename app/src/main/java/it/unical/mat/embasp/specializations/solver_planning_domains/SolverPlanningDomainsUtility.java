@@ -2,71 +2,74 @@ package it.unical.mat.embasp.specializations.solver_planning_domains;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 
+import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.pddl.PDDLException;
 import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 
-public class SolverPlanningDomainsUtility {
+public abstract class SolverPlanningDomainsUtility {
 
-	static String getFileAsString(final String s) throws Exception {
-		String everything = "";
-		final BufferedReader br = new BufferedReader(new FileReader(s));
-		try {
-			final StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			everything = sb.toString();
-		} finally {
-			br.close();
-		}
-		return everything;
-	}
 
 	private final String solverUrl = "http://solver.planning.domains/solve";
 
 	public SolverPlanningDomainsUtility() {
 	}
 
-	public JSONObject createJson(final PDDLInputProgram pddlInputProgram) throws PDDLException {
-		String problem = pddlInputProgram.getPDDLProblemString();
-		String domain = pddlInputProgram.getPDDLDomainString();
-		if (problem == "") {
-			final String problemFile = pddlInputProgram.getPDDLProblemFile();
-			if (problemFile == "")
-				throw new PDDLException("Problem file not specified");
-			try {
-				problem = SolverPlanningDomainsUtility.getFileAsString(problemFile);
-			} catch (final Exception e) {
-				throw new PDDLException("Problem file : " + problemFile + " not found.");
+	public JSONObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
+		
+		String problem = "";
+		String domain = "";
+
+
+		for(InputProgram ip:pddlInputProgram){
+			if(!(ip instanceof PDDLInputProgram))continue;
+			PDDLInputProgram pip = (PDDLInputProgram) ip;
+			switch (pip.getProgramsType()) {
+			case DOMAIN:
+				domain+=pip.getPrograms()+pip.getSeparator();
+				domain+=getFromFile(pip.getFilesPaths(),pip.getSeparator());
+				break;
+			case PROBLEM:
+				problem+=pip.getPrograms()+pip.getSeparator();
+				problem+=getFromFile(pip.getFilesPaths(),pip.getSeparator());
+				break;
+			default:
+				throw new PDDLException("Program type : "+pip.getProgramsType()+" not valid.");
 			}
 		}
-		if (domain == "") {
-			final String domainFile = pddlInputProgram.getPDDLDomainFile();
-			if (domainFile == "")
-				throw new PDDLException("Domain file not specified");
-			try {
-				domain = SolverPlanningDomainsUtility.getFileAsString(domainFile);
-			} catch (final Exception e) {
-				throw new PDDLException("Domain file : " + domainFile + " not found.");
-			}
-		}
+		
+		if (problem.equals("")) 
+			throw new PDDLException("Problem file not specified");
+		if (domain.equals("")) 
+			throw new PDDLException("Domain file not specified");
+		
 		final JSONObject obj = new JSONObject();
 		obj.put("problem", problem);
 		obj.put("domain", domain);
 
 		return obj;
 	}
+
+	private String getFromFile(List<String> filesPaths,String separator) {
+		final StringBuilder toReturn = new StringBuilder();
+		for(String s:filesPaths)
+			try {
+				toReturn.append(readFile(s)).append(separator);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		return toReturn.toString();
+	}
+
+	protected abstract String readFile(String s) throws IOException ;
 
 	public String postJsonToURL(final String json) throws PDDLException {
 

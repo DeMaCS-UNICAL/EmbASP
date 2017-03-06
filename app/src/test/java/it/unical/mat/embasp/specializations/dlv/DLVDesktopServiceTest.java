@@ -17,9 +17,12 @@ import org.junit.Test;
 
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
 import it.unical.mat.embasp.languages.asp.ASPInputProgram;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 import it.unical.mat.embasp.languages.asp.AnswerSets;
+import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.languages.asp.PredicateNotValidException;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
 import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
 
@@ -94,20 +97,16 @@ public class DLVDesktopServiceTest {
 	}
 
 	@Test
-	public void sudokuTest() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException,
-			InstantiationException, InterruptedException {
-
+	public void sudokuTest() {
+		try{
+		
 		final Handler handler = new DesktopHandler(new DLVDesktopService(getPath()));
 
 		final InputProgram inputProgram = new ASPInputProgram();
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				try {
 					if (sudokuMatrix[i][j] != 0)
 						inputProgram.addObjectInput(new Cell(i, j, sudokuMatrix[i][j]));
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
 
 		inputProgram.addFilesPath(
 				"app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "asp" + File.separator + "sudoku");
@@ -146,6 +145,9 @@ public class DLVDesktopServiceTest {
 					Assert.fail("Number not valid");
 			}
 			System.out.println();
+		}
+		}catch (Exception e) {
+			Assert.fail("Exception "+e.getMessage());
 		}
 
 	}

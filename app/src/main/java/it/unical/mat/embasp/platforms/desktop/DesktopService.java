@@ -77,7 +77,7 @@ public abstract class DesktopService implements Service {
 
 		for (final InputProgram p : programs) {
 			final_program += p.getPrograms();
-			final String program_file = p.getFilesPaths();
+			final String program_file = p.getStringOfFilesPaths();
 			if (program_file != null)
 				files_paths += program_file;
 		}

@@ -1,5 +1,8 @@
 package it.unical.mat.embasp.specializations.solver_planning_domains.desktop;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import it.unical.mat.embasp.base.InputProgram;
@@ -12,11 +15,54 @@ import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanni
 
 public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
+	static String getFileAsString(final String s) throws Exception {
+	String everything = "";
+	final BufferedReader br = new BufferedReader(new FileReader(s));
+	try {
+		final StringBuilder sb = new StringBuilder();
+		String line = br.readLine();
+
+		while (line != null) {
+			sb.append(line);
+			sb.append(System.lineSeparator());
+			line = br.readLine();
+		}
+		everything = sb.toString();
+	} finally {
+		br.close();
+	}
+	return everything;
+	}
+	
+	
 	private final SolverPlanningDomainsUtility spdu;
 
 	public SolverPlanningDomainsServiceDesktop() {
 		super("");
-		spdu = new SolverPlanningDomainsUtility();
+		spdu = new SolverPlanningDomainsUtility() {
+			@Override
+			protected String readFile(String s) throws IOException {
+
+				String everything = "";
+				BufferedReader br = null;
+				try{
+					br = new BufferedReader(new FileReader(s));
+					final StringBuilder sb = new StringBuilder();
+					String line = br.readLine();
+
+					while (line != null) {
+						sb.append(line);
+						sb.append(System.lineSeparator());
+						line = br.readLine();
+					}
+					everything = sb.toString();
+				} finally {
+					if(br!=null)
+						br.close();
+				}
+				return everything;
+			}
+		};
 	}
 
 	@Override
@@ -30,16 +76,9 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 		if (programs.isEmpty())
 			return getOutput("", "PDDLInputProgram not defined");
 
-		if (programs.size() > 1)
-			return getOutput("", "For PDDL you must specify just a PDDLInputProgram");
 
-		final InputProgram ip = programs.get(0);
-		if (!(ip instanceof PDDLInputProgram))
-			return getOutput("", "InputProgram is not of type PDDLInputProgram");
-
-		final PDDLInputProgram pddlIp = (PDDLInputProgram) ip;
 		try {
-			return getOutput(spdu.postJsonToURL(spdu.createJson(pddlIp).toString()), "");
+			return getOutput(spdu.postJsonToURL(spdu.createJson(programs).toString()), "");
 		} catch (final Exception e) {
 			return getOutput("", "Error : " + e.getMessage());
 		}

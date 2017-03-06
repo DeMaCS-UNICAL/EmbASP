@@ -15,7 +15,7 @@ public class InputProgram {
 	/** where programs data is stored */
 	protected String programs;
 	/** where associated files are stored */
-	protected List<String> files_paths;
+	private List<String> files_paths;
 	/** used as separator for programs */
 	protected String separator;
 
@@ -103,7 +103,7 @@ public class InputProgram {
 	 * 
 	 * @return String concatenating files paths
 	 */
-	public String getFilesPaths() {
+	public String getStringOfFilesPaths() {
 
 		final StringBuilder to_return = new StringBuilder();
 
@@ -152,38 +152,12 @@ public class InputProgram {
 		this.separator = separator;
 	}
 
-	public void setPDDLDomainFile(final String domain){
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
-	
-	public void setPDDLProblemFile(final String problem){
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
-	
-	public void setPDDLDomainAsString(final String domain){
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
-	
-	public void setPDDLProblemAsString(final String problem){
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
-	
-	public String getPDDLProblemString() {
-		throw new UnsupportedOperationException("functionality not implemented");
+	public List<String> getFilesPaths() {
+		return files_paths;
 	}
 
-	public String getPDDLDomainString() {
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
 	
-	public String getPDDLProblemFile() {
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
 
-	public String getPDDLDomainFile() {
-		throw new UnsupportedOperationException("functionality not implemented");
-	}
-	
 	
 
 }

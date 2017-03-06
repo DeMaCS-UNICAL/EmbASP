@@ -18,6 +18,7 @@ import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.pddl.Action;
 import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
+import it.unical.mat.embasp.languages.pddl.PDDLProgramType;
 import it.unical.mat.embasp.languages.pddl.Plan;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
 import it.unical.mat.embasp.specializations.solver_planning_domains.desktop.SolverPlanningDomainsServiceDesktop;
@@ -67,19 +68,24 @@ public class SPDDesktopServiceTest {
 			lock = new CountDownLatch(1);
 
 			final Handler handler = new DesktopHandler(new SolverPlanningDomainsServiceDesktop());
+			System.out.println();
 
-			final InputProgram inputProgram = new PDDLInputProgram();
+			final InputProgram inputProgramDomain = new PDDLInputProgram(PDDLProgramType.DOMAIN);
 
-			((PDDLInputProgram) inputProgram).setPDDLDomainFile(base_path + "domain.pddl");
+			inputProgramDomain.addFilesPath(base_path + "domain.pddl");
+			
+			final InputProgram inputProgramProblem = new PDDLInputProgram(PDDLProgramType.PROBLEM);
+
 
 			final String problem = base_path + "p" + (i < 10 ? 0 : "") + i + ".pddl";
 
 			System.out.println(problem);
 			Assert.assertTrue("File not found: " + problem, new File(problem).exists());
 
-			((PDDLInputProgram) inputProgram).setPDDLProblemFile(problem);
+			inputProgramProblem.addFilesPath(problem);
 
-			handler.addProgram(inputProgram);
+			handler.addProgram(inputProgramDomain);
+			handler.addProgram(inputProgramProblem);
 
 			Assert.assertNull(plan);
 
