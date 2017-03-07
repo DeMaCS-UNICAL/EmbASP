@@ -3,12 +3,20 @@
  */
 package it.unical.mat.embasp.language.asp;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
+import it.unical.mat.embasp.languages.ObjectNotValidException;
+import it.unical.mat.embasp.languages.asp.ASPMapper;
+import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.specializations.dlv.Cell;
 
 public class ASPMapperTest {
 
@@ -42,7 +50,28 @@ public class ASPMapperTest {
 
 	@Test
 	public void test() {
-		Assert.fail("Not yet implemented");
+
+		final ASPMapper instance = ASPMapper.getInstance();
+
+		try {
+
+			instance.registerClass(Cell.class);
+
+			final Object object = instance.getObject("cell(1,2,5)");
+
+			Assert.assertTrue(object instanceof Cell);
+
+			Assert.assertEquals(1, ((Cell) object).getRow());
+			Assert.assertEquals(2, ((Cell) object).getColumn());
+			Assert.assertEquals(5, ((Cell) object).getValue());
+
+			Assert.assertEquals("cell(1,2,5)", instance.getString(object));
+
+		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | InstantiationException | IllegalTermException e) {
+			Assert.fail(e.getMessage());
+		}
+
 	}
 
 }

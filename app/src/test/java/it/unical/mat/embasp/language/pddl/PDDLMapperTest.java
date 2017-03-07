@@ -3,12 +3,19 @@
  */
 package it.unical.mat.embasp.language.pddl;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import it.unical.mat.embasp.languages.IllegalAnnotationException;
+import it.unical.mat.embasp.languages.ObjectNotValidException;
+import it.unical.mat.embasp.languages.pddl.PDDLMapper;
+import it.unical.mat.embasp.specializations.solver_planning_domains.PickUp;
 
 public class PDDLMapperTest {
 
@@ -42,7 +49,24 @@ public class PDDLMapperTest {
 
 	@Test
 	public void test() {
-		Assert.fail("Not yet implemented");
+
+		final PDDLMapper instance = PDDLMapper.getInstance();
+
+		try {
+
+			instance.registerClass(PickUp.class);
+
+			final Object object = instance.getObject("(pick-up b)");
+
+			Assert.assertTrue(object instanceof PickUp);
+
+			Assert.assertEquals("b", ((PickUp) object).getBlock());
+
+		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | InstantiationException e) {
+			Assert.fail(e.getMessage());
+		}
+
 	}
 
 }
