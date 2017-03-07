@@ -38,5 +38,4 @@ public abstract class AnswerSets extends Output implements Cloneable {
 		return output;
 	}
 
-
 }

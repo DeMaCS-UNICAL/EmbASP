@@ -16,40 +16,39 @@ import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 
 public abstract class SolverPlanningDomainsUtility {
 
-
 	private final String solverUrl = "http://solver.planning.domains/solve";
 
 	public SolverPlanningDomainsUtility() {
 	}
 
 	public JSONObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
-		
+
 		String problem = "";
 		String domain = "";
 
-
-		for(InputProgram ip:pddlInputProgram){
-			if(!(ip instanceof PDDLInputProgram))continue;
-			PDDLInputProgram pip = (PDDLInputProgram) ip;
+		for (final InputProgram ip : pddlInputProgram) {
+			if (!(ip instanceof PDDLInputProgram))
+				continue;
+			final PDDLInputProgram pip = (PDDLInputProgram) ip;
 			switch (pip.getProgramsType()) {
-			case DOMAIN:
-				domain+=pip.getPrograms()+pip.getSeparator();
-				domain+=getFromFile(pip.getFilesPaths(),pip.getSeparator());
-				break;
-			case PROBLEM:
-				problem+=pip.getPrograms()+pip.getSeparator();
-				problem+=getFromFile(pip.getFilesPaths(),pip.getSeparator());
-				break;
-			default:
-				throw new PDDLException("Program type : "+pip.getProgramsType()+" not valid.");
+				case DOMAIN:
+					domain += pip.getPrograms() + pip.getSeparator();
+					domain += getFromFile(pip.getFilesPaths(), pip.getSeparator());
+					break;
+				case PROBLEM:
+					problem += pip.getPrograms() + pip.getSeparator();
+					problem += getFromFile(pip.getFilesPaths(), pip.getSeparator());
+					break;
+				default:
+					throw new PDDLException("Program type : " + pip.getProgramsType() + " not valid.");
 			}
 		}
-		
-		if (problem.equals("")) 
+
+		if (problem.equals(""))
 			throw new PDDLException("Problem file not specified");
-		if (domain.equals("")) 
+		if (domain.equals(""))
 			throw new PDDLException("Domain file not specified");
-		
+
 		final JSONObject obj = new JSONObject();
 		obj.put("problem", problem);
 		obj.put("domain", domain);
@@ -57,18 +56,16 @@ public abstract class SolverPlanningDomainsUtility {
 		return obj;
 	}
 
-	private String getFromFile(List<String> filesPaths,String separator) {
+	private String getFromFile(final List<String> filesPaths, final String separator) {
 		final StringBuilder toReturn = new StringBuilder();
-		for(String s:filesPaths)
+		for (final String s : filesPaths)
 			try {
 				toReturn.append(readFile(s)).append(separator);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 		return toReturn.toString();
 	}
-
-	protected abstract String readFile(String s) throws IOException ;
 
 	public String postJsonToURL(final String json) throws PDDLException {
 
@@ -104,5 +101,7 @@ public abstract class SolverPlanningDomainsUtility {
 		return result;
 
 	}
+
+	protected abstract String readFile(String s) throws IOException;
 
 }

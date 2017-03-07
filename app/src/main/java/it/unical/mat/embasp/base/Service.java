@@ -4,14 +4,14 @@ import java.util.List;
 
 /**
  * Contains generic methods for ASP Solver execution .
- * 
+ *
  * @see List
  */
 public interface Service {
 
 	/**
 	 * Starts ASP solving Asyncronously on a subset of data and options.
-	 * 
+	 *
 	 * @param programs
 	 *            a list of {@link InputProgram} used as data.
 	 * @param options
@@ -25,7 +25,7 @@ public interface Service {
 
 	/**
 	 * Starts ASP solving Syncronously on a subset of data and options.
-	 * 
+	 *
 	 * @param programs
 	 *            a list of {@link InputProgram} used as data.
 	 * @param options

@@ -8,26 +8,23 @@ import java.util.List;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
-import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 import it.unical.mat.embasp.platforms.desktop.DesktopService;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainPlan;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainsUtility;
 
 public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
-	
-	
 	private final SolverPlanningDomainsUtility spdu;
 
 	public SolverPlanningDomainsServiceDesktop() {
 		super("");
 		spdu = new SolverPlanningDomainsUtility() {
 			@Override
-			protected String readFile(String s) throws IOException {
+			protected String readFile(final String s) throws IOException {
 
 				String everything = "";
 				BufferedReader br = null;
-				try{
+				try {
 					br = new BufferedReader(new FileReader(s));
 					final StringBuilder sb = new StringBuilder();
 					String line = br.readLine();
@@ -39,7 +36,7 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 					}
 					everything = sb.toString();
 				} finally {
-					if(br!=null)
+					if (br != null)
 						br.close();
 				}
 				return everything;
@@ -57,7 +54,6 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
 		if (programs.isEmpty())
 			return getOutput("", "PDDLInputProgram not defined");
-
 
 		try {
 			return getOutput(spdu.postJsonToURL(spdu.createJson(programs).toString()), "");

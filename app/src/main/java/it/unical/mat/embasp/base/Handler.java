@@ -9,7 +9,7 @@ import java.util.Map;
  * A collection of {@link InputProgram} and {@link OptionDescriptor}.
  * The subclasses have to implement {@link #startAsync(Callback, List, List)} and {@link #startSync(List, List)} methods.
  * Each instance inside {@link #programs} and {@link #options} are represented by an integer (id) , respectively.
- * 
+ *
  * @see ArrayList
  * @see HashMap
  * @see List
@@ -35,7 +35,7 @@ public abstract class Handler {
 
 	/**
 	 * Add a new element inside {@link #options} set.
-	 * 
+	 *
 	 * @param o
 	 *            is the new {@link OptionDescriptor} instance
 	 * @return the id associate to the new added {@link OptionDescriptor} instance
@@ -51,7 +51,7 @@ public abstract class Handler {
 
 	/**
 	 * Add a new element inside {@link #programs} set.
-	 * 
+	 *
 	 * @param program
 	 *            is the {@link InputProgram} instance added to the collection.
 	 * @return the id associate to the new added {@link InputProgram} instance.
@@ -92,7 +92,7 @@ public abstract class Handler {
 
 	/**
 	 * Returns the specified {@link InputProgram} element
-	 * 
+	 *
 	 * @param key
 	 *            the id
 	 * @return {@link InputProgram} element associate with the given key
@@ -103,7 +103,7 @@ public abstract class Handler {
 
 	/**
 	 * Returns the specified {@link OptionDescriptor} element
-	 * 
+	 *
 	 * @param key
 	 *            the id
 	 * @return {@link OptionDescriptor} element associate with the given key
@@ -122,7 +122,7 @@ public abstract class Handler {
 
 	/**
 	 * Removes the element associate within the given id from {@link #options} set.
-	 * 
+	 *
 	 * @param option_id
 	 *            the id associate within an element
 	 */
@@ -134,7 +134,7 @@ public abstract class Handler {
 
 	/**
 	 * Removes every occurrence of a specified {@link OptionDescriptor} element from {@link #options} set.
-	 * 
+	 *
 	 * @param o
 	 *            element to be removed
 	 * @result true if one or more elements are removed , false otherwise
@@ -154,7 +154,7 @@ public abstract class Handler {
 
 	/**
 	 * Removes every occurrence of a specified {@link InputProgram} element from {@link #programs} set.
-	 * 
+	 *
 	 * @param p
 	 *            element to be removed
 	 * @result true if one or more elements are removed , false otherwise
@@ -173,7 +173,7 @@ public abstract class Handler {
 
 	/**
 	 * Removes the element associate within the given id from {@link #programs} set.
-	 * 
+	 *
 	 * @param program_id
 	 *            the id associate within an element
 	 */
@@ -204,7 +204,7 @@ public abstract class Handler {
 	/**
 	 * This method have to be implemented by subclasses to execute solver in a synchronous way, if no parameters are given
 	 * the entire sets of programs and option are used
-	 * 
+	 *
 	 * @see Service
 	 */
 	public Output startSync(final List<Integer> program_index, final List<Integer> option_index) {

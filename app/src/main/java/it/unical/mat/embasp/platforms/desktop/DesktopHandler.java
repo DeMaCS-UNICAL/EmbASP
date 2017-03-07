@@ -10,7 +10,7 @@ import it.unical.mat.embasp.base.Output;
 
 /**
  * is a specialization for a Desktop platform
- * 
+ *
  * @see Handler
  */
 

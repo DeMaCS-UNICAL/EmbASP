@@ -1,9 +1,6 @@
 package it.unical.mat.embasp.languages.pddl;
 
-import java.util.HashMap;
-
 import it.unical.mat.embasp.languages.Mapper;
-import it.unical.mat.embasp.languages.asp.ASPMapper;
 
 public class PDDLMapper extends Mapper {
 
@@ -14,15 +11,14 @@ public class PDDLMapper extends Mapper {
 			PDDLMapper.mapper = new PDDLMapper();
 		return PDDLMapper.mapper;
 	}
+
 	private PDDLMapper() {
 	}
-
-
 
 	@Override
 	protected String[] getParameters(final String string) {
 		// FIXME I assume that there are spaces only between terms
-		return string.substring(string.indexOf(" ")+1, string.lastIndexOf(")")).split(" ");
+		return string.substring(string.indexOf(" ") + 1, string.lastIndexOf(")")).split(" ");
 	}
 
 	@Override

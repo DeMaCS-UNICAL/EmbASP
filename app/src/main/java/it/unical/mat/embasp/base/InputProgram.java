@@ -27,7 +27,7 @@ public class InputProgram {
 
 	/**
 	 * instantiate a new {@link InputProgram}
-	 * 
+	 *
 	 * @param inputObj
 	 *            Object used to retrieve data from
 	 * @see #addObjectInput(Object)
@@ -45,7 +45,7 @@ public class InputProgram {
 
 	/**
 	 * add a new file path into {@link #files_paths}
-	 * 
+	 *
 	 * @param file_path
 	 *            a new file path
 	 */
@@ -71,7 +71,7 @@ public class InputProgram {
 
 	/**
 	 * Adds a new instruction directly into {@link #programs}
-	 * 
+	 *
 	 * @param new_instruction
 	 *            a new programs instruction
 	 */
@@ -98,9 +98,27 @@ public class InputProgram {
 		programs = "";
 	}
 
+	public List<String> getFilesPaths() {
+		return files_paths;
+	}
+
+	/** Returns data stored in {@link #programs} */
+	public String getPrograms() {
+		return programs;
+	}
+
+	/**
+	 * get separator character
+	 *
+	 * @return separator
+	 */
+	public String getSeparator() {
+		return separator;
+	}
+
 	/**
 	 * Returns files paths for this programs
-	 * 
+	 *
 	 * @return String concatenating files paths
 	 */
 	public String getStringOfFilesPaths() {
@@ -114,20 +132,6 @@ public class InputProgram {
 		return to_return.toString();
 	}
 
-	/** Returns data stored in {@link #programs} */
-	public String getPrograms() {
-		return programs;
-	}
-
-	/**
-	 * get separator character
-	 * 
-	 * @return separator
-	 */
-	public String getSeparator() {
-		return separator;
-	}
-
 	private void init() {
 		programs = new String();
 		files_paths = new ArrayList<>();
@@ -135,7 +139,7 @@ public class InputProgram {
 
 	/**
 	 * sets {@link #programs } value to the new given one
-	 * 
+	 *
 	 * @parm programs new value
 	 */
 	public void setPrograms(final String programs) {
@@ -144,20 +148,12 @@ public class InputProgram {
 
 	/**
 	 * Set programs separator to current value
-	 * 
+	 *
 	 * @param separator
 	 *            used as new separator
 	 */
 	public void setSeparator(final String separator) {
 		this.separator = separator;
 	}
-
-	public List<String> getFilesPaths() {
-		return files_paths;
-	}
-
-	
-
-	
 
 }

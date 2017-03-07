@@ -3,12 +3,9 @@ package it.unical.mat.embasp.languages.pddl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import it.unical.mat.embasp.base.Output;
-import it.unical.mat.embasp.languages.asp.ASPMapper;
 
 /** A simplified solution to a PDDL problem */
 
@@ -30,12 +27,11 @@ public abstract class Plan extends Output implements Cloneable {
 		return Collections.unmodifiableList(actionSequence);
 	}
 
-
 	public List<Object> getActionsObjects() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 		if (actionsObjects == null) {
 			actionsObjects = new ArrayList<>();
 			final PDDLMapper mapper = PDDLMapper.getInstance();
-			for (final Action a: getActions()) {
+			for (final Action a : getActions()) {
 				final Object obj = mapper.getObject(a.getName());
 				if (obj != null)
 					actionsObjects.add(obj);

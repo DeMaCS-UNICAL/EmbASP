@@ -13,12 +13,12 @@ import it.unical.mat.embasp.specializations.dlv2.DLV2AnswerSets;
 
 public class DLV2DesktopService extends DesktopService {
 
-	private OptionDescriptor competitionOutputOption;
-	
+	private final OptionDescriptor competitionOutputOption;
+
 	public DLV2DesktopService(final String exe_path) {
 		super(exe_path);
 		load_from_STDIN_option = "";
-		competitionOutputOption=new OptionDescriptor(" --competition-output ");
+		competitionOutputOption = new OptionDescriptor(" --competition-output ");
 	}
 
 	@Override

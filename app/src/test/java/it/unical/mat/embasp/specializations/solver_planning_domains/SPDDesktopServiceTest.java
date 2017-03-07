@@ -73,9 +73,8 @@ public class SPDDesktopServiceTest {
 			final InputProgram inputProgramDomain = new PDDLInputProgram(PDDLProgramType.DOMAIN);
 
 			inputProgramDomain.addFilesPath(base_path + "domain.pddl");
-			
-			final InputProgram inputProgramProblem = new PDDLInputProgram(PDDLProgramType.PROBLEM);
 
+			final InputProgram inputProgramProblem = new PDDLInputProgram(PDDLProgramType.PROBLEM);
 
 			final String problem = base_path + "p" + (i < 10 ? 0 : "") + i + ".pddl";
 

@@ -17,7 +17,7 @@ public class OptionDescriptor {
 
 	/**
 	 * concatenate a new option in a String format to the current {@link #options}
-	 * 
+	 *
 	 * @param option
 	 *            String to be concatenated
 	 */
@@ -37,7 +37,7 @@ public class OptionDescriptor {
 
 	/**
 	 * Returns values stored in {@link #options}
-	 * 
+	 *
 	 * @return {@link #options}'s data in a String format
 	 */
 	public String getOptions() {

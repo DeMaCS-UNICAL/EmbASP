@@ -4,7 +4,6 @@
 package it.unical.mat.embasp.specializations.dlv;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -17,12 +16,9 @@ import org.junit.Test;
 
 import it.unical.mat.embasp.base.Handler;
 import it.unical.mat.embasp.base.InputProgram;
-import it.unical.mat.embasp.languages.IllegalAnnotationException;
 import it.unical.mat.embasp.languages.asp.ASPInputProgram;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 import it.unical.mat.embasp.languages.asp.AnswerSets;
-import it.unical.mat.embasp.languages.asp.IllegalTermException;
-import it.unical.mat.embasp.languages.asp.PredicateNotValidException;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
 import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
 
@@ -98,56 +94,56 @@ public class DLVDesktopServiceTest {
 
 	@Test
 	public void sudokuTest() {
-		try{
-		
-		final Handler handler = new DesktopHandler(new DLVDesktopService(getPath()));
+		try {
 
-		final InputProgram inputProgram = new ASPInputProgram();
-		for (int i = 0; i < N; i++)
-			for (int j = 0; j < N; j++)
+			final Handler handler = new DesktopHandler(new DLVDesktopService(getPath()));
+
+			final InputProgram inputProgram = new ASPInputProgram();
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
 					if (sudokuMatrix[i][j] != 0)
 						inputProgram.addObjectInput(new Cell(i, j, sudokuMatrix[i][j]));
 
-		inputProgram.addFilesPath(
-				"app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "asp" + File.separator + "sudoku");
+			inputProgram.addFilesPath("app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "asp"
+					+ File.separator + "sudoku");
 
-		handler.addProgram(inputProgram);
+			handler.addProgram(inputProgram);
 
-		handler.startAsync(o -> {
+			handler.startAsync(o -> {
 
-			if (!(o instanceof AnswerSets))
+				if (!(o instanceof AnswerSets))
+					return;
+
+				answerSets = (AnswerSets) o;
+
+				lock.countDown();
+
+			});
+
+			lock.await(50000, TimeUnit.MILLISECONDS);
+
+			Assert.assertNotNull(answerSets);
+
+			Assert.assertTrue("Found error in the Plan\n" + answerSets.getErrors(), answerSets.getErrors().isEmpty());
+
+			if (answerSets.getAnswersets().size() == 0)
 				return;
-
-			answerSets = (AnswerSets) o;
-
-			lock.countDown();
-
-		});
-
-		lock.await(50000, TimeUnit.MILLISECONDS);
-
-		Assert.assertNotNull(answerSets);
-
-		Assert.assertTrue("Found error in the Plan\n" + answerSets.getErrors(), answerSets.getErrors().isEmpty());
-
-		if (answerSets.getAnswersets().size() == 0)
-			return;
-		final AnswerSet as = answerSets.getAnswersets().get(0);
-		for (final Object obj : as.getAtoms()) {
-			final Cell cell = (Cell) obj;
-			sudokuMatrix[cell.getRow()][cell.getColumn()] = cell.getValue();
-		}
-
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				System.out.print(sudokuMatrix[i][j] + " ");
-				if (sudokuMatrix[i][j] == 0)
-					Assert.fail("Number not valid");
+			final AnswerSet as = answerSets.getAnswersets().get(0);
+			for (final Object obj : as.getAtoms()) {
+				final Cell cell = (Cell) obj;
+				sudokuMatrix[cell.getRow()][cell.getColumn()] = cell.getValue();
 			}
-			System.out.println();
-		}
-		}catch (Exception e) {
-			Assert.fail("Exception "+e.getMessage());
+
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++) {
+					System.out.print(sudokuMatrix[i][j] + " ");
+					if (sudokuMatrix[i][j] == 0)
+						Assert.fail("Number not valid");
+				}
+				System.out.println();
+			}
+		} catch (final Exception e) {
+			Assert.fail("Exception " + e.getMessage());
 		}
 
 	}

@@ -5,11 +5,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
-import java.util.Set;
-
-import it.unical.mat.embasp.languages.asp.ASPMapper;
 import it.unical.mat.embasp.languages.pddl.Action;
 import it.unical.mat.embasp.languages.pddl.Plan;
 
@@ -38,6 +33,5 @@ public class SolverPlanningDomainPlan extends Plan {
 			errors += " ParseException : " + e.getMessage();
 		}
 	}
-
 
 }

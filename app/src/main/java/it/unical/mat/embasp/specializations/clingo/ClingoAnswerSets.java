@@ -24,13 +24,12 @@ public class ClingoAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		boolean optimum=output.contains("OPTIMUM");
-		final Pattern pattern = (!optimum) 
-				?Pattern.compile("Answer: (\\d+)\\r?\\n(.*)")
-				:Pattern.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))");
+		final boolean optimum = output.contains("OPTIMUM");
+		final Pattern pattern = !optimum ? Pattern.compile("Answer: (\\d+)\\r?\\n(.*)")
+				: Pattern.compile("Answer: (\\d+)\\r?\\n(.*)(\\r?\\nOptimization: (.+))");
 		final Matcher matcher = pattern.matcher(output);
 		while (matcher.find()) {
-			
+
 			try {
 				if (matcher.group(1) == null || Integer.parseInt(matcher.group(1)) <= answersets.size())
 					continue;
@@ -38,8 +37,6 @@ public class ClingoAnswerSets extends AnswerSets {
 				e1.printStackTrace();
 				break;
 			}
-			
-
 
 			final Pattern patternAnswerSet = Pattern.compile("-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?");
 			final Matcher matcherAnswerSet = patternAnswerSet.matcher(matcher.group(2));

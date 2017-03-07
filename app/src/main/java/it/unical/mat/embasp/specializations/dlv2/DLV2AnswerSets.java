@@ -24,14 +24,12 @@ public class DLV2AnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		boolean optimum=output.contains("OPTIMUM");
-		final Pattern pattern = (!optimum) 
-				?Pattern.compile("ANSWER\\r?\\n(.*)")
-				:Pattern.compile("ANSWER\\r?\\n(.*)(\\r?\\nCOST (.+)\\r?\\nOPTIMUM)");
+		final boolean optimum = output.contains("OPTIMUM");
+		final Pattern pattern = !optimum ? Pattern.compile("ANSWER\\r?\\n(.*)") : Pattern.compile("ANSWER\\r?\\n(.*)(\\r?\\nCOST (.+)\\r?\\nOPTIMUM)");
 
 		final Matcher matcher = pattern.matcher(output);
 		while (matcher.find()) {
-			
+
 			final Pattern patternAnswerSet = Pattern.compile("-?[a-z][A-Za-z0-9_]*(\\(.*?\\))?");
 			final Matcher matcherAnswerSet = patternAnswerSet.matcher(matcher.group(1));
 			final List<String> answerSetList = new ArrayList<>();
@@ -43,7 +41,7 @@ public class DLV2AnswerSets extends AnswerSets {
 				final Map<Integer, Integer> weightMap = new HashMap<>();
 				try {
 					final String[] split = matcher.group(3).split(" ");
-					for (final String weightLevel : split){
+					for (final String weightLevel : split) {
 						final String[] weightLevelArray = weightLevel.split("@");
 						weightMap.put(Integer.parseInt(weightLevelArray[1]), Integer.parseInt(weightLevelArray[0]));
 					}
