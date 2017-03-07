@@ -21,7 +21,7 @@ import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 import it.unical.mat.embasp.languages.pddl.PDDLProgramType;
 import it.unical.mat.embasp.languages.pddl.Plan;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
-import it.unical.mat.embasp.specializations.solver_planning_domains.desktop.SolverPlanningDomainsServiceDesktop;
+import it.unical.mat.embasp.specializations.solver_planning_domains.desktop.SPDServiceDesktop;
 
 public class SPDDesktopServiceTest {
 
@@ -67,7 +67,7 @@ public class SPDDesktopServiceTest {
 			plan = null;
 			lock = new CountDownLatch(1);
 
-			final Handler handler = new DesktopHandler(new SolverPlanningDomainsServiceDesktop());
+			final Handler handler = new DesktopHandler(new SPDServiceDesktop());
 			System.out.println();
 
 			final InputProgram inputProgramDomain = new PDDLInputProgram(PDDLProgramType.DOMAIN);

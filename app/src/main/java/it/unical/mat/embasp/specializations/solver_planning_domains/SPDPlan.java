@@ -8,9 +8,9 @@ import org.json.simple.parser.ParseException;
 import it.unical.mat.embasp.languages.pddl.Action;
 import it.unical.mat.embasp.languages.pddl.Plan;
 
-public class SolverPlanningDomainPlan extends Plan {
+public class SPDPlan extends Plan {
 
-	public SolverPlanningDomainPlan(final String plan, final String error) {
+	public SPDPlan(final String plan, final String error) {
 		super(plan, error);
 	}
 

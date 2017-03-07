@@ -14,11 +14,11 @@ import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.pddl.PDDLException;
 import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
 
-public abstract class SolverPlanningDomainsUtility {
+public abstract class SPDUtility {
 
 	private final String solverUrl = "http://solver.planning.domains/solve";
 
-	public SolverPlanningDomainsUtility() {
+	public SPDUtility() {
 	}
 
 	public JSONObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {

@@ -9,16 +9,16 @@ import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.platforms.desktop.DesktopService;
-import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainPlan;
-import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainsUtility;
+import it.unical.mat.embasp.specializations.solver_planning_domains.SPDPlan;
+import it.unical.mat.embasp.specializations.solver_planning_domains.SPDUtility;
 
-public class SolverPlanningDomainsServiceDesktop extends DesktopService {
+public class SPDServiceDesktop extends DesktopService {
 
-	private final SolverPlanningDomainsUtility spdu;
+	private final SPDUtility spdu;
 
-	public SolverPlanningDomainsServiceDesktop() {
+	public SPDServiceDesktop() {
 		super("");
-		spdu = new SolverPlanningDomainsUtility() {
+		spdu = new SPDUtility() {
 			@Override
 			protected String readFile(final String s) throws IOException {
 
@@ -46,7 +46,7 @@ public class SolverPlanningDomainsServiceDesktop extends DesktopService {
 
 	@Override
 	protected Output getOutput(final String output, final String error) {
-		return new SolverPlanningDomainPlan(output, error);
+		return new SPDPlan(output, error);
 	}
 
 	@Override
