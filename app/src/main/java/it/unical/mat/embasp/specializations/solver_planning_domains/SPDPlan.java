@@ -27,8 +27,10 @@ public class SPDPlan extends Plan {
 				final JSONArray arrayPlan = (JSONArray) ((JSONObject) obj.get("result")).get("plan");
 				for (int i = 0; i < arrayPlan.size(); i++)
 					actionSequence.add(new Action(((JSONObject) arrayPlan.get(i)).get("name").toString()));
-			} else
-				errors += " " + (String) ((JSONObject) obj.get("result")).get("error");
+			} else{
+				Object resultObj= obj.get("result");
+				errors += (resultObj instanceof JSONObject)?" " + (String) ((JSONObject) resultObj).get("error"):resultObj.toString();
+			}
 		} catch (final ParseException e) {
 			errors += " ParseException : " + e.getMessage();
 		}
