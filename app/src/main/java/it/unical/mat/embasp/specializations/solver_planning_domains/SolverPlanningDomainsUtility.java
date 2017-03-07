@@ -1,7 +1,6 @@
 package it.unical.mat.embasp.specializations.solver_planning_domains;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
