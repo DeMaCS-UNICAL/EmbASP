@@ -9,7 +9,7 @@ import it.unical.mat.embasp.base.Output;
 
 /** A simplified solution to a PDDL problem */
 
-public abstract class Plan extends Output implements Cloneable {
+public abstract class Plan extends Output {
 	protected List<Action> actionSequence;
 
 	private List<Object> actionsObjects;

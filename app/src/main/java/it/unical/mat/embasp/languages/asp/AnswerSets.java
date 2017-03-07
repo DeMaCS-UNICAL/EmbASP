@@ -8,7 +8,7 @@ import it.unical.mat.embasp.base.Output;
 
 /** A collection of {@link AnswerSet} */
 
-public abstract class AnswerSets extends Output implements Cloneable {
+public abstract class AnswerSets extends Output {
 	/** Where Answer Sets are stored */
 	protected List<AnswerSet> answersets;
 
