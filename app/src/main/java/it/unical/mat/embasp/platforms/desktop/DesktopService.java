@@ -70,7 +70,7 @@ public abstract class DesktopService implements Service {
 
 		String option = new String();
 		for (final OptionDescriptor o : options)
-			option += o.getOptions();
+			option += o.getOptions()+" ";
 
 		String files_paths = new String();
 		String final_program = new String();
@@ -138,7 +138,7 @@ public abstract class DesktopService implements Service {
 			solver_process.waitFor();
 
 			final long stopTime = System.nanoTime();
-			System.out.println("Total time : " + (stopTime - startTime));
+			System.err.println("Total time : " + (stopTime - startTime));
 
 			return getOutput(solverOutput.toString(), solverError.toString());
 
