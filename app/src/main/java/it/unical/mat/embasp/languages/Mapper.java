@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.unical.mat.embasp.languages.asp.IllegalTermException;
+
 /**
  * Base class
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}
@@ -17,6 +19,8 @@ public abstract class Mapper {
 	protected final Map<String, Class<?>> predicateClass = new HashMap<>();
 
 	protected final Map<Class<?>, Map<String, Method>> classSetterMethod = new HashMap<>();
+
+	protected abstract String getActualString(String predicate, HashMap<Integer, Object> parametersMap) throws IllegalTermException;
 
 	public Class<?> getClass(final String predicate) {
 		return predicateClass.get(predicate);
@@ -36,6 +40,9 @@ public abstract class Mapper {
 
 		final String predicate = getPredicate(string);
 
+		if (predicate == null)
+			return null;
+
 		final Class<?> cl = getClass(predicate);
 
 		// Not exist mapping between the predicate and the class
@@ -43,6 +50,9 @@ public abstract class Mapper {
 			return null;
 
 		final String[] parameters = getParameters(string);
+
+		if (parameters == null)
+			return null;
 
 		final Object obj = cl.newInstance();
 
@@ -74,11 +84,23 @@ public abstract class Mapper {
 	 *            Object from witch data are extrapolated
 	 * @return String data for the given Object in a String format
 	 * @throws IllegalAccessException,
-	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
+	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException, IllegalTermException
 	 */
 	public String getString(final Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, ObjectNotValidException, IllegalAnnotationException {
-		return null;
+			SecurityException, ObjectNotValidException, IllegalAnnotationException, IllegalTermException {
+		final String predicate = registerClass(obj.getClass());
+
+		final HashMap<Integer, Object> parametersMap = new HashMap<>();
+		for (final Field field : obj.getClass().getDeclaredFields())
+			if (field.isAnnotationPresent(Term.class)) {
+				final Object value = obj.getClass().getMethod("get" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1))
+						.invoke(obj);
+				parametersMap.put(field.getAnnotation(Term.class).value(), value);
+			} else
+				throw new IllegalAnnotationException();
+
+		return getActualString(predicate, parametersMap);
+
 	}
 
 	private void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {

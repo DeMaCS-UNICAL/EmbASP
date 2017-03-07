@@ -1,13 +1,8 @@
 package it.unical.mat.embasp.base;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import it.unical.mat.embasp.languages.IllegalAnnotationException;
-import it.unical.mat.embasp.languages.asp.IllegalTermException;
-import it.unical.mat.embasp.languages.asp.PredicateNotValidException;
 
 /** Represents a generic option */
 
@@ -32,8 +27,7 @@ public class InputProgram {
 	 *            Object used to retrieve data from
 	 * @see #addObjectInput(Object)
 	 */
-	public InputProgram(final Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
+	public InputProgram(final Object inputObj) throws Exception {
 		init();
 		addObjectInput(inputObj);
 	}
@@ -54,17 +48,14 @@ public class InputProgram {
 	}
 
 	/**
-	 * @throws IllegalAccessException
-	 *             , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException
+	 * @throws Exception
 	 */
-	public void addObjectInput(final Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, IllegalTermException, IllegalAnnotationException, PredicateNotValidException {
+	public void addObjectInput(final Object inputObj) throws Exception {
 		throw new UnsupportedOperationException("functionality not implemented");
 	}
 
 	/** @see #addObjectInput(Object) */
-	public void addObjectsInput(final Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
+	public void addObjectsInput(final Set<Object> inputObjs) throws Exception {
 		for (final Object inputObj : inputObjs)
 			addObjectInput(inputObj);
 	}

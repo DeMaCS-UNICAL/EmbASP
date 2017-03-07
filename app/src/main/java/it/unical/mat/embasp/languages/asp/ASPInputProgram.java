@@ -1,10 +1,8 @@
 package it.unical.mat.embasp.languages.asp;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import it.unical.mat.embasp.base.InputProgram;
-import it.unical.mat.embasp.languages.IllegalAnnotationException;
 
 /** a generic ASP program , with the capabilities of retrieve data by objects */
 
@@ -14,8 +12,7 @@ public class ASPInputProgram extends InputProgram {
 		super();
 	}
 
-	public ASPInputProgram(final Object inputObj) throws InvocationTargetException, NoSuchMethodException, IllegalTermException, IllegalAccessException,
-			IllegalAnnotationException, PredicateNotValidException {
+	public ASPInputProgram(final Object inputObj) throws Exception {
 		super(inputObj);
 	}
 
@@ -30,18 +27,17 @@ public class ASPInputProgram extends InputProgram {
 	 *            an object to be transformed
 	 * @see ASPMapper
 	 * @throws IllegalAccessException
-	 *             , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException
+	 *             , IllegalArgumentException , InvocationTargetException , NoSuchMethodException , SecurityException , IllegalTermException,
+	 *             ObjectNotValidException
 	 */
 	@Override
-	public void addObjectInput(final Object inputObj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, IllegalTermException, IllegalAnnotationException, PredicateNotValidException {
+	public void addObjectInput(final Object inputObj) throws Exception {
 		addProgram(ASPMapper.getInstance().getString(inputObj) + ".");
 	}
 
 	/** transforms a set of objects @see #addObjectInput(Object) */
 	@Override
-	public void addObjectsInput(final Set<Object> inputObjs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			NoSuchMethodException, SecurityException, IllegalTermException, PredicateNotValidException, IllegalAnnotationException {
+	public void addObjectsInput(final Set<Object> inputObjs) throws Exception {
 		for (final Object inputObj : inputObjs)
 			addObjectInput(inputObj);
 	}

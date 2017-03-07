@@ -1,6 +1,9 @@
 package it.unical.mat.embasp.languages.pddl;
 
+import java.util.HashMap;
+
 import it.unical.mat.embasp.languages.Mapper;
+import it.unical.mat.embasp.languages.asp.IllegalTermException;
 
 public class PDDLMapper extends Mapper {
 
@@ -13,6 +16,13 @@ public class PDDLMapper extends Mapper {
 	}
 
 	private PDDLMapper() {
+		super();
+	}
+
+	@Override
+	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -31,6 +41,7 @@ public class PDDLMapper extends Mapper {
 			throw new IllegalArgumentException("Wrong format");
 
 		return string.substring(1, string.indexOf(" "));
+
 	}
 
 }
