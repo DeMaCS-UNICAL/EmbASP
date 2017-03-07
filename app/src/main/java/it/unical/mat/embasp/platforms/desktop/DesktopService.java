@@ -69,8 +69,11 @@ public abstract class DesktopService implements Service {
 	public Output startSync(final List<InputProgram> programs, final List<OptionDescriptor> options) {
 
 		String option = new String();
-		for (final OptionDescriptor o : options)
-			option += o.getOptions() + " ";
+		for (final OptionDescriptor o : options) {
+			if (!option.isEmpty())
+				option += o.getSeparator();
+			option += o.getOptions();
+		}
 
 		String files_paths = new String();
 		String final_program = new String();
