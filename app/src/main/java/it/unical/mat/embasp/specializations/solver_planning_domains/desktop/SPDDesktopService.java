@@ -12,11 +12,11 @@ import it.unical.mat.embasp.platforms.desktop.DesktopService;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SPDPlan;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SPDUtility;
 
-public class SPDServiceDesktop extends DesktopService {
+public class SPDDesktopService extends DesktopService {
 
 	private final SPDUtility spdu;
 
-	public SPDServiceDesktop() {
+	public SPDDesktopService() {
 		super("");
 		spdu = new SPDUtility() {
 			@Override
