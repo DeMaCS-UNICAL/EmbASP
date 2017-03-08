@@ -146,5 +146,20 @@ public abstract class Mapper {
 		classSetterMethod.put(cl, namesMethods);
 		return predicate;
 	}
+	
+	public void unregisterClass(final Class<?> cl) throws IllegalAnnotationException  {
+
+		final Annotation annotation = cl.getAnnotation(Predicate.class);
+
+		if (annotation == null)
+			throw new IllegalAnnotationException();
+
+		final String predicate = ((Predicate) annotation).value();
+
+		predicateClass.remove(predicate);
+		classSetterMethod.remove(cl);
+		
+		
+	}
 
 }

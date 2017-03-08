@@ -67,6 +67,13 @@ public class ASPMapperTest {
 
 			Assert.assertEquals("cell(1,2,5)", instance.getString(object));
 
+			instance.unregisterClass(Cell.class);
+			
+			final Object nullObject = instance.getObject("cell(1,2,5)");
+			
+			Assert.assertNull(nullObject);
+			
+
 		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | InstantiationException | IllegalTermException e) {
 			Assert.fail(e.getMessage());
