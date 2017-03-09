@@ -16,13 +16,13 @@ import it.unical.mat.embasp.platforms.android.AndroidUtility;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainPlan;
 import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainsUtility;
 
-public class SolverPlanningDomainsServiceAndroid extends AndroidService {
+public class SPDServiceAndroid extends AndroidService {
 
 	
 	
 	private final SolverPlanningDomainsUtility spdu;
 
-	public SolverPlanningDomainsServiceAndroid(final Context c) {
+	public SPDServiceAndroid(final Context c) {
 		super(c);
 		spdu = new SolverPlanningDomainsUtility() {
 			@Override
