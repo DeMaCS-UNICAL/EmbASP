@@ -9,7 +9,7 @@ import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.platforms.desktop.DesktopService;
 import it.unical.mat.embasp.specializations.dlv2.DLV2AnswerSets;
 
-/** is an extention of {@link DesktopService} for Clingo 's solver */
+/** is an extention of {@link DesktopService} for DLV2 's solver */
 
 public class DLV2DesktopService extends DesktopService {
 
@@ -17,8 +17,8 @@ public class DLV2DesktopService extends DesktopService {
 
 	public DLV2DesktopService(final String exe_path) {
 		super(exe_path);
-		load_from_STDIN_option = "";
-		competitionOutputOption = new OptionDescriptor(" --competition-output ");
+		load_from_STDIN_option = "--stdin";
+		competitionOutputOption = new OptionDescriptor("--competition-output");
 	}
 
 	@Override
@@ -28,7 +28,6 @@ public class DLV2DesktopService extends DesktopService {
 
 	@Override
 	public void startAsync(final Callback callback, final List<InputProgram> programs, final List<OptionDescriptor> options) {
-		options.add(competitionOutputOption);
 		super.startAsync(callback, programs, options);
 	}
 

@@ -9,9 +9,11 @@ public class OptionDescriptor {
 
 	public OptionDescriptor() {
 		options = new String();
+		separator = new String();
 	}
 
 	public OptionDescriptor(final String initial_option) {
+		this();
 		options = new String(initial_option);
 	}
 

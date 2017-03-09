@@ -69,21 +69,25 @@ public abstract class DesktopService implements Service {
 	public Output startSync(final List<InputProgram> programs, final List<OptionDescriptor> options) {
 
 		String option = new String();
-		for (final OptionDescriptor o : options) {
-			if (!option.isEmpty())
+		for (final OptionDescriptor o : options) 
+			if(o!=null){
+				option += o.getOptions();
 				option += o.getSeparator();
-			option += o.getOptions();
-		}
+			}else
+				System.err.println("Warning : wrong "+OptionDescriptor.class.getName());
 
 		String files_paths = new String();
 		String final_program = new String();
 
-		for (final InputProgram p : programs) {
-			final_program += p.getPrograms();
-			final String program_file = p.getStringOfFilesPaths();
-			if (program_file != null)
-				files_paths += program_file;
-		}
+		for (final InputProgram p : programs) 
+			if(p!=null){
+				final_program += p.getPrograms();
+				final String program_file = p.getStringOfFilesPaths();
+				if (program_file != null)
+					files_paths += program_file;
+			}else
+				System.err.println("Warning : wrong "+InputProgram.class.getName());
+			
 
 		final StringBuffer solverOutput = new StringBuffer();
 		final StringBuffer solverError = new StringBuffer();
@@ -92,8 +96,19 @@ public abstract class DesktopService implements Service {
 
 			final long startTime = System.nanoTime();
 
-			final Process solver_process = Runtime.getRuntime().exec(exe_path + " " + option + files_paths + load_from_STDIN_option);
+			StringBuffer stringBuffer = new StringBuffer();
+			if(exe_path==null)
+				return new Output("", "Error: executable not found");
+			stringBuffer.append(exe_path).append(" ").append(option).append(files_paths);
+			if(!final_program.isEmpty())
+				stringBuffer.append(" ").append(load_from_STDIN_option);
+			
+			
+			
+			System.err.println(stringBuffer.toString());
+			final Process solver_process = Runtime.getRuntime().exec(stringBuffer.toString());
 
+			
 			new Thread() {
 				@Override
 				public void run() {
