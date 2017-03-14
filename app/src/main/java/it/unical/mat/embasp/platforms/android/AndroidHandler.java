@@ -46,7 +46,6 @@ public class AndroidHandler extends Handler {
 
         List<InputProgram> input_programs = collect_programs(program_index);
         List<OptionDescriptor> input_options = collect_options(option_index);
-        System.out.println(input_programs.toString());
         service.startAsync(c, input_programs, input_options);
 
     }

@@ -13,18 +13,18 @@ import it.unical.mat.embasp.base.OptionDescriptor;
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.platforms.android.AndroidService;
 import it.unical.mat.embasp.platforms.android.AndroidUtility;
-import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainPlan;
-import it.unical.mat.embasp.specializations.solver_planning_domains.SolverPlanningDomainsUtility;
+import it.unical.mat.embasp.specializations.solver_planning_domains.SPDPlan;
+import it.unical.mat.embasp.specializations.solver_planning_domains.SPDUtility;
 
-public class SPDServiceAndroid extends AndroidService {
+public class SPDAndroidService extends AndroidService {
 
 	
 	
-	private final SolverPlanningDomainsUtility spdu;
+	private final SPDUtility spdu;
 
-	public SPDServiceAndroid(final Context c) {
+	public SPDAndroidService(final Context c) {
 		super(c);
-		spdu = new SolverPlanningDomainsUtility() {
+		spdu = new SPDUtility() {
 			@Override
 			protected String readFile(String s) throws IOException {
 				return AndroidUtility.getRawTextFileFromName(c,s);
@@ -33,7 +33,7 @@ public class SPDServiceAndroid extends AndroidService {
 	}
 
 	protected Output getOutput(final String output, final String error) {
-		return new SolverPlanningDomainPlan(output, error);
+		return new SPDPlan(output, error);
 	}
 
 	@Override

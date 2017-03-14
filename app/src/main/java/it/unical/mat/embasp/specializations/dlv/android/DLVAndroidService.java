@@ -77,7 +77,6 @@ public class DLVAndroidService extends AndroidService{
         intent.putExtra(DLVAndroidReasoner.PROGRAM, final_program);
         intent.putExtra(DLVAndroidReasoner.FILES, files);
         context.registerReceiver(new Receiver(callback), new IntentFilter(DLVAndroidReasoner.RESULT_NOTIFICATION));
-        Log.i(getClass().getName(), " start service");
         context.startService(intent);
 
     }

@@ -1,5 +1,7 @@
 package it.unical.mat.embasp.languages;
 
+import android.util.Log;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -91,16 +93,15 @@ public abstract class Mapper {
 		final String predicate = registerClass(obj.getClass());
 
 		final HashMap<Integer, Object> parametersMap = new HashMap<>();
-		for (final Field field : obj.getClass().getDeclaredFields())
+		for (final Field field : obj.getClass().getDeclaredFields()) {
+			if (field.isSynthetic()) continue;
 			if (field.isAnnotationPresent(Term.class)) {
 				final Object value = obj.getClass().getMethod("get" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1))
 						.invoke(obj);
 				parametersMap.put(field.getAnnotation(Term.class).value(), value);
-			} else
-				throw new IllegalAnnotationException();
-
-		return getActualString(predicate, parametersMap);
-
+			}
+		}
+        return getActualString(predicate, parametersMap);
 	}
 
 	private void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {

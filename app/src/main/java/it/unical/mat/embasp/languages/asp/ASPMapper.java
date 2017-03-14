@@ -1,5 +1,7 @@
 package it.unical.mat.embasp.languages.asp;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 import it.unical.mat.embasp.languages.Mapper;
@@ -26,7 +28,6 @@ public class ASPMapper extends Mapper {
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 
 		String atom = predicate + "(";
-
 		for (int i = 0; i < parametersMap.size(); i++) {
 			if (i != 0)
 				atom += ",";
@@ -39,7 +40,6 @@ public class ASPMapper extends Mapper {
 				atom += "\"" + objectTerm.toString() + "\"";
 		}
 		atom += ")";
-
 		return atom;
 
 	}
