@@ -73,6 +73,13 @@ public class ASPMapperTest {
 			
 			Assert.assertNull(nullObject);
 			
+			instance.registerClass(Arity0.class);
+			
+			final Object object1= instance.getObject("a");
+			
+			Assert.assertNotNull(object1);
+			Assert.assertTrue(object1 instanceof Arity0);
+			Assert.assertEquals("a", instance.getString(object1));
 
 		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | InstantiationException | IllegalTermException e) {

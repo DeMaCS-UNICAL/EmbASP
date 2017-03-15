@@ -25,7 +25,9 @@ public class ASPMapper extends Mapper {
 
 	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
-
+		if(parametersMap.isEmpty())
+			return predicate;
+		
 		String atom = predicate + "(";
 		for (int i = 0; i < parametersMap.size(); i++) {
 			if (i != 0)
