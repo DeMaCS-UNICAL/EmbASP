@@ -45,8 +45,12 @@ public class ASPMapper extends Mapper {
 
 	@Override
 	protected String[] getParameters(final String string) {
+		int start=string.indexOf("(")+1;
+		int end=string.lastIndexOf(")");
 		// FIXME Not work with "a("asd,"). fix the split
-		return string.substring(string.indexOf("(") + 1, string.lastIndexOf(")")).split(",");
+		return (start==0 || end==-1 || end<start)
+				?new String[0]
+				:string.substring(start , end).split(",");
 	}
 
 	@Override
