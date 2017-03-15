@@ -1,6 +1,5 @@
 package it.unical.mat.embasp.languages.asp;
 
-import android.util.Log;
 
 import java.util.HashMap;
 

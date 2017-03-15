@@ -1,6 +1,5 @@
 package it.unical.mat.embasp.languages;
 
-import android.util.Log;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
