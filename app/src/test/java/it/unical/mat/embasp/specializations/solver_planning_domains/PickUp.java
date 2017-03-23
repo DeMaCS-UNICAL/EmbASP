@@ -3,13 +3,13 @@
  */
 package it.unical.mat.embasp.specializations.solver_planning_domains;
 
-import it.unical.mat.embasp.languages.Predicate;
-import it.unical.mat.embasp.languages.Term;
+import it.unical.mat.embasp.languages.Id;
+import it.unical.mat.embasp.languages.Param;
 
-@Predicate("pick-up")
+@Id("pick-up")
 public class PickUp {
 
-	@Term(0)
+	@Param(0)
 	private String block;
 
 	/**

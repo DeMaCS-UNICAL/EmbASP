@@ -1,8 +1,8 @@
 package it.unical.mat.embasp.language.asp;
 
-import it.unical.mat.embasp.languages.Predicate;
+import it.unical.mat.embasp.languages.Id;
 
-@Predicate("a")
+@Id("a")
 public class Arity0 {
 
 	@Override

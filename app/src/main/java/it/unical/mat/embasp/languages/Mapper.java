@@ -94,10 +94,10 @@ public abstract class Mapper {
 		final HashMap<Integer, Object> parametersMap = new HashMap<>();
 		for (final Field field : obj.getClass().getDeclaredFields()) {
 			if (field.isSynthetic()) continue;
-			if (field.isAnnotationPresent(Term.class)) {
+			if (field.isAnnotationPresent(Param.class)) {
 				final Object value = obj.getClass().getMethod("get" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1))
 						.invoke(obj);
-				parametersMap.put(field.getAnnotation(Term.class).value(), value);
+				parametersMap.put(field.getAnnotation(Param.class).value(), value);
 			}
 		}
         return getActualString(predicate, parametersMap);
@@ -105,9 +105,9 @@ public abstract class Mapper {
 
 	private void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {
 		for (final Field field : cl.getDeclaredFields())
-			if (field.isAnnotationPresent(Term.class)) {
+			if (field.isAnnotationPresent(Param.class)) {
 
-				final int term = field.getAnnotation(Term.class).value();
+				final int term = field.getAnnotation(Param.class).value();
 				final String nameMethod = "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
 				final Method method = classSetterMethod.get(cl).get(nameMethod);
 
@@ -127,12 +127,12 @@ public abstract class Mapper {
 	 */
 	public String registerClass(final Class<?> cl) throws ObjectNotValidException, IllegalAnnotationException {
 
-		final Annotation annotation = cl.getAnnotation(Predicate.class);
+		final Annotation annotation = cl.getAnnotation(Id.class);
 
 		if (annotation == null)
 			throw new IllegalAnnotationException();
 
-		final String predicate = ((Predicate) annotation).value();
+		final String predicate = ((Id) annotation).value();
 
 		if (predicate.contains(" "))
 			throw new ObjectNotValidException();
@@ -149,12 +149,12 @@ public abstract class Mapper {
 	
 	public void unregisterClass(final Class<?> cl) throws IllegalAnnotationException  {
 
-		final Annotation annotation = cl.getAnnotation(Predicate.class);
+		final Annotation annotation = cl.getAnnotation(Id.class);
 
 		if (annotation == null)
 			throw new IllegalAnnotationException();
 
-		final String predicate = ((Predicate) annotation).value();
+		final String predicate = ((Id) annotation).value();
 
 		predicateClass.remove(predicate);
 		classSetterMethod.remove(cl);

@@ -1,15 +1,15 @@
 package it.unical.mat.embasp.specializations.dlv;
 
-import it.unical.mat.embasp.languages.Predicate;
-import it.unical.mat.embasp.languages.Term;
+import it.unical.mat.embasp.languages.Id;
+import it.unical.mat.embasp.languages.Param;
 
-@Predicate("cell")
+@Id("cell")
 public class Cell {
-	@Term(0)
+	@Param(0)
 	private int row;
-	@Term(1)
+	@Param(1)
 	private int column;
-	@Term(2)
+	@Param(2)
 	private int value;
 
 	public Cell() {
