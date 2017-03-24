@@ -1,6 +1,5 @@
 package it.unical.mat.embasp.languages;
 
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -93,14 +92,15 @@ public abstract class Mapper {
 
 		final HashMap<Integer, Object> parametersMap = new HashMap<>();
 		for (final Field field : obj.getClass().getDeclaredFields()) {
-			if (field.isSynthetic()) continue;
+			if (field.isSynthetic())
+				continue;
 			if (field.isAnnotationPresent(Param.class)) {
 				final Object value = obj.getClass().getMethod("get" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1))
 						.invoke(obj);
 				parametersMap.put(field.getAnnotation(Param.class).value(), value);
 			}
 		}
-        return getActualString(predicate, parametersMap);
+		return getActualString(predicate, parametersMap);
 	}
 
 	private void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {
@@ -146,8 +146,8 @@ public abstract class Mapper {
 		classSetterMethod.put(cl, namesMethods);
 		return predicate;
 	}
-	
-	public void unregisterClass(final Class<?> cl) throws IllegalAnnotationException  {
+
+	public void unregisterClass(final Class<?> cl) throws IllegalAnnotationException {
 
 		final Annotation annotation = cl.getAnnotation(Id.class);
 
@@ -158,8 +158,7 @@ public abstract class Mapper {
 
 		predicateClass.remove(predicate);
 		classSetterMethod.remove(cl);
-		
-		
+
 	}
 
 }

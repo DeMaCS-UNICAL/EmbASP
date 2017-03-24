@@ -1,6 +1,5 @@
 package it.unical.mat.embasp.languages.asp;
 
-
 import java.util.HashMap;
 
 import it.unical.mat.embasp.languages.Mapper;
@@ -25,9 +24,9 @@ public class ASPMapper extends Mapper {
 
 	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
-		if(parametersMap.isEmpty())
+		if (parametersMap.isEmpty())
 			return predicate;
-		
+
 		String atom = predicate + "(";
 		for (int i = 0; i < parametersMap.size(); i++) {
 			if (i != 0)
@@ -47,12 +46,10 @@ public class ASPMapper extends Mapper {
 
 	@Override
 	protected String[] getParameters(final String string) {
-		int start=string.indexOf("(")+1;
-		int end=string.lastIndexOf(")");
+		final int start = string.indexOf("(") + 1;
+		final int end = string.lastIndexOf(")");
 		// FIXME Not work with "a("asd,"). fix the split
-		return (start==0 || end==-1 || end<start)
-				?new String[0]
-				:string.substring(start , end).split(",");
+		return start == 0 || end == -1 || end < start ? new String[0] : string.substring(start, end).split(",");
 	}
 
 	@Override
