@@ -148,7 +148,7 @@ public class SPDDesktopServiceTest {
 	@Test
 	public void test_depots() throws InterruptedException {
 
-		final int[] results_sizes = { 11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 0, 0, 36, 54, 103, 56, 146, 55, 0 };
+		final int[] results_sizes = { 11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 52, 0, 36, 54, 103, 56, 146, 55, 0 };
 		final String base_path = "app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pddl"
 				+ File.separator;
 		test(results_sizes, base_path + "depots" + File.separator);

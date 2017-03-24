@@ -56,7 +56,7 @@ public class SPDDesktopService extends DesktopService {
 			return getOutput("", "PDDLInputProgram not defined");
 
 		try {
-			return getOutput(spdu.postJsonToURL(spdu.createJson(programs).toString()), "");
+			return getOutput(spdu.postJsonToURL(spdu.createJson(programs).toJson()), "");
 		} catch (final Exception e) {
 			return getOutput("", "Error : " + e.getMessage());
 		}

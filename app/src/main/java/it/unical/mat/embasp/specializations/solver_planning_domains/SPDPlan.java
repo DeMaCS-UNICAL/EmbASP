@@ -1,9 +1,9 @@
 package it.unical.mat.embasp.specializations.solver_planning_domains;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.simple.DeserializationException;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsoner;
 
 import it.unical.mat.embasp.languages.pddl.Action;
 import it.unical.mat.embasp.languages.pddl.Plan;
@@ -18,20 +18,19 @@ public class SPDPlan extends Plan {
 	protected void parse() {
 		if (errors != "" || output == "")
 			return;
-		final JSONParser parser = new JSONParser();
-		JSONObject obj;
+		JsonObject obj;
 		try {
-			obj = (JSONObject) parser.parse(output);
+			obj = (JsonObject) Jsoner.deserialize(output);
 			final String status = (String) obj.get("status");
 			if (status.contains("ok")) {
-				final JSONArray arrayPlan = (JSONArray) ((JSONObject) obj.get("result")).get("plan");
+				final JsonArray arrayPlan = (JsonArray) ((JsonObject) obj.get("result")).get("plan");
 				for (int i = 0; i < arrayPlan.size(); i++)
-					actionSequence.add(new Action(((JSONObject) arrayPlan.get(i)).get("name").toString()));
-			} else{
-				Object resultObj= obj.get("result");
-				errors += (resultObj instanceof JSONObject)?" " + (String) ((JSONObject) resultObj).get("error"):resultObj.toString();
+					actionSequence.add(new Action(((JsonObject) arrayPlan.get(i)).get("name").toString()));
+			} else {
+				final Object resultObj = obj.get("result");
+				errors += resultObj instanceof JsonObject ? " " + (String) ((JsonObject) resultObj).get("error") : resultObj.toString();
 			}
-		} catch (final ParseException e) {
+		} catch (final DeserializationException e) {
 			errors += " ParseException : " + e.getMessage();
 		}
 	}

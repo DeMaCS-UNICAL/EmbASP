@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.pddl.PDDLException;
@@ -21,7 +21,7 @@ public abstract class SPDUtility {
 	public SPDUtility() {
 	}
 
-	public JSONObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
+	public JsonObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
 
 		String problem = "";
 		String domain = "";
@@ -49,7 +49,7 @@ public abstract class SPDUtility {
 		if (domain.equals(""))
 			throw new PDDLException("Domain file not specified");
 
-		final JSONObject obj = new JSONObject();
+		final JsonObject obj = new JsonObject();
 		obj.put("problem", problem);
 		obj.put("domain", domain);
 
@@ -96,7 +96,7 @@ public abstract class SPDUtility {
 			} else
 				throw new PDDLException("HTTP connection error, response code : " + con.getResponseCode() + " response message : " + con.getResponseMessage());
 		} catch (final Exception e) {
-			throw new PDDLException("Impossible to perform HTTP connection");
+			throw new PDDLException("Impossible to perform HTTP connection: " + e.getMessage());
 		}
 		return result;
 
