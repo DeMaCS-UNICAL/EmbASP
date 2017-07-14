@@ -1,3 +1,4 @@
+
 ## Java.gitignore
 
 # Compiled class file
@@ -240,3 +241,11 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+
+
+
+
+## Exceptions
+!Java version/lib/
+!Java version/lib/*.jar
