@@ -42,7 +42,15 @@ public class AnswerSet {
 	public List<String> getAnswerSet() {
 		return Collections.unmodifiableList(value);
 	}
-
+	
+	public List <String> getValue() {
+		/* Il Parser ha bisogno di aggiungere i predicati in corso d'opera,
+		   quindi ho aggiunto questo metodo. Se non vi piace che il campo value possa essere 
+		   modificabile, si può usare un altro sistema e cancellare questo metodo.
+		*/
+		return value;
+	}
+	
 	/**
 	 * Return atoms stored in {@link #atoms}
 	 *
