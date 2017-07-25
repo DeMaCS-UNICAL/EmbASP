@@ -13,9 +13,7 @@ class DLVParserListenerImplementation extends DLVParserBaseListener {
     }
 
     private void addNewAnswerSet() {
-        current = new AnswerSet(new LinkedList <> ());
-
-        answerSets.add(current);
+        answerSets.add(current = new AnswerSet(new LinkedList <> ()));
     }
 
     @Override
