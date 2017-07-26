@@ -11,23 +11,19 @@ class DLVParserListenerImplementation extends DLVParserBaseListener {
         this.answerSets = answerSets;
     }
 
-    private void addNewAnswerSet() {
-        answerSets.add(new AnswerSet(new LinkedList <> ()));
-    }
-
     @Override
     public void enterSimpleModel(DLVParser.SimpleModelContext ctx) {
-        addNewAnswerSet();
+    	answerSets.add(new AnswerSet(new LinkedList <> ()));
     }
 
     @Override
     public void enterWeightedModel(DLVParser.WeightedModelContext ctx) {
-        addNewAnswerSet();
+    	answerSets.add(new AnswerSet(new LinkedList <> ()));
     }
 
     @Override
     public void enterWitness(DLVParser.WitnessContext ctx) {
-        addNewAnswerSet();
+    	answerSets.add(new AnswerSet(new LinkedList <> ()));
     }
 
     @Override
