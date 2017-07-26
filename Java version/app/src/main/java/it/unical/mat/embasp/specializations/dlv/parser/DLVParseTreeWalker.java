@@ -20,9 +20,14 @@ public class DLVParseTreeWalker {
 		return instance;
 	}
 	
-    public void walk(List <AnswerSet> answerSets, String dlvOutput) {
-        final DLVParser parser = new DLVParser(new CommonTokenStream(new DLVLexer(CharStreams.fromString(dlvOutput))));
-        
-        ParseTreeWalker.DEFAULT.walk(new DLVParserListenerImplementation(answerSets), parser.output());
+	/**
+	 * Walks the parse tree and stores the answer sets found 
+	 * by the parser.
+	 *
+	 * @param answerSets  the list to store the answer sets in
+	 * @param dlvOutput  the output of the DLV solver
+	 */
+    public void walk(final List <AnswerSet> answerSets, final String dlvOutput) {
+    	ParseTreeWalker.DEFAULT.walk(new DLVParserListenerImplementation(answerSets), new DLVParser(new CommonTokenStream(new DLVLexer(CharStreams.fromString(dlvOutput)))).output());
     }
 }

@@ -5,15 +5,14 @@ import java.util.List;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 
 class DLVParserListenerImplementation extends DLVParserBaseListener {
-    private AnswerSet current;
     private final List <AnswerSet> answerSets;
 
-    DLVParserListenerImplementation(List <AnswerSet> answerSets) {
+    DLVParserListenerImplementation(final List <AnswerSet> answerSets) {
         this.answerSets = answerSets;
     }
 
     private void addNewAnswerSet() {
-        answerSets.add(current = new AnswerSet(new LinkedList <> ()));
+        answerSets.add(new AnswerSet(new LinkedList <> ()));
     }
 
     @Override
@@ -33,12 +32,12 @@ class DLVParserListenerImplementation extends DLVParserBaseListener {
 
     @Override
     public void exitCost_level(DLVParser.Cost_levelContext ctx) {
-        current.getLevelWeight().put(Integer.parseInt(ctx.INTEGER_CONSTANT(1).getText()), Integer.parseInt(ctx.INTEGER_CONSTANT(0).getText()));
+        answerSets.get(answerSets.size() - 1).getLevelWeight().put(Integer.parseInt(ctx.INTEGER_CONSTANT(1).getText()), Integer.parseInt(ctx.INTEGER_CONSTANT(0).getText()));
     }
     
     @Override
     public void exitPredicate(DLVParser.PredicateContext ctx) {
         if(!(ctx.getParent() instanceof DLVParser.FunctionalTermContext))
-            current.getValue().add(ctx.getText());
+        	answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
     }
 }
