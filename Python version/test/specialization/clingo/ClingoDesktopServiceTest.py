@@ -25,7 +25,7 @@ class ClingoDesktopServiceTest(unittest.TestCase):
     
     def getPath(self):
         OS = sys.platform
-        path = os.path.join("..", "..", "resources", "asp", "executables")
+        path = os.path.join("..", "..", "..", "..", "test-resources", "asp", "executables", "clingo")
         if OS.startswith("win32"):
             if sys.maxsize > 2**32:
                 path = os.path.join(path, "clingo64.exe")
@@ -51,7 +51,7 @@ class ClingoDesktopServiceTest(unittest.TestCase):
                     if (self.inputMatrix[i][j] != 0):
                         inp.addObjectInput(Cell(i,j,self.inputMatrix[i][j]))
                       
-            inp.addFilesPath(os.path.join("..", "..","resources", "asp", "sudoku"))
+            inp.addFilesPath(os.path.join("..", "..", "..", "..", "test-resources", "asp", "sudoku"))
              
             handler.addProgram(inp)
             

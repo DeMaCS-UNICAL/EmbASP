@@ -25,7 +25,7 @@ class DLVDesktopServiceTest(unittest.TestCase):
     
     def getPath(self):
         OS = sys.platform
-        path = os.path.join("..", "..", "resources", "asp", "executables")
+        path = os.path.join("..", "..", "..", "..", "test-resources", "asp", "executables", "dlv")
         if OS.startswith("win32"):
             path = os.path.join(path, "dlv.mingw.exe")
         else:
@@ -50,7 +50,7 @@ class DLVDesktopServiceTest(unittest.TestCase):
                     if (self.inputMatrix[i][j] != 0):
                         inp.addObjectInput(Cell(i,j,self.inputMatrix[i][j]))
                       
-            inp.addFilesPath(os.path.join("..", "..", "resources", "asp", "sudoku"))
+            inp.addFilesPath(os.path.join("..", "..", "..", "..", "test-resources", "asp", "sudoku"))
              
             handler.addProgram(inp)
             
