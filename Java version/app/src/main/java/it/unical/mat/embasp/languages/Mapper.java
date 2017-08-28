@@ -103,7 +103,7 @@ public abstract class Mapper {
 		return getActualString(predicate, parametersMap);
 	}
 
-	private void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {
+	protected void populateObject(final Class<?> cl, final String[] parameters, final Object obj) throws IllegalAccessException, InvocationTargetException {
 		for (final Field field : cl.getDeclaredFields())
 			if (field.isAnnotationPresent(Param.class)) {
 
