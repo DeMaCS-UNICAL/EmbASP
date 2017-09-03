@@ -55,16 +55,14 @@ public class ASPMapper extends Mapper {
 		for(final Predicate_atomContext predicateAtom : ASPGrammarBaseVisitorImplementation.getPredicateAtoms(atomsList)) {
 			aspVisitor.resetParameters();
 			
-			final String predicate = aspVisitor.visitPredicate_atom(predicateAtom);
-			final Class<?> cl = getClass(predicate);
+			final Class<?> cl = getClass(aspVisitor.visit(predicateAtom));
 
 			if (cl == null)
 				continue;
 			
-			final String[] parameters = aspVisitor.getParameters();
 			final Object obj = cl.newInstance();
 
-			populateObject(cl, parameters, obj);
+			populateObject(cl, aspVisitor.getParameters(), obj);
 			objects.add(obj);
 		}
 

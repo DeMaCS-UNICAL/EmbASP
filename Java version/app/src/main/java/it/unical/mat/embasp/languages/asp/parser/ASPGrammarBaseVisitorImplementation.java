@@ -5,8 +5,6 @@ import java.util.List;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import it.unical.mat.embasp.languages.asp.parser.ASPGrammarParser.Predicate_atomContext;
-
 public class ASPGrammarBaseVisitorImplementation extends ASPGrammarBaseVisitor <String> {	
 	private List <String> parameters;
 	
@@ -24,32 +22,40 @@ public class ASPGrammarBaseVisitorImplementation extends ASPGrammarBaseVisitor <
 	
     @Override
     public String visitPredicate_atom(ASPGrammarParser.Predicate_atomContext ctx) {
-    	ctx.term().forEach(parameter -> parameters.add(visit(parameter)));
+    	visitChildren(ctx);
     	
     	return ctx.IDENTIFIER().getText();
     }
 
     @Override
     public String visitSymbolicTerm(ASPGrammarParser.SymbolicTermContext ctx) {
-        return ctx.getText();
+        parameters.add(ctx.getText());
+        
+        return null;
     }
 
     @Override
     public String visitIntegerTerm(ASPGrammarParser.IntegerTermContext ctx) {
-        return ctx.getText();
+    	parameters.add(ctx.getText());
+    	
+    	return null;
     }
 
     @Override
     public String visitFunctionalTerm(ASPGrammarParser.FunctionalTermContext ctx) {
-        return ctx.getText();
+    	parameters.add(ctx.getText());
+    	
+    	return null;
     }
 
     @Override
     public String visitStringTerm(ASPGrammarParser.StringTermContext ctx) {
-        return ctx.getText();
+    	parameters.add(ctx.getText());
+    	
+    	return null;
     }
 
-    public static List<Predicate_atomContext> getPredicateAtoms(final String atomsList) {
+    public static List<ASPGrammarParser.Predicate_atomContext> getPredicateAtoms(final String atomsList) {
     	return new ASPGrammarParser(new CommonTokenStream(new ASPGrammarLexer(CharStreams.fromString(atomsList)))).output().predicate_atom();
     }
 }
