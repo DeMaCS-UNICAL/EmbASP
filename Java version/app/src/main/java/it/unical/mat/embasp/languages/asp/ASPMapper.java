@@ -1,8 +1,12 @@
 package it.unical.mat.embasp.languages.asp;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-
+import java.util.HashSet;
+import java.util.Set;
 import it.unical.mat.embasp.languages.Mapper;
+import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementation;
+import it.unical.mat.embasp.languages.asp.parser.ASPGrammarParser.Predicate_atomContext;
 
 /**
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}
@@ -44,6 +48,27 @@ public class ASPMapper extends Mapper {
 
 	}
 
+	public Set<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		final ASPGrammarBaseVisitorImplementation aspVisitor = new ASPGrammarBaseVisitorImplementation();
+		final Set <Object> objects = new HashSet <> ();
+		
+		for(final Predicate_atomContext predicateAtom : ASPGrammarBaseVisitorImplementation.getPredicateAtoms(atomsList)) {
+			aspVisitor.resetParameters();
+			
+			final Class<?> cl = getClass(aspVisitor.visit(predicateAtom));
+
+			if (cl == null)
+				continue;
+			
+			final Object obj = cl.newInstance();
+
+			populateObject(cl, aspVisitor.getParameters(), obj);
+			objects.add(obj);
+		}
+
+		return objects;
+	}
+	
 	@Override
 	protected String[] getParameters(final String string) {
 		final int start = string.indexOf("(") + 1;

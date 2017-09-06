@@ -3,7 +3,6 @@ package it.unical.mat.embasp.languages.asp;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,16 +53,9 @@ public class AnswerSet {
 	 */
 	public Set<Object> getAtoms() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException,
 			InstantiationException {
-		if (atoms == null) {
-			atoms = new HashSet<>();
-			final ASPMapper mapper = ASPMapper.getInstance();
-			for (final String atom : value) {
-				final Object obj = mapper.getObject(atom);
-				if (obj != null)
-					atoms.add(obj);
-			}
-		}
-
+		if (atoms == null)
+			atoms = ASPMapper.getInstance().getObjects(String.join("\n", value));
+		
 		return atoms;
 	}
 
