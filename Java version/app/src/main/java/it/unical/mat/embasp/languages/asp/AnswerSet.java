@@ -42,7 +42,11 @@ public class AnswerSet {
 	public List<String> getAnswerSet() {
 		return Collections.unmodifiableList(value);
 	}
-
+	
+	public List <String> getValue() {
+		return value;
+	}
+	
 	/**
 	 * Return atoms stored in {@link #atoms}
 	 *
