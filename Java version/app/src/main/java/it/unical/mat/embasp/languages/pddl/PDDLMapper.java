@@ -44,4 +44,18 @@ public class PDDLMapper extends Mapper {
 
 	}
 
+	@Override
+	protected void buildParseTree(String atomsList) {
+		throw new UnsupportedOperationException("Not yet supported");
+	}
+
+	@Override
+	protected String getId() {
+		throw new UnsupportedOperationException("Not yet supported");
+	}
+
+	@Override
+	protected String[] getParam() {
+		throw new UnsupportedOperationException("Not yet supported");
+	}
 }

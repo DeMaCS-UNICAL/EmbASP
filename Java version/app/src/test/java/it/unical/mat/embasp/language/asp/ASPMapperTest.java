@@ -57,29 +57,25 @@ public class ASPMapperTest {
 
 			instance.registerClass(Cell.class);
 
-			final Object object = instance.getObject("cell(1,2,5)");
-
-			Assert.assertTrue(object instanceof Cell);
-
-			Assert.assertEquals(1, ((Cell) object).getRow());
-			Assert.assertEquals(2, ((Cell) object).getColumn());
-			Assert.assertEquals(5, ((Cell) object).getValue());
-
-			Assert.assertEquals("cell(1,2,5)", instance.getString(object));
-
+			for(final Object object : instance.getObjects("cell(1,2,5)")) {
+				Assert.assertTrue(object instanceof Cell);
+				Assert.assertEquals(1, ((Cell) object).getRow());
+				Assert.assertEquals(2, ((Cell) object).getColumn());
+				Assert.assertEquals(5, ((Cell) object).getValue());
+				Assert.assertEquals("cell(1,2,5)", instance.getString(object));
+			}
+			
 			instance.unregisterClass(Cell.class);
 			
-			final Object nullObject = instance.getObject("cell(1,2,5)");
-			
-			Assert.assertNull(nullObject);
+			Assert.assertEquals(0, instance.getObjects("cell(1,2,5)").size());
 			
 			instance.registerClass(Arity0.class);
 			
-			final Object object1= instance.getObject("a");
-			
-			Assert.assertNotNull(object1);
-			Assert.assertTrue(object1 instanceof Arity0);
-			Assert.assertEquals("a", instance.getString(object1));
+			for(final Object object1 : instance.getObjects("a")) {
+				Assert.assertNotNull(object1);
+				Assert.assertTrue(object1 instanceof Arity0);
+				Assert.assertEquals("a", instance.getString(object1));
+			}
 
 		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | InstantiationException | IllegalTermException e) {
@@ -87,5 +83,4 @@ public class ASPMapperTest {
 		}
 
 	}
-
 }
