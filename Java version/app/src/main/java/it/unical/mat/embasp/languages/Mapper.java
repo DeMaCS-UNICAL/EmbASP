@@ -5,7 +5,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
 
@@ -25,7 +27,54 @@ public abstract class Mapper {
 	public Class<?> getClass(final String predicate) {
 		return predicateClass.get(predicate);
 	}
+	
+	/**
+	 * Returns a Set of Objects for the given string representing a list of atoms
+	 *
+	 * @param string
+	 *            String from witch data are extrapolated
+	 * @return Set of Objects for the given String data
+	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
+	 */
+	public Set<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		buildParseTree(atomsList);
+		
+		final Set <Object> objects = new HashSet <> ();
+		String predicate = getId();
+		
+		while(predicate != null) {
+			final Class<?> cl = getClass(predicate);
+			final String[] parameters = getParam();
+			predicate = getId();
+			
+			if (cl == null || parameters == null)
+				continue;
+			
+			final Object obj = cl.newInstance();
 
+			populateObject(cl, parameters, obj);
+			objects.add(obj);
+		}
+
+		return objects;
+	}
+	
+	/**
+	 * @param string
+	 *            The string representing a list of atoms received as parameter of getObjects
+	 */
+	protected abstract void buildParseTree(final String atomsList);
+	
+	/**
+	 * @return The predicate name
+	 */
+	protected abstract String getId();
+	
+	/**
+	 * @return All the Terms
+	 */
+	protected abstract String[] getParam();
+	
 	/**
 	 * Returns an Object for the given string
 	 *
