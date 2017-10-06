@@ -4,6 +4,7 @@
 package it.unical.mat.embasp.language.asp;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,7 +58,11 @@ public class ASPMapperTest {
 
 			instance.registerClass(Cell.class);
 
-			for(final Object object : instance.getObjects("cell(1,2,5)")) {
+			final Set<Object> objects = instance.getObjects("cell(1,2,5)");
+			
+			Assert.assertEquals(1, objects.size());
+			
+			for(final Object object : objects) {
 				Assert.assertTrue(object instanceof Cell);
 				Assert.assertEquals(1, ((Cell) object).getRow());
 				Assert.assertEquals(2, ((Cell) object).getColumn());
@@ -71,7 +76,11 @@ public class ASPMapperTest {
 			
 			instance.registerClass(Arity0.class);
 			
-			for(final Object object1 : instance.getObjects("a")) {
+			final Set<Object> objects1 = instance.getObjects("a");
+			
+			Assert.assertEquals(1, objects1.size());
+			
+			for(final Object object1 : objects1) {
 				Assert.assertNotNull(object1);
 				Assert.assertTrue(object1 instanceof Arity0);
 				Assert.assertEquals("a", instance.getString(object1));
