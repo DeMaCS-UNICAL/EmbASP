@@ -76,57 +76,6 @@ public abstract class Mapper {
 	protected abstract String[] getParam();
 	
 	/**
-	 * Returns an Object for the given string
-	 *
-	 * @param string
-	 *            String from witch data are extrapolated
-	 * @return Object for the given String data
-	 * @throws IllegalAccessException,
-	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
-	 */
-	public Object getObject(final String string) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, InstantiationException {
-
-		final String predicate = getPredicate(string);
-
-		if (predicate == null)
-			return null;
-
-		final Class<?> cl = getClass(predicate);
-
-		// Not exist mapping between the predicate and the class
-		if (cl == null)
-			return null;
-
-		final String[] parameters = getParameters(string);
-
-		if (parameters == null)
-			return null;
-
-		final Object obj = cl.newInstance();
-
-		populateObject(cl, parameters, obj);
-
-		return obj;
-
-	}
-
-	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
-	 * @return All the Terms
-	 */
-	protected abstract String[] getParameters(final String string);
-
-	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
-	 * @return The predicate name
-	 * @throws IllegalArgumentException
-	 */
-	protected abstract String getPredicate(final String string) throws IllegalArgumentException;
-
-	/**
 	 * Returns data for the given Object
 	 *
 	 * @param obj

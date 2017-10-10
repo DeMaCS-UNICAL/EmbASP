@@ -4,6 +4,7 @@
 package it.unical.mat.embasp.language.pddl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -56,14 +57,17 @@ public class PDDLMapperTest {
 
 			instance.registerClass(PickUp.class);
 
-			final Object object = instance.getObject("(pick-up b)");
+			final Set<Object> objects = instance.getObjects("(pick-up b)");
 
-			Assert.assertTrue(object instanceof PickUp);
-
-			Assert.assertEquals("b", ((PickUp) object).getBlock());
+			Assert.assertEquals(1, objects.size());
+			
+			for(final Object object : objects) {
+				Assert.assertTrue(object instanceof PickUp);
+				Assert.assertEquals("b", ((PickUp) object).getBlock());
+			}
 
 		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException | InstantiationException e) {
+				| SecurityException | InstantiationException e) {
 			Assert.fail(e.getMessage());
 		}
 
