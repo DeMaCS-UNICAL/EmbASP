@@ -47,26 +47,6 @@ public class ASPMapper extends Mapper {
 	}
 
 	@Override
-	protected String[] getParameters(final String string) {
-		final int start = string.indexOf("(") + 1;
-		final int end = string.lastIndexOf(")");
-		// FIXME Not work with "a("asd,"). fix the split
-		return start == 0 || end == -1 || end < start ? new String[0] : string.substring(start, end).split(",");
-	}
-
-	@Override
-	protected String getPredicate(final String string) throws IllegalArgumentException {
-
-		final int indexOf = string.indexOf("(");
-
-		if (indexOf == -1) // Arity 0
-			return string;
-
-		return string.substring(0, string.indexOf("("));
-
-	}
-
-	@Override
 	protected void buildParseTree(final String atomsList) {
 		parser = new ASPGrammarBaseVisitorImplementation(atomsList);
 	}
