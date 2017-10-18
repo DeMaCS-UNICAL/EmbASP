@@ -54,7 +54,7 @@ public class AnswerSet {
 	public Set<Object> getAtoms() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException,
 			InstantiationException {
 		if (atoms == null) 
-			atoms = ASPMapper.getInstance().getObjects(String.join("\n", value));
+			atoms = (Set<Object>) ASPMapper.getInstance().getObjects(String.join("\n", value));
 
 		return atoms;
 	}

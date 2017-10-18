@@ -1,6 +1,8 @@
 package it.unical.mat.embasp.languages.asp;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementation;
@@ -24,6 +26,11 @@ public class ASPMapper extends Mapper {
 		super();
 	}
 
+	@Override
+	protected Set<Object> getDataStructure() {
+		return new HashSet<> ();
+	}
+	
 	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 		if (parametersMap.isEmpty())

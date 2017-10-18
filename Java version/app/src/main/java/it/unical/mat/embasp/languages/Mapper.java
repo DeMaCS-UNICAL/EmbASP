@@ -4,10 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
 
@@ -36,10 +35,10 @@ public abstract class Mapper {
 	 * @return Set of Objects for the given String data
 	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
 	 */
-	public Set<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
 		buildParseTree(atomsList);
 		
-		final Set <Object> objects = new HashSet <> ();
+		final Collection<Object> objects = getDataStructure();
 		String predicate = getId();
 		
 		while(predicate != null) {
@@ -58,6 +57,11 @@ public abstract class Mapper {
 
 		return objects;
 	}
+	
+	/**
+	 * @return The appropriate data structure depending on the Mapper subclass in use
+	 */
+	protected abstract Collection<Object> getDataStructure();
 	
 	/**
 	 * @param string

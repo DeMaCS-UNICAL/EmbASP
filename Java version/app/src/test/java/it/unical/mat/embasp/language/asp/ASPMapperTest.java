@@ -58,7 +58,7 @@ public class ASPMapperTest {
 
 			instance.registerClass(Cell.class);
 
-			final Set<Object> objects = instance.getObjects("cell(1,2,5)");
+			final Set<Object> objects = (Set<Object>) instance.getObjects("cell(1,2,5)");
 			
 			Assert.assertEquals(1, objects.size());
 			
@@ -76,7 +76,7 @@ public class ASPMapperTest {
 			
 			instance.registerClass(Arity0.class);
 			
-			final Set<Object> objects1 = instance.getObjects("a");
+			final Set<Object> objects1 = (Set<Object>) instance.getObjects("a");
 			
 			Assert.assertEquals(1, objects1.size());
 			

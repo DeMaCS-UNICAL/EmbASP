@@ -1,6 +1,8 @@
 package it.unical.mat.embasp.languages.pddl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
@@ -19,6 +21,11 @@ public class PDDLMapper extends Mapper {
 
 	private PDDLMapper() {
 		super();
+	}
+
+	@Override
+	protected List<Object> getDataStructure() {
+		return new ArrayList <> ();
 	}
 
 	@Override

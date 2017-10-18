@@ -4,7 +4,7 @@
 package it.unical.mat.embasp.language.pddl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,7 +57,7 @@ public class PDDLMapperTest {
 
 			instance.registerClass(PickUp.class);
 
-			final Set<Object> objects = instance.getObjects("(pick-up b)");
+			final List<Object> objects = (List<Object>) instance.getObjects("(pick-up b)");
 
 			Assert.assertEquals(1, objects.size());
 			

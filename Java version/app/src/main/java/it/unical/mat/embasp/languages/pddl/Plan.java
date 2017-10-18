@@ -34,7 +34,7 @@ public abstract class Plan extends Output {
 			for(final Action action : actionSequence)
 				atomsList += action.getName() + '\n';
 			
-			actionsObjects = new ArrayList <> (PDDLMapper.getInstance().getObjects(atomsList));
+			actionsObjects = (List<Object>) PDDLMapper.getInstance().getObjects(atomsList);
 		}
 
 		return actionsObjects;
