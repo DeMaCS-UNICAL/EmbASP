@@ -27,7 +27,7 @@ public class ASPMapper extends Mapper {
 	}
 
 	@Override
-	protected Set<Object> getDataStructure() {
+	protected Set<Object> getCollectionImplementation() {
 		return new HashSet<> ();
 	}
 	

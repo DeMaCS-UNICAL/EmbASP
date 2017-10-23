@@ -38,7 +38,7 @@ public abstract class Mapper {
 	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
 		buildParseTree(atomsList);
 		
-		final Collection<Object> objects = getDataStructure();
+		final Collection<Object> objects = getCollectionImplementation();
 		String predicate = getId();
 		
 		while(predicate != null) {
@@ -61,7 +61,7 @@ public abstract class Mapper {
 	/**
 	 * @return The appropriate data structure depending on the Mapper subclass in use
 	 */
-	protected abstract Collection<Object> getDataStructure();
+	protected abstract Collection<Object> getCollectionImplementation();
 	
 	/**
 	 * @param string

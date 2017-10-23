@@ -24,7 +24,7 @@ public class PDDLMapper extends Mapper {
 	}
 
 	@Override
-	protected List<Object> getDataStructure() {
+	protected List<Object> getCollectionImplementation() {
 		return new ArrayList <> ();
 	}
 
