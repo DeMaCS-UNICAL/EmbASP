@@ -28,11 +28,11 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Returns a Set of Objects for the given string representing a list of atoms
+	 * Returns a Collection of Objects for the given string representing a list of atoms
 	 *
 	 * @param string
 	 *            String from witch data are extrapolated
-	 * @return Set of Objects for the given String data
+	 * @return Collection of Objects for the given String data
 	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
 	 */
 	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
