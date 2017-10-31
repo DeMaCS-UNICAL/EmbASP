@@ -4,8 +4,10 @@
 package it.unical.mat.embasp.language.pddl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.List;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -56,9 +58,9 @@ public class PDDLMapperTest {
 		try {
 
 			instance.registerClass(PickUp.class);
-
-			final List<Object> objects = (List<Object>) instance.getObjects("(pick-up b)");
-
+			final Collection <Object> objects = instance.getObjects("(pick-up b)");
+			
+			Assert.assertThat(objects, CoreMatchers.instanceOf(List.class));
 			Assert.assertEquals(1, objects.size());
 			
 			for(final Object object : objects) {
