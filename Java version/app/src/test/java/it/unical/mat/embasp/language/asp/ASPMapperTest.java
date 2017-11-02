@@ -4,8 +4,10 @@
 package it.unical.mat.embasp.language.asp;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.Set;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -58,8 +60,9 @@ public class ASPMapperTest {
 
 			instance.registerClass(Cell.class);
 
-			final Set<Object> objects = instance.getObjects("cell(1,2,5)");
+			final Collection<Object> objects = instance.getObjects("cell(1,2,5)");
 			
+			Assert.assertThat(objects, CoreMatchers.instanceOf(Set.class));
 			Assert.assertEquals(1, objects.size());
 			
 			for(final Object object : objects) {
@@ -76,8 +79,9 @@ public class ASPMapperTest {
 			
 			instance.registerClass(Arity0.class);
 			
-			final Set<Object> objects1 = instance.getObjects("a");
+			final Collection<Object> objects1 = instance.getObjects("a");
 			
+			Assert.assertThat(objects, CoreMatchers.instanceOf(Set.class));
 			Assert.assertEquals(1, objects1.size());
 			
 			for(final Object object1 : objects1) {

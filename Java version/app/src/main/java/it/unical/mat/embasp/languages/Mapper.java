@@ -4,10 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
 
@@ -29,17 +28,17 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Returns a Set of Objects for the given string representing a list of atoms
+	 * Returns a Collection of Objects for the given string representing a list of atoms
 	 *
 	 * @param string
 	 *            String from witch data are extrapolated
-	 * @return Set of Objects for the given String data
+	 * @return Collection of Objects for the given String data
 	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
 	 */
-	public Set<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
 		buildParseTree(atomsList);
 		
-		final Set <Object> objects = new HashSet <> ();
+		final Collection<Object> objects = getCollectionImplementation();
 		String predicate = getId();
 		
 		while(predicate != null) {
@@ -60,6 +59,11 @@ public abstract class Mapper {
 	}
 	
 	/**
+	 * @return The appropriate data structure depending on the Mapper subclass in use
+	 */
+	protected abstract Collection<Object> getCollectionImplementation();
+	
+	/**
 	 * @param string
 	 *            The string representing a list of atoms received as parameter of getObjects
 	 */
@@ -75,57 +79,6 @@ public abstract class Mapper {
 	 */
 	protected abstract String[] getParam();
 	
-	/**
-	 * Returns an Object for the given string
-	 *
-	 * @param string
-	 *            String from witch data are extrapolated
-	 * @return Object for the given String data
-	 * @throws IllegalAccessException,
-	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
-	 */
-	public Object getObject(final String string) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-			SecurityException, InstantiationException {
-
-		final String predicate = getPredicate(string);
-
-		if (predicate == null)
-			return null;
-
-		final Class<?> cl = getClass(predicate);
-
-		// Not exist mapping between the predicate and the class
-		if (cl == null)
-			return null;
-
-		final String[] parameters = getParameters(string);
-
-		if (parameters == null)
-			return null;
-
-		final Object obj = cl.newInstance();
-
-		populateObject(cl, parameters, obj);
-
-		return obj;
-
-	}
-
-	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
-	 * @return All the Terms
-	 */
-	protected abstract String[] getParameters(final String string);
-
-	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
-	 * @return The predicate name
-	 * @throws IllegalArgumentException
-	 */
-	protected abstract String getPredicate(final String string) throws IllegalArgumentException;
-
 	/**
 	 * Returns data for the given Object
 	 *

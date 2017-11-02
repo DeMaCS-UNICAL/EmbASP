@@ -29,13 +29,12 @@ public abstract class Plan extends Output {
 
 	public List<Object> getActionsObjects() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 		if (actionsObjects == null) {
-			actionsObjects = new ArrayList<>();
-			final PDDLMapper mapper = PDDLMapper.getInstance();
-			for (final Action a : getActions()) {
-				final Object obj = mapper.getObject(a.getName());
-				if (obj != null)
-					actionsObjects.add(obj);
-			}
+			String atomsList = "";
+			
+			for(final Action action : actionSequence)
+				atomsList += action.getName() + '\n';
+			
+			actionsObjects = (List<Object>) PDDLMapper.getInstance().getObjects(atomsList);
 		}
 
 		return actionsObjects;

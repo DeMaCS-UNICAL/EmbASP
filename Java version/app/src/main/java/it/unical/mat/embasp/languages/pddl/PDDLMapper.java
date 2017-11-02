@@ -1,14 +1,18 @@
 package it.unical.mat.embasp.languages.pddl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.languages.pddl.parser.PDDLGrammarBaseVisitorImplementation;
 
 public class PDDLMapper extends Mapper {
 
 	private static PDDLMapper mapper;
-
+	private PDDLGrammarBaseVisitorImplementation parser;
+	
 	public static PDDLMapper getInstance() {
 		if (PDDLMapper.mapper == null)
 			PDDLMapper.mapper = new PDDLMapper();
@@ -20,42 +24,28 @@ public class PDDLMapper extends Mapper {
 	}
 
 	@Override
+	protected List<Object> getCollectionImplementation() {
+		return new ArrayList <> ();
+	}
+
+	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected String[] getParameters(final String string) {
-		// FIXME I assume that there are spaces only between terms
-		return string.substring(string.indexOf(" ") + 1, string.lastIndexOf(")")).split(" ");
-	}
-
-	@Override
-	protected String getPredicate(final String string) throws IllegalArgumentException {
-		// I assume that the string is like (zoom plane1 city4 city1 fl4 fl3 fl2)
-
-		final int initialB = string.indexOf("(");
-
-		if (initialB != 0)
-			throw new IllegalArgumentException("Wrong format");
-
-		return string.substring(1, string.indexOf(" "));
-
-	}
-
-	@Override
 	protected void buildParseTree(String atomsList) {
-		throw new UnsupportedOperationException("Not yet supported");
+		parser = new PDDLGrammarBaseVisitorImplementation(atomsList);
 	}
 
 	@Override
 	protected String getId() {
-		throw new UnsupportedOperationException("Not yet supported");
+		return parser.getIdentifier();
 	}
 
 	@Override
 	protected String[] getParam() {
-		throw new UnsupportedOperationException("Not yet supported");
+		return parser.getParameters();
 	}
 }

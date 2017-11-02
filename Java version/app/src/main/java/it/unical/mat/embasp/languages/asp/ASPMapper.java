@@ -1,6 +1,8 @@
 package it.unical.mat.embasp.languages.asp;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementation;
@@ -25,6 +27,11 @@ public class ASPMapper extends Mapper {
 	}
 
 	@Override
+	protected Set<Object> getCollectionImplementation() {
+		return new HashSet<> ();
+	}
+	
+	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 		if (parametersMap.isEmpty())
 			return predicate;
@@ -43,26 +50,6 @@ public class ASPMapper extends Mapper {
 		}
 		atom += ")";
 		return atom;
-
-	}
-
-	@Override
-	protected String[] getParameters(final String string) {
-		final int start = string.indexOf("(") + 1;
-		final int end = string.lastIndexOf(")");
-		// FIXME Not work with "a("asd,"). fix the split
-		return start == 0 || end == -1 || end < start ? new String[0] : string.substring(start, end).split(",");
-	}
-
-	@Override
-	protected String getPredicate(final String string) throws IllegalArgumentException {
-
-		final int indexOf = string.indexOf("(");
-
-		if (indexOf == -1) // Arity 0
-			return string;
-
-		return string.substring(0, string.indexOf("("));
 
 	}
 
