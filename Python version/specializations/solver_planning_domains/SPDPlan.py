@@ -1,6 +1,5 @@
 from languages.pddl.Plan import Plan
-import json
-from languages.pddl.Action import Action
+from specializations.solver_planning_domains.parser.SPDGrammarVisitorImplementation import SPDGrammarVisitorImplementation
 
 class SPDPlan(Plan):
     """Represent a solution to a SPD problem"""
@@ -9,19 +8,7 @@ class SPDPlan(Plan):
         super(SPDPlan, self).__init__(plan, error)
         
     def _parse(self):
-        """Create new Action objects represents output given in a json forms and add this in _actionSequence field"""
-        if self._errors != "" or self._output=="":
+        if self._errors or not self._output:
             return
-        try:
-            parsed_json = json.loads(self._output)
-            status = parsed_json["status"]
-            if "ok" in status:
-                arrayPlan = parsed_json["result"]["plan"]
-                for x in arrayPlan:
-                    self._actionSequence.append(Action(x["name"]))
-            else:
-                self._errors += " " + str(parsed_json["result"])
-                
-        except ValueError as e:
-            self._errors += "ParseException: " + e
-    
+
+        self._errors += SPDGrammarVisitorImplementation.parse(self._actionSequence, self._output)
