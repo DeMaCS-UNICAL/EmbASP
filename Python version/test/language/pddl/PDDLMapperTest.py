@@ -12,11 +12,14 @@ class PDDLMapperTest(unittest.TestCase):
         try:
             instance.registerClass(PickUp)
             
-            obj = instance.getObject("(pick-up b)")
-        
-            self.assertTrue(isinstance(obj, PickUp))
+            objs = instance.getObjects("(pick-up b)")
             
-            self.assertEqual("b", obj.getBlock())
+            self.assertTrue(isinstance(objs, list))
+            self.assertEqual(1, len(objs))
+            
+            for obj in objs:
+                self.assertTrue(isinstance(obj, PickUp))
+                self.assertEqual("b", obj.getBlock())
             
         except Exception as e:
             self.fail(str(e))

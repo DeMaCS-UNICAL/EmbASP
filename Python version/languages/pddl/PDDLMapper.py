@@ -1,4 +1,5 @@
 from languages.Mapper import Mapper
+from languages.pddl.parser.PDDLGrammarVisitorImplementation import PDDLGrammarVisitorImplementation
 class PDDLMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
     __Instance = None
@@ -18,13 +19,17 @@ class PDDLMapper(Mapper):
     def _getActualString(self, predicate, parametersMap):
         return None
     
-    def _getParameters(self, string):
-        """Return a set of parameter string name"""
-        return string[string.index(" ") + 1:string.rfind(")")].split(" ")
+    def _addToCollection(self, obj):
+        self._objects.append(obj)
+        
+    def _initialize(self, atomsList):
+        self._objects = list()
+        self._parser = PDDLGrammarVisitorImplementation(atomsList)
     
-    def _getPredicate(self, string):
-        """Return a string representing a predicate"""
-        initialB = string.index("(")
-        if initialB != 0:
-            raise ("Wrong format")
-        return string[1:string.index(" ")]
+    def _getId(self):
+        """Returns a string representing an id"""
+        return self._parser.getIdentifier()
+    
+    def _getParam(self):
+        """Returns strings representing parameters"""
+        return self._parser.getParameters()

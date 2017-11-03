@@ -1,4 +1,5 @@
 from languages.Mapper import Mapper
+from languages.asp.parser.ASPGrammarVisitorImplementation import ASPGrammarVisitorImplementation
 class ASPMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
     
@@ -32,18 +33,17 @@ class ASPMapper(Mapper):
         atom += ")"
         return atom
     
-    def _getParameters(self, string):
-        """Return a set of parameter string name"""
-        return string[string.index("(")+1:string.index(")")].split(",")
+    def _addToCollection(self, obj):
+        self._objects.add(obj)
+        
+    def _initialize(self, atomsList):
+        self._objects = set()
+        self._parser = ASPGrammarVisitorImplementation(atomsList)
     
-    def _getPredicate(self, string):
-        """Return a string representing a predicate"""
-        if "(" not in string:
-            return string;
-        return string[:string.index("(")]
-        
-        
-        
-        
-            
-        
+    def _getId(self):
+        """Returns a string representing an id"""
+        return self._parser.getIdentifier()
+    
+    def _getParam(self):
+        """Returns strings representing parameters"""
+        return self._parser.getParameters()

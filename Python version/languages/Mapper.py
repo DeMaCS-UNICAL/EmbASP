@@ -6,16 +6,24 @@ class Mapper(object):
     __metaclass__ = ABCMeta
     
     def __init__(self):
+        self._objects = None
+        self._parser = None
         self._predicateClass = dict()  # Represents a dict, where are stored a string name of a predicate as a key, and a corresponding Class element
         
     @abstractmethod
     def _getActualString(self, predicate, parametersMap):
         pass
     @abstractmethod
-    def _getPredicate(self, string):
+    def _initialize(self, atomsList):
         pass
     @abstractmethod
-    def _getParameters(self, string):
+    def _getId(self):
+        pass
+    @abstractmethod
+    def _getParam(self):
+        pass
+    @abstractmethod
+    def _addToCollection(self, obj):
         pass
     
     def getClass(self, predicate):
@@ -33,23 +41,28 @@ class Mapper(object):
                 getattr(obj, nameMethod)(parameters[key])
                 
             
-    def getObject(self, string):
-        """Returns an Object for the given string
+    def getObjects(self, atomsList):
+        """Returns a collection of objects for the given string
         The parameter string is a string from witch data are extrapolated
-        The method return a Object for the given string data
         """
-        predicate = self._getPredicate(string)
-        if (predicate == None):
-            return None
-        cl = self.getClass(predicate)
-        if(cl == None):
-            return None
-        parameters = self._getParameters(string)
-        if(parameters == None):
-            return None
-        obj = cl()
-        self.__populateObject(cl, parameters, obj)
-        return obj
+        self._initialize(atomsList)
+        
+        predicate = self._getId()
+        
+        while predicate is not None:
+            cl = self.getClass(predicate)
+            parameters = self._getParam()
+            predicate = self._getId()
+            
+            if cl is None or parameters is None:
+                continue
+            
+            obj = cl()
+            
+            self.__populateObject(cl, parameters, obj)
+            self._addToCollection(obj)
+            
+        return self._objects
     
     def registerClass(self, cl):
         """Insert an object into _predicateClass
