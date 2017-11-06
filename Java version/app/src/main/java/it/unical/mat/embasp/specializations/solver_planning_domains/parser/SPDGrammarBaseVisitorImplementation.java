@@ -46,65 +46,6 @@ public class SPDGrammarBaseVisitorImplementation extends SPDGrammarBaseVisitor <
 
         return (string.charAt(0) == '"' && string.charAt(stringLength - 1) == '"') ? string.substring(1, stringLength - 1) : string;
     }
-    
-    private static String unescape(final String string) {
-        final StringBuilder stringBuilder = new StringBuilder(string.length());
-
-        for(int index = 0; index < string.length(); index++) {
-            char character = string.charAt(index);
-
-            if(character == '\\') {
-                final char nextChar = (index == string.length() - 1) ? '\\' : string.charAt(index + 1);
-
-                if(nextChar >= '0' && nextChar <= '7') {
-                    String code = "" + nextChar;
-                    index++;
-
-                    if(index < string.length() - 1 && string.charAt(index + 1) >= '0' && string.charAt(index + 1) <= '7') {
-                        code += string.charAt(index++ + 1);
-
-                        if(index < string.length() - 1 && string.charAt(index + 1) >= '0' && string.charAt(index + 1) <= '7')
-                            code += string.charAt(index++ + 1);
-                    }
-
-                    stringBuilder.append((char)Integer.parseInt(code, 8));
-
-                    continue;
-                }
-
-                switch(nextChar) {
-                    case '\\': character = '\\'; break;
-                    case 'b': character = '\b'; break;
-                    case 'f': character = '\f'; break;
-                    case 'n': character = '\n'; break;
-                    case 'r': character = '\r'; break;
-                    case 't': character = '\t'; break;
-                    case '\"': character = '\"'; break;
-                    case '\'': character = '\''; break;
-                    case 'u':
-                        if(index >= string.length() - 5) {
-                            character = 'u';
-
-                            break;
-                        }
-
-                        int code = Integer.parseInt("" + string.charAt(index + 2) + string.charAt(index + 3) + string.charAt(index + 4) + string.charAt(index + 5), 16);
-
-                        stringBuilder.append(Character.toChars(code));
-
-                        index += 5;
-
-                        continue;
-                }
-
-                index++;
-            }
-
-            stringBuilder.append(character);
-        }
-
-        return stringBuilder.toString();
-    }
 
     public static String parse(final List <Action> actions, final String spdOutput) {
         final SPDGrammarBaseVisitorImplementation parser = new SPDGrammarBaseVisitorImplementation(actions);
