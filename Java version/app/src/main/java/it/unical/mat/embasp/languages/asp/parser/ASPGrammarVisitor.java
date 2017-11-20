@@ -23,31 +23,9 @@ public interface ASPGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPredicate_atom(ASPGrammarParser.Predicate_atomContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SymbolicTerm}
-	 * labeled alternative in {@link ASPGrammarParser#term}.
+	 * Visit a parse tree produced by {@link ASPGrammarParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSymbolicTerm(ASPGrammarParser.SymbolicTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IntegerTerm}
-	 * labeled alternative in {@link ASPGrammarParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntegerTerm(ASPGrammarParser.IntegerTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FunctionalTerm}
-	 * labeled alternative in {@link ASPGrammarParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionalTerm(ASPGrammarParser.FunctionalTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code StringTerm}
-	 * labeled alternative in {@link ASPGrammarParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStringTerm(ASPGrammarParser.StringTermContext ctx);
+	T visitTerm(ASPGrammarParser.TermContext ctx);
 }

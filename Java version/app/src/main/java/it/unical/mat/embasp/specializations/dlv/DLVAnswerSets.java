@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.dlv;
 
 import it.unical.mat.embasp.languages.asp.AnswerSets;
-import it.unical.mat.embasp.specializations.dlv.parser.DLVParseTreeWalker;
+import it.unical.mat.embasp.specializations.dlv.parser.DLVParserBaseVisitorImplementation;
 
 public class DLVAnswerSets extends AnswerSets {
 	/** Represent an AnswerSet specific for DLV */
@@ -17,6 +17,6 @@ public class DLVAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		DLVParseTreeWalker.getInstance().walk(answersets, output);
+		DLVParserBaseVisitorImplementation.parse(answersets, output);
 	}
 }
