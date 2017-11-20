@@ -38,8 +38,7 @@ public class DLV2ParserBaseVisitorImplementation extends DLV2ParserBaseVisitor <
 
     @Override
     public Void visitPredicate_atom(DLV2Parser.Predicate_atomContext ctx) {
-        if(!(ctx.getParent() instanceof DLV2Parser.FunctionalTermContext))
-            answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
+        answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
 
         return null;
     }

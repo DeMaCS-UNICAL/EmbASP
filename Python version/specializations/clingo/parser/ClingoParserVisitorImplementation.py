@@ -10,7 +10,6 @@ class ClingoParserVisitorImplementation(ClingoParserVisitor):
         self._answerSets = answerSets
         
     def visitAnswer_set(self, ctx:ClingoParser.Answer_setContext):
-        
         self._answerSets.append(AnserSet([]))
         
         return self.visitChildren(ctx)

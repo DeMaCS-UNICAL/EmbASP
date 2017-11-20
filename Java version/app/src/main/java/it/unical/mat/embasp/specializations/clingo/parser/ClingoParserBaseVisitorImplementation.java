@@ -38,8 +38,7 @@ public class ClingoParserBaseVisitorImplementation extends ClingoParserBaseVisit
 
     @Override
     public Void visitPredicate_atom(ClingoParser.Predicate_atomContext ctx) {
-        if(!(ctx.getParent() instanceof ClingoParser.FunctionalTermContext))
-            answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
+        answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
 
         return null;
     }

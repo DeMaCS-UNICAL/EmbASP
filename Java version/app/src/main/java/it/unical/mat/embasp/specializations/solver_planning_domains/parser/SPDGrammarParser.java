@@ -20,9 +20,9 @@ public class SPDGrammarParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, BOOLEAN=8, INTEGER=9, 
 		STRING=10, WHITE_SPACE=11;
 	public static final int
-		RULE_array = 0, RULE_json = 1, RULE_object = 2, RULE_pair = 3, RULE_value = 4;
+		RULE_array = 0, RULE_json = 1, RULE_oBjEcT = 2, RULE_pair = 3, RULE_value = 4;
 	public static final String[] ruleNames = {
-		"array", "json", "object", "pair", "value"
+		"array", "json", "oBjEcT", "pair", "value"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -193,27 +193,27 @@ public class SPDGrammarParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ObjectContext extends ParserRuleContext {
+	public static class OBjEcTContext extends ParserRuleContext {
 		public List<PairContext> pair() {
 			return getRuleContexts(PairContext.class);
 		}
 		public PairContext pair(int i) {
 			return getRuleContext(PairContext.class,i);
 		}
-		public ObjectContext(ParserRuleContext parent, int invokingState) {
+		public OBjEcTContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_object; }
+		@Override public int getRuleIndex() { return RULE_oBjEcT; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SPDGrammarVisitor ) return ((SPDGrammarVisitor<? extends T>)visitor).visitObject(this);
+			if ( visitor instanceof SPDGrammarVisitor ) return ((SPDGrammarVisitor<? extends T>)visitor).visitOBjEcT(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ObjectContext object() throws RecognitionException {
-		ObjectContext _localctx = new ObjectContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_object);
+	public final OBjEcTContext oBjEcT() throws RecognitionException {
+		OBjEcTContext _localctx = new OBjEcTContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_oBjEcT);
 		int _la;
 		try {
 			setState(40);
@@ -329,8 +329,8 @@ public class SPDGrammarParser extends Parser {
 		}
 	}
 	public static class ObjectValueContext extends ValueContext {
-		public ObjectContext object() {
-			return getRuleContext(ObjectContext.class,0);
+		public OBjEcTContext oBjEcT() {
+			return getRuleContext(OBjEcTContext.class,0);
 		}
 		public ObjectValueContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
@@ -422,7 +422,7 @@ public class SPDGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(50);
-				object();
+				oBjEcT();
 				}
 				break;
 			case STRING:

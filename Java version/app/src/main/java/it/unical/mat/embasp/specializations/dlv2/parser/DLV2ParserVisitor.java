@@ -47,31 +47,9 @@ public interface DLV2ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPredicate_atom(DLV2Parser.Predicate_atomContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SymbolicTerm}
-	 * labeled alternative in {@link DLV2Parser#term}.
+	 * Visit a parse tree produced by {@link DLV2Parser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSymbolicTerm(DLV2Parser.SymbolicTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IntegerTerm}
-	 * labeled alternative in {@link DLV2Parser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntegerTerm(DLV2Parser.IntegerTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FunctionalTerm}
-	 * labeled alternative in {@link DLV2Parser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionalTerm(DLV2Parser.FunctionalTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code StringTerm}
-	 * labeled alternative in {@link DLV2Parser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStringTerm(DLV2Parser.StringTermContext ctx);
+	T visitTerm(DLV2Parser.TermContext ctx);
 }

@@ -23,11 +23,11 @@ public interface SPDGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJson(SPDGrammarParser.JsonContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SPDGrammarParser#object}.
+	 * Visit a parse tree produced by {@link SPDGrammarParser#oBjEcT}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitObject(SPDGrammarParser.ObjectContext ctx);
+	T visitOBjEcT(SPDGrammarParser.OBjEcTContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SPDGrammarParser#pair}.
 	 * @param ctx the parse tree

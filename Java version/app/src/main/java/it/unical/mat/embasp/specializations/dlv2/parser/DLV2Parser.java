@@ -439,51 +439,19 @@ public class DLV2Parser extends Parser {
 	}
 
 	public static class TermContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(DLV2Parser.IDENTIFIER, 0); }
+		public TerminalNode INTEGER_CONSTANT() { return getToken(DLV2Parser.INTEGER_CONSTANT, 0); }
+		public Predicate_atomContext predicate_atom() {
+			return getRuleContext(Predicate_atomContext.class,0);
+		}
+		public TerminalNode STRING_CONSTANT() { return getToken(DLV2Parser.STRING_CONSTANT, 0); }
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
-	 
-		public TermContext() { }
-		public void copyFrom(TermContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class IntegerTermContext extends TermContext {
-		public TerminalNode INTEGER_CONSTANT() { return getToken(DLV2Parser.INTEGER_CONSTANT, 0); }
-		public IntegerTermContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DLV2ParserVisitor ) return ((DLV2ParserVisitor<? extends T>)visitor).visitIntegerTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StringTermContext extends TermContext {
-		public TerminalNode STRING_CONSTANT() { return getToken(DLV2Parser.STRING_CONSTANT, 0); }
-		public StringTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DLV2ParserVisitor ) return ((DLV2ParserVisitor<? extends T>)visitor).visitStringTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FunctionalTermContext extends TermContext {
-		public Predicate_atomContext predicate_atom() {
-			return getRuleContext(Predicate_atomContext.class,0);
-		}
-		public FunctionalTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DLV2ParserVisitor ) return ((DLV2ParserVisitor<? extends T>)visitor).visitFunctionalTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class SymbolicTermContext extends TermContext {
-		public TerminalNode IDENTIFIER() { return getToken(DLV2Parser.IDENTIFIER, 0); }
-		public SymbolicTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DLV2ParserVisitor ) return ((DLV2ParserVisitor<? extends T>)visitor).visitSymbolicTerm(this);
+			if ( visitor instanceof DLV2ParserVisitor ) return ((DLV2ParserVisitor<? extends T>)visitor).visitTerm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -496,7 +464,6 @@ public class DLV2Parser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
-				_localctx = new SymbolicTermContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(64);
@@ -504,7 +471,6 @@ public class DLV2Parser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new IntegerTermContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(65);
@@ -512,7 +478,6 @@ public class DLV2Parser extends Parser {
 				}
 				break;
 			case 3:
-				_localctx = new FunctionalTermContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(66);
@@ -520,7 +485,6 @@ public class DLV2Parser extends Parser {
 				}
 				break;
 			case 4:
-				_localctx = new StringTermContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(67);

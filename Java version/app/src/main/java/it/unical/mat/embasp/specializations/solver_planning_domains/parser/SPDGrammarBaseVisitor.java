@@ -31,7 +31,7 @@ public class SPDGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitObject(SPDGrammarParser.ObjectContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOBjEcT(SPDGrammarParser.OBjEcTContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
