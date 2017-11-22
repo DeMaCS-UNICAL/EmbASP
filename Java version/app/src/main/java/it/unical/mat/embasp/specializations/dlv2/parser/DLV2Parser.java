@@ -28,8 +28,8 @@ public class DLV2Parser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'{'", "'COST '", null, null, "'@'", null, null, null, "','", null, 
-		null, "'}'", null, "'('", "')'"
+		null, "'{'", null, null, null, "'@'", null, null, null, "','", null, null, 
+		"'}'", null, "'('", "')'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "START", "COST_LABEL", "ANY", "IGNORE", "AT", "INTEGER", "NEW_LINE", 

@@ -11,20 +11,24 @@ class DLV2ParserVisitorImplementation(DLV2ParserVisitor):
         self._cost = None
     
     def visitAnswer_set(self, ctx:DLV2Parser.Answer_setContext):
-        answerSet = AnserSet([])
+        answerSet = AnserSet([], {})
+        
+        if not ctx.cost() is None and not ctx.cost().isEmpty():
+            firstCost = ctx.cost().COST_LABEL().getText().split(' ')[1].split('@')
+            answerSet.getWeights()[firstCost[1]] = firstCost[0]
         
         if not self._cost is None and (ctx.cost() is None or ctx.cost().isEmpty()):
             answerSet.getWeights().update(self._cost)
         else:
             self._cost = answerSet.getWeights()
-            
+        
         self._answerSets.append(answerSet)
         
         return self.visitChildren(ctx)
     
     def visitLevel(self, ctx:DLV2Parser.LevelContext):
         self._answerSets[-1].getWeights()[ctx.INTEGER(1).getText()] = ctx.INTEGER(0).getText()
-        
+    
     def visitPredicate_atom(self, ctx):
         self._answerSets[-1].getAnswerSet().append(ctx.getText())
     

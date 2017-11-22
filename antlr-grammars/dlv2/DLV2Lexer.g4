@@ -1,7 +1,7 @@
 lexer grammar DLV2Lexer;
 
 START     : '{'-> mode(MODEL);
-COST_LABEL: 'COST '-> mode(COST);
+COST_LABEL: 'COST 'INT'@'INT-> mode(COST);
 ANY       : .+?-> skip;
 IGNORE    : (NL|WS)-> skip;
 
