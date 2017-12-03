@@ -1,21 +1,20 @@
 # Generated from PDDLGrammar.g4 by ANTLR 4.7
 # encoding: utf-8
-from __future__ import print_function
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
 import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\6\26\4\2\t\2\4\3\t\3\3\2\3\2\7\2\t\n\2\f\2\16\2\f\13")
-        buf.write(u"\2\3\2\3\2\3\3\7\3\21\n\3\f\3\16\3\24\13\3\3\3\2\2\4")
-        buf.write(u"\2\4\2\2\2\25\2\6\3\2\2\2\4\22\3\2\2\2\6\n\7\3\2\2\7")
-        buf.write(u"\t\7\5\2\2\b\7\3\2\2\2\t\f\3\2\2\2\n\b\3\2\2\2\n\13\3")
-        buf.write(u"\2\2\2\13\r\3\2\2\2\f\n\3\2\2\2\r\16\7\4\2\2\16\3\3\2")
-        buf.write(u"\2\2\17\21\5\2\2\2\20\17\3\2\2\2\21\24\3\2\2\2\22\20")
-        buf.write(u"\3\2\2\2\22\23\3\2\2\2\23\5\3\2\2\2\24\22\3\2\2\2\4\n")
-        buf.write(u"\22")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\6")
+        buf.write("\26\4\2\t\2\4\3\t\3\3\2\3\2\7\2\t\n\2\f\2\16\2\f\13\2")
+        buf.write("\3\2\3\2\3\3\7\3\21\n\3\f\3\16\3\24\13\3\3\3\2\2\4\2\4")
+        buf.write("\2\2\2\25\2\6\3\2\2\2\4\22\3\2\2\2\6\n\7\3\2\2\7\t\7\5")
+        buf.write("\2\2\b\7\3\2\2\2\t\f\3\2\2\2\n\b\3\2\2\2\n\13\3\2\2\2")
+        buf.write("\13\r\3\2\2\2\f\n\3\2\2\2\r\16\7\4\2\2\16\3\3\2\2\2\17")
+        buf.write("\21\5\2\2\2\20\17\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2")
+        buf.write("\22\23\3\2\2\2\23\5\3\2\2\2\24\22\3\2\2\2\4\n\22")
         return buf.getvalue()
 
 
@@ -29,15 +28,15 @@ class PDDLGrammarParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'('", u"')'" ]
+    literalNames = [ "<INVALID>", "'('", "')'" ]
 
-    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"IDENTIFIER", 
-                      u"SEPARATOR" ]
+    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "IDENTIFIER", 
+                      "SEPARATOR" ]
 
     RULE_atom = 0
     RULE_output = 1
 
-    ruleNames =  [ u"atom", u"output" ]
+    ruleNames =  [ "atom", "output" ]
 
     EOF = Token.EOF
     T__0=1
@@ -45,8 +44,8 @@ class PDDLGrammarParser ( Parser ):
     IDENTIFIER=3
     SEPARATOR=4
 
-    def __init__(self, input, output=sys.stdout):
-        super(PDDLGrammarParser, self).__init__(input, output=output)
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
         self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -55,11 +54,11 @@ class PDDLGrammarParser ( Parser ):
 
     class AtomContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(PDDLGrammarParser.AtomContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IDENTIFIER(self, i=None):
+        def IDENTIFIER(self, i:int=None):
             if i is None:
                 return self.getTokens(PDDLGrammarParser.IDENTIFIER)
             else:
@@ -68,8 +67,8 @@ class PDDLGrammarParser ( Parser ):
         def getRuleIndex(self):
             return PDDLGrammarParser.RULE_atom
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAtom"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAtom" ):
                 return visitor.visitAtom(self)
             else:
                 return visitor.visitChildren(self)
@@ -108,11 +107,11 @@ class PDDLGrammarParser ( Parser ):
 
     class OutputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(PDDLGrammarParser.OutputContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def atom(self, i=None):
+        def atom(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PDDLGrammarParser.AtomContext)
             else:
@@ -122,8 +121,8 @@ class PDDLGrammarParser ( Parser ):
         def getRuleIndex(self):
             return PDDLGrammarParser.RULE_output
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitOutput"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOutput" ):
                 return visitor.visitOutput(self)
             else:
                 return visitor.visitChildren(self)

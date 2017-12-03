@@ -1,52 +1,52 @@
 # Generated from DLVParser.g4 by ANTLR 4.7
 # encoding: utf-8
-from __future__ import print_function
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
 import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\30z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write(u"\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26\n\2\f\2\16\2\31\13")
-        buf.write(u"\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\3\2\3\2\3\2\7\2&")
-        buf.write(u"\n\2\f\2\16\2)\13\2\3\2\5\2,\n\2\3\2\3\2\3\2\5\2\61\n")
-        buf.write(u"\2\3\3\3\3\3\3\3\3\7\3\67\n\3\f\3\16\3:\13\3\3\3\3\3")
-        buf.write(u"\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\7\5H\n\5\f\5")
-        buf.write(u"\16\5K\13\5\5\5M\n\5\3\5\3\5\3\6\7\6R\n\6\f\6\16\6U\13")
-        buf.write(u"\6\3\7\3\7\3\7\3\7\3\7\7\7\\\n\7\f\7\16\7_\13\7\3\7\3")
-        buf.write(u"\7\5\7c\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\bl\n\b\f\b")
-        buf.write(u"\16\bo\13\b\5\bq\n\b\3\b\3\b\5\bu\n\b\3\t\3\t\3\t\3\t")
-        buf.write(u"\2\2\n\2\4\6\b\n\f\16\20\2\2\2\u0084\2\60\3\2\2\2\4\62")
-        buf.write(u"\3\2\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2\2")
-        buf.write(u"\16t\3\2\2\2\20v\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2")
-        buf.write(u"\24\26\7\16\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2")
-        buf.write(u"\2\2\27\30\3\2\2\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33")
-        buf.write(u"\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2\2\36")
-        buf.write(u" \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61")
-        buf.write(u"\5\b\5\2\"\'\5\16\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2")
-        buf.write(u"&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\61\3\2\2\2)\'\3\2\2")
-        buf.write(u"\2*,\7\f\2\2+*\3\2\2\2+,\3\2\2\2,-\3\2\2\2-.\5\b\5\2")
-        buf.write(u"./\5\4\3\2/\61\3\2\2\2\60\22\3\2\2\2\60!\3\2\2\2\60\"")
-        buf.write(u"\3\2\2\2\60+\3\2\2\2\61\3\3\2\2\2\62\63\7\5\2\2\638\5")
-        buf.write(u"\6\4\2\64\65\7\r\2\2\65\67\5\6\4\2\66\64\3\2\2\2\67:")
-        buf.write(u"\3\2\2\28\66\3\2\2\289\3\2\2\29;\3\2\2\2:8\3\2\2\2;<")
-        buf.write(u"\7\6\2\2<\5\3\2\2\2=>\7\7\2\2>?\7\17\2\2?@\7\4\2\2@A")
-        buf.write(u"\7\17\2\2AB\7\b\2\2B\7\3\2\2\2CL\7\n\2\2DI\5\f\7\2EF")
-        buf.write(u"\7\r\2\2FH\5\f\7\2GE\3\2\2\2HK\3\2\2\2IG\3\2\2\2IJ\3")
-        buf.write(u"\2\2\2JM\3\2\2\2KI\3\2\2\2LD\3\2\2\2LM\3\2\2\2MN\3\2")
-        buf.write(u"\2\2NO\7\13\2\2O\t\3\2\2\2PR\5\2\2\2QP\3\2\2\2RU\3\2")
-        buf.write(u"\2\2SQ\3\2\2\2ST\3\2\2\2T\13\3\2\2\2US\3\2\2\2Vb\7\16")
-        buf.write(u"\2\2WX\7\21\2\2X]\5\16\b\2YZ\7\r\2\2Z\\\5\16\b\2[Y\3")
-        buf.write(u"\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2")
-        buf.write(u"\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2bc\3\2\2\2c\r\3\2")
-        buf.write(u"\2\2du\7\16\2\2eu\7\17\2\2fu\5\f\7\2gp\7\7\2\2hm\5\16")
-        buf.write(u"\b\2ij\7\r\2\2jl\5\16\b\2ki\3\2\2\2lo\3\2\2\2mk\3\2\2")
-        buf.write(u"\2mn\3\2\2\2nq\3\2\2\2om\3\2\2\2ph\3\2\2\2pq\3\2\2\2")
-        buf.write(u"qr\3\2\2\2ru\7\b\2\2su\7\20\2\2td\3\2\2\2te\3\2\2\2t")
-        buf.write(u"f\3\2\2\2tg\3\2\2\2ts\3\2\2\2u\17\3\2\2\2vw\7\30\2\2")
-        buf.write(u"wx\5\b\5\2x\21\3\2\2\2\20\27\37\'+\608ILS]bmpt")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30")
+        buf.write("z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26\n\2\f\2\16\2\31\13\2\3")
+        buf.write("\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\3\2\3\2\3\2\7\2&\n\2\f")
+        buf.write("\2\16\2)\13\2\3\2\5\2,\n\2\3\2\3\2\3\2\5\2\61\n\2\3\3")
+        buf.write("\3\3\3\3\3\3\7\3\67\n\3\f\3\16\3:\13\3\3\3\3\3\3\4\3\4")
+        buf.write("\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\7\5H\n\5\f\5\16\5K\13")
+        buf.write("\5\5\5M\n\5\3\5\3\5\3\6\7\6R\n\6\f\6\16\6U\13\6\3\7\3")
+        buf.write("\7\3\7\3\7\3\7\7\7\\\n\7\f\7\16\7_\13\7\3\7\3\7\5\7c\n")
+        buf.write("\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\bl\n\b\f\b\16\bo\13\b")
+        buf.write("\5\bq\n\b\3\b\3\b\5\bu\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6")
+        buf.write("\b\n\f\16\20\2\2\2\u0084\2\60\3\2\2\2\4\62\3\2\2\2\6=")
+        buf.write("\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2\2\16t\3\2\2\2")
+        buf.write("\20v\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24\26\7\16\2")
+        buf.write("\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2")
+        buf.write("\2\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33\7\t\2\2\33\34\7")
+        buf.write("\24\2\2\34\37\7\26\2\2\35 \7\25\2\2\36 \5\20\t\2\37\35")
+        buf.write("\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61\5\b\5\2\"\'\5\16")
+        buf.write("\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2&)\3\2\2\2\'%\3\2\2")
+        buf.write("\2\'(\3\2\2\2(\61\3\2\2\2)\'\3\2\2\2*,\7\f\2\2+*\3\2\2")
+        buf.write("\2+,\3\2\2\2,-\3\2\2\2-.\5\b\5\2./\5\4\3\2/\61\3\2\2\2")
+        buf.write("\60\22\3\2\2\2\60!\3\2\2\2\60\"\3\2\2\2\60+\3\2\2\2\61")
+        buf.write("\3\3\2\2\2\62\63\7\5\2\2\638\5\6\4\2\64\65\7\r\2\2\65")
+        buf.write("\67\5\6\4\2\66\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3")
+        buf.write("\2\2\29;\3\2\2\2:8\3\2\2\2;<\7\6\2\2<\5\3\2\2\2=>\7\7")
+        buf.write("\2\2>?\7\17\2\2?@\7\4\2\2@A\7\17\2\2AB\7\b\2\2B\7\3\2")
+        buf.write("\2\2CL\7\n\2\2DI\5\f\7\2EF\7\r\2\2FH\5\f\7\2GE\3\2\2\2")
+        buf.write("HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JM\3\2\2\2KI\3\2\2\2LD\3")
+        buf.write("\2\2\2LM\3\2\2\2MN\3\2\2\2NO\7\13\2\2O\t\3\2\2\2PR\5\2")
+        buf.write("\2\2QP\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3\2\2\2T\13\3\2\2")
+        buf.write("\2US\3\2\2\2Vb\7\16\2\2WX\7\21\2\2X]\5\16\b\2YZ\7\r\2")
+        buf.write("\2Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2")
+        buf.write("\2^`\3\2\2\2_]\3\2\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2")
+        buf.write("bc\3\2\2\2c\r\3\2\2\2du\7\16\2\2eu\7\17\2\2fu\5\f\7\2")
+        buf.write("gp\7\7\2\2hm\5\16\b\2ij\7\r\2\2jl\5\16\b\2ki\3\2\2\2l")
+        buf.write("o\3\2\2\2mk\3\2\2\2mn\3\2\2\2nq\3\2\2\2om\3\2\2\2ph\3")
+        buf.write("\2\2\2pq\3\2\2\2qr\3\2\2\2ru\7\b\2\2su\7\20\2\2td\3\2")
+        buf.write("\2\2te\3\2\2\2tf\3\2\2\2tg\3\2\2\2ts\3\2\2\2u\17\3\2\2")
+        buf.write("\2vw\7\30\2\2wx\5\b\5\2x\21\3\2\2\2\20\27\37\'+\608IL")
+        buf.write("S]bmpt")
         return buf.getvalue()
 
 
@@ -60,19 +60,18 @@ class DLVParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"<INVALID>", u"':'", u"'Cost ([Weight:Level]): <'", 
-                     u"'>'", u"'['", u"']'", u"' is '", u"'{'", u"'}'", 
-                     u"'Best model:'", u"','", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"'('", u"')'", u"<INVALID>", u"<INVALID>", 
-                     u"'.'", u"<INVALID>", u"<INVALID>", u"', evidenced by'" ]
+    literalNames = [ "<INVALID>", "<INVALID>", "':'", "'Cost ([Weight:Level]): <'", 
+                     "'>'", "'['", "']'", "' is '", "'{'", "'}'", "'Best model:'", 
+                     "','", "<INVALID>", "<INVALID>", "<INVALID>", "'('", 
+                     "')'", "<INVALID>", "<INVALID>", "'.'", "<INVALID>", 
+                     "<INVALID>", "', evidenced by'" ]
 
-    symbolicNames = [ u"<INVALID>", u"HEADER", u"COLON", u"COST_BEGIN", 
-                      u"COST_END", u"OPEN_SQUARE_BRACKET", u"CLOSE_SQUARE_BRACKET", 
-                      u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", u"MODEL_END", 
-                      u"WEIGHTED_MODEL_LABEL", u"COMMA", u"IDENTIFIER", 
-                      u"INTEGER_CONSTANT", u"STRING_CONSTANT", u"TERMS_BEGIN", 
-                      u"TERMS_END", u"WHITESPACE", u"REASONING", u"DOT", 
-                      u"BOOLEAN", u"WHITESPACE_IN_GROUND_QUERY", u"WITNESS_LABEL" ]
+    symbolicNames = [ "<INVALID>", "HEADER", "COLON", "COST_BEGIN", "COST_END", 
+                      "OPEN_SQUARE_BRACKET", "CLOSE_SQUARE_BRACKET", "GROUND_QUERY_BEGIN", 
+                      "MODEL_BEGIN", "MODEL_END", "WEIGHTED_MODEL_LABEL", 
+                      "COMMA", "IDENTIFIER", "INTEGER_CONSTANT", "STRING_CONSTANT", 
+                      "TERMS_BEGIN", "TERMS_END", "WHITESPACE", "REASONING", 
+                      "DOT", "BOOLEAN", "WHITESPACE_IN_GROUND_QUERY", "WITNESS_LABEL" ]
 
     RULE_answer_set = 0
     RULE_cost = 1
@@ -83,8 +82,8 @@ class DLVParser ( Parser ):
     RULE_term = 6
     RULE_witness = 7
 
-    ruleNames =  [ u"answer_set", u"cost", u"cost_level", u"model", u"output", 
-                   u"predicate", u"term", u"witness" ]
+    ruleNames =  [ "answer_set", "cost", "cost_level", "model", "output", 
+                   "predicate", "term", "witness" ]
 
     EOF = Token.EOF
     HEADER=1
@@ -110,8 +109,8 @@ class DLVParser ( Parser ):
     WHITESPACE_IN_GROUND_QUERY=21
     WITNESS_LABEL=22
 
-    def __init__(self, input, output=sys.stdout):
-        super(DLVParser, self).__init__(input, output=output)
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
         self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -120,8 +119,8 @@ class DLVParser ( Parser ):
 
     class Answer_setContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.Answer_setContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -129,23 +128,23 @@ class DLVParser ( Parser ):
             return DLVParser.RULE_answer_set
 
      
-        def copyFrom(self, ctx):
-            super(DLVParser.Answer_setContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class SimpleModelContext(Answer_setContext):
 
-        def __init__(self, parser, ctx): # actually a DLVParser.Answer_setContext)
-            super(DLVParser.SimpleModelContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a DLVParser.Answer_setContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def model(self):
             return self.getTypedRuleContext(DLVParser.ModelContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitSimpleModel"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSimpleModel" ):
                 return visitor.visitSimpleModel(self)
             else:
                 return visitor.visitChildren(self)
@@ -153,11 +152,11 @@ class DLVParser ( Parser ):
 
     class GroundQueryContext(Answer_setContext):
 
-        def __init__(self, parser, ctx): # actually a DLVParser.Answer_setContext)
-            super(DLVParser.GroundQueryContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a DLVParser.Answer_setContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def IDENTIFIER(self, i=None):
+        def IDENTIFIER(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.IDENTIFIER)
             else:
@@ -173,14 +172,14 @@ class DLVParser ( Parser ):
         def witness(self):
             return self.getTypedRuleContext(DLVParser.WitnessContext,0)
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
                 return self.getToken(DLVParser.COMMA, i)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitGroundQuery"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitGroundQuery" ):
                 return visitor.visitGroundQuery(self)
             else:
                 return visitor.visitChildren(self)
@@ -188,8 +187,8 @@ class DLVParser ( Parser ):
 
     class WeightedModelContext(Answer_setContext):
 
-        def __init__(self, parser, ctx): # actually a DLVParser.Answer_setContext)
-            super(DLVParser.WeightedModelContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a DLVParser.Answer_setContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def model(self):
@@ -201,8 +200,8 @@ class DLVParser ( Parser ):
         def WEIGHTED_MODEL_LABEL(self):
             return self.getToken(DLVParser.WEIGHTED_MODEL_LABEL, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitWeightedModel"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitWeightedModel" ):
                 return visitor.visitWeightedModel(self)
             else:
                 return visitor.visitChildren(self)
@@ -210,24 +209,24 @@ class DLVParser ( Parser ):
 
     class NonGroundQueryContext(Answer_setContext):
 
-        def __init__(self, parser, ctx): # actually a DLVParser.Answer_setContext)
-            super(DLVParser.NonGroundQueryContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a DLVParser.Answer_setContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def term(self, i=None):
+        def term(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.TermContext)
             else:
                 return self.getTypedRuleContext(DLVParser.TermContext,i)
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
                 return self.getToken(DLVParser.COMMA, i)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitNonGroundQuery"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNonGroundQuery" ):
                 return visitor.visitNonGroundQuery(self)
             else:
                 return visitor.visitChildren(self)
@@ -336,14 +335,14 @@ class DLVParser ( Parser ):
 
     class CostContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.CostContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def COST_BEGIN(self):
             return self.getToken(DLVParser.COST_BEGIN, 0)
 
-        def cost_level(self, i=None):
+        def cost_level(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.Cost_levelContext)
             else:
@@ -353,7 +352,7 @@ class DLVParser ( Parser ):
         def COST_END(self):
             return self.getToken(DLVParser.COST_END, 0)
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
@@ -362,8 +361,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_cost
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitCost"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCost" ):
                 return visitor.visitCost(self)
             else:
                 return visitor.visitChildren(self)
@@ -406,14 +405,14 @@ class DLVParser ( Parser ):
 
     class Cost_levelContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.Cost_levelContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def OPEN_SQUARE_BRACKET(self):
             return self.getToken(DLVParser.OPEN_SQUARE_BRACKET, 0)
 
-        def INTEGER_CONSTANT(self, i=None):
+        def INTEGER_CONSTANT(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.INTEGER_CONSTANT)
             else:
@@ -428,8 +427,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_cost_level
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitCost_level"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCost_level" ):
                 return visitor.visitCost_level(self)
             else:
                 return visitor.visitChildren(self)
@@ -463,8 +462,8 @@ class DLVParser ( Parser ):
 
     class ModelContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.ModelContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def MODEL_BEGIN(self):
@@ -473,14 +472,14 @@ class DLVParser ( Parser ):
         def MODEL_END(self):
             return self.getToken(DLVParser.MODEL_END, 0)
 
-        def predicate(self, i=None):
+        def predicate(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.PredicateContext)
             else:
                 return self.getTypedRuleContext(DLVParser.PredicateContext,i)
 
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
@@ -489,8 +488,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_model
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitModel"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitModel" ):
                 return visitor.visitModel(self)
             else:
                 return visitor.visitChildren(self)
@@ -539,11 +538,11 @@ class DLVParser ( Parser ):
 
     class OutputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.OutputContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def answer_set(self, i=None):
+        def answer_set(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.Answer_setContext)
             else:
@@ -553,8 +552,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_output
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitOutput"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOutput" ):
                 return visitor.visitOutput(self)
             else:
                 return visitor.visitChildren(self)
@@ -589,8 +588,8 @@ class DLVParser ( Parser ):
 
     class PredicateContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.PredicateContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
@@ -599,7 +598,7 @@ class DLVParser ( Parser ):
         def TERMS_BEGIN(self):
             return self.getToken(DLVParser.TERMS_BEGIN, 0)
 
-        def term(self, i=None):
+        def term(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.TermContext)
             else:
@@ -609,7 +608,7 @@ class DLVParser ( Parser ):
         def TERMS_END(self):
             return self.getToken(DLVParser.TERMS_END, 0)
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
@@ -618,8 +617,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_predicate
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitPredicate"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPredicate" ):
                 return visitor.visitPredicate(self)
             else:
                 return visitor.visitChildren(self)
@@ -670,8 +669,8 @@ class DLVParser ( Parser ):
 
     class TermContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.TermContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
@@ -690,14 +689,14 @@ class DLVParser ( Parser ):
         def CLOSE_SQUARE_BRACKET(self):
             return self.getToken(DLVParser.CLOSE_SQUARE_BRACKET, 0)
 
-        def term(self, i=None):
+        def term(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVParser.TermContext)
             else:
                 return self.getTypedRuleContext(DLVParser.TermContext,i)
 
 
-        def COMMA(self, i=None):
+        def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(DLVParser.COMMA)
             else:
@@ -709,8 +708,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_term
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitTerm"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTerm" ):
                 return visitor.visitTerm(self)
             else:
                 return visitor.visitChildren(self)
@@ -790,8 +789,8 @@ class DLVParser ( Parser ):
 
     class WitnessContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(DLVParser.WitnessContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def WITNESS_LABEL(self):
@@ -804,8 +803,8 @@ class DLVParser ( Parser ):
         def getRuleIndex(self):
             return DLVParser.RULE_witness
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitWitness"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitWitness" ):
                 return visitor.visitWitness(self)
             else:
                 return visitor.visitChildren(self)
