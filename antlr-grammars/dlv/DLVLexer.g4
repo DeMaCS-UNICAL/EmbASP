@@ -2,11 +2,11 @@ lexer grammar DLVLexer;
 
 HEADER: 'DLV ['.*?']'-> skip;
 
-COLON           : ':';
-COST_BEGIN      : 'Cost ([Weight:Level]): <';
-COST_END        : '>';
-COST_LEVEL_BEGIN: '[';
-COST_LEVEL_END  : ']';
+COLON               : ':';
+COST_BEGIN          : 'Cost ([Weight:Level]): <';
+COST_END            : '>';
+OPEN_SQUARE_BRACKET : '[';
+CLOSE_SQUARE_BRACKET: ']';
 
 GROUND_QUERY_BEGIN: ' is '-> mode(IN_GROUND_QUERY);
 

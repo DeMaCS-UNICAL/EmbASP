@@ -8,7 +8,7 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\30n\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write(u"\30z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write(u"\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26\n\2\f\2\16\2\31\13")
         buf.write(u"\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\3\2\3\2\3\2\7\2&")
         buf.write(u"\n\2\f\2\16\2)\13\2\3\2\5\2,\n\2\3\2\3\2\3\2\5\2\61\n")
@@ -16,13 +16,14 @@ def serializedATN():
         buf.write(u"\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\7\5H\n\5\f\5")
         buf.write(u"\16\5K\13\5\5\5M\n\5\3\5\3\5\3\6\7\6R\n\6\f\6\16\6U\13")
         buf.write(u"\6\3\7\3\7\3\7\3\7\3\7\7\7\\\n\7\f\7\16\7_\13\7\3\7\3")
-        buf.write(u"\7\5\7c\n\7\3\b\3\b\3\b\3\b\5\bi\n\b\3\t\3\t\3\t\3\t")
-        buf.write(u"\2\2\n\2\4\6\b\n\f\16\20\2\2\2u\2\60\3\2\2\2\4\62\3\2")
-        buf.write(u"\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2\2\16h")
-        buf.write(u"\3\2\2\2\20j\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24")
-        buf.write(u"\26\7\16\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2")
-        buf.write(u"\2\27\30\3\2\2\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33\7")
-        buf.write(u"\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2\2\36")
+        buf.write(u"\7\5\7c\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\bl\n\b\f\b")
+        buf.write(u"\16\bo\13\b\5\bq\n\b\3\b\3\b\5\bu\n\b\3\t\3\t\3\t\3\t")
+        buf.write(u"\2\2\n\2\4\6\b\n\f\16\20\2\2\2\u0084\2\60\3\2\2\2\4\62")
+        buf.write(u"\3\2\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2\2")
+        buf.write(u"\16t\3\2\2\2\20v\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2")
+        buf.write(u"\24\26\7\16\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2")
+        buf.write(u"\2\2\27\30\3\2\2\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33")
+        buf.write(u"\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2\2\36")
         buf.write(u" \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61")
         buf.write(u"\5\b\5\2\"\'\5\16\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2")
         buf.write(u"&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\61\3\2\2\2)\'\3\2\2")
@@ -40,9 +41,12 @@ def serializedATN():
         buf.write(u"\2\2WX\7\21\2\2X]\5\16\b\2YZ\7\r\2\2Z\\\5\16\b\2[Y\3")
         buf.write(u"\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2")
         buf.write(u"\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2bc\3\2\2\2c\r\3\2")
-        buf.write(u"\2\2di\7\16\2\2ei\7\17\2\2fi\5\f\7\2gi\7\20\2\2hd\3\2")
-        buf.write(u"\2\2he\3\2\2\2hf\3\2\2\2hg\3\2\2\2i\17\3\2\2\2jk\7\30")
-        buf.write(u"\2\2kl\5\b\5\2l\21\3\2\2\2\16\27\37\'+\608ILS]bh")
+        buf.write(u"\2\2du\7\16\2\2eu\7\17\2\2fu\5\f\7\2gp\7\7\2\2hm\5\16")
+        buf.write(u"\b\2ij\7\r\2\2jl\5\16\b\2ki\3\2\2\2lo\3\2\2\2mk\3\2\2")
+        buf.write(u"\2mn\3\2\2\2nq\3\2\2\2om\3\2\2\2ph\3\2\2\2pq\3\2\2\2")
+        buf.write(u"qr\3\2\2\2ru\7\b\2\2su\7\20\2\2td\3\2\2\2te\3\2\2\2t")
+        buf.write(u"f\3\2\2\2tg\3\2\2\2ts\3\2\2\2u\17\3\2\2\2vw\7\30\2\2")
+        buf.write(u"wx\5\b\5\2x\21\3\2\2\2\20\27\37\'+\608ILS]bmpt")
         return buf.getvalue()
 
 
@@ -63,7 +67,7 @@ class DLVParser ( Parser ):
                      u"'.'", u"<INVALID>", u"<INVALID>", u"', evidenced by'" ]
 
     symbolicNames = [ u"<INVALID>", u"HEADER", u"COLON", u"COST_BEGIN", 
-                      u"COST_END", u"COST_LEVEL_BEGIN", u"COST_LEVEL_END", 
+                      u"COST_END", u"OPEN_SQUARE_BRACKET", u"CLOSE_SQUARE_BRACKET", 
                       u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", u"MODEL_END", 
                       u"WEIGHTED_MODEL_LABEL", u"COMMA", u"IDENTIFIER", 
                       u"INTEGER_CONSTANT", u"STRING_CONSTANT", u"TERMS_BEGIN", 
@@ -87,8 +91,8 @@ class DLVParser ( Parser ):
     COLON=2
     COST_BEGIN=3
     COST_END=4
-    COST_LEVEL_BEGIN=5
-    COST_LEVEL_END=6
+    OPEN_SQUARE_BRACKET=5
+    CLOSE_SQUARE_BRACKET=6
     GROUND_QUERY_BEGIN=7
     MODEL_BEGIN=8
     MODEL_END=9
@@ -406,8 +410,8 @@ class DLVParser ( Parser ):
             super(DLVParser.Cost_levelContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def COST_LEVEL_BEGIN(self):
-            return self.getToken(DLVParser.COST_LEVEL_BEGIN, 0)
+        def OPEN_SQUARE_BRACKET(self):
+            return self.getToken(DLVParser.OPEN_SQUARE_BRACKET, 0)
 
         def INTEGER_CONSTANT(self, i=None):
             if i is None:
@@ -418,8 +422,8 @@ class DLVParser ( Parser ):
         def COLON(self):
             return self.getToken(DLVParser.COLON, 0)
 
-        def COST_LEVEL_END(self):
-            return self.getToken(DLVParser.COST_LEVEL_END, 0)
+        def CLOSE_SQUARE_BRACKET(self):
+            return self.getToken(DLVParser.CLOSE_SQUARE_BRACKET, 0)
 
         def getRuleIndex(self):
             return DLVParser.RULE_cost_level
@@ -440,7 +444,7 @@ class DLVParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 59
-            self.match(DLVParser.COST_LEVEL_BEGIN)
+            self.match(DLVParser.OPEN_SQUARE_BRACKET)
             self.state = 60
             self.match(DLVParser.INTEGER_CONSTANT)
             self.state = 61
@@ -448,7 +452,7 @@ class DLVParser ( Parser ):
             self.state = 62
             self.match(DLVParser.INTEGER_CONSTANT)
             self.state = 63
-            self.match(DLVParser.COST_LEVEL_END)
+            self.match(DLVParser.CLOSE_SQUARE_BRACKET)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -568,7 +572,7 @@ class DLVParser ( Parser ):
             self.state = 81
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DLVParser.MODEL_BEGIN) | (1 << DLVParser.WEIGHTED_MODEL_LABEL) | (1 << DLVParser.IDENTIFIER) | (1 << DLVParser.INTEGER_CONSTANT) | (1 << DLVParser.STRING_CONSTANT))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DLVParser.OPEN_SQUARE_BRACKET) | (1 << DLVParser.MODEL_BEGIN) | (1 << DLVParser.WEIGHTED_MODEL_LABEL) | (1 << DLVParser.IDENTIFIER) | (1 << DLVParser.INTEGER_CONSTANT) | (1 << DLVParser.STRING_CONSTANT))) != 0):
                 self.state = 78
                 self.answer_set()
                 self.state = 83
@@ -680,6 +684,25 @@ class DLVParser ( Parser ):
             return self.getTypedRuleContext(DLVParser.PredicateContext,0)
 
 
+        def OPEN_SQUARE_BRACKET(self):
+            return self.getToken(DLVParser.OPEN_SQUARE_BRACKET, 0)
+
+        def CLOSE_SQUARE_BRACKET(self):
+            return self.getToken(DLVParser.CLOSE_SQUARE_BRACKET, 0)
+
+        def term(self, i=None):
+            if i is None:
+                return self.getTypedRuleContexts(DLVParser.TermContext)
+            else:
+                return self.getTypedRuleContext(DLVParser.TermContext,i)
+
+
+        def COMMA(self, i=None):
+            if i is None:
+                return self.getTokens(DLVParser.COMMA)
+            else:
+                return self.getToken(DLVParser.COMMA, i)
+
         def STRING_CONSTANT(self):
             return self.getToken(DLVParser.STRING_CONSTANT, 0)
 
@@ -699,10 +722,11 @@ class DLVParser ( Parser ):
 
         localctx = DLVParser.TermContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_term)
+        self._la = 0 # Token type
         try:
-            self.state = 102
+            self.state = 114
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 98
@@ -724,6 +748,34 @@ class DLVParser ( Parser ):
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 101
+                self.match(DLVParser.OPEN_SQUARE_BRACKET)
+                self.state = 110
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DLVParser.OPEN_SQUARE_BRACKET) | (1 << DLVParser.IDENTIFIER) | (1 << DLVParser.INTEGER_CONSTANT) | (1 << DLVParser.STRING_CONSTANT))) != 0):
+                    self.state = 102
+                    self.term()
+                    self.state = 107
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    while _la==DLVParser.COMMA:
+                        self.state = 103
+                        self.match(DLVParser.COMMA)
+                        self.state = 104
+                        self.term()
+                        self.state = 109
+                        self._errHandler.sync(self)
+                        _la = self._input.LA(1)
+
+
+
+                self.state = 112
+                self.match(DLVParser.CLOSE_SQUARE_BRACKET)
+                pass
+
+            elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 113
                 self.match(DLVParser.STRING_CONSTANT)
                 pass
 
@@ -767,9 +819,9 @@ class DLVParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_witness)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 104
+            self.state = 116
             self.match(DLVParser.WITNESS_LABEL)
-            self.state = 105
+            self.state = 117
             self.model()
         except RecognitionException as re:
             localctx.exception = re

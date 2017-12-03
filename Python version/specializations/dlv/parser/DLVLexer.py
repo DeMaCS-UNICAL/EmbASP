@@ -108,8 +108,8 @@ class DLVLexer(Lexer):
     COLON = 2
     COST_BEGIN = 3
     COST_END = 4
-    COST_LEVEL_BEGIN = 5
-    COST_LEVEL_END = 6
+    OPEN_SQUARE_BRACKET = 5
+    CLOSE_SQUARE_BRACKET = 6
     GROUND_QUERY_BEGIN = 7
     MODEL_BEGIN = 8
     MODEL_END = 9
@@ -137,15 +137,15 @@ class DLVLexer(Lexer):
             u"')'", u"'.'", u"', evidenced by'" ]
 
     symbolicNames = [ u"<INVALID>",
-            u"HEADER", u"COLON", u"COST_BEGIN", u"COST_END", u"COST_LEVEL_BEGIN", 
-            u"COST_LEVEL_END", u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", u"MODEL_END", 
-            u"WEIGHTED_MODEL_LABEL", u"COMMA", u"IDENTIFIER", u"INTEGER_CONSTANT", 
-            u"STRING_CONSTANT", u"TERMS_BEGIN", u"TERMS_END", u"WHITESPACE", 
-            u"REASONING", u"DOT", u"BOOLEAN", u"WHITESPACE_IN_GROUND_QUERY", 
+            u"HEADER", u"COLON", u"COST_BEGIN", u"COST_END", u"OPEN_SQUARE_BRACKET", 
+            u"CLOSE_SQUARE_BRACKET", u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", 
+            u"MODEL_END", u"WEIGHTED_MODEL_LABEL", u"COMMA", u"IDENTIFIER", 
+            u"INTEGER_CONSTANT", u"STRING_CONSTANT", u"TERMS_BEGIN", u"TERMS_END", 
+            u"WHITESPACE", u"REASONING", u"DOT", u"BOOLEAN", u"WHITESPACE_IN_GROUND_QUERY", 
             u"WITNESS_LABEL" ]
 
-    ruleNames = [ u"HEADER", u"COLON", u"COST_BEGIN", u"COST_END", u"COST_LEVEL_BEGIN", 
-                  u"COST_LEVEL_END", u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", 
+    ruleNames = [ u"HEADER", u"COLON", u"COST_BEGIN", u"COST_END", u"OPEN_SQUARE_BRACKET", 
+                  u"CLOSE_SQUARE_BRACKET", u"GROUND_QUERY_BEGIN", u"MODEL_BEGIN", 
                   u"MODEL_END", u"WEIGHTED_MODEL_LABEL", u"COMMA", u"IDENTIFIER", 
                   u"INTEGER_CONSTANT", u"STRING_CONSTANT", u"TERMS_BEGIN", 
                   u"TERMS_END", u"WHITESPACE", u"REASONING", u"DOT", u"BOOLEAN", 
