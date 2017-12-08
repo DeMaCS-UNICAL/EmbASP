@@ -25,7 +25,7 @@ public abstract class SPDUtility {
 			final char character = escapable.charAt(i);
 			
 			switch(character) {
-				//case '"': builder.append("\\\""); break;
+				case '"': builder.append("\\\""); break;
 				case '\\': builder.append("\\\\"); break;
 				case '\b': builder.append("\\b"); break;
 				case '\f': builder.append("\\f"); break;
@@ -79,7 +79,7 @@ public abstract class SPDUtility {
 		if (domain.equals(""))
 			throw new PDDLException("Domain file not specified");
 
-		return escape("{\"problem\":\"" + problem + "\", \"domain\":\"" + domain + "\"}");
+		return "{\"problem\":\"" + escape(problem) + "\", \"domain\":\"" + escape(domain) + "\"}";
 	}
 
 	private String getFromFile(final List<String> filesPaths, final String separator) {
