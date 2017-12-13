@@ -20,12 +20,13 @@ class Plan(Output):
         return self._actionSequence
     
     def getActionsObjects(self):
-        """Return a set of Objects represents Actions"""
-        if self.__actionsObjects == None:
-            self.__actionsObjects = list()
-            mapper = PDDLMapper.getInstance()
-            for a in self.getActions():
-                obj = mapper.getObject(a.getName())
-                if obj != None:
-                    self.__actionsObjects.append(obj)
+        """Return a list of objects representing Actions"""
+        if self.__actionsObjects is None:
+            atomsList = ""
+            
+            for action in self._actionSequence:
+                atomsList += action.getName() + '\n'
+            
+            self.__actionsObjects = PDDLMapper.getInstance().getObjects(atomsList)
+            
         return self.__actionsObjects

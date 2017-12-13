@@ -82,7 +82,7 @@ class SPDDesktopServiceTest(unittest.TestCase):
         self.core(results_sizes, base_path)
           
     def test_depots(self):
-        results_sizes = (11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 0, 0, 36, 54, 103, 56, 146, 55, 0)
+        results_sizes = (11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 52, 0, 36, 54, 103, 56, 146, 55, 0)
         base_path = os.path.join("..", "..", "resources", "pddl", "depots", "")
         self.core(results_sizes, base_path)
           
