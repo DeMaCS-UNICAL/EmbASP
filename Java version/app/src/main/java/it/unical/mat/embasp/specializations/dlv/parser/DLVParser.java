@@ -108,12 +108,9 @@ public class DLVParser extends Parser {
 		}
 		public SimpleModelContext(Answer_setContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterSimpleModel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitSimpleModel(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitSimpleModel(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class GroundQueryContext extends Answer_setContext {
@@ -134,12 +131,9 @@ public class DLVParser extends Parser {
 		}
 		public GroundQueryContext(Answer_setContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterGroundQuery(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitGroundQuery(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitGroundQuery(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class WeightedModelContext extends Answer_setContext {
@@ -152,12 +146,9 @@ public class DLVParser extends Parser {
 		public TerminalNode WEIGHTED_MODEL_LABEL() { return getToken(DLVParser.WEIGHTED_MODEL_LABEL, 0); }
 		public WeightedModelContext(Answer_setContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterWeightedModel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitWeightedModel(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitWeightedModel(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NonGroundQueryContext extends Answer_setContext {
@@ -173,12 +164,9 @@ public class DLVParser extends Parser {
 		}
 		public NonGroundQueryContext(Answer_setContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterNonGroundQuery(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitNonGroundQuery(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitNonGroundQuery(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -321,12 +309,9 @@ public class DLVParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cost; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterCost(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitCost(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitCost(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -385,12 +370,9 @@ public class DLVParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cost_level; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterCost_level(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitCost_level(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitCost_level(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -424,50 +406,26 @@ public class DLVParser extends Parser {
 	}
 
 	public static class ModelContext extends ParserRuleContext {
-		public ModelContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_model; }
-	 
-		public ModelContext() { }
-		public void copyFrom(ModelContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class EmptyModelContext extends ModelContext {
 		public TerminalNode MODEL_BEGIN() { return getToken(DLVParser.MODEL_BEGIN, 0); }
 		public TerminalNode MODEL_END() { return getToken(DLVParser.MODEL_END, 0); }
-		public EmptyModelContext(ModelContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterEmptyModel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitEmptyModel(this);
-		}
-	}
-	public static class NonemptyModelContext extends ModelContext {
-		public TerminalNode MODEL_BEGIN() { return getToken(DLVParser.MODEL_BEGIN, 0); }
 		public List<PredicateContext> predicate() {
 			return getRuleContexts(PredicateContext.class);
 		}
 		public PredicateContext predicate(int i) {
 			return getRuleContext(PredicateContext.class,i);
 		}
-		public TerminalNode MODEL_END() { return getToken(DLVParser.MODEL_END, 0); }
 		public List<TerminalNode> COMMA() { return getTokens(DLVParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(DLVParser.COMMA, i);
 		}
-		public NonemptyModelContext(ModelContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterNonemptyModel(this);
+		public ModelContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
+		@Override public int getRuleIndex() { return RULE_model; }
 		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitNonemptyModel(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitModel(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -476,47 +434,38 @@ public class DLVParser extends Parser {
 		enterRule(_localctx, 6, RULE_model);
 		int _la;
 		try {
-			setState(78);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(65);
+			match(MODEL_BEGIN);
+			setState(74);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
-			case 1:
-				_localctx = new EmptyModelContext(_localctx);
-				enterOuterAlt(_localctx, 1);
+			_la = _input.LA(1);
+			if (_la==IDENTIFIER) {
 				{
-				setState(65);
-				match(MODEL_BEGIN);
 				setState(66);
-				match(MODEL_END);
-				}
-				break;
-			case 2:
-				_localctx = new NonemptyModelContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(67);
-				match(MODEL_BEGIN);
-				setState(68);
 				predicate();
-				setState(73);
+				setState(71);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(69);
+					setState(67);
 					match(COMMA);
-					setState(70);
+					setState(68);
 					predicate();
 					}
 					}
-					setState(75);
+					setState(73);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(76);
-				match(MODEL_END);
 				}
-				break;
+			}
+
+			setState(76);
+			match(MODEL_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -542,12 +491,9 @@ public class DLVParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_output; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterOutput(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitOutput(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitOutput(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -558,17 +504,17 @@ public class DLVParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(83);
+			setState(81);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MODEL_BEGIN) | (1L << WEIGHTED_MODEL_LABEL) | (1L << IDENTIFIER) | (1L << INTEGER_CONSTANT) | (1L << STRING_CONSTANT))) != 0)) {
 				{
 				{
-				setState(80);
+				setState(78);
 				answer_set();
 				}
 				}
-				setState(85);
+				setState(83);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -604,12 +550,9 @@ public class DLVParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_predicate; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterPredicate(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitPredicate(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitPredicate(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -620,34 +563,34 @@ public class DLVParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(86);
+			setState(84);
 			match(IDENTIFIER);
-			setState(98);
+			setState(96);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TERMS_BEGIN) {
 				{
-				setState(87);
+				setState(85);
 				match(TERMS_BEGIN);
-				setState(88);
+				setState(86);
 				term();
-				setState(93);
+				setState(91);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(89);
+					setState(87);
 					match(COMMA);
-					setState(90);
+					setState(88);
 					term();
 					}
 					}
-					setState(95);
+					setState(93);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(96);
+				setState(94);
 				match(TERMS_END);
 				}
 			}
@@ -666,64 +609,20 @@ public class DLVParser extends Parser {
 	}
 
 	public static class TermContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(DLVParser.IDENTIFIER, 0); }
+		public TerminalNode INTEGER_CONSTANT() { return getToken(DLVParser.INTEGER_CONSTANT, 0); }
+		public PredicateContext predicate() {
+			return getRuleContext(PredicateContext.class,0);
+		}
+		public TerminalNode STRING_CONSTANT() { return getToken(DLVParser.STRING_CONSTANT, 0); }
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
-	 
-		public TermContext() { }
-		public void copyFrom(TermContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class IntegerTermContext extends TermContext {
-		public TerminalNode INTEGER_CONSTANT() { return getToken(DLVParser.INTEGER_CONSTANT, 0); }
-		public IntegerTermContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterIntegerTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitIntegerTerm(this);
-		}
-	}
-	public static class StringTermContext extends TermContext {
-		public TerminalNode STRING_CONSTANT() { return getToken(DLVParser.STRING_CONSTANT, 0); }
-		public StringTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterStringTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitStringTerm(this);
-		}
-	}
-	public static class FunctionalTermContext extends TermContext {
-		public PredicateContext predicate() {
-			return getRuleContext(PredicateContext.class,0);
-		}
-		public FunctionalTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterFunctionalTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitFunctionalTerm(this);
-		}
-	}
-	public static class SymbolicTermContext extends TermContext {
-		public TerminalNode IDENTIFIER() { return getToken(DLVParser.IDENTIFIER, 0); }
-		public SymbolicTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterSymbolicTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitSymbolicTerm(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitTerm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -731,38 +630,34 @@ public class DLVParser extends Parser {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_term);
 		try {
-			setState(104);
+			setState(102);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
-				_localctx = new SymbolicTermContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(100);
+				setState(98);
 				match(IDENTIFIER);
 				}
 				break;
 			case 2:
-				_localctx = new IntegerTermContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(101);
+				setState(99);
 				match(INTEGER_CONSTANT);
 				}
 				break;
 			case 3:
-				_localctx = new FunctionalTermContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(102);
+				setState(100);
 				predicate();
 				}
 				break;
 			case 4:
-				_localctx = new StringTermContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(103);
+				setState(101);
 				match(STRING_CONSTANT);
 				}
 				break;
@@ -789,12 +684,9 @@ public class DLVParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_witness; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).enterWitness(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DLVParserListener ) ((DLVParserListener)listener).exitWitness(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVParserVisitor ) return ((DLVParserVisitor<? extends T>)visitor).visitWitness(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -804,9 +696,9 @@ public class DLVParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
+			setState(104);
 			match(WITNESS_LABEL);
-			setState(107);
+			setState(105);
 			model();
 			}
 		}
@@ -822,34 +714,34 @@ public class DLVParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30p\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30n\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26"+
 		"\n\2\f\2\16\2\31\13\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\3\2\3\2\3\2\7\2"+
 		"&\n\2\f\2\16\2)\13\2\3\2\5\2,\n\2\3\2\3\2\3\2\5\2\61\n\2\3\3\3\3\3\3\3"+
 		"\3\7\3\67\n\3\f\3\16\3:\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\7\5J\n\5\f\5\16\5M\13\5\3\5\3\5\5\5Q\n\5\3\6\7\6T\n\6\f"+
-		"\6\16\6W\13\6\3\7\3\7\3\7\3\7\3\7\7\7^\n\7\f\7\16\7a\13\7\3\7\3\7\5\7"+
-		"e\n\7\3\b\3\b\3\b\3\b\5\bk\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20"+
-		"\2\2\2w\2\60\3\2\2\2\4\62\3\2\2\2\6=\3\2\2\2\bP\3\2\2\2\nU\3\2\2\2\fX"+
-		"\3\2\2\2\16j\3\2\2\2\20l\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24\26\7"+
-		"\16\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32"+
-		"\3\2\2\2\31\27\3\2\2\2\32\33\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35"+
-		" \7\25\2\2\36 \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61\5"+
-		"\b\5\2\"\'\5\16\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2&)\3\2\2\2\'%\3\2\2"+
-		"\2\'(\3\2\2\2(\61\3\2\2\2)\'\3\2\2\2*,\7\f\2\2+*\3\2\2\2+,\3\2\2\2,-\3"+
-		"\2\2\2-.\5\b\5\2./\5\4\3\2/\61\3\2\2\2\60\22\3\2\2\2\60!\3\2\2\2\60\""+
-		"\3\2\2\2\60+\3\2\2\2\61\3\3\2\2\2\62\63\7\5\2\2\638\5\6\4\2\64\65\7\r"+
-		"\2\2\65\67\5\6\4\2\66\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3\2\2\29;\3"+
-		"\2\2\2:8\3\2\2\2;<\7\6\2\2<\5\3\2\2\2=>\7\7\2\2>?\7\17\2\2?@\7\4\2\2@"+
-		"A\7\17\2\2AB\7\b\2\2B\7\3\2\2\2CD\7\n\2\2DQ\7\13\2\2EF\7\n\2\2FK\5\f\7"+
-		"\2GH\7\r\2\2HJ\5\f\7\2IG\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2LN\3\2\2"+
-		"\2MK\3\2\2\2NO\7\13\2\2OQ\3\2\2\2PC\3\2\2\2PE\3\2\2\2Q\t\3\2\2\2RT\5\2"+
-		"\2\2SR\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2\2\2V\13\3\2\2\2WU\3\2\2\2Xd\7"+
-		"\16\2\2YZ\7\21\2\2Z_\5\16\b\2[\\\7\r\2\2\\^\5\16\b\2][\3\2\2\2^a\3\2\2"+
-		"\2_]\3\2\2\2_`\3\2\2\2`b\3\2\2\2a_\3\2\2\2bc\7\22\2\2ce\3\2\2\2dY\3\2"+
-		"\2\2de\3\2\2\2e\r\3\2\2\2fk\7\16\2\2gk\7\17\2\2hk\5\f\7\2ik\7\20\2\2j"+
-		"f\3\2\2\2jg\3\2\2\2jh\3\2\2\2ji\3\2\2\2k\17\3\2\2\2lm\7\30\2\2mn\5\b\5"+
-		"\2n\21\3\2\2\2\16\27\37\'+\608KPU_dj";
+		"\5\3\5\7\5H\n\5\f\5\16\5K\13\5\5\5M\n\5\3\5\3\5\3\6\7\6R\n\6\f\6\16\6"+
+		"U\13\6\3\7\3\7\3\7\3\7\3\7\7\7\\\n\7\f\7\16\7_\13\7\3\7\3\7\5\7c\n\7\3"+
+		"\b\3\b\3\b\3\b\5\bi\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\2\2"+
+		"u\2\60\3\2\2\2\4\62\3\2\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2"+
+		"\2\16h\3\2\2\2\20j\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24\26\7\16\2\2"+
+		"\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32\3\2\2\2"+
+		"\31\27\3\2\2\2\32\33\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2"+
+		"\2\36 \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61\5\b\5\2\""+
+		"\'\5\16\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2"+
+		"\2\2(\61\3\2\2\2)\'\3\2\2\2*,\7\f\2\2+*\3\2\2\2+,\3\2\2\2,-\3\2\2\2-."+
+		"\5\b\5\2./\5\4\3\2/\61\3\2\2\2\60\22\3\2\2\2\60!\3\2\2\2\60\"\3\2\2\2"+
+		"\60+\3\2\2\2\61\3\3\2\2\2\62\63\7\5\2\2\638\5\6\4\2\64\65\7\r\2\2\65\67"+
+		"\5\6\4\2\66\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3\2\2\29;\3\2\2\2:8\3"+
+		"\2\2\2;<\7\6\2\2<\5\3\2\2\2=>\7\7\2\2>?\7\17\2\2?@\7\4\2\2@A\7\17\2\2"+
+		"AB\7\b\2\2B\7\3\2\2\2CL\7\n\2\2DI\5\f\7\2EF\7\r\2\2FH\5\f\7\2GE\3\2\2"+
+		"\2HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JM\3\2\2\2KI\3\2\2\2LD\3\2\2\2LM\3\2\2"+
+		"\2MN\3\2\2\2NO\7\13\2\2O\t\3\2\2\2PR\5\2\2\2QP\3\2\2\2RU\3\2\2\2SQ\3\2"+
+		"\2\2ST\3\2\2\2T\13\3\2\2\2US\3\2\2\2Vb\7\16\2\2WX\7\21\2\2X]\5\16\b\2"+
+		"YZ\7\r\2\2Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2"+
+		"\2\2_]\3\2\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2bc\3\2\2\2c\r\3\2\2\2di\7"+
+		"\16\2\2ei\7\17\2\2fi\5\f\7\2gi\7\20\2\2hd\3\2\2\2he\3\2\2\2hf\3\2\2\2"+
+		"hg\3\2\2\2i\17\3\2\2\2jk\7\30\2\2kl\5\b\5\2l\21\3\2\2\2\16\27\37\'+\60"+
+		"8ILS]bh";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -45,7 +45,7 @@ class DLV2Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'{'", u"'COST '", u"<INVALID>", u"<INVALID>", 
+    literalNames = [ u"<INVALID>", u"'{'", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
                      u"'@'", u"<INVALID>", u"<INVALID>", u"<INVALID>", u"','", 
                      u"<INVALID>", u"<INVALID>", u"'}'", u"<INVALID>", u"'('", 
                      u"')'" ]

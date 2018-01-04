@@ -15,7 +15,6 @@ TERMS_BEGIN=14
 TERMS_END=15
 WHITE_SPACE=16
 '{'=1
-'COST '=2
 '@'=5
 ','=9
 '}'=12

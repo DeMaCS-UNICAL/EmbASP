@@ -8,7 +8,6 @@ from languages.asp.AnswerSet import AnserSet
 class DLVParserVisitorImplementation(DLVParserVisitor):
     def __init__(self, answerSets):
         self._answerSets = answerSets
-        self._cost = None
     
     def visitSimpleModel(self, ctx):
         self._answerSets.append(AnserSet([]))

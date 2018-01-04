@@ -19,6 +19,12 @@ public class DLV2ParserBaseVisitorImplementation extends DLV2ParserBaseVisitor <
     public Void visitAnswer_set(DLV2Parser.Answer_setContext ctx) {
         final AnswerSet answerSet = new AnswerSet(new LinkedList <> ());
 
+        if(ctx.cost() != null && !ctx.cost().isEmpty()) {
+        	final String[] firstCost = ctx.cost().COST_LABEL().getText().split(" ")[1].split("@");
+        	
+        	answerSet.getLevelWeight().put(Integer.parseInt(firstCost[1]), Integer.parseInt(firstCost[0]));
+        } 
+        
         if(cost != null && (ctx.cost() == null || ctx.cost().isEmpty()))
             answerSet.getLevelWeight().putAll(cost);
         else
@@ -38,8 +44,7 @@ public class DLV2ParserBaseVisitorImplementation extends DLV2ParserBaseVisitor <
 
     @Override
     public Void visitPredicate_atom(DLV2Parser.Predicate_atomContext ctx) {
-        if(!(ctx.getParent() instanceof DLV2Parser.FunctionalTermContext))
-            answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
+        answerSets.get(answerSets.size() - 1).getValue().add(ctx.getText());
 
         return null;
     }

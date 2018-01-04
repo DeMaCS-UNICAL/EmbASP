@@ -35,31 +35,9 @@ public interface ClingoParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPredicate_atom(ClingoParser.Predicate_atomContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SymbolicTerm}
-	 * labeled alternative in {@link ClingoParser#term}.
+	 * Visit a parse tree produced by {@link ClingoParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSymbolicTerm(ClingoParser.SymbolicTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IntegerTerm}
-	 * labeled alternative in {@link ClingoParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntegerTerm(ClingoParser.IntegerTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FunctionalTerm}
-	 * labeled alternative in {@link ClingoParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionalTerm(ClingoParser.FunctionalTermContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code StringTerm}
-	 * labeled alternative in {@link ClingoParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStringTerm(ClingoParser.StringTermContext ctx);
+	T visitTerm(ClingoParser.TermContext ctx);
 }

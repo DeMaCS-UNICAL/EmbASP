@@ -41,28 +41,7 @@ public class ASPGrammarBaseVisitorImplementation extends ASPGrammarBaseVisitor <
     }
 
     @Override
-    public Void visitSymbolicTerm(ASPGrammarParser.SymbolicTermContext ctx) {
-        parameters.add(ctx.getText());
-        
-        return null;
-    }
-
-    @Override
-    public Void visitIntegerTerm(ASPGrammarParser.IntegerTermContext ctx) {
-    	parameters.add(ctx.getText());
-    	
-    	return null;
-    }
-
-    @Override
-    public Void visitFunctionalTerm(ASPGrammarParser.FunctionalTermContext ctx) {
-    	parameters.add(ctx.getText());
-    	
-    	return null;
-    }
-
-    @Override
-    public Void visitStringTerm(ASPGrammarParser.StringTermContext ctx) {
+    public Void visitTerm(ASPGrammarParser.TermContext ctx) {
     	parameters.add(ctx.getText());
     	
     	return null;

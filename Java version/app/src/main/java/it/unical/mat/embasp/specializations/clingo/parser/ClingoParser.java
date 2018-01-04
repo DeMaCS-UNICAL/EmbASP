@@ -306,51 +306,19 @@ public class ClingoParser extends Parser {
 	}
 
 	public static class TermContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(ClingoParser.IDENTIFIER, 0); }
+		public TerminalNode INTEGER_CONSTANT() { return getToken(ClingoParser.INTEGER_CONSTANT, 0); }
+		public Predicate_atomContext predicate_atom() {
+			return getRuleContext(Predicate_atomContext.class,0);
+		}
+		public TerminalNode STRING_CONSTANT() { return getToken(ClingoParser.STRING_CONSTANT, 0); }
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
-	 
-		public TermContext() { }
-		public void copyFrom(TermContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class IntegerTermContext extends TermContext {
-		public TerminalNode INTEGER_CONSTANT() { return getToken(ClingoParser.INTEGER_CONSTANT, 0); }
-		public IntegerTermContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ClingoParserVisitor ) return ((ClingoParserVisitor<? extends T>)visitor).visitIntegerTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StringTermContext extends TermContext {
-		public TerminalNode STRING_CONSTANT() { return getToken(ClingoParser.STRING_CONSTANT, 0); }
-		public StringTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ClingoParserVisitor ) return ((ClingoParserVisitor<? extends T>)visitor).visitStringTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FunctionalTermContext extends TermContext {
-		public Predicate_atomContext predicate_atom() {
-			return getRuleContext(Predicate_atomContext.class,0);
-		}
-		public FunctionalTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ClingoParserVisitor ) return ((ClingoParserVisitor<? extends T>)visitor).visitFunctionalTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class SymbolicTermContext extends TermContext {
-		public TerminalNode IDENTIFIER() { return getToken(ClingoParser.IDENTIFIER, 0); }
-		public SymbolicTermContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ClingoParserVisitor ) return ((ClingoParserVisitor<? extends T>)visitor).visitSymbolicTerm(this);
+			if ( visitor instanceof ClingoParserVisitor ) return ((ClingoParserVisitor<? extends T>)visitor).visitTerm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -363,7 +331,6 @@ public class ClingoParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
-				_localctx = new SymbolicTermContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(41);
@@ -371,7 +338,6 @@ public class ClingoParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new IntegerTermContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(42);
@@ -379,7 +345,6 @@ public class ClingoParser extends Parser {
 				}
 				break;
 			case 3:
-				_localctx = new FunctionalTermContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(43);
@@ -387,7 +352,6 @@ public class ClingoParser extends Parser {
 				}
 				break;
 			case 4:
-				_localctx = new StringTermContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(44);
