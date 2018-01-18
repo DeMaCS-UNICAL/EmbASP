@@ -17,7 +17,7 @@ public class DLVParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		HEADER=1, COLON=2, COST_BEGIN=3, COST_END=4, COST_LEVEL_BEGIN=5, COST_LEVEL_END=6, 
+		HEADER=1, COLON=2, COST_BEGIN=3, COST_END=4, OPEN_SQUARE_BRACKET=5, CLOSE_SQUARE_BRACKET=6, 
 		GROUND_QUERY_BEGIN=7, MODEL_BEGIN=8, MODEL_END=9, WEIGHTED_MODEL_LABEL=10, 
 		COMMA=11, IDENTIFIER=12, INTEGER_CONSTANT=13, STRING_CONSTANT=14, TERMS_BEGIN=15, 
 		TERMS_END=16, WHITESPACE=17, REASONING=18, DOT=19, BOOLEAN=20, WHITESPACE_IN_GROUND_QUERY=21, 
@@ -36,11 +36,11 @@ public class DLVParser extends Parser {
 		"')'", null, null, "'.'", null, null, "', evidenced by'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "HEADER", "COLON", "COST_BEGIN", "COST_END", "COST_LEVEL_BEGIN", 
-		"COST_LEVEL_END", "GROUND_QUERY_BEGIN", "MODEL_BEGIN", "MODEL_END", "WEIGHTED_MODEL_LABEL", 
-		"COMMA", "IDENTIFIER", "INTEGER_CONSTANT", "STRING_CONSTANT", "TERMS_BEGIN", 
-		"TERMS_END", "WHITESPACE", "REASONING", "DOT", "BOOLEAN", "WHITESPACE_IN_GROUND_QUERY", 
-		"WITNESS_LABEL"
+		null, "HEADER", "COLON", "COST_BEGIN", "COST_END", "OPEN_SQUARE_BRACKET", 
+		"CLOSE_SQUARE_BRACKET", "GROUND_QUERY_BEGIN", "MODEL_BEGIN", "MODEL_END", 
+		"WEIGHTED_MODEL_LABEL", "COMMA", "IDENTIFIER", "INTEGER_CONSTANT", "STRING_CONSTANT", 
+		"TERMS_BEGIN", "TERMS_END", "WHITESPACE", "REASONING", "DOT", "BOOLEAN", 
+		"WHITESPACE_IN_GROUND_QUERY", "WITNESS_LABEL"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -358,13 +358,13 @@ public class DLVParser extends Parser {
 	}
 
 	public static class Cost_levelContext extends ParserRuleContext {
-		public TerminalNode COST_LEVEL_BEGIN() { return getToken(DLVParser.COST_LEVEL_BEGIN, 0); }
+		public TerminalNode OPEN_SQUARE_BRACKET() { return getToken(DLVParser.OPEN_SQUARE_BRACKET, 0); }
 		public List<TerminalNode> INTEGER_CONSTANT() { return getTokens(DLVParser.INTEGER_CONSTANT); }
 		public TerminalNode INTEGER_CONSTANT(int i) {
 			return getToken(DLVParser.INTEGER_CONSTANT, i);
 		}
 		public TerminalNode COLON() { return getToken(DLVParser.COLON, 0); }
-		public TerminalNode COST_LEVEL_END() { return getToken(DLVParser.COST_LEVEL_END, 0); }
+		public TerminalNode CLOSE_SQUARE_BRACKET() { return getToken(DLVParser.CLOSE_SQUARE_BRACKET, 0); }
 		public Cost_levelContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -383,7 +383,7 @@ public class DLVParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(59);
-			match(COST_LEVEL_BEGIN);
+			match(OPEN_SQUARE_BRACKET);
 			setState(60);
 			match(INTEGER_CONSTANT);
 			setState(61);
@@ -391,7 +391,7 @@ public class DLVParser extends Parser {
 			setState(62);
 			match(INTEGER_CONSTANT);
 			setState(63);
-			match(COST_LEVEL_END);
+			match(CLOSE_SQUARE_BRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -507,7 +507,7 @@ public class DLVParser extends Parser {
 			setState(81);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MODEL_BEGIN) | (1L << WEIGHTED_MODEL_LABEL) | (1L << IDENTIFIER) | (1L << INTEGER_CONSTANT) | (1L << STRING_CONSTANT))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << OPEN_SQUARE_BRACKET) | (1L << MODEL_BEGIN) | (1L << WEIGHTED_MODEL_LABEL) | (1L << IDENTIFIER) | (1L << INTEGER_CONSTANT) | (1L << STRING_CONSTANT))) != 0)) {
 				{
 				{
 				setState(78);
@@ -614,6 +614,18 @@ public class DLVParser extends Parser {
 		public PredicateContext predicate() {
 			return getRuleContext(PredicateContext.class,0);
 		}
+		public TerminalNode OPEN_SQUARE_BRACKET() { return getToken(DLVParser.OPEN_SQUARE_BRACKET, 0); }
+		public TerminalNode CLOSE_SQUARE_BRACKET() { return getToken(DLVParser.CLOSE_SQUARE_BRACKET, 0); }
+		public List<TermContext> term() {
+			return getRuleContexts(TermContext.class);
+		}
+		public TermContext term(int i) {
+			return getRuleContext(TermContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(DLVParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(DLVParser.COMMA, i);
+		}
 		public TerminalNode STRING_CONSTANT() { return getToken(DLVParser.STRING_CONSTANT, 0); }
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -629,10 +641,11 @@ public class DLVParser extends Parser {
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_term);
+		int _la;
 		try {
-			setState(102);
+			setState(114);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
@@ -658,6 +671,41 @@ public class DLVParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(101);
+				match(OPEN_SQUARE_BRACKET);
+				setState(110);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << OPEN_SQUARE_BRACKET) | (1L << IDENTIFIER) | (1L << INTEGER_CONSTANT) | (1L << STRING_CONSTANT))) != 0)) {
+					{
+					setState(102);
+					term();
+					setState(107);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==COMMA) {
+						{
+						{
+						setState(103);
+						match(COMMA);
+						setState(104);
+						term();
+						}
+						}
+						setState(109);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					}
+				}
+
+				setState(112);
+				match(CLOSE_SQUARE_BRACKET);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(113);
 				match(STRING_CONSTANT);
 				}
 				break;
@@ -696,9 +744,9 @@ public class DLVParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(116);
 			match(WITNESS_LABEL);
-			setState(105);
+			setState(117);
 			model();
 			}
 		}
@@ -714,34 +762,37 @@ public class DLVParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30n\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30z\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26"+
 		"\n\2\f\2\16\2\31\13\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\3\2\3\2\3\2\7\2"+
 		"&\n\2\f\2\16\2)\13\2\3\2\5\2,\n\2\3\2\3\2\3\2\5\2\61\n\2\3\3\3\3\3\3\3"+
 		"\3\7\3\67\n\3\f\3\16\3:\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3"+
 		"\5\3\5\7\5H\n\5\f\5\16\5K\13\5\5\5M\n\5\3\5\3\5\3\6\7\6R\n\6\f\6\16\6"+
 		"U\13\6\3\7\3\7\3\7\3\7\3\7\7\7\\\n\7\f\7\16\7_\13\7\3\7\3\7\5\7c\n\7\3"+
-		"\b\3\b\3\b\3\b\5\bi\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\2\2"+
-		"u\2\60\3\2\2\2\4\62\3\2\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2"+
-		"\2\16h\3\2\2\2\20j\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24\26\7\16\2\2"+
-		"\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32\3\2\2\2"+
-		"\31\27\3\2\2\2\32\33\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2"+
-		"\2\36 \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61\5\b\5\2\""+
-		"\'\5\16\b\2#$\7\r\2\2$&\5\16\b\2%#\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2"+
-		"\2\2(\61\3\2\2\2)\'\3\2\2\2*,\7\f\2\2+*\3\2\2\2+,\3\2\2\2,-\3\2\2\2-."+
-		"\5\b\5\2./\5\4\3\2/\61\3\2\2\2\60\22\3\2\2\2\60!\3\2\2\2\60\"\3\2\2\2"+
-		"\60+\3\2\2\2\61\3\3\2\2\2\62\63\7\5\2\2\638\5\6\4\2\64\65\7\r\2\2\65\67"+
-		"\5\6\4\2\66\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3\2\2\29;\3\2\2\2:8\3"+
-		"\2\2\2;<\7\6\2\2<\5\3\2\2\2=>\7\7\2\2>?\7\17\2\2?@\7\4\2\2@A\7\17\2\2"+
-		"AB\7\b\2\2B\7\3\2\2\2CL\7\n\2\2DI\5\f\7\2EF\7\r\2\2FH\5\f\7\2GE\3\2\2"+
-		"\2HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JM\3\2\2\2KI\3\2\2\2LD\3\2\2\2LM\3\2\2"+
-		"\2MN\3\2\2\2NO\7\13\2\2O\t\3\2\2\2PR\5\2\2\2QP\3\2\2\2RU\3\2\2\2SQ\3\2"+
-		"\2\2ST\3\2\2\2T\13\3\2\2\2US\3\2\2\2Vb\7\16\2\2WX\7\21\2\2X]\5\16\b\2"+
-		"YZ\7\r\2\2Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2"+
-		"\2\2_]\3\2\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2bc\3\2\2\2c\r\3\2\2\2di\7"+
-		"\16\2\2ei\7\17\2\2fi\5\f\7\2gi\7\20\2\2hd\3\2\2\2he\3\2\2\2hf\3\2\2\2"+
-		"hg\3\2\2\2i\17\3\2\2\2jk\7\30\2\2kl\5\b\5\2l\21\3\2\2\2\16\27\37\'+\60"+
-		"8ILS]bh";
+		"\b\3\b\3\b\3\b\3\b\3\b\3\b\7\bl\n\b\f\b\16\bo\13\b\5\bq\n\b\3\b\3\b\5"+
+		"\bu\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\2\2\u0084\2\60\3\2\2"+
+		"\2\4\62\3\2\2\2\6=\3\2\2\2\bC\3\2\2\2\nS\3\2\2\2\fV\3\2\2\2\16t\3\2\2"+
+		"\2\20v\3\2\2\2\22\27\7\16\2\2\23\24\7\r\2\2\24\26\7\16\2\2\25\23\3\2\2"+
+		"\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32\3\2\2\2\31\27\3\2\2"+
+		"\2\32\33\7\t\2\2\33\34\7\24\2\2\34\37\7\26\2\2\35 \7\25\2\2\36 \5\20\t"+
+		"\2\37\35\3\2\2\2\37\36\3\2\2\2 \61\3\2\2\2!\61\5\b\5\2\"\'\5\16\b\2#$"+
+		"\7\r\2\2$&\5\16\b\2%#\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\61\3\2"+
+		"\2\2)\'\3\2\2\2*,\7\f\2\2+*\3\2\2\2+,\3\2\2\2,-\3\2\2\2-.\5\b\5\2./\5"+
+		"\4\3\2/\61\3\2\2\2\60\22\3\2\2\2\60!\3\2\2\2\60\"\3\2\2\2\60+\3\2\2\2"+
+		"\61\3\3\2\2\2\62\63\7\5\2\2\638\5\6\4\2\64\65\7\r\2\2\65\67\5\6\4\2\66"+
+		"\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3\2\2\29;\3\2\2\2:8\3\2\2\2;<\7"+
+		"\6\2\2<\5\3\2\2\2=>\7\7\2\2>?\7\17\2\2?@\7\4\2\2@A\7\17\2\2AB\7\b\2\2"+
+		"B\7\3\2\2\2CL\7\n\2\2DI\5\f\7\2EF\7\r\2\2FH\5\f\7\2GE\3\2\2\2HK\3\2\2"+
+		"\2IG\3\2\2\2IJ\3\2\2\2JM\3\2\2\2KI\3\2\2\2LD\3\2\2\2LM\3\2\2\2MN\3\2\2"+
+		"\2NO\7\13\2\2O\t\3\2\2\2PR\5\2\2\2QP\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3\2"+
+		"\2\2T\13\3\2\2\2US\3\2\2\2Vb\7\16\2\2WX\7\21\2\2X]\5\16\b\2YZ\7\r\2\2"+
+		"Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2"+
+		"\2\2`a\7\22\2\2ac\3\2\2\2bW\3\2\2\2bc\3\2\2\2c\r\3\2\2\2du\7\16\2\2eu"+
+		"\7\17\2\2fu\5\f\7\2gp\7\7\2\2hm\5\16\b\2ij\7\r\2\2jl\5\16\b\2ki\3\2\2"+
+		"\2lo\3\2\2\2mk\3\2\2\2mn\3\2\2\2nq\3\2\2\2om\3\2\2\2ph\3\2\2\2pq\3\2\2"+
+		"\2qr\3\2\2\2ru\7\b\2\2su\7\20\2\2td\3\2\2\2te\3\2\2\2tf\3\2\2\2tg\3\2"+
+		"\2\2ts\3\2\2\2u\17\3\2\2\2vw\7\30\2\2wx\5\b\5\2x\21\3\2\2\2\20\27\37\'"+
+		"+\608ILS]bmpt";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
