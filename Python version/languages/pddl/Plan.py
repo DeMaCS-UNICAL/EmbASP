@@ -1,5 +1,5 @@
-from base.Output import Output
-from languages.pddl.PDDLMapper import PDDLMapper
+from base.output import Output
+from languages.pddl.pddl_mapper import PDDLMapper
 from abc import ABCMeta
 
 class Plan(Output):
@@ -9,23 +9,23 @@ class Plan(Output):
     
     def __init__(self, plan, error):
         super(Plan, self).__init__(plan, error)
-        self._actionSequence = None
-        self.__actionsObjects = None
+        self._action_sequence = None
+        self.__actions_objects = None
         
-    def getActions(self):
+    def get_actions(self):
         """Return a set of Actions"""
-        if self._actionSequence == None:
-            self._actionSequence = list()
+        if self._action_sequence == None:
+            self._action_sequence = list()
             self._parse()
-        return self._actionSequence
+        return self._action_sequence
     
-    def getActionsObjects(self):
+    def get_actions_objects(self):
         """Return a set of Objects represents Actions"""
-        if self.__actionsObjects == None:
-            self.__actionsObjects = list()
-            mapper = PDDLMapper.getInstance()
-            for a in self.getActions():
-                obj = mapper.getObject(a.getName())
+        if self.__actions_objects == None:
+            self.__actions_objects = list()
+            mapper = PDDLMapper.get_instance()
+            for a in self.get_actions():
+                obj = mapper.get_object(a.get_name())
                 if obj != None:
-                    self.__actionsObjects.append(obj)
-        return self.__actionsObjects
+                    self.__actions_objects.append(obj)
+        return self.__actions_objects

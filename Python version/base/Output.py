@@ -5,19 +5,19 @@ class Output(object):
         self._output = output  # Variable in which results are stored
         self._errors = errors  # The errors thrown by the solver
     
-    def getErrors(self):
+    def get_errors(self):
         """Get error string"""
         return self._errors
     
-    def getOutput(self):
+    def get_output(self):
         """Get output string"""
         return self._output
     
-    def setErrors(self, errors):
+    def set_errors(self, errors):
         """Set error string"""
         self._errors=errors
         
-    def setOutput(self, output):
+    def set_output(self, output):
         """Set output string"""
         self._output=output
 

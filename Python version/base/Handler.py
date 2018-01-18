@@ -2,7 +2,7 @@ from abc import ABCMeta
 
 class Handler(object):
     """A collection of InputProgram and OptionDescriptor.
-    The subclasses have to implement startAsync(Callback, List, List) and startSync(List, List) methods.
+    The subclasses have to implement start_async(Callback, List, List) and start_sync(List, List) methods.
     Each instance inside _programs and _options are represented by an integer (id) , respectively.
     """
     __metaclass__ = ABCMeta
@@ -11,7 +11,7 @@ class Handler(object):
         self._programs = dict()  # Is where InputProgram elements are stored.
         self._options = dict()  # Is where OptionDescriptor elements are stored
         
-    def addOption(self, o):
+    def add_option(self, o):
         """Add a new element inside _options dict.
         The o parameter is the new OptionDescriptor instance.
         The method return the id associate to the new added OptionDescriptor instance.
@@ -21,7 +21,7 @@ class Handler(object):
         self._options[last_index]=o
         return current_value
     
-    def addProgram(self, program):
+    def add_program(self, program):
         """Add a new element inside _programs dict.
         The program param is the InputProgram instance added to the collection.
         The method return the id associate to the new added InputProgram instance.
@@ -57,34 +57,34 @@ class Handler(object):
                 input_programs.append(self._programs.get(index))
         return input_programs
     
-    def getInputProgram(self, key):
+    def get_input_program(self, key):
         """Returns the specified InputProgram element
         The parameter key represents the id
         The method return the InputProgram element associate with the given key
         """
         return self._programs.get(key)
     
-    def getOptionDescriptor(self, key):
+    def get_option_descriptor(self, key):
         """Returns the specified OptionDescriptor element
         The parameter key represents the id
         The method return the OptionDescriptor element associate with the given key
         """
         return self._options.get(key)
     
-    def removeAll(self):
+    def remove_all(self):
         """Removes all of the elements from _programs and _options.
         Both of the collections will be empty after this method returns.
         """
         self._options.clear()
         self._programs.clear()
         
-    def removeOptionFromId(self, option_id):
+    def remove_option_from_id(self, option_id):
         """Removes the element associate within the given id from _options dict.
         option_id represents the id associate within an element.
         """
         self._options.pop(option_id)
         
-    def removeOptionFromValue(self, o):
+    def remove_option_from_value(self, o):
         """Removes every occurrence of a specified OptionDescriptor element from _options dict.
         the parameter o represents the element to be removed
         The method return true if one or more elements are removed, false otherwise
@@ -96,7 +96,7 @@ class Handler(object):
                 result=True
         return result
     
-    def removeProgramFromValue(self, p):
+    def remove_program_from_value(self, p):
         """Removes every occurrence of a specified InputProgram element from _programs dict.
         The parameter p represents the element to be removed
         The method return true if one or more elements are removed, false otherwise
@@ -108,20 +108,20 @@ class Handler(object):
                 result=True
         return result
     
-    def removeProgramFromId(self, program_id):
+    def remove_program_from_id(self, program_id):
         """Removes the element associate within the given id from _programs} dict.
         The parameter program_id represents the id associate within an element
         """
         self._programs.pop(program_id)
         
     
-    def startAsync(self, c, program_index=None, option_index=None):
+    def start_async(self, c, program_index=None, option_index=None):
         """This method have to be implemented by subclasses to execute solver in a asynchronous way,
         if no parameters are given, the entire sets of programs and option are used
         """
         pass
     
-    def startSync(self, program_index=None, option_index=None):
+    def start_sync(self, program_index=None, option_index=None):
         """This method have to be implemented by subclasses to execute solver in a synchronous way,
         if no parameters are given, the entire sets of programs and option are used
         """

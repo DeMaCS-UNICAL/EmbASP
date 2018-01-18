@@ -5,7 +5,7 @@ class Service(object):
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def startAsync(self, callback, programs, options):
+    def start_async(self, callback, programs, options):
         """Starts ASP solving Asyncronously on a subset of data and options.
         The parameter callback is an interface used to interact with user
         The parameter programs rapresents a list of InputProgram used as data.
@@ -14,7 +14,7 @@ class Service(object):
         pass
     
     @abstractmethod
-    def startSync(self, programs, options):
+    def start_sync(self, programs, options):
         """Starts ASP solving Syncronously on a subset of data and options.
         The parameter programs is a list of InputProgram used as data.
         The parameter options is a list of OptionDescriptor used as options.
