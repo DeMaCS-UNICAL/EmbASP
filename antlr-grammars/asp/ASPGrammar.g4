@@ -7,4 +7,4 @@ WHITESPACE : [ \n\r\t]-> skip;
 
 output        : predicate_atom*;
 predicate_atom: IDENTIFIER ('(' term (',' term)* ')')?;
-term          : IDENTIFIER | INTEGER | predicate_atom | STRING;
+term          : IDENTIFIER | INTEGER | predicate_atom | '[' (term (',' term)*)? ']' | STRING;

@@ -1,26 +1,29 @@
 # Generated from ASPGrammar.g4 by ANTLR 4.7
 # encoding: utf-8
-from __future__ import print_function
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
 import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\t#\4\2\t\2\4\3\t\3\4\4\t\4\3\2\7\2\n\n\2\f\2\16\2\r")
-        buf.write(u"\13\2\3\3\3\3\3\3\3\3\3\3\7\3\24\n\3\f\3\16\3\27\13\3")
-        buf.write(u"\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\5\4!\n\4\3\4\2\2")
-        buf.write(u"\5\2\4\6\2\2\2%\2\13\3\2\2\2\4\16\3\2\2\2\6 \3\2\2\2")
-        buf.write(u"\b\n\5\4\3\2\t\b\3\2\2\2\n\r\3\2\2\2\13\t\3\2\2\2\13")
-        buf.write(u"\f\3\2\2\2\f\3\3\2\2\2\r\13\3\2\2\2\16\32\7\6\2\2\17")
-        buf.write(u"\20\7\3\2\2\20\25\5\6\4\2\21\22\7\4\2\2\22\24\5\6\4\2")
-        buf.write(u"\23\21\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2")
-        buf.write(u"\2\2\26\30\3\2\2\2\27\25\3\2\2\2\30\31\7\5\2\2\31\33")
-        buf.write(u"\3\2\2\2\32\17\3\2\2\2\32\33\3\2\2\2\33\5\3\2\2\2\34")
-        buf.write(u"!\7\6\2\2\35!\7\7\2\2\36!\5\4\3\2\37!\7\b\2\2 \34\3\2")
-        buf.write(u"\2\2 \35\3\2\2\2 \36\3\2\2\2 \37\3\2\2\2!\7\3\2\2\2\6")
-        buf.write(u"\13\25\32 ")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13")
+        buf.write("/\4\2\t\2\4\3\t\3\4\4\t\4\3\2\7\2\n\n\2\f\2\16\2\r\13")
+        buf.write("\2\3\3\3\3\3\3\3\3\3\3\7\3\24\n\3\f\3\16\3\27\13\3\3\3")
+        buf.write("\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4$\n\4\f")
+        buf.write("\4\16\4\'\13\4\5\4)\n\4\3\4\3\4\5\4-\n\4\3\4\2\2\5\2\4")
+        buf.write("\6\2\2\2\64\2\13\3\2\2\2\4\16\3\2\2\2\6,\3\2\2\2\b\n\5")
+        buf.write("\4\3\2\t\b\3\2\2\2\n\r\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2")
+        buf.write("\2\f\3\3\2\2\2\r\13\3\2\2\2\16\32\7\b\2\2\17\20\7\3\2")
+        buf.write("\2\20\25\5\6\4\2\21\22\7\4\2\2\22\24\5\6\4\2\23\21\3\2")
+        buf.write("\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3")
+        buf.write("\2\2\2\27\25\3\2\2\2\30\31\7\5\2\2\31\33\3\2\2\2\32\17")
+        buf.write("\3\2\2\2\32\33\3\2\2\2\33\5\3\2\2\2\34-\7\b\2\2\35-\7")
+        buf.write("\t\2\2\36-\5\4\3\2\37(\7\6\2\2 %\5\6\4\2!\"\7\4\2\2\"")
+        buf.write("$\5\6\4\2#!\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&)\3")
+        buf.write("\2\2\2\'%\3\2\2\2( \3\2\2\2()\3\2\2\2)*\3\2\2\2*-\7\7")
+        buf.write("\2\2+-\7\n\2\2,\34\3\2\2\2,\35\3\2\2\2,\36\3\2\2\2,\37")
+        buf.write("\3\2\2\2,+\3\2\2\2-\7\3\2\2\2\b\13\25\32%(,")
         return buf.getvalue()
 
 
@@ -34,28 +37,31 @@ class ASPGrammarParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'('", u"','", u"')'" ]
+    literalNames = [ "<INVALID>", "'('", "','", "')'", "'['", "']'" ]
 
-    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"IDENTIFIER", u"INTEGER", u"STRING", u"WHITESPACE" ]
+    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "IDENTIFIER", "INTEGER", 
+                      "STRING", "WHITESPACE" ]
 
     RULE_output = 0
     RULE_predicate_atom = 1
     RULE_term = 2
 
-    ruleNames =  [ u"output", u"predicate_atom", u"term" ]
+    ruleNames =  [ "output", "predicate_atom", "term" ]
 
     EOF = Token.EOF
     T__0=1
     T__1=2
     T__2=3
-    IDENTIFIER=4
-    INTEGER=5
-    STRING=6
-    WHITESPACE=7
+    T__3=4
+    T__4=5
+    IDENTIFIER=6
+    INTEGER=7
+    STRING=8
+    WHITESPACE=9
 
-    def __init__(self, input, output=sys.stdout):
-        super(ASPGrammarParser, self).__init__(input, output=output)
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
         self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -64,11 +70,11 @@ class ASPGrammarParser ( Parser ):
 
     class OutputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(ASPGrammarParser.OutputContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def predicate_atom(self, i=None):
+        def predicate_atom(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ASPGrammarParser.Predicate_atomContext)
             else:
@@ -78,8 +84,8 @@ class ASPGrammarParser ( Parser ):
         def getRuleIndex(self):
             return ASPGrammarParser.RULE_output
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitOutput"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOutput" ):
                 return visitor.visitOutput(self)
             else:
                 return visitor.visitChildren(self)
@@ -114,14 +120,14 @@ class ASPGrammarParser ( Parser ):
 
     class Predicate_atomContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(ASPGrammarParser.Predicate_atomContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
             return self.getToken(ASPGrammarParser.IDENTIFIER, 0)
 
-        def term(self, i=None):
+        def term(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ASPGrammarParser.TermContext)
             else:
@@ -131,8 +137,8 @@ class ASPGrammarParser ( Parser ):
         def getRuleIndex(self):
             return ASPGrammarParser.RULE_predicate_atom
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitPredicate_atom"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPredicate_atom" ):
                 return visitor.visitPredicate_atom(self)
             else:
                 return visitor.visitChildren(self)
@@ -183,8 +189,8 @@ class ASPGrammarParser ( Parser ):
 
     class TermContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(ASPGrammarParser.TermContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
@@ -197,14 +203,21 @@ class ASPGrammarParser ( Parser ):
             return self.getTypedRuleContext(ASPGrammarParser.Predicate_atomContext,0)
 
 
+        def term(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ASPGrammarParser.TermContext)
+            else:
+                return self.getTypedRuleContext(ASPGrammarParser.TermContext,i)
+
+
         def STRING(self):
             return self.getToken(ASPGrammarParser.STRING, 0)
 
         def getRuleIndex(self):
             return ASPGrammarParser.RULE_term
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitTerm"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTerm" ):
                 return visitor.visitTerm(self)
             else:
                 return visitor.visitChildren(self)
@@ -216,10 +229,11 @@ class ASPGrammarParser ( Parser ):
 
         localctx = ASPGrammarParser.TermContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_term)
+        self._la = 0 # Token type
         try:
-            self.state = 30
+            self.state = 42
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 26
@@ -241,6 +255,34 @@ class ASPGrammarParser ( Parser ):
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 29
+                self.match(ASPGrammarParser.T__3)
+                self.state = 38
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ASPGrammarParser.T__3) | (1 << ASPGrammarParser.IDENTIFIER) | (1 << ASPGrammarParser.INTEGER) | (1 << ASPGrammarParser.STRING))) != 0):
+                    self.state = 30
+                    self.term()
+                    self.state = 35
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    while _la==ASPGrammarParser.T__1:
+                        self.state = 31
+                        self.match(ASPGrammarParser.T__1)
+                        self.state = 32
+                        self.term()
+                        self.state = 37
+                        self._errHandler.sync(self)
+                        _la = self._input.LA(1)
+
+
+
+                self.state = 40
+                self.match(ASPGrammarParser.T__4)
+                pass
+
+            elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 41
                 self.match(ASPGrammarParser.STRING)
                 pass
 
