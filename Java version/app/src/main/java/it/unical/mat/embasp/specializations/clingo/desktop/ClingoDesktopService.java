@@ -23,14 +23,4 @@ public class ClingoDesktopService extends DesktopService {
 		return new ClingoAnswerSets(output, error);
 	}
 
-	@Override
-	public void startAsync(final Callback callback, final List<InputProgram> programs, final List<OptionDescriptor> options) {
-		super.startAsync(callback, programs, options);
-	}
-
-	@Override
-	public Output startSync(final List<InputProgram> programs, final List<OptionDescriptor> options) {
-
-		return super.startSync(programs, options);
-	}
 }

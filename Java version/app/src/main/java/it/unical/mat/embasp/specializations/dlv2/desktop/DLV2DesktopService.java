@@ -26,8 +26,8 @@ public class DLV2DesktopService extends DesktopService {
 		return new DLV2AnswerSets(output, error);
 	}
 
-	@Override
 	public void startAsync(final Callback callback, final List<InputProgram> programs, final List<OptionDescriptor> options) {
+		options.add(competitionOutputOption);
 		super.startAsync(callback, programs, options);
 	}
 
