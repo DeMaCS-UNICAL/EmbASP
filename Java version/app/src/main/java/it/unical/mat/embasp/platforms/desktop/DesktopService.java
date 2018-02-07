@@ -88,7 +88,8 @@ public abstract class DesktopService implements Service {
 				for(final String program_file: p.getFilesPaths()){
 					File f = new File(program_file);
 					if(f.exists() && !f.isDirectory()) { 
-						files_paths = p.getStringOfFilesPaths();
+						files_paths += program_file;
+						files_paths += " ";
 					}
 					else
 						System.err.println("Warning : the file " + f.getAbsolutePath() + " does not exists.");
