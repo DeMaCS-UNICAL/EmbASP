@@ -1,65 +1,62 @@
 # Generated from DLVParser.g4 by ANTLR 4.7
 from antlr4 import *
-from .DLVParser import DLVParser
 
 # This class defines a complete generic visitor for a parse tree produced by DLVParser.
 
 class DLVParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by DLVParser#GroundQuery.
-    def visitGroundQuery(self, ctx:DLVParser.GroundQueryContext):
+    def visitGroundQuery(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#SimpleModel.
-    def visitSimpleModel(self, ctx:DLVParser.SimpleModelContext):
+    def visitSimpleModel(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#NonGroundQuery.
-    def visitNonGroundQuery(self, ctx:DLVParser.NonGroundQueryContext):
+    def visitNonGroundQuery(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#WeightedModel.
-    def visitWeightedModel(self, ctx:DLVParser.WeightedModelContext):
+    def visitWeightedModel(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#cost.
-    def visitCost(self, ctx:DLVParser.CostContext):
+    def visitCost(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#cost_level.
-    def visitCost_level(self, ctx:DLVParser.Cost_levelContext):
+    def visitCost_level(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#model.
-    def visitModel(self, ctx:DLVParser.ModelContext):
+    def visitModel(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#output.
-    def visitOutput(self, ctx:DLVParser.OutputContext):
+    def visitOutput(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#predicate.
-    def visitPredicate(self, ctx:DLVParser.PredicateContext):
+    def visitPredicate(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#term.
-    def visitTerm(self, ctx:DLVParser.TermContext):
+    def visitTerm(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLVParser#witness.
-    def visitWitness(self, ctx:DLVParser.WitnessContext):
+    def visitWitness(self, ctx):
         return self.visitChildren(ctx)
 
 
-
-del DLVParser

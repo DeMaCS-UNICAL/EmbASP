@@ -1,30 +1,30 @@
 # Generated from ClingoParser.g4 by ANTLR 4.7
 # encoding: utf-8
+from __future__ import print_function
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f")
-        buf.write("\62\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3")
-        buf.write("\2\3\3\7\3\21\n\3\f\3\16\3\24\13\3\3\3\3\3\3\4\7\4\31")
-        buf.write("\n\4\f\4\16\4\34\13\4\3\5\3\5\3\5\3\5\3\5\7\5#\n\5\f\5")
-        buf.write("\16\5&\13\5\3\5\3\5\5\5*\n\5\3\6\3\6\3\6\3\6\5\6\60\n")
-        buf.write("\6\3\6\2\2\7\2\4\6\b\n\2\2\2\63\2\f\3\2\2\2\4\22\3\2\2")
-        buf.write("\2\6\32\3\2\2\2\b\35\3\2\2\2\n/\3\2\2\2\f\r\7\3\2\2\r")
-        buf.write("\16\5\4\3\2\16\3\3\2\2\2\17\21\5\b\5\2\20\17\3\2\2\2\21")
-        buf.write("\24\3\2\2\2\22\20\3\2\2\2\22\23\3\2\2\2\23\25\3\2\2\2")
-        buf.write("\24\22\3\2\2\2\25\26\7\7\2\2\26\5\3\2\2\2\27\31\5\2\2")
-        buf.write("\2\30\27\3\2\2\2\31\34\3\2\2\2\32\30\3\2\2\2\32\33\3\2")
-        buf.write("\2\2\33\7\3\2\2\2\34\32\3\2\2\2\35)\7\b\2\2\36\37\7\n")
-        buf.write("\2\2\37$\5\n\6\2 !\7\5\2\2!#\5\n\6\2\" \3\2\2\2#&\3\2")
-        buf.write("\2\2$\"\3\2\2\2$%\3\2\2\2%\'\3\2\2\2&$\3\2\2\2\'(\7\13")
-        buf.write("\2\2(*\3\2\2\2)\36\3\2\2\2)*\3\2\2\2*\t\3\2\2\2+\60\7")
-        buf.write("\b\2\2,\60\7\6\2\2-\60\5\b\5\2.\60\7\t\2\2/+\3\2\2\2/")
-        buf.write(",\3\2\2\2/-\3\2\2\2/.\3\2\2\2\60\13\3\2\2\2\7\22\32$)")
-        buf.write("/")
+        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
+        buf.write(u"\f\62\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2")
+        buf.write(u"\3\2\3\3\7\3\21\n\3\f\3\16\3\24\13\3\3\3\3\3\3\4\7\4")
+        buf.write(u"\31\n\4\f\4\16\4\34\13\4\3\5\3\5\3\5\3\5\3\5\7\5#\n\5")
+        buf.write(u"\f\5\16\5&\13\5\3\5\3\5\5\5*\n\5\3\6\3\6\3\6\3\6\5\6")
+        buf.write(u"\60\n\6\3\6\2\2\7\2\4\6\b\n\2\2\2\63\2\f\3\2\2\2\4\22")
+        buf.write(u"\3\2\2\2\6\32\3\2\2\2\b\35\3\2\2\2\n/\3\2\2\2\f\r\7\3")
+        buf.write(u"\2\2\r\16\5\4\3\2\16\3\3\2\2\2\17\21\5\b\5\2\20\17\3")
+        buf.write(u"\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\22\23\3\2\2\2\23\25")
+        buf.write(u"\3\2\2\2\24\22\3\2\2\2\25\26\7\7\2\2\26\5\3\2\2\2\27")
+        buf.write(u"\31\5\2\2\2\30\27\3\2\2\2\31\34\3\2\2\2\32\30\3\2\2\2")
+        buf.write(u"\32\33\3\2\2\2\33\7\3\2\2\2\34\32\3\2\2\2\35)\7\b\2\2")
+        buf.write(u"\36\37\7\n\2\2\37$\5\n\6\2 !\7\5\2\2!#\5\n\6\2\" \3\2")
+        buf.write(u"\2\2#&\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%\'\3\2\2\2&$\3\2")
+        buf.write(u"\2\2\'(\7\13\2\2(*\3\2\2\2)\36\3\2\2\2)*\3\2\2\2*\t\3")
+        buf.write(u"\2\2\2+\60\7\b\2\2,\60\7\6\2\2-\60\5\b\5\2.\60\7\t\2")
+        buf.write(u"\2/+\3\2\2\2/,\3\2\2\2/-\3\2\2\2/.\3\2\2\2\60\13\3\2")
+        buf.write(u"\2\2\7\22\32$)/")
         return buf.getvalue()
 
 
@@ -38,12 +38,12 @@ class ClingoParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "','", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "'('", "')'" ]
+    literalNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"','", u"<INVALID>", 
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"'('", u"')'" ]
 
-    symbolicNames = [ "<INVALID>", "START", "ANY", "COMMA", "INTEGER_CONSTANT", 
-                      "NEW_LINE", "IDENTIFIER", "STRING_CONSTANT", "TERMS_BEGIN", 
-                      "TERMS_END", "WHITE_SPACE" ]
+    symbolicNames = [ u"<INVALID>", u"START", u"ANY", u"COMMA", u"INTEGER_CONSTANT", 
+                      u"NEW_LINE", u"IDENTIFIER", u"STRING_CONSTANT", u"TERMS_BEGIN", 
+                      u"TERMS_END", u"WHITE_SPACE" ]
 
     RULE_answer_set = 0
     RULE_model = 1
@@ -51,7 +51,8 @@ class ClingoParser ( Parser ):
     RULE_predicate_atom = 3
     RULE_term = 4
 
-    ruleNames =  [ "answer_set", "model", "output", "predicate_atom", "term" ]
+    ruleNames =  [ u"answer_set", u"model", u"output", u"predicate_atom", 
+                   u"term" ]
 
     EOF = Token.EOF
     START=1
@@ -65,8 +66,8 @@ class ClingoParser ( Parser ):
     TERMS_END=9
     WHITE_SPACE=10
 
-    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
-        super().__init__(input, output)
+    def __init__(self, input, output=sys.stdout):
+        super(ClingoParser, self).__init__(input, output=output)
         self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -75,8 +76,8 @@ class ClingoParser ( Parser ):
 
     class Answer_setContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(ClingoParser.Answer_setContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def START(self):
@@ -89,8 +90,8 @@ class ClingoParser ( Parser ):
         def getRuleIndex(self):
             return ClingoParser.RULE_answer_set
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAnswer_set" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitAnswer_set"):
                 return visitor.visitAnswer_set(self)
             else:
                 return visitor.visitChildren(self)
@@ -118,14 +119,14 @@ class ClingoParser ( Parser ):
 
     class ModelContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(ClingoParser.ModelContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def NEW_LINE(self):
             return self.getToken(ClingoParser.NEW_LINE, 0)
 
-        def predicate_atom(self, i:int=None):
+        def predicate_atom(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(ClingoParser.Predicate_atomContext)
             else:
@@ -135,8 +136,8 @@ class ClingoParser ( Parser ):
         def getRuleIndex(self):
             return ClingoParser.RULE_model
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitModel" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitModel"):
                 return visitor.visitModel(self)
             else:
                 return visitor.visitChildren(self)
@@ -173,11 +174,11 @@ class ClingoParser ( Parser ):
 
     class OutputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(ClingoParser.OutputContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def answer_set(self, i:int=None):
+        def answer_set(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(ClingoParser.Answer_setContext)
             else:
@@ -187,8 +188,8 @@ class ClingoParser ( Parser ):
         def getRuleIndex(self):
             return ClingoParser.RULE_output
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOutput" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitOutput"):
                 return visitor.visitOutput(self)
             else:
                 return visitor.visitChildren(self)
@@ -223,8 +224,8 @@ class ClingoParser ( Parser ):
 
     class Predicate_atomContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(ClingoParser.Predicate_atomContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
@@ -233,7 +234,7 @@ class ClingoParser ( Parser ):
         def TERMS_BEGIN(self):
             return self.getToken(ClingoParser.TERMS_BEGIN, 0)
 
-        def term(self, i:int=None):
+        def term(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(ClingoParser.TermContext)
             else:
@@ -243,7 +244,7 @@ class ClingoParser ( Parser ):
         def TERMS_END(self):
             return self.getToken(ClingoParser.TERMS_END, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i=None):
             if i is None:
                 return self.getTokens(ClingoParser.COMMA)
             else:
@@ -252,8 +253,8 @@ class ClingoParser ( Parser ):
         def getRuleIndex(self):
             return ClingoParser.RULE_predicate_atom
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPredicate_atom" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitPredicate_atom"):
                 return visitor.visitPredicate_atom(self)
             else:
                 return visitor.visitChildren(self)
@@ -304,8 +305,8 @@ class ClingoParser ( Parser ):
 
     class TermContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(ClingoParser.TermContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def IDENTIFIER(self):
@@ -324,8 +325,8 @@ class ClingoParser ( Parser ):
         def getRuleIndex(self):
             return ClingoParser.RULE_term
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTerm" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitTerm"):
                 return visitor.visitTerm(self)
             else:
                 return visitor.visitChildren(self)

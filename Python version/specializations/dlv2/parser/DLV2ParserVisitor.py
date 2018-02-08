@@ -1,45 +1,42 @@
 # Generated from DLV2Parser.g4 by ANTLR 4.7
 from antlr4 import *
-from .DLV2Parser import DLV2Parser
 
 # This class defines a complete generic visitor for a parse tree produced by DLV2Parser.
 
 class DLV2ParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by DLV2Parser#answer_set.
-    def visitAnswer_set(self, ctx:DLV2Parser.Answer_setContext):
+    def visitAnswer_set(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#cost.
-    def visitCost(self, ctx:DLV2Parser.CostContext):
+    def visitCost(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#level.
-    def visitLevel(self, ctx:DLV2Parser.LevelContext):
+    def visitLevel(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#model.
-    def visitModel(self, ctx:DLV2Parser.ModelContext):
+    def visitModel(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#output.
-    def visitOutput(self, ctx:DLV2Parser.OutputContext):
+    def visitOutput(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#predicate_atom.
-    def visitPredicate_atom(self, ctx:DLV2Parser.Predicate_atomContext):
+    def visitPredicate_atom(self, ctx):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by DLV2Parser#term.
-    def visitTerm(self, ctx:DLV2Parser.TermContext):
+    def visitTerm(self, ctx):
         return self.visitChildren(ctx)
 
 
-
-del DLV2Parser

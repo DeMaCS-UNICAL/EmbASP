@@ -1,32 +1,33 @@
 # Generated from SPDGrammar.g4 by ANTLR 4.7
 # encoding: utf-8
+from __future__ import print_function
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r")
-        buf.write("9\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2")
-        buf.write("\3\2\7\2\21\n\2\f\2\16\2\24\13\2\3\2\3\2\3\3\7\3\31\n")
-        buf.write("\3\f\3\16\3\34\13\3\3\4\3\4\3\4\3\4\7\4\"\n\4\f\4\16\4")
-        buf.write("%\13\4\3\4\3\4\3\4\3\4\5\4+\n\4\3\5\3\5\3\5\3\5\3\6\3")
-        buf.write("\6\3\6\3\6\3\6\3\6\5\6\67\n\6\3\6\2\2\7\2\4\6\b\n\2\2")
-        buf.write("\2<\2\f\3\2\2\2\4\32\3\2\2\2\6*\3\2\2\2\b,\3\2\2\2\n\66")
-        buf.write("\3\2\2\2\f\r\7\3\2\2\r\22\5\n\6\2\16\17\7\4\2\2\17\21")
-        buf.write("\5\n\6\2\20\16\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\22")
-        buf.write("\23\3\2\2\2\23\25\3\2\2\2\24\22\3\2\2\2\25\26\7\5\2\2")
-        buf.write("\26\3\3\2\2\2\27\31\5\n\6\2\30\27\3\2\2\2\31\34\3\2\2")
-        buf.write("\2\32\30\3\2\2\2\32\33\3\2\2\2\33\5\3\2\2\2\34\32\3\2")
-        buf.write("\2\2\35\36\7\6\2\2\36#\5\b\5\2\37 \7\4\2\2 \"\5\b\5\2")
-        buf.write("!\37\3\2\2\2\"%\3\2\2\2#!\3\2\2\2#$\3\2\2\2$&\3\2\2\2")
-        buf.write("%#\3\2\2\2&\'\7\7\2\2\'+\3\2\2\2()\7\6\2\2)+\7\7\2\2*")
-        buf.write("\35\3\2\2\2*(\3\2\2\2+\7\3\2\2\2,-\7\f\2\2-.\7\b\2\2.")
-        buf.write("/\5\n\6\2/\t\3\2\2\2\60\67\5\2\2\2\61\67\7\n\2\2\62\67")
-        buf.write("\7\13\2\2\63\67\7\t\2\2\64\67\5\6\4\2\65\67\7\f\2\2\66")
-        buf.write("\60\3\2\2\2\66\61\3\2\2\2\66\62\3\2\2\2\66\63\3\2\2\2")
-        buf.write("\66\64\3\2\2\2\66\65\3\2\2\2\67\13\3\2\2\2\7\22\32#*\66")
+        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
+        buf.write(u"\r9\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3")
+        buf.write(u"\2\3\2\7\2\21\n\2\f\2\16\2\24\13\2\3\2\3\2\3\3\7\3\31")
+        buf.write(u"\n\3\f\3\16\3\34\13\3\3\4\3\4\3\4\3\4\7\4\"\n\4\f\4\16")
+        buf.write(u"\4%\13\4\3\4\3\4\3\4\3\4\5\4+\n\4\3\5\3\5\3\5\3\5\3\6")
+        buf.write(u"\3\6\3\6\3\6\3\6\3\6\5\6\67\n\6\3\6\2\2\7\2\4\6\b\n\2")
+        buf.write(u"\2\2<\2\f\3\2\2\2\4\32\3\2\2\2\6*\3\2\2\2\b,\3\2\2\2")
+        buf.write(u"\n\66\3\2\2\2\f\r\7\3\2\2\r\22\5\n\6\2\16\17\7\4\2\2")
+        buf.write(u"\17\21\5\n\6\2\20\16\3\2\2\2\21\24\3\2\2\2\22\20\3\2")
+        buf.write(u"\2\2\22\23\3\2\2\2\23\25\3\2\2\2\24\22\3\2\2\2\25\26")
+        buf.write(u"\7\5\2\2\26\3\3\2\2\2\27\31\5\n\6\2\30\27\3\2\2\2\31")
+        buf.write(u"\34\3\2\2\2\32\30\3\2\2\2\32\33\3\2\2\2\33\5\3\2\2\2")
+        buf.write(u"\34\32\3\2\2\2\35\36\7\6\2\2\36#\5\b\5\2\37 \7\4\2\2")
+        buf.write(u" \"\5\b\5\2!\37\3\2\2\2\"%\3\2\2\2#!\3\2\2\2#$\3\2\2")
+        buf.write(u"\2$&\3\2\2\2%#\3\2\2\2&\'\7\7\2\2\'+\3\2\2\2()\7\6\2")
+        buf.write(u"\2)+\7\7\2\2*\35\3\2\2\2*(\3\2\2\2+\7\3\2\2\2,-\7\f\2")
+        buf.write(u"\2-.\7\b\2\2./\5\n\6\2/\t\3\2\2\2\60\67\5\2\2\2\61\67")
+        buf.write(u"\7\n\2\2\62\67\7\13\2\2\63\67\7\t\2\2\64\67\5\6\4\2\65")
+        buf.write(u"\67\7\f\2\2\66\60\3\2\2\2\66\61\3\2\2\2\66\62\3\2\2\2")
+        buf.write(u"\66\63\3\2\2\2\66\64\3\2\2\2\66\65\3\2\2\2\67\13\3\2")
+        buf.write(u"\2\2\7\22\32#*\66")
         return buf.getvalue()
 
 
@@ -40,12 +41,12 @@ class SPDGrammarParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'['", "','", "']'", "'{'", "'}'", "':'", 
-                     "'null'" ]
+    literalNames = [ u"<INVALID>", u"'['", u"','", u"']'", u"'{'", u"'}'", 
+                     u"':'", u"'null'" ]
 
-    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "BOOLEAN", "INTEGER", "STRING", "WHITE_SPACE" ]
+    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                      u"BOOLEAN", u"INTEGER", u"STRING", u"WHITE_SPACE" ]
 
     RULE_array = 0
     RULE_json = 1
@@ -53,7 +54,7 @@ class SPDGrammarParser ( Parser ):
     RULE_pair = 3
     RULE_value = 4
 
-    ruleNames =  [ "array", "json", "oBjEcT", "pair", "value" ]
+    ruleNames =  [ u"array", u"json", u"oBjEcT", u"pair", u"value" ]
 
     EOF = Token.EOF
     T__0=1
@@ -68,8 +69,8 @@ class SPDGrammarParser ( Parser ):
     STRING=10
     WHITE_SPACE=11
 
-    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
-        super().__init__(input, output)
+    def __init__(self, input, output=sys.stdout):
+        super(SPDGrammarParser, self).__init__(input, output=output)
         self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -78,11 +79,11 @@ class SPDGrammarParser ( Parser ):
 
     class ArrayContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(SPDGrammarParser.ArrayContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def value(self, i:int=None):
+        def value(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(SPDGrammarParser.ValueContext)
             else:
@@ -92,8 +93,8 @@ class SPDGrammarParser ( Parser ):
         def getRuleIndex(self):
             return SPDGrammarParser.RULE_array
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArray" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitArray"):
                 return visitor.visitArray(self)
             else:
                 return visitor.visitChildren(self)
@@ -136,11 +137,11 @@ class SPDGrammarParser ( Parser ):
 
     class JsonContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(SPDGrammarParser.JsonContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def value(self, i:int=None):
+        def value(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(SPDGrammarParser.ValueContext)
             else:
@@ -150,8 +151,8 @@ class SPDGrammarParser ( Parser ):
         def getRuleIndex(self):
             return SPDGrammarParser.RULE_json
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJson" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitJson"):
                 return visitor.visitJson(self)
             else:
                 return visitor.visitChildren(self)
@@ -186,11 +187,11 @@ class SPDGrammarParser ( Parser ):
 
     class OBjEcTContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(SPDGrammarParser.OBjEcTContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def pair(self, i:int=None):
+        def pair(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(SPDGrammarParser.PairContext)
             else:
@@ -200,8 +201,8 @@ class SPDGrammarParser ( Parser ):
         def getRuleIndex(self):
             return SPDGrammarParser.RULE_oBjEcT
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOBjEcT" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitOBjEcT"):
                 return visitor.visitOBjEcT(self)
             else:
                 return visitor.visitChildren(self)
@@ -259,8 +260,8 @@ class SPDGrammarParser ( Parser ):
 
     class PairContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(SPDGrammarParser.PairContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def STRING(self):
@@ -273,8 +274,8 @@ class SPDGrammarParser ( Parser ):
         def getRuleIndex(self):
             return SPDGrammarParser.RULE_pair
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPair" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitPair"):
                 return visitor.visitPair(self)
             else:
                 return visitor.visitChildren(self)
@@ -304,8 +305,8 @@ class SPDGrammarParser ( Parser ):
 
     class ValueContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(SPDGrammarParser.ValueContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -313,20 +314,20 @@ class SPDGrammarParser ( Parser ):
             return SPDGrammarParser.RULE_value
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(SPDGrammarParser.ValueContext, self).copyFrom(ctx)
 
 
 
     class NullValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.NullValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitNullValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitNullValue"):
                 return visitor.visitNullValue(self)
             else:
                 return visitor.visitChildren(self)
@@ -334,16 +335,16 @@ class SPDGrammarParser ( Parser ):
 
     class ObjectValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.ObjectValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def oBjEcT(self):
             return self.getTypedRuleContext(SPDGrammarParser.OBjEcTContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitObjectValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitObjectValue"):
                 return visitor.visitObjectValue(self)
             else:
                 return visitor.visitChildren(self)
@@ -351,15 +352,15 @@ class SPDGrammarParser ( Parser ):
 
     class BooleanValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.BooleanValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def BOOLEAN(self):
             return self.getToken(SPDGrammarParser.BOOLEAN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBooleanValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitBooleanValue"):
                 return visitor.visitBooleanValue(self)
             else:
                 return visitor.visitChildren(self)
@@ -367,15 +368,15 @@ class SPDGrammarParser ( Parser ):
 
     class IntegerValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.IntegerValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def INTEGER(self):
             return self.getToken(SPDGrammarParser.INTEGER, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIntegerValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitIntegerValue"):
                 return visitor.visitIntegerValue(self)
             else:
                 return visitor.visitChildren(self)
@@ -383,15 +384,15 @@ class SPDGrammarParser ( Parser ):
 
     class StringValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.StringValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def STRING(self):
             return self.getToken(SPDGrammarParser.STRING, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStringValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitStringValue"):
                 return visitor.visitStringValue(self)
             else:
                 return visitor.visitChildren(self)
@@ -399,16 +400,16 @@ class SPDGrammarParser ( Parser ):
 
     class ArrayValueContext(ValueContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a SPDGrammarParser.ValueContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a SPDGrammarParser.ValueContext)
+            super(SPDGrammarParser.ArrayValueContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def array(self):
             return self.getTypedRuleContext(SPDGrammarParser.ArrayContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArrayValue" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitArrayValue"):
                 return visitor.visitArrayValue(self)
             else:
                 return visitor.visitChildren(self)
