@@ -1,5 +1,6 @@
 package it.unical.mat.embasp.languages.asp.parser;
 
+// Generated from ASPGrammar.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,7 +18,8 @@ public class ASPGrammarParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, IDENTIFIER=4, INTEGER=5, STRING=6, WHITESPACE=7;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, IDENTIFIER=6, INTEGER=7, STRING=8, 
+		WHITESPACE=9;
 	public static final int
 		RULE_output = 0, RULE_predicate_atom = 1, RULE_term = 2;
 	public static final String[] ruleNames = {
@@ -25,10 +27,11 @@ public class ASPGrammarParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'('", "','", "')'"
+		null, "'('", "','", "')'", "'['", "']'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, "IDENTIFIER", "INTEGER", "STRING", "WHITESPACE"
+		null, null, null, null, null, null, "IDENTIFIER", "INTEGER", "STRING", 
+		"WHITESPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -208,6 +211,12 @@ public class ASPGrammarParser extends Parser {
 		public Predicate_atomContext predicate_atom() {
 			return getRuleContext(Predicate_atomContext.class,0);
 		}
+		public List<TermContext> term() {
+			return getRuleContexts(TermContext.class);
+		}
+		public TermContext term(int i) {
+			return getRuleContext(TermContext.class,i);
+		}
 		public TerminalNode STRING() { return getToken(ASPGrammarParser.STRING, 0); }
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -223,10 +232,11 @@ public class ASPGrammarParser extends Parser {
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_term);
+		int _la;
 		try {
-			setState(30);
+			setState(42);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
@@ -252,6 +262,41 @@ public class ASPGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(29);
+				match(T__3);
+				setState(38);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << IDENTIFIER) | (1L << INTEGER) | (1L << STRING))) != 0)) {
+					{
+					setState(30);
+					term();
+					setState(35);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==T__1) {
+						{
+						{
+						setState(31);
+						match(T__1);
+						setState(32);
+						term();
+						}
+						}
+						setState(37);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					}
+				}
+
+				setState(40);
+				match(T__4);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(41);
 				match(STRING);
 				}
 				break;
@@ -269,16 +314,20 @@ public class ASPGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\t#\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13/\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\3\2\7\2\n\n\2\f\2\16\2\r\13\2\3\3\3\3\3\3\3\3\3\3\7\3\24\n"+
-		"\3\f\3\16\3\27\13\3\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\5\4!\n\4\3\4\2"+
-		"\2\5\2\4\6\2\2\2%\2\13\3\2\2\2\4\16\3\2\2\2\6 \3\2\2\2\b\n\5\4\3\2\t\b"+
-		"\3\2\2\2\n\r\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\3\3\2\2\2\r\13\3\2\2"+
-		"\2\16\32\7\6\2\2\17\20\7\3\2\2\20\25\5\6\4\2\21\22\7\4\2\2\22\24\5\6\4"+
-		"\2\23\21\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2"+
-		"\2\27\25\3\2\2\2\30\31\7\5\2\2\31\33\3\2\2\2\32\17\3\2\2\2\32\33\3\2\2"+
-		"\2\33\5\3\2\2\2\34!\7\6\2\2\35!\7\7\2\2\36!\5\4\3\2\37!\7\b\2\2 \34\3"+
-		"\2\2\2 \35\3\2\2\2 \36\3\2\2\2 \37\3\2\2\2!\7\3\2\2\2\6\13\25\32 ";
+		"\3\f\3\16\3\27\13\3\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4"+
+		"$\n\4\f\4\16\4\'\13\4\5\4)\n\4\3\4\3\4\5\4-\n\4\3\4\2\2\5\2\4\6\2\2\2"+
+		"\64\2\13\3\2\2\2\4\16\3\2\2\2\6,\3\2\2\2\b\n\5\4\3\2\t\b\3\2\2\2\n\r\3"+
+		"\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\3\3\2\2\2\r\13\3\2\2\2\16\32\7\b\2"+
+		"\2\17\20\7\3\2\2\20\25\5\6\4\2\21\22\7\4\2\2\22\24\5\6\4\2\23\21\3\2\2"+
+		"\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\25\3\2\2"+
+		"\2\30\31\7\5\2\2\31\33\3\2\2\2\32\17\3\2\2\2\32\33\3\2\2\2\33\5\3\2\2"+
+		"\2\34-\7\b\2\2\35-\7\t\2\2\36-\5\4\3\2\37(\7\6\2\2 %\5\6\4\2!\"\7\4\2"+
+		"\2\"$\5\6\4\2#!\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&)\3\2\2\2\'%\3"+
+		"\2\2\2( \3\2\2\2()\3\2\2\2)*\3\2\2\2*-\7\7\2\2+-\7\n\2\2,\34\3\2\2\2,"+
+		"\35\3\2\2\2,\36\3\2\2\2,\37\3\2\2\2,+\3\2\2\2-\7\3\2\2\2\b\13\25\32%("+
+		",";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

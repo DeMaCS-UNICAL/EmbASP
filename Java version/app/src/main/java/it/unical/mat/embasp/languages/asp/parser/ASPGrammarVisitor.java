@@ -1,5 +1,6 @@
 package it.unical.mat.embasp.languages.asp.parser;
 
+// Generated from ASPGrammar.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
