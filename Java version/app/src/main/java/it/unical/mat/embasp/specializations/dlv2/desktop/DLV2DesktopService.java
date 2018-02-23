@@ -12,13 +12,9 @@ import it.unical.mat.embasp.specializations.dlv2.DLV2AnswerSets;
 /** is an extention of {@link DesktopService} for DLV2 's solver */
 
 public class DLV2DesktopService extends DesktopService {
-
-	private final OptionDescriptor competitionOutputOption;
-
 	public DLV2DesktopService(final String exe_path) {
 		super(exe_path);
 		load_from_STDIN_option = "--stdin";
-		competitionOutputOption = new OptionDescriptor("--competition-output");
 	}
 
 	@Override
@@ -33,7 +29,6 @@ public class DLV2DesktopService extends DesktopService {
 
 	@Override
 	public Output startSync(final List<InputProgram> programs, final List<OptionDescriptor> options) {
-		options.add(competitionOutputOption);
 		return super.startSync(programs, options);
 	}
 }
