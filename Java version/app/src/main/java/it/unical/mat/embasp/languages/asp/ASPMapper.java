@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.mat.embasp.languages.Mapper;
-import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementation;
+import it.unical.mat.parsers.asp.ASPParser;
 
 /**
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}
@@ -14,7 +14,7 @@ import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementa
 public class ASPMapper extends Mapper {
 
 	private static ASPMapper mapper;
-	private ASPGrammarBaseVisitorImplementation parser;
+	private ASPParser parser;
 	
 	public static ASPMapper getInstance() {
 		if (ASPMapper.mapper == null)
@@ -55,7 +55,7 @@ public class ASPMapper extends Mapper {
 
 	@Override
 	protected void buildParseTree(final String atomsList) {
-		parser = new ASPGrammarBaseVisitorImplementation(atomsList);
+		parser = new ASPParser(atomsList);
 	}
 	
 	

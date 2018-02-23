@@ -6,12 +6,12 @@ import java.util.List;
 
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
-import it.unical.mat.embasp.languages.pddl.parser.PDDLGrammarBaseVisitorImplementation;
+import it.unical.mat.parsers.pddl.PDDLParser;
 
 public class PDDLMapper extends Mapper {
 
 	private static PDDLMapper mapper;
-	private PDDLGrammarBaseVisitorImplementation parser;
+	private PDDLParser parser;
 	
 	public static PDDLMapper getInstance() {
 		if (PDDLMapper.mapper == null)
@@ -36,7 +36,7 @@ public class PDDLMapper extends Mapper {
 
 	@Override
 	protected void buildParseTree(String atomsList) {
-		parser = new PDDLGrammarBaseVisitorImplementation(atomsList);
+		parser = new PDDLParser(atomsList);
 	}
 
 	@Override

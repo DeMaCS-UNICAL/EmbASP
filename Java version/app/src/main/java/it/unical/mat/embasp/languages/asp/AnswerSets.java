@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unical.mat.embasp.base.Output;
+import it.unical.mat.parsers.asp.ASPDataCollection;
 
 /** A collection of {@link AnswerSet} */
 
-public abstract class AnswerSets extends Output {
+public abstract class AnswerSets extends Output implements ASPDataCollection {
 	/** Where Answer Sets are stored */
 	protected List<AnswerSet> answersets;
 
@@ -38,4 +39,18 @@ public abstract class AnswerSets extends Output {
 		return output;
 	}
 
+	@Override
+	public void addAnswerSet() {
+		answersets.add(new AnswerSet(new ArrayList <String> ()));
+	}
+	
+	@Override
+	public void storeAtom(final String result) {
+		answersets.get(answersets.size() - 1).getValue().add(result);
+	}
+	
+	@Override
+	public void storeCost(final int level, final int weight) {
+		answersets.get(answersets.size() - 1).getLevelWeight().put(level, weight);
+	}
 }

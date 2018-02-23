@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unical.mat.embasp.base.Output;
+import it.unical.mat.parsers.pddl.PDDLDataCollection;
 
 /** A simplified solution to a PDDL problem */
 
-public abstract class Plan extends Output {
+public abstract class Plan extends Output implements PDDLDataCollection {
 	protected List<Action> actionSequence;
 
 	private List<Object> actionsObjects;
@@ -38,5 +39,10 @@ public abstract class Plan extends Output {
 		}
 
 		return actionsObjects;
+	}
+	
+	@Override
+	public void storeAction(final String action) {
+		actionSequence.add(new Action(action));
 	}
 }

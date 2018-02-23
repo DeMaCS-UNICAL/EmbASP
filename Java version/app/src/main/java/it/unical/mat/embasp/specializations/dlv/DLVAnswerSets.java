@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.dlv;
 
 import it.unical.mat.embasp.languages.asp.AnswerSets;
-import it.unical.mat.embasp.specializations.dlv.parser.DLVParserBaseVisitorImplementation;
+import it.unical.mat.parsers.asp.ASPDataCollection;
 
 public class DLVAnswerSets extends AnswerSets {
 	/** Represent an AnswerSet specific for DLV */
@@ -17,6 +17,6 @@ public class DLVAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		DLVParserBaseVisitorImplementation.parse(answersets, output);
+		ASPDataCollection.parseDLV(this, output);
 	}
 }
