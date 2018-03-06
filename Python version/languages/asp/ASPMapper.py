@@ -1,5 +1,6 @@
 from languages.Mapper import Mapper
-from languages.asp.parser.ASPGrammarVisitorImplementation import ASPGrammarVisitorImplementation
+from parsers.asp.ASPParser import ASPParser
+
 class ASPMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
     
@@ -38,7 +39,7 @@ class ASPMapper(Mapper):
         
     def _initialize(self, atomsList):
         self._objects = set()
-        self._parser = ASPGrammarVisitorImplementation(atomsList)
+        self._parser = ASPParser(atomsList)
     
     def _getId(self):
         """Returns a string representing an id"""

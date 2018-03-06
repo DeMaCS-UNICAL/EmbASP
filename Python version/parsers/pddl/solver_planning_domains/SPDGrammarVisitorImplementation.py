@@ -1,9 +1,8 @@
 from .SPDGrammarLexer import SPDGrammarLexer
 from .SPDGrammarParser import SPDGrammarParser
-from .SPDGrammarVisitor import SPDGrammarVisitor
+from .SPDGrammarVisitor import  SPDGrammarVisitor
 from antlr4.CommonTokenStream import CommonTokenStream
 from antlr4.InputStream import InputStream
-from languages.pddl.Action import Action
 
 class SPDGrammarVisitorImplementation(SPDGrammarVisitor):
     ERROR_STATUS = -1
@@ -30,11 +29,9 @@ class SPDGrammarVisitorImplementation(SPDGrammarVisitor):
                 self._errors += SPDGrammarVisitorImplementation._trim(valueContext.getText());
         elif self._status == SPDGrammarVisitorImplementation.OK_STATUS:
             if string == '"name"':
-                self._actions.append(Action(SPDGrammarVisitorImplementation._trim(valueContext.getText())));
+                self._actions.storeAction(SPDGrammarVisitorImplementation._trim(valueContext.getText()));
             elif string == '"plan"' or string == '"result"':
                 return self.visitChildren(ctx);
-
-        return None;
     
     @staticmethod
     def _trim(string):

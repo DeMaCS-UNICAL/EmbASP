@@ -1,20 +1,19 @@
 from .ClingoLexer import ClingoLexer
-from .ClingoParser import ClingoParser
+from .ClingoParser import ClingoParser 
 from .ClingoParserVisitor import ClingoParserVisitor
-from antlr4 import CommonTokenStream
-from antlr4 import InputStream
-from languages.asp.AnswerSet import AnserSet
+from antlr4.CommonTokenStream import CommonTokenStream
+from antlr4.InputStream import InputStream
 
 class ClingoParserVisitorImplementation(ClingoParserVisitor):
     def __init__(self, answerSets):
         self._answerSets = answerSets
         
-    def visitAnswer_set(self, ctx:ClingoParser.Answer_setContext):
-        self._answerSets.append(AnserSet([]))
+    def visitAnswer_set(self, ctx):
+        self._answerSets.addAnswerSet()
         
         return self.visitChildren(ctx)
         
-    def visitModel(self, ctx:ClingoParser.ModelContext):
+    def visitModel(self, ctx):
         cost = ctx.NEW_LINE().getText().strip()
         
         if len(cost) > 1:
@@ -22,13 +21,13 @@ class ClingoParserVisitorImplementation(ClingoParserVisitor):
             levels = len(tokens) - 1
             
             for index in range(1, len(tokens)):
-                self._answerSets[-1].getWeights()[levels] = tokens[index]
+                self._answerSets.storeCost(levels, tokens[index])
                 levels -= 1
         
         return self.visitChildren(ctx)
     
     def visitPredicate_atom(self, ctx):
-        self._answerSets[-1].getAnswerSet().append(ctx.getText())
+        self._answerSets.storeAtom(ctx.getText())
     
     @staticmethod
     def parse(answerSets, clingoOutput):

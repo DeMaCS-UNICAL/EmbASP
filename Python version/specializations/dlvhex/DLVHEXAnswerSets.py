@@ -1,9 +1,9 @@
 from languages.asp.AnswerSets import AnswerSets
-from .parser.DLVHEXParserVisitorImplementation import DLVHEXParserVisitorImplementation
+from parsers.asp.ASPDataCollection import ASPDataCollection
 
 class DLVHEXAnswerSets(AnswerSets):
     def __init__(self, output, errors = None):
         super(DLVHEXAnswerSets, self).__init__(output, errors)
         
     def _parse(self):
-        DLVHEXParserVisitorImplementation.parse(self._answersets, self._output)
+        ASPDataCollection.parseDLVHEX(self, self._output)

@@ -1,8 +1,10 @@
+from .Action import Action
+from abc import ABCMeta
 from base.Output import Output
 from languages.pddl.PDDLMapper import PDDLMapper
-from abc import ABCMeta
+from parsers.pddl.PDDLDataCollection import PDDLDataCollection
 
-class Plan(Output):
+class Plan(Output, PDDLDataCollection):
     """A simplified solution to a PDDL problem"""
     
     __metaclass__ = ABCMeta
@@ -30,3 +32,6 @@ class Plan(Output):
             self.__actionsObjects = PDDLMapper.getInstance().getObjects(atomsList)
             
         return self.__actionsObjects
+    
+    def storeAction(self, action):
+        self._actionSequence.append(Action(action))

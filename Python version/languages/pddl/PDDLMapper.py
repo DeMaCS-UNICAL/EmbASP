@@ -1,5 +1,6 @@
 from languages.Mapper import Mapper
-from languages.pddl.parser.PDDLGrammarVisitorImplementation import PDDLGrammarVisitorImplementation
+from parsers.pddl.PDDLParser import PDDLParser
+
 class PDDLMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
     __Instance = None
@@ -24,7 +25,7 @@ class PDDLMapper(Mapper):
         
     def _initialize(self, atomsList):
         self._objects = list()
-        self._parser = PDDLGrammarVisitorImplementation(atomsList)
+        self._parser = PDDLParser(atomsList)
     
     def _getId(self):
         """Returns a string representing an id"""

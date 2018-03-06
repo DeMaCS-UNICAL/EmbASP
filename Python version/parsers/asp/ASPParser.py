@@ -1,10 +1,9 @@
-from .ASPGrammarLexer import ASPGrammarLexer
-from .ASPGrammarParser import ASPGrammarParser
-from .ASPGrammarVisitor import ASPGrammarVisitor
-from antlr4.CommonTokenStream import CommonTokenStream
-from antlr4.InputStream import InputStream
+from .asp_parser_base.ASPGrammarLexer import ASPGrammarLexer
+from .asp_parser_base.ASPGrammarParser import ASPGrammarParser
+from .asp_parser_base.ASPGrammarVisitor import ASPGrammarVisitor
+from antlr4 import CommonTokenStream, InputStream
 
-class ASPGrammarVisitorImplementation(ASPGrammarVisitor):
+class ASPParser(ASPGrammarVisitor):
     def __init__(self, atomsList):
         self._contexts = ASPGrammarParser(CommonTokenStream(ASPGrammarLexer(InputStream(atomsList)))).output().predicate_atom()
         self._identifier = None

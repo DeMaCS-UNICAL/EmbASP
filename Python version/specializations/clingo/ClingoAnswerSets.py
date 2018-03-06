@@ -1,5 +1,5 @@
 from languages.asp.AnswerSets import AnswerSets
-from .parser.ClingoParserVisitorImplementation import ClingoParserVisitorImplementation
+from parsers.asp.ASPDataCollection import ASPDataCollection
 
 class ClingoAnswerSets(AnswerSets):
     """Represents Clingo's answersets"""
@@ -8,4 +8,4 @@ class ClingoAnswerSets(AnswerSets):
         super(ClingoAnswerSets, self).__init__(out, err)
         
     def _parse(self):
-        ClingoParserVisitorImplementation.parse(self._answersets, self._output)
+        ASPDataCollection.parseClingo(self, self._output)

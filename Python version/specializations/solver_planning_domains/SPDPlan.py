@@ -1,5 +1,5 @@
 from languages.pddl.Plan import Plan
-from specializations.solver_planning_domains.parser.SPDGrammarVisitorImplementation import SPDGrammarVisitorImplementation
+from parsers.pddl.PDDLDataCollection import PDDLDataCollection
 
 class SPDPlan(Plan):
     """Represent a solution to a SPD problem"""
@@ -11,4 +11,4 @@ class SPDPlan(Plan):
         if self._errors or not self._output:
             return
 
-        self._errors += SPDGrammarVisitorImplementation.parse(self._actionSequence, self._output)
+        self._errors += PDDLDataCollection.parseSolverPlanningDomains(self, self._output)

@@ -1,10 +1,9 @@
-from .PDDLGrammarLexer import PDDLGrammarLexer
-from .PDDLGrammarParser import PDDLGrammarParser
-from .PDDLGrammarVisitor import PDDLGrammarVisitor
-from antlr4.CommonTokenStream import CommonTokenStream
-from antlr4.InputStream import InputStream
+from .pddl_parser_base.PDDLGrammarLexer import PDDLGrammarLexer 
+from .pddl_parser_base.PDDLGrammarParser import PDDLGrammarParser 
+from .pddl_parser_base.PDDLGrammarVisitor import PDDLGrammarVisitor
+from antlr4 import CommonTokenStream, InputStream
 
-class PDDLGrammarVisitorImplementation(PDDLGrammarVisitor):
+class PDDLParser(PDDLGrammarVisitor):
     def __init__(self, atomsList):
         self._contexts = PDDLGrammarParser(CommonTokenStream(PDDLGrammarLexer(InputStream(atomsList)))).output().atom()
         self._identifier = None

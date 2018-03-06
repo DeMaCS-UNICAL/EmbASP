@@ -13,15 +13,19 @@ class Mapper(object):
     @abstractmethod
     def _getActualString(self, predicate, parametersMap):
         pass
+    
     @abstractmethod
     def _initialize(self, atomsList):
         pass
+    
     @abstractmethod
     def _getId(self):
         pass
+    
     @abstractmethod
     def _getParam(self):
         pass
+    
     @abstractmethod
     def _addToCollection(self, obj):
         pass

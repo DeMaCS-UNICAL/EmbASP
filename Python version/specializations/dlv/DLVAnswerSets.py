@@ -1,5 +1,5 @@
 from languages.asp.AnswerSets import AnswerSets
-from .parser.DLVParserVisitorImplementation import DLVParserVisitorImplementation
+from parsers.asp.ASPDataCollection import ASPDataCollection
 
 class DLVAnswerSets(AnswerSets):
     """Represent an AnswerSet specific for DLV"""
@@ -8,4 +8,4 @@ class DLVAnswerSets(AnswerSets):
         super(DLVAnswerSets, self).__init__(out, err)
         
     def _parse(self):
-        DLVParserVisitorImplementation.parse(self._answersets, self._output)
+        ASPDataCollection.parseDLV(self, self._output)
