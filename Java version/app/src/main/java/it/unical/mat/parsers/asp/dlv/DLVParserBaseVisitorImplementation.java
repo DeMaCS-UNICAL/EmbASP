@@ -1,8 +1,13 @@
 package it.unical.mat.parsers.asp.dlv;
 
 import it.unical.mat.parsers.asp.ASPDataCollection;
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ConsoleErrorListener;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.atn.PredictionMode;
 
 public class DLVParserBaseVisitorImplementation extends DLVParserBaseVisitor<Void> {
 	private final ASPDataCollection answerSets;
@@ -46,7 +51,31 @@ public class DLVParserBaseVisitorImplementation extends DLVParserBaseVisitor<Voi
 		return null;
 	}
 	
-	public static void parse(final ASPDataCollection answerSets, final String atomsList) {
-        new DLVParserBaseVisitorImplementation(answerSets).visit(new DLVParser(new CommonTokenStream(new DLVLexer(CharStreams.fromString(atomsList)))).output());
+	public static void parse(final ASPDataCollection answerSets, final String atomsList, final boolean two_stageParsing) {
+    	final CommonTokenStream tokens = new CommonTokenStream(new DLVLexer(CharStreams.fromString(atomsList)));
+        final DLVParser parser = new DLVParser(tokens);
+        final DLVParserBaseVisitorImplementation visitor = new DLVParserBaseVisitorImplementation(answerSets);
+        
+        if(!two_stageParsing) {
+        	visitor.visit(parser.output());
+        	
+        	return;
+        }
+        
+        parser.getInterpreter().setPredictionMode(PredictionMode.SLL); 
+        parser.removeErrorListeners();
+        parser.setErrorHandler(new BailErrorStrategy());
+     
+        try {
+        	visitor.visit(parser.output());
+        } catch (final RuntimeException exception) {
+        	if(exception.getClass() == RuntimeException.class && exception.getCause() instanceof RecognitionException) {
+        		tokens.seek(0);
+        		parser.addErrorListener(ConsoleErrorListener.INSTANCE);
+        		parser.setErrorHandler(new DefaultErrorStrategy());
+        		parser.getInterpreter().setPredictionMode(PredictionMode.LL); 
+                visitor.visit(parser.output());
+        	}
+        }
     }
 }

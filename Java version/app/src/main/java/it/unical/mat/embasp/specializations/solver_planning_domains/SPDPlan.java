@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.solver_planning_domains;
 
 import it.unical.mat.embasp.languages.pddl.Plan;
-import it.unical.mat.parsers.pddl.PDDLDataCollection;
+import it.unical.mat.parsers.pddl.PDDLSolversParser;
 
 public class SPDPlan extends Plan {
 
@@ -14,7 +14,7 @@ public class SPDPlan extends Plan {
 		if((errors != null && !errors.isEmpty()) || (output != null && output.isEmpty()))
 		    return;
 		
-		errors += PDDLDataCollection.parseSolverPlanningDomains(this, output);
+		errors += PDDLSolversParser.parseSolverPlanningDomains(this, output, true);
 	}
 
 }

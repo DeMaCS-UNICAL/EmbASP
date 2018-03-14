@@ -1,8 +1,13 @@
 package it.unical.mat.parsers.pddl.solver_planning_domains;
 
 import it.unical.mat.parsers.pddl.PDDLDataCollection;
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ConsoleErrorListener;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.atn.PredictionMode;
 
 public class SPDGrammarBaseVisitorImplementation extends SPDGrammarBaseVisitor <Void> {
 	private static final int OK_STATUS = 1;
@@ -46,11 +51,33 @@ public class SPDGrammarBaseVisitorImplementation extends SPDGrammarBaseVisitor <
         return (string.charAt(0) == '"' && string.charAt(stringLength - 1) == '"') ? string.substring(1, stringLength - 1) : string;
     }
 
-    public static String parse(final PDDLDataCollection actions, final String spdOutput) {
-        final SPDGrammarBaseVisitorImplementation parser = new SPDGrammarBaseVisitorImplementation(actions);
+    public static String parse(final PDDLDataCollection actions, final String spdOutput, final boolean two_stageParsing) {
+    	final CommonTokenStream tokens = new CommonTokenStream(new SPDGrammarLexer(CharStreams.fromString(spdOutput)));
+        final SPDGrammarParser parser = new SPDGrammarParser(tokens);
+        final SPDGrammarBaseVisitorImplementation visitor = new SPDGrammarBaseVisitorImplementation(actions);
+        
+        if(!two_stageParsing) {
+        	visitor.visit(parser.json());
+        	
+        	return visitor.errors;
+        }
+        
+        parser.getInterpreter().setPredictionMode(PredictionMode.SLL); 
+        parser.removeErrorListeners();
+        parser.setErrorHandler(new BailErrorStrategy());
+     
+        try {
+        	visitor.visit(parser.json());
+        } catch (final RuntimeException exception) {
+        	if(exception.getClass() == RuntimeException.class && exception.getCause() instanceof RecognitionException) {
+        		tokens.seek(0);
+        		parser.addErrorListener(ConsoleErrorListener.INSTANCE);
+        		parser.setErrorHandler(new DefaultErrorStrategy());
+        		parser.getInterpreter().setPredictionMode(PredictionMode.LL); 
+                visitor.visit(parser.json());
+        	}
+        }
 
-        parser.visit(new SPDGrammarParser(new CommonTokenStream(new SPDGrammarLexer(CharStreams.fromString(spdOutput)))).json());
-
-        return parser.errors;
+        return visitor.errors;
     }
 }

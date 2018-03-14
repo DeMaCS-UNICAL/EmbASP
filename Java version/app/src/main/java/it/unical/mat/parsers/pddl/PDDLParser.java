@@ -1,14 +1,13 @@
 package it.unical.mat.parsers.pddl;
 
+import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarBaseVisitor;
+import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarLexer;
+import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarParser;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-
-import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarBaseVisitor;
-import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarLexer;
-import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarParser;
 
 public class PDDLParser extends PDDLGrammarBaseVisitor <Void> {
     private final List <PDDLGrammarParser.AtomContext> contexts;

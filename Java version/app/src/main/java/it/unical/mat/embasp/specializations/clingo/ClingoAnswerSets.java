@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.clingo;
 
 import it.unical.mat.embasp.languages.asp.AnswerSets;
-import it.unical.mat.parsers.asp.ASPDataCollection;
+import it.unical.mat.parsers.asp.ASPSolversParser;
 
 /** represents Clingo's answersets */
 
@@ -17,6 +17,6 @@ public class ClingoAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		ASPDataCollection.parseClingo(this, output);
+		ASPSolversParser.parseClingo(this, output, true);
 	}
 }
