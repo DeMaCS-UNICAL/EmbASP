@@ -6,8 +6,13 @@ import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarParser;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ConsoleErrorListener;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.atn.PredictionMode;
 
 public class PDDLParser extends PDDLGrammarBaseVisitor <Void> {
     private final List <PDDLGrammarParser.AtomContext> contexts;
@@ -16,10 +21,34 @@ public class PDDLParser extends PDDLGrammarBaseVisitor <Void> {
     private String identifier;
 
     public PDDLParser(final String atomsList) {
-        contexts = new PDDLGrammarParser(new CommonTokenStream(new PDDLGrammarLexer(CharStreams.fromString(atomsList)))).output().atom();
-        iterator = contexts.iterator();
+    	contexts = getContexts(atomsList);
+    	iterator = contexts.iterator();
     }
 
+    private static final List <PDDLGrammarParser.AtomContext> getContexts(final String atomsList) {
+		final CommonTokenStream tokens = new CommonTokenStream(new PDDLGrammarLexer(CharStreams.fromString(atomsList)));
+        final PDDLGrammarParser parser = new PDDLGrammarParser(tokens);
+        
+        parser.getInterpreter().setPredictionMode(PredictionMode.SLL); 
+        parser.removeErrorListeners();
+        parser.setErrorHandler(new BailErrorStrategy());
+     
+        try {
+        	return parser.output().atom();
+        } catch (final RuntimeException exception) {
+        	if(exception.getClass() == RuntimeException.class && exception.getCause() instanceof RecognitionException) {
+        		tokens.seek(0);
+        		parser.addErrorListener(ConsoleErrorListener.INSTANCE);
+        		parser.setErrorHandler(new DefaultErrorStrategy());
+        		parser.getInterpreter().setPredictionMode(PredictionMode.LL); 
+        		
+        		return parser.output().atom();
+        	}
+        }
+        
+        return null;
+	}
+    
     public String getIdentifier() {
         if(iterator.hasNext()) {
             parameters = new LinkedList <> ();
