@@ -1,6 +1,6 @@
 from languages.asp.ASPMapper import ASPMapper
 
-class AnserSet(object):
+class AnswerSet(object):
     """A collection of data representing a generic Answer Set"""
     
     def __init__(self, value, weightMap=dict()):

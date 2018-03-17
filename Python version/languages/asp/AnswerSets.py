@@ -1,4 +1,4 @@
-from .AnswerSet import AnserSet
+from .AnswerSet import AnswerSet
 from abc import ABCMeta
 from base.Output import Output
 from parsers.asp.ASPDataCollection import ASPDataCollection
@@ -24,7 +24,7 @@ class AnswerSets(Output, ASPDataCollection):
         return self._output
 
     def addAnswerSet(self):
-        self._answersets.append(AnserSet([]))
+        self._answersets.append(AnswerSet([], {}))
     
     def storeAtom(self, result):
         self._answersets[-1].getAnswerSet().append(result)
