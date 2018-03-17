@@ -1,7 +1,11 @@
 from .SPDGrammarLexer import SPDGrammarLexer
 from .SPDGrammarParser import SPDGrammarParser
 from .SPDGrammarVisitor import  SPDGrammarVisitor
+from antlr4 import PredictionMode
 from antlr4.CommonTokenStream import CommonTokenStream
+from antlr4.error.ErrorListener import ConsoleErrorListener
+from antlr4.error.Errors import RecognitionException
+from antlr4.error.ErrorStrategy import BailErrorStrategy, DefaultErrorStrategy
 from antlr4.InputStream import InputStream
 
 class SPDGrammarVisitorImplementation(SPDGrammarVisitor):
@@ -38,9 +42,28 @@ class SPDGrammarVisitorImplementation(SPDGrammarVisitor):
         return string[1:-1] if (string[0] == '"' and string[-1] == '"') else string
         
     @staticmethod
-    def parse(actions, spdOutput):
-        parser = SPDGrammarVisitorImplementation(actions)
+    def parse(actions, spdOutput, two_stageParsing):
+        tokens = CommonTokenStream(SPDGrammarLexer(InputStream(spdOutput)))
+        parser = SPDGrammarParser(tokens)
+        visitor = SPDGrammarVisitorImplementation(actions)
         
-        parser.visit(SPDGrammarParser(CommonTokenStream(SPDGrammarLexer(InputStream(spdOutput)))).json());
+        if not two_stageParsing:
+            visitor.visit(parser.json())
+            
+            return visitor._errors
         
-        return parser._errors
+        parser._interp.predictionMode = PredictionMode.SLL
+        parser.removeErrorListeners()
+        parser._errHandler = BailErrorStrategy()
+        
+        try:
+            visitor.visit(parser.json())
+        except RuntimeError as exception:
+            if isinstance(exception, RecognitionException):
+                tokens.seek(0)
+                parser.addErrorListener(ConsoleErrorListener.INSTANCE)
+                parser._errHandler = DefaultErrorStrategy()
+                parser._interp.predictionMode = PredictionMode.LL
+                visitor.visit(parser.json())
+        
+        return visitor._errors

@@ -1,5 +1,5 @@
 from languages.pddl.Plan import Plan
-from parsers.pddl.PDDLDataCollection import PDDLDataCollection
+from parsers.pddl.PDDLSolversParser import PDDLSolversParser
 
 class SPDPlan(Plan):
     """Represent a solution to a SPD problem"""
@@ -11,4 +11,4 @@ class SPDPlan(Plan):
         if self._errors or not self._output:
             return
 
-        self._errors += PDDLDataCollection.parseSolverPlanningDomains(self, self._output)
+        self._errors += PDDLSolversParser.parseSolverPlanningDomains(self, self._output, True)
