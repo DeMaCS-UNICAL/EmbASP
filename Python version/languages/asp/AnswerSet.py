@@ -3,7 +3,10 @@ from languages.asp.ASPMapper import ASPMapper
 class AnswerSet(object):
     """A collection of data representing a generic Answer Set"""
     
-    def __init__(self, value, weightMap=dict()):
+    def __init__(self, value, weightMap = None):
+        if weightMap is None:
+            weightMap = dict()
+        
         self.__value = value  # Where data of answer set is stored
         self.__weight_map = weightMap  # Where weights of the answer set are stored
         self.__atoms = None  # Where Answer set's atoms are stored
