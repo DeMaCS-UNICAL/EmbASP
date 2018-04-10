@@ -36,6 +36,8 @@ public class ASPMapper extends Mapper {
 				throw new IllegalTermException("Wrong term number of predicate " + predicate);
 			if (objectTerm instanceof Integer)
 				atom += objectTerm + "";
+			else if(objectTerm instanceof SymbolicConstant)
+				atom += objectTerm.toString() + "";
 			else
 				atom += "\"" + objectTerm.toString() + "\"";
 		}
