@@ -6,15 +6,15 @@ from setuptools import find_packages
 from codecs import open
 from os import path
 
-here = path.abspath(path.dirname(__file__))
-
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+# here = path.abspath(path.dirname(__file__))
+#
+# with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+#     long_description = f.read()
 
 setup(name='embASP',
       version='1.0',
       description='embASP',
-      long_description=long_description,
+      # long_description=long_description,
       author='Department of Mathematics and Computer Science, University of Calabria',
       license='MIT',
       author_email='embasp@mat.unical.it',
