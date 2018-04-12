@@ -1,3 +1,5 @@
+from languages.asp import symbolic_constant
+from languages.asp.symbolic_constant import SymbolicConstant
 from languages.predicate import Predicate
 
 class Cell(Predicate):
@@ -5,7 +7,7 @@ class Cell(Predicate):
     predicate_name="cell"
     
     def __init__(self, row=None, column=None, value=None):
-        super(Cell, self).__init__([("row", int), ("column", int), ("value", int)])
+        super(Cell, self).__init__([("row", int), ("column", int), ("value", SymbolicConstant)])
         self.row = row
         self.value = value
         self.column = column

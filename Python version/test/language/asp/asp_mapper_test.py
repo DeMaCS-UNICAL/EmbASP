@@ -1,12 +1,11 @@
 import unittest
 from languages.asp.asp_mapper import ASPMapper
-from cell import Cell
-
+from test.language.asp.cell import Cell
 
 
 class ASPMapperTest(unittest.TestCase):
 
-    def test(self):
+    def runTest(self):
         
         instance = ASPMapper.get_instance()
         
@@ -21,8 +20,10 @@ class ASPMapperTest(unittest.TestCase):
             
             self.assertEqual(2, obj.get_column())
             
-            self.assertEqual(5, obj.get_value())
-            
+            self.assertEqual('5', obj.get_value().value)
+
+            print(instance.get_string(obj))
+
             self.assertEqual("cell(1,2,5)", instance.get_string(obj))
             
             instance.unregister_class(Cell)

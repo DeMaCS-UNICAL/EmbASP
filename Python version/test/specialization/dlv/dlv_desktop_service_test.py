@@ -77,7 +77,7 @@ class DLVDesktopServiceTest(unittest.TestCase):
                 return
             
             ans = out.get_answer_sets()[0]
-             
+
             for obj in ans.get_atoms():
                 self.inputMatrix[obj.get_row()][obj.get_column()] = obj.get_value()
             
