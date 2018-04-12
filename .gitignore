@@ -291,3 +291,5 @@ ENV/
 !Java version/lib/*.jar
 
 Java version/.idea
+Python version/.idea
+Python version/.vscode
