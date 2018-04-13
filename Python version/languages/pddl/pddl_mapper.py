@@ -1,4 +1,6 @@
 from languages.mapper import Mapper
+
+
 class PDDLMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
     __instance = None
@@ -14,14 +16,14 @@ class PDDLMapper(Mapper):
         if not cls.__instance:
             cls.__instance = PDDLMapper()
         return cls.__instance
-    
+
     def _get_actual_string(self, predicate, parametersMap):
         return None
-    
+
     def _get_parameters(self, string):
         """Return a set of parameter string name"""
         return string[string.index(" ") + 1:string.rfind(")")].split(" ")
-    
+
     def _get_predicate(self, string):
         """Return a string representing a predicate"""
         initialB = string.index("(")

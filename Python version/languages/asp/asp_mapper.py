@@ -9,7 +9,7 @@ class ASPMapper(Mapper):
 
     def __init__(self):
         if ASPMapper.__instance:
-            raise("Instance already exists")
+            raise "Instance already exists"
         super(ASPMapper, self).__init__()
 
     @classmethod
@@ -19,21 +19,21 @@ class ASPMapper(Mapper):
             cls.__instance = ASPMapper()
         return cls.__instance
 
-    def _get_actual_string(self, predicate, parametersMap):
+    def _get_actual_string(self, predicate, parameters_map):
         """Return a string representing atom, from given predicate string name, and set of parameters"""
         atom = predicate + "("
-        for i in range(0, len(parametersMap)):
+        for i in range(0, len(parameters_map)):
             if i != 0:
                 atom += ","
-            objectTerm = parametersMap[i]
-            if objectTerm is None:
+            object_term = parameters_map[i]
+            if object_term is None:
                 raise("Wrong term number of predicate " + predicate)
-            if isinstance(objectTerm, int):
-                atom += str(objectTerm)
-            elif isinstance(objectTerm, SymbolicConstant):
-                atom += str(SymbolicConstant(objectTerm))
+            if isinstance(object_term, int):
+                atom += str(object_term)
+            elif isinstance(object_term, SymbolicConstant):
+                atom += str(SymbolicConstant(object_term))
             else:
-                atom += "\"" + str(objectTerm) + "\""
+                atom += "\"" + str(object_term) + "\""
         atom += ")"
         return atom
 

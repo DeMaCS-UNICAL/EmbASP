@@ -1,18 +1,17 @@
 class InputProgram(object):
     """Represents a generic option"""
-    
+
     def __init__(self):
         """Creates a new programs , setting space as default separator"""
         self._programs = ""  # Where programs data is stored
         self.__files_paths = list()  # Where associated files are stored
         self._separator = " "  # Used as separator for programs
 
-
-    def add_object_input(self,inputObj):
+    def add_object_input(self, input_obj):
         raise "Functionality not implemented"
 
-    def add_objects_input(self, inputObjs):
-        for inputObj in inputObjs:
+    def add_objects_input(self, input_objs):
+        for inputObj in input_objs:
             self.add_object_input(inputObj)
 
     def add_files_path(self, file_path):
@@ -21,12 +20,11 @@ class InputProgram(object):
         """
         self.__files_paths.append(file_path)
 
-
     def add_program(self, new_instruction):
         """Adds a new instruction directly into _programs
-        The parameter new_instruction rapresents a new programs instruction
+        The parameter new_instruction represents a new programs instruction
         """
-        if(self._programs == None):
+        if self._programs is None:
             self._programs = new_instruction
         else:
             self._programs += self._separator + new_instruction
@@ -58,15 +56,15 @@ class InputProgram(object):
 
     def get_string_of_files_paths(self):
         """Returns string concatenating files paths"""
-        to_return=""
+        to_return = ""
         for paths in self.__files_paths:
-            if(len(paths) != 0):
+            if len(paths) != 0:
                 to_return += paths + " "
         return to_return
 
     def set_programs(self, programs):
         """Sets _programs value to the new given one
-        The parameter programs, rapresents new value
+        The parameter programs, represents new value
         """
         self._programs = programs
 
@@ -75,5 +73,3 @@ class InputProgram(object):
         The parameter separator is used as new separator
         """
         self._separator = separator
-
-

@@ -12,7 +12,7 @@ class Mapper(object):
         self._predicate_class = dict()
 
     @abstractmethod
-    def _get_actual_string(self, predicate, parametersMap):
+    def _get_actual_string(self, predicate, parameters_map):
         pass
 
     @abstractmethod
@@ -27,7 +27,8 @@ class Mapper(object):
         """Returns a string for the given predicate name string"""
         return self._predicate_class.get(predicate)
 
-    def __populate_object(self, parameters, obj):
+    @staticmethod
+    def __populate_object(parameters, obj):
         """Sets a fields of object from set of parameters given, by invoking setters methods of object"""
         for key, value in obj.get_terms_type().items():
             if isinstance(value, tuple) and len(value) == 2:
@@ -35,7 +36,8 @@ class Mapper(object):
                 if value[1] is int:
                     getattr(obj, name_method)(int(parameters[key]))
                 elif value[1] is SymbolicConstant:
-                    getattr(obj, name_method)(SymbolicConstant(parameters[key]))
+                    getattr(obj, name_method)(
+                        SymbolicConstant(parameters[key]))
             else:
                 name_method = "set_" + value
                 getattr(obj, name_method)(parameters[key])
@@ -63,17 +65,17 @@ class Mapper(object):
         The method return a string representing pairing key of _predicate_class
         """
         if not issubclass(cl, Predicate):
-            raise("input class is not subclass of Predicate")
+            raise "input class is not subclass of Predicate"
         predicate = cl.get_predicate_name()
         if " " in predicate:
-            raise("Value of the object is not valid")
+            raise "Value of the object is not valid"
         self._predicate_class[predicate] = cl
         return predicate
 
     def unregister_class(self, cl):
         """Remove an object from _predicate_class"""
-        if(not issubclass(cl, Predicate)):
-            raise("input class is not subclass of Predicate")
+        if not issubclass(cl, Predicate):
+            raise "input class is not subclass of Predicate"
         predicate = cl.get_predicate_name()
         del self._predicate_class[predicate]
 
@@ -83,11 +85,11 @@ class Mapper(object):
         The method return a string data for the given Object in a String format
         """
         predicate = self.register_class(obj.__class__)
-        parametersMap = dict()
+        parameters_map = dict()
         for key, value in obj.get_terms_type().items():
             if isinstance(value, tuple) and len(value) == 2:
                 val = getattr(obj, "get_" + value[0])()
             else:
                 val = getattr(obj, "get_" + value)()
-            parametersMap[key] = val
-        return self._get_actual_string(predicate, parametersMap)
+            parameters_map[key] = val
+        return self._get_actual_string(predicate, parameters_map)
