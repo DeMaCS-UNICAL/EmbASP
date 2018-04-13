@@ -20,13 +20,14 @@ class DLVHEXParserVisitorImplementation(DLVHEXParserVisitor):
     def visitLevel(self, ctx):
         self._answerSets.storeCost(ctx.INTEGER(1).getText(), ctx.INTEGER(0).getText())
         
-        return None
-        
     def visitPredicate_atom(self, ctx):
         self._answerSets.storeAtom(ctx.getText())
-        
-        return None
-        
+    
+    def visitWitness(self, ctx):
+        self._answerSets.addAnswerSet()
+    
+        return self.visitChildren(ctx)
+    
     @staticmethod
     def parse(answerSets, dlvhexOutput, two_stageParsing):
         tokens = CommonTokenStream(DLVHEXLexer(InputStream(dlvhexOutput)))

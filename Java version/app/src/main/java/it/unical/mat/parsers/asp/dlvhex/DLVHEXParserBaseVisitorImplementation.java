@@ -37,6 +37,13 @@ public class DLVHEXParserBaseVisitorImplementation extends DLVHEXParserBaseVisit
         return null;
     }
 
+    @Override
+	public Void visitWitness(DLVHEXParser.WitnessContext ctx) {
+		answerSets.addAnswerSet();
+		
+		return visitChildren(ctx);
+	}
+    
     public static void parse(final ASPDataCollection answerSets, final String atomsList, final boolean two_stageParsing) {
     	final CommonTokenStream tokens = new CommonTokenStream(new DLVHEXLexer(CharStreams.fromString(atomsList)));
         final DLVHEXParser parser = new DLVHEXParser(tokens);
