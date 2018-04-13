@@ -4,8 +4,6 @@ using System.Text;
 
 namespace it.unical.mat.embasp.@base
 {
-
-
 	public class InputProgram
 	{
 		protected internal string programs;
@@ -14,127 +12,72 @@ namespace it.unical.mat.embasp.@base
 
 		public InputProgram()
 		{
-			init();
+			Init();
 			separator = " ";
 		}
 
 		public InputProgram(object inputObj)
 		{
-			init();
-			addObjectInput(inputObj);
+			Init();
+			AddObjectInput(inputObj);
 		}
 
 		public InputProgram(string initial_program)
 		{
-			init();
+			Init();
 			programs = initial_program;
 		}
 
-		public virtual void addFilesPath(string file_path)
-		{
-			files_paths.Add(file_path);
-		}
+    public virtual void AddFilesPath(string file_path) => files_paths.Add(file_path);
 
-		public virtual void addObjectInput(object inputObj)
-		{
-			throw new System.NotSupportedException("functionality not implemented");
-		}
+    public virtual void AddObjectInput(object inputObj) => throw new System.NotSupportedException("functionality not implemented");
 
-		public virtual void addObjectsInput(ISet<object> inputObjs)
+    public virtual void AddObjectsInput(ISet<object> inputObjs)
 		{
 			foreach (Object inputObj in inputObjs)
-			{
-				addObjectInput(inputObj);
-			}
+				AddObjectInput(inputObj);
 		}
 
-		public virtual void addProgram(string new_instruction)
+		public virtual void AddProgram(string new_instruction)
 		{
 			if (programs.Length == 0)
-			{
 				programs = new_instruction;
-			}
 			else
-			{
 				programs += separator + new_instruction;
-			}
 		}
 
-		public virtual void clearAll()
+		public virtual void ClearAll()
 		{
-			clearFilesPaths();
-			clearPrograms();
+			ClearFilesPaths();
+			ClearPrograms();
 		}
 
-		public virtual void clearFilesPaths()
-		{
-			files_paths.Clear();
-		}
+    public virtual void ClearFilesPaths() => files_paths.Clear();
 
-		public virtual void clearPrograms()
-		{
-			programs = "";
-		}
+    public virtual void ClearPrograms() => programs = "";
 
-		public virtual IList<string> FilesPaths
-		{
-			get
-			{
-				return files_paths;
-			}
-		}
+    public virtual IList<string> FilesPaths => files_paths;
 
-		public virtual string Programs
+    public virtual string Programs { get => programs; set => this.programs = value; }
+
+    public virtual string Separator { get => separator; set => this.separator = value; }
+
+    public virtual string StringOfFilesPaths
 		{
 			get
 			{
-				return programs;
-			}
-			set
-			{
-				this.programs = value;
-			}
-		}
-
-		public virtual string Separator
-		{
-			get
-			{
-				return separator;
-			}
-			set
-			{
-				this.separator = value;
-			}
-		}
-
-		public virtual string StringOfFilesPaths
-		{
-			get
-			{
-    
 				StringBuilder to_return = new StringBuilder();
-    
 				foreach (String paths in files_paths)
-				{
 					if (paths.Length != 0)
-					{
 						to_return.Append(paths).Append(" ");
-					}
-				}
-    
 				return to_return.ToString();
 			}
 		}
 
-		private void init()
+		private void Init()
 		{
 			programs = "";
 			files_paths = new List<string>();
 		}
-
-
-
 	}
-
 }

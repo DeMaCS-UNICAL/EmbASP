@@ -16,51 +16,18 @@
 			options = initial_option;
 		}
 
-		public virtual void addOption(string option)
+		public virtual void AddOption(string option)
 		{
 			if (option.Length == 0)
-			{
 				options = option;
-			}
 			else
-			{
 				options += separator + option;
-			}
-
 		}
 
-		public virtual void clear()
-		{
+    public virtual void Clear() => options = "";
 
-			options = "";
-		}
+    public virtual string Options { get => options; set => options = value; }
 
-		public virtual string Options
-		{
-			get
-			{
-    
-				return options;
-			}
-			set
-			{
-				options = value;
-			}
-		}
-
-		public virtual string Separator
-		{
-			get
-			{
-				return separator;
-			}
-			set
-			{
-				this.separator = value;
-			}
-		}
-
-
-	}
-
+    public virtual string Separator { get => separator; set => this.separator = value; }
+  }
 }

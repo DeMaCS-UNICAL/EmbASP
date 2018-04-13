@@ -4,9 +4,6 @@
 
 	public abstract class ASPFilterOption : OptionDescriptor
 	{
-		public ASPFilterOption() : base("-filter=")
-		{
-		}
+    public ASPFilterOption() : base("-filter=") { }
 	}
-
 }

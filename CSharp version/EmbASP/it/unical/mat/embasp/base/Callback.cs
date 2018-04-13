@@ -1,8 +1,7 @@
 ﻿namespace it.unical.mat.embasp.@base
 {
-	public interface Callback
+	public interface ICallback
 	{
-		void callback(Output o);
+		void Callback(Output o);
 	}
-
 }

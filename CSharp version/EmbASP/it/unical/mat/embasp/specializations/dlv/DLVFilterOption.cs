@@ -4,10 +4,6 @@
 
 	public class DLVFilterOption : ASPFilterOption
 	{
-		public DLVFilterOption(string initial_option) : base()
-		{
-			options += initial_option;
-		}
-	}
-
+    public DLVFilterOption(string initial_option) : base() => options += initial_option;
+  }
 }

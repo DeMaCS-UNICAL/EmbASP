@@ -3,48 +3,31 @@ using System.Collections.ObjectModel;
 
 namespace it.unical.mat.embasp.languages.asp
 {
-
 	using Output = it.unical.mat.embasp.@base.Output;
 
 	public abstract class AnswerSets : Output
 	{
 		protected internal IList<AnswerSet> answersets;
 
-		public AnswerSets(string @out) : base(@out)
-		{
-		}
+		public AnswerSets(string @out) : base(@out) { }
 
-		public AnswerSets(string @out, string err) : base(@out, err)
-		{
-		}
+		public AnswerSets(string @out, string err) : base(@out, err) { }
 
-		public override object Clone()
-		{
-			return base.Clone();
-		}
+    public override object Clone() => base.Clone();
 
-		public virtual IList<AnswerSet> Answersets
+    public virtual IList<AnswerSet> Answersets
 		{
 			get
 			{
 				if (answersets == null)
 				{
 					answersets = new List<AnswerSet>();
-					parse();
+					Parse();
 				}
-
         return new ReadOnlyCollection<AnswerSet>(answersets);
 			}
 		}
 
-		public virtual string AnswerSetsString
-		{
-			get
-			{
-				return output;
-			}
-		}
-
-	}
-
+    public virtual string AnswerSetsString => output;
+  }
 }

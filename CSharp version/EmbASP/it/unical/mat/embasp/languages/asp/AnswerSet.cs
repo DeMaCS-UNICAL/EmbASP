@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-
 namespace it.unical.mat.embasp.languages.asp
 {
-
 	public class AnswerSet
 	{
-
 		private readonly IList<string> value;
 		private readonly IDictionary<int, int> weight_map;
 		private ISet<object> atoms;
@@ -25,12 +22,9 @@ namespace it.unical.mat.embasp.languages.asp
 			weight_map = weightMap;
 		}
 
-		public virtual IList<string> getAnswerSet()
-		{
-      return new ReadOnlyCollection<string>(value);
-		}
+    public virtual IList<string> GetAnswerSet() => new ReadOnlyCollection<string>(value);
 
-		public virtual ISet<object> Atoms
+    public virtual ISet<object> Atoms
 		{
 			get
 			{
@@ -40,39 +34,19 @@ namespace it.unical.mat.embasp.languages.asp
 					ASPMapper mapper = ASPMapper.Instance;
 					foreach (String atom in value)
 					{
-            //Console.WriteLine("ATOM NAME {0}", atom);
-						object obj = mapper.getObject(atom);
+						object obj = mapper.GetObject(atom);
 						if (obj != null)
-						{
 							atoms.Add(obj);
-						}
 					}
 				}
-    
 				return atoms;
 			}
 		}
 
-		public virtual IDictionary<int, int> LevelWeight
-		{
-			get
-			{
-				return weight_map;
-			}
-		}
+    public virtual IDictionary<int, int> LevelWeight => weight_map;
 
-		public virtual IDictionary<int, int> Weights
-		{
-			get
-			{
-        return new ReadOnlyDictionary<int,int>(weight_map);
-			}
-		}
+    public virtual IDictionary<int, int> Weights => new ReadOnlyDictionary<int, int>(weight_map);
 
-		public override string ToString()
-		{
-			return value.ToString();
-		}
-	}
-
+    public override string ToString() => value.ToString();
+  }
 }

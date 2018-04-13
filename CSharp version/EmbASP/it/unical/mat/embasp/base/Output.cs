@@ -7,58 +7,26 @@ namespace it.unical.mat.embasp.@base
 		protected internal string output;
 		protected internal string errors;
 
-		public Output()
-		{
-			output = "";
-		}
+    public Output() => output = "";
 
-		public Output(string initial_output)
-		{
-			output = initial_output;
-		}
+    public Output(string initial_output) => output = initial_output;
 
-		public Output(string @out, string err)
+    public Output(string @out, string err)
 		{
 			output = @out;
 			errors = err;
 		}
 
     public virtual object Clone() {
-        try {
-          return base.MemberwiseClone();
-        }
-        catch (NotSupportedException ex) {
-          // code that handles the exception
-          throw;
-        }
+      return base.MemberwiseClone();
     }
 
-    public virtual string Errors
-		{
-			get
-			{
-				return errors;
-			}
-			set
-			{
-				errors = value;
-			}
-		}
+    public virtual string ErrorsString { get => errors; set => errors = value; }
 
-		public virtual string getOutput()
-		{
-			return output;
-		}
+    public virtual string OutputString => output;
 
-		protected internal virtual void parse()
-		{
-		}
+    protected internal virtual void Parse() { }
 
-		public virtual void setOutput(string output)
-		{
-			this.output = output;
-		}
-
+    public virtual void SetOutput(string output) => this.output = output;
   }
-
 }

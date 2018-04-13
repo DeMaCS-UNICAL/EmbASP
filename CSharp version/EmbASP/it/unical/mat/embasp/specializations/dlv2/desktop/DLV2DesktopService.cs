@@ -2,8 +2,7 @@
 
 namespace it.unical.mat.embasp.specializations.dlv2.desktop
 {
-
-	using Callback = it.unical.mat.embasp.@base.Callback;
+	using ICallback = it.unical.mat.embasp.@base.ICallback;
 	using InputProgram = it.unical.mat.embasp.@base.InputProgram;
 	using OptionDescriptor = it.unical.mat.embasp.@base.OptionDescriptor;
 	using Output = it.unical.mat.embasp.@base.Output;
@@ -11,7 +10,6 @@ namespace it.unical.mat.embasp.specializations.dlv2.desktop
 
 	public class DLV2DesktopService : DesktopService
 	{
-
 		private readonly OptionDescriptor competitionOutputOption;
 
 		public DLV2DesktopService(string exe_path) : base(exe_path)
@@ -20,22 +18,18 @@ namespace it.unical.mat.embasp.specializations.dlv2.desktop
 			competitionOutputOption = new OptionDescriptor("--competition-output");
 		}
 
-		protected internal override Output getOutput(string output, string error)
-		{
-			return new DLV2AnswerSets(output, error);
-		}
+    protected internal override Output GetOutput(string output, string error) => new DLV2AnswerSets(output, error);
 
-		public virtual void startAsync(Callback callback, IList<InputProgram> programs, IList<OptionDescriptor> options)
+    public new virtual void StartAsync(ICallback callback, IList<InputProgram> programs, IList<OptionDescriptor> options)
 		{
 			options.Add(competitionOutputOption);
-			base.startAsync(callback, programs, options);
+			base.StartAsync(callback, programs, options);
 		}
 
-		public override Output startSync(IList<InputProgram> programs, IList<OptionDescriptor> options)
+		public override Output StartSync(IList<InputProgram> programs, IList<OptionDescriptor> options)
 		{
 			options.Add(competitionOutputOption);
-			return base.startSync(programs, options);
+			return base.StartSync(programs, options);
 		}
 	}
-
 }

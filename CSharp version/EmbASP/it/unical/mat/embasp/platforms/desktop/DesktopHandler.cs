@@ -2,8 +2,7 @@
 
 namespace it.unical.mat.embasp.platforms.desktop
 {
-
-	using Callback = it.unical.mat.embasp.@base.Callback;
+	using ICallback = it.unical.mat.embasp.@base.ICallback;
 	using Handler = it.unical.mat.embasp.@base.Handler;
 	using InputProgram = it.unical.mat.embasp.@base.InputProgram;
 	using OptionDescriptor = it.unical.mat.embasp.@base.OptionDescriptor;
@@ -11,32 +10,22 @@ namespace it.unical.mat.embasp.platforms.desktop
 
 	public class DesktopHandler : Handler
 	{
-
 		private readonly DesktopService service;
 
-		public DesktopHandler(DesktopService service)
+    public DesktopHandler(DesktopService service) => this.service = service;
+
+    public override void StartAsync(ICallback c, IList<int> program_index, IList<int> option_index)
 		{
-			this.service = service;
+			IList<InputProgram> input_programs = CollectPrograms(program_index);
+			IList<OptionDescriptor> input_options = CollectOptions(option_index);
+			service.StartAsync(c, input_programs, input_options);
 		}
 
-		public override void startAsync(Callback c, IList<int> program_index, IList<int> option_index)
+		public override Output StartSync(IList<int> program_index, IList<int> option_index)
 		{
-
-			IList<InputProgram> input_programs = collect_programs(program_index);
-			IList<OptionDescriptor> input_options = collect_options(option_index);
-
-			service.startAsync(c, input_programs, input_options);
-
-		}
-
-		public override Output startSync(IList<int> program_index, IList<int> option_index)
-		{
-
-			IList<InputProgram> input_programs = collect_programs(program_index);
-			IList<OptionDescriptor> input_options = collect_options(option_index);
-
-			return service.startSync(input_programs, input_options);
+			IList<InputProgram> input_programs = CollectPrograms(program_index);
+			IList<OptionDescriptor> input_options = CollectOptions(option_index);
+			return service.StartSync(input_programs, input_options);
 		}
 	}
-
 }
