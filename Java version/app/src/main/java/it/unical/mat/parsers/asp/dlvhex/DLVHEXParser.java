@@ -17,26 +17,28 @@ public class DLVHEXParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		START=1, COST_LABEL=2, ANY=3, IGNORE=4, COMMA=5, INTEGER_CONSTANT=6, IDENTIFIER=7, 
-		ANSWER_SET_END=8, STRING_CONSTANT=9, TERMS_BEGIN=10, TERMS_END=11, WHITE_SPACE=12, 
-		BLANK_SPACE=13, COLON=14, COMMA_IN_COST=15, COST_END=16, INTEGER=17, LEVEL_BEGIN=18, 
-		LEVEL_END=19;
+		HEADER=1, WHITE_SPACE=2, COLON=3, COMMA=4, COST_BEGIN=5, COST_END=6, INTEGER=7, 
+		LEVEL_BEGIN=8, LEVEL_END=9, GROUND_QUERY_BEGIN=10, ANSWER_SET_BEGIN=11, 
+		ANSWER_SET_END=12, IDENTIFIER=13, STRING_CONSTANT=14, TERMS_BEGIN=15, 
+		TERMS_END=16, REASONING=17, DOT=18, BOOLEAN=19, WHITESPACE_IN_GROUND_QUERY=20, 
+		WITNESS_LABEL=21;
 	public static final int
 		RULE_answer_set = 0, RULE_atoms = 1, RULE_cost = 2, RULE_level = 3, RULE_output = 4, 
-		RULE_predicate_atom = 5, RULE_term = 6;
+		RULE_predicate_atom = 5, RULE_term = 6, RULE_witness = 7;
 	public static final String[] ruleNames = {
-		"answer_set", "atoms", "cost", "level", "output", "predicate_atom", "term"
+		"answer_set", "atoms", "cost", "level", "output", "predicate_atom", "term", 
+		"witness"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'{'", "'<'", null, null, null, null, null, "'}'", null, "'('", 
-		"')'", null, null, "':'", null, "'>'", null, "'['", "']'"
+		null, null, null, "':'", "','", "'<'", "'>'", null, "'['", "']'", "' is '", 
+		"'{'", "'}'", null, null, "'('", "')'", null, "'.'", null, null, "', evidenced by'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "START", "COST_LABEL", "ANY", "IGNORE", "COMMA", "INTEGER_CONSTANT", 
-		"IDENTIFIER", "ANSWER_SET_END", "STRING_CONSTANT", "TERMS_BEGIN", "TERMS_END", 
-		"WHITE_SPACE", "BLANK_SPACE", "COLON", "COMMA_IN_COST", "COST_END", "INTEGER", 
-		"LEVEL_BEGIN", "LEVEL_END"
+		null, "HEADER", "WHITE_SPACE", "COLON", "COMMA", "COST_BEGIN", "COST_END", 
+		"INTEGER", "LEVEL_BEGIN", "LEVEL_END", "GROUND_QUERY_BEGIN", "ANSWER_SET_BEGIN", 
+		"ANSWER_SET_END", "IDENTIFIER", "STRING_CONSTANT", "TERMS_BEGIN", "TERMS_END", 
+		"REASONING", "DOT", "BOOLEAN", "WHITESPACE_IN_GROUND_QUERY", "WITNESS_LABEL"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -88,24 +90,47 @@ public class DLVHEXParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class Answer_setContext extends ParserRuleContext {
-		public TerminalNode START() { return getToken(DLVHEXParser.START, 0); }
-		public TerminalNode ANSWER_SET_END() { return getToken(DLVHEXParser.ANSWER_SET_END, 0); }
-		public List<AtomsContext> atoms() {
-			return getRuleContexts(AtomsContext.class);
-		}
-		public AtomsContext atoms(int i) {
-			return getRuleContext(AtomsContext.class,i);
-		}
-		public CostContext cost() {
-			return getRuleContext(CostContext.class,0);
-		}
 		public Answer_setContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_answer_set; }
+	 
+		public Answer_setContext() { }
+		public void copyFrom(Answer_setContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class GroundQueryContext extends Answer_setContext {
+		public List<TerminalNode> IDENTIFIER() { return getTokens(DLVHEXParser.IDENTIFIER); }
+		public TerminalNode IDENTIFIER(int i) {
+			return getToken(DLVHEXParser.IDENTIFIER, i);
+		}
+		public TerminalNode GROUND_QUERY_BEGIN() { return getToken(DLVHEXParser.GROUND_QUERY_BEGIN, 0); }
+		public TerminalNode REASONING() { return getToken(DLVHEXParser.REASONING, 0); }
+		public TerminalNode BOOLEAN() { return getToken(DLVHEXParser.BOOLEAN, 0); }
+		public TerminalNode DOT() { return getToken(DLVHEXParser.DOT, 0); }
+		public WitnessContext witness() {
+			return getRuleContext(WitnessContext.class,0);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(DLVHEXParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(DLVHEXParser.COMMA, i);
+		}
+		public GroundQueryContext(Answer_setContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DLVHEXParserVisitor ) return ((DLVHEXParserVisitor<? extends T>)visitor).visitAnswer_set(this);
+			if ( visitor instanceof DLVHEXParserVisitor ) return ((DLVHEXParserVisitor<? extends T>)visitor).visitGroundQuery(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ModelContext extends Answer_setContext {
+		public AtomsContext atoms() {
+			return getRuleContext(AtomsContext.class,0);
+		}
+		public ModelContext(Answer_setContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVHEXParserVisitor ) return ((DLVHEXParserVisitor<? extends T>)visitor).visitModel(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -115,36 +140,67 @@ public class DLVHEXParser extends Parser {
 		enterRule(_localctx, 0, RULE_answer_set);
 		int _la;
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(14);
-			match(START);
-			setState(18);
+			setState(32);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==IDENTIFIER) {
+			switch (_input.LA(1)) {
+			case IDENTIFIER:
+				_localctx = new GroundQueryContext(_localctx);
+				enterOuterAlt(_localctx, 1);
 				{
-				{
-				setState(15);
-				atoms();
-				}
-				}
-				setState(20);
+				setState(16);
+				match(IDENTIFIER);
+				setState(21);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
-			setState(21);
-			match(ANSWER_SET_END);
-			setState(23);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==COST_LABEL) {
-				{
-				setState(22);
-				cost();
+				while (_la==COMMA) {
+					{
+					{
+					setState(17);
+					match(COMMA);
+					setState(18);
+					match(IDENTIFIER);
+					}
+					}
+					setState(23);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
 				}
-			}
-
+				setState(24);
+				match(GROUND_QUERY_BEGIN);
+				setState(25);
+				match(REASONING);
+				setState(26);
+				match(BOOLEAN);
+				setState(29);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case DOT:
+					{
+					setState(27);
+					match(DOT);
+					}
+					break;
+				case WITNESS_LABEL:
+					{
+					setState(28);
+					witness();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				}
+				break;
+			case ANSWER_SET_BEGIN:
+				_localctx = new ModelContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(31);
+				atoms();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -159,11 +215,16 @@ public class DLVHEXParser extends Parser {
 	}
 
 	public static class AtomsContext extends ParserRuleContext {
+		public TerminalNode ANSWER_SET_BEGIN() { return getToken(DLVHEXParser.ANSWER_SET_BEGIN, 0); }
+		public TerminalNode ANSWER_SET_END() { return getToken(DLVHEXParser.ANSWER_SET_END, 0); }
 		public List<Predicate_atomContext> predicate_atom() {
 			return getRuleContexts(Predicate_atomContext.class);
 		}
 		public Predicate_atomContext predicate_atom(int i) {
 			return getRuleContext(Predicate_atomContext.class,i);
+		}
+		public CostContext cost() {
+			return getRuleContext(CostContext.class,0);
 		}
 		public List<TerminalNode> COMMA() { return getTokens(DLVHEXParser.COMMA); }
 		public TerminalNode COMMA(int i) {
@@ -187,24 +248,46 @@ public class DLVHEXParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(25);
-			predicate_atom();
-			setState(30);
+			setState(34);
+			match(ANSWER_SET_BEGIN);
+			setState(43);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==COMMA) {
+			if (_la==IDENTIFIER) {
 				{
-				{
-				setState(26);
-				match(COMMA);
-				setState(27);
+				setState(35);
 				predicate_atom();
-				}
-				}
-				setState(32);
+				setState(40);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
+				while (_la==COMMA) {
+					{
+					{
+					setState(36);
+					match(COMMA);
+					setState(37);
+					predicate_atom();
+					}
+					}
+					setState(42);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
 			}
+
+			setState(45);
+			match(ANSWER_SET_END);
+			setState(47);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==COST_BEGIN) {
+				{
+				setState(46);
+				cost();
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -219,7 +302,7 @@ public class DLVHEXParser extends Parser {
 	}
 
 	public static class CostContext extends ParserRuleContext {
-		public TerminalNode COST_LABEL() { return getToken(DLVHEXParser.COST_LABEL, 0); }
+		public TerminalNode COST_BEGIN() { return getToken(DLVHEXParser.COST_BEGIN, 0); }
 		public List<LevelContext> level() {
 			return getRuleContexts(LevelContext.class);
 		}
@@ -227,9 +310,9 @@ public class DLVHEXParser extends Parser {
 			return getRuleContext(LevelContext.class,i);
 		}
 		public TerminalNode COST_END() { return getToken(DLVHEXParser.COST_END, 0); }
-		public List<TerminalNode> COMMA_IN_COST() { return getTokens(DLVHEXParser.COMMA_IN_COST); }
-		public TerminalNode COMMA_IN_COST(int i) {
-			return getToken(DLVHEXParser.COMMA_IN_COST, i);
+		public List<TerminalNode> COMMA() { return getTokens(DLVHEXParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(DLVHEXParser.COMMA, i);
 		}
 		public CostContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -249,27 +332,27 @@ public class DLVHEXParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(33);
-			match(COST_LABEL);
-			setState(34);
+			setState(49);
+			match(COST_BEGIN);
+			setState(50);
 			level();
-			setState(39);
+			setState(55);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==COMMA_IN_COST) {
+			while (_la==COMMA) {
 				{
 				{
-				setState(35);
-				match(COMMA_IN_COST);
-				setState(36);
+				setState(51);
+				match(COMMA);
+				setState(52);
 				level();
 				}
 				}
-				setState(41);
+				setState(57);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(42);
+			setState(58);
 			match(COST_END);
 			}
 		}
@@ -309,15 +392,15 @@ public class DLVHEXParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
+			setState(60);
 			match(LEVEL_BEGIN);
-			setState(45);
+			setState(61);
 			match(INTEGER);
-			setState(46);
+			setState(62);
 			match(COLON);
-			setState(47);
+			setState(63);
 			match(INTEGER);
-			setState(48);
+			setState(64);
 			match(LEVEL_END);
 			}
 		}
@@ -357,17 +440,17 @@ public class DLVHEXParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(69);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==START) {
+			while (_la==ANSWER_SET_BEGIN || _la==IDENTIFIER) {
 				{
 				{
-				setState(50);
+				setState(66);
 				answer_set();
 				}
 				}
-				setState(55);
+				setState(71);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -416,34 +499,34 @@ public class DLVHEXParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
+			setState(72);
 			match(IDENTIFIER);
-			setState(68);
+			setState(84);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TERMS_BEGIN) {
 				{
-				setState(57);
+				setState(73);
 				match(TERMS_BEGIN);
-				setState(58);
+				setState(74);
 				term();
-				setState(63);
+				setState(79);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(59);
+					setState(75);
 					match(COMMA);
-					setState(60);
+					setState(76);
 					term();
 					}
 					}
-					setState(65);
+					setState(81);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(66);
+				setState(82);
 				match(TERMS_END);
 				}
 			}
@@ -463,7 +546,7 @@ public class DLVHEXParser extends Parser {
 
 	public static class TermContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(DLVHEXParser.IDENTIFIER, 0); }
-		public TerminalNode INTEGER_CONSTANT() { return getToken(DLVHEXParser.INTEGER_CONSTANT, 0); }
+		public TerminalNode INTEGER() { return getToken(DLVHEXParser.INTEGER, 0); }
 		public Predicate_atomContext predicate_atom() {
 			return getRuleContext(Predicate_atomContext.class,0);
 		}
@@ -483,34 +566,34 @@ public class DLVHEXParser extends Parser {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_term);
 		try {
-			setState(74);
+			setState(90);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(70);
+				setState(86);
 				match(IDENTIFIER);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(71);
-				match(INTEGER_CONSTANT);
+				setState(87);
+				match(INTEGER);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(72);
+				setState(88);
 				predicate_atom();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(73);
+				setState(89);
 				match(STRING_CONSTANT);
 				}
 				break;
@@ -527,27 +610,71 @@ public class DLVHEXParser extends Parser {
 		return _localctx;
 	}
 
+	public static class WitnessContext extends ParserRuleContext {
+		public TerminalNode WITNESS_LABEL() { return getToken(DLVHEXParser.WITNESS_LABEL, 0); }
+		public AtomsContext atoms() {
+			return getRuleContext(AtomsContext.class,0);
+		}
+		public WitnessContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_witness; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DLVHEXParserVisitor ) return ((DLVHEXParserVisitor<? extends T>)visitor).visitWitness(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final WitnessContext witness() throws RecognitionException {
+		WitnessContext _localctx = new WitnessContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_witness);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(92);
+			match(WITNESS_LABEL);
+			setState(93);
+			atoms();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\25O\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\7\2\23\n\2\f\2\16\2"+
-		"\26\13\2\3\2\3\2\5\2\32\n\2\3\3\3\3\3\3\7\3\37\n\3\f\3\16\3\"\13\3\3\4"+
-		"\3\4\3\4\3\4\7\4(\n\4\f\4\16\4+\13\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3"+
-		"\6\7\6\66\n\6\f\6\16\69\13\6\3\7\3\7\3\7\3\7\3\7\7\7@\n\7\f\7\16\7C\13"+
-		"\7\3\7\3\7\5\7G\n\7\3\b\3\b\3\b\3\b\5\bM\n\b\3\b\2\2\t\2\4\6\b\n\f\16"+
-		"\2\2\2Q\2\20\3\2\2\2\4\33\3\2\2\2\6#\3\2\2\2\b.\3\2\2\2\n\67\3\2\2\2\f"+
-		":\3\2\2\2\16L\3\2\2\2\20\24\7\3\2\2\21\23\5\4\3\2\22\21\3\2\2\2\23\26"+
-		"\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27\31"+
-		"\7\n\2\2\30\32\5\6\4\2\31\30\3\2\2\2\31\32\3\2\2\2\32\3\3\2\2\2\33 \5"+
-		"\f\7\2\34\35\7\7\2\2\35\37\5\f\7\2\36\34\3\2\2\2\37\"\3\2\2\2 \36\3\2"+
-		"\2\2 !\3\2\2\2!\5\3\2\2\2\" \3\2\2\2#$\7\4\2\2$)\5\b\5\2%&\7\21\2\2&("+
-		"\5\b\5\2\'%\3\2\2\2(+\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*,\3\2\2\2+)\3\2\2\2"+
-		",-\7\22\2\2-\7\3\2\2\2./\7\24\2\2/\60\7\23\2\2\60\61\7\20\2\2\61\62\7"+
-		"\23\2\2\62\63\7\25\2\2\63\t\3\2\2\2\64\66\5\2\2\2\65\64\3\2\2\2\669\3"+
-		"\2\2\2\67\65\3\2\2\2\678\3\2\2\28\13\3\2\2\29\67\3\2\2\2:F\7\t\2\2;<\7"+
-		"\f\2\2<A\5\16\b\2=>\7\7\2\2>@\5\16\b\2?=\3\2\2\2@C\3\2\2\2A?\3\2\2\2A"+
-		"B\3\2\2\2BD\3\2\2\2CA\3\2\2\2DE\7\r\2\2EG\3\2\2\2F;\3\2\2\2FG\3\2\2\2"+
-		"G\r\3\2\2\2HM\7\t\2\2IM\7\b\2\2JM\5\f\7\2KM\7\13\2\2LH\3\2\2\2LI\3\2\2"+
-		"\2LJ\3\2\2\2LK\3\2\2\2M\17\3\2\2\2\n\24\31 )\67AFL";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27b\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26"+
+		"\n\2\f\2\16\2\31\13\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\5\2#\n\2\3\3\3"+
+		"\3\3\3\3\3\7\3)\n\3\f\3\16\3,\13\3\5\3.\n\3\3\3\3\3\5\3\62\n\3\3\4\3\4"+
+		"\3\4\3\4\7\48\n\4\f\4\16\4;\13\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\6\7"+
+		"\6F\n\6\f\6\16\6I\13\6\3\7\3\7\3\7\3\7\3\7\7\7P\n\7\f\7\16\7S\13\7\3\7"+
+		"\3\7\5\7W\n\7\3\b\3\b\3\b\3\b\5\b]\n\b\3\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n"+
+		"\f\16\20\2\2\2f\2\"\3\2\2\2\4$\3\2\2\2\6\63\3\2\2\2\b>\3\2\2\2\nG\3\2"+
+		"\2\2\fJ\3\2\2\2\16\\\3\2\2\2\20^\3\2\2\2\22\27\7\17\2\2\23\24\7\6\2\2"+
+		"\24\26\7\17\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2"+
+		"\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33\7\f\2\2\33\34\7\23\2\2\34\37\7\25"+
+		"\2\2\35 \7\24\2\2\36 \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 #\3\2\2\2!"+
+		"#\5\4\3\2\"\22\3\2\2\2\"!\3\2\2\2#\3\3\2\2\2$-\7\r\2\2%*\5\f\7\2&\'\7"+
+		"\6\2\2\')\5\f\7\2(&\3\2\2\2),\3\2\2\2*(\3\2\2\2*+\3\2\2\2+.\3\2\2\2,*"+
+		"\3\2\2\2-%\3\2\2\2-.\3\2\2\2./\3\2\2\2/\61\7\16\2\2\60\62\5\6\4\2\61\60"+
+		"\3\2\2\2\61\62\3\2\2\2\62\5\3\2\2\2\63\64\7\7\2\2\649\5\b\5\2\65\66\7"+
+		"\6\2\2\668\5\b\5\2\67\65\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3\2\2\2:<\3\2"+
+		"\2\2;9\3\2\2\2<=\7\b\2\2=\7\3\2\2\2>?\7\n\2\2?@\7\t\2\2@A\7\5\2\2AB\7"+
+		"\t\2\2BC\7\13\2\2C\t\3\2\2\2DF\5\2\2\2ED\3\2\2\2FI\3\2\2\2GE\3\2\2\2G"+
+		"H\3\2\2\2H\13\3\2\2\2IG\3\2\2\2JV\7\17\2\2KL\7\21\2\2LQ\5\16\b\2MN\7\6"+
+		"\2\2NP\5\16\b\2OM\3\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3"+
+		"\2\2\2TU\7\22\2\2UW\3\2\2\2VK\3\2\2\2VW\3\2\2\2W\r\3\2\2\2X]\7\17\2\2"+
+		"Y]\7\t\2\2Z]\5\f\7\2[]\7\20\2\2\\X\3\2\2\2\\Y\3\2\2\2\\Z\3\2\2\2\\[\3"+
+		"\2\2\2]\17\3\2\2\2^_\7\27\2\2_`\5\4\3\2`\21\3\2\2\2\r\27\37\"*-\619GQ"+
+		"V\\";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

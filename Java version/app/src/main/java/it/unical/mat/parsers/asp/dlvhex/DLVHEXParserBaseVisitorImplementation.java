@@ -17,7 +17,7 @@ public class DLVHEXParserBaseVisitorImplementation extends DLVHEXParserBaseVisit
     }
 
     @Override
-    public Void visitAnswer_set(DLVHEXParser.Answer_setContext ctx) {
+    public Void visitModel(DLVHEXParser.ModelContext ctx) {
         answerSets.addAnswerSet();
 
         return visitChildren(ctx);

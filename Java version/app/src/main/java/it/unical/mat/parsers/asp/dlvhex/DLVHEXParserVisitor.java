@@ -11,11 +11,19 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface DLVHEXParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link DLVHEXParser#answer_set}.
+	 * Visit a parse tree produced by the {@code GroundQuery}
+	 * labeled alternative in {@link DLVHEXParser#answer_set}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAnswer_set(DLVHEXParser.Answer_setContext ctx);
+	T visitGroundQuery(DLVHEXParser.GroundQueryContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Model}
+	 * labeled alternative in {@link DLVHEXParser#answer_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModel(DLVHEXParser.ModelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DLVHEXParser#atoms}.
 	 * @param ctx the parse tree
@@ -52,4 +60,10 @@ public interface DLVHEXParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTerm(DLVHEXParser.TermContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DLVHEXParser#witness}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWitness(DLVHEXParser.WitnessContext ctx);
 }
