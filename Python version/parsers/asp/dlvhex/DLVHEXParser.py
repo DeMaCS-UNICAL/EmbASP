@@ -8,32 +8,37 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\25O\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write(u"\4\b\t\b\3\2\3\2\7\2\23\n\2\f\2\16\2\26\13\2\3\2\3\2")
-        buf.write(u"\5\2\32\n\2\3\3\3\3\3\3\7\3\37\n\3\f\3\16\3\"\13\3\3")
-        buf.write(u"\4\3\4\3\4\3\4\7\4(\n\4\f\4\16\4+\13\4\3\4\3\4\3\5\3")
-        buf.write(u"\5\3\5\3\5\3\5\3\5\3\6\7\6\66\n\6\f\6\16\69\13\6\3\7")
-        buf.write(u"\3\7\3\7\3\7\3\7\7\7@\n\7\f\7\16\7C\13\7\3\7\3\7\5\7")
-        buf.write(u"G\n\7\3\b\3\b\3\b\3\b\5\bM\n\b\3\b\2\2\t\2\4\6\b\n\f")
-        buf.write(u"\16\2\2\2Q\2\20\3\2\2\2\4\33\3\2\2\2\6#\3\2\2\2\b.\3")
-        buf.write(u"\2\2\2\n\67\3\2\2\2\f:\3\2\2\2\16L\3\2\2\2\20\24\7\3")
-        buf.write(u"\2\2\21\23\5\4\3\2\22\21\3\2\2\2\23\26\3\2\2\2\24\22")
-        buf.write(u"\3\2\2\2\24\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27")
-        buf.write(u"\31\7\n\2\2\30\32\5\6\4\2\31\30\3\2\2\2\31\32\3\2\2\2")
-        buf.write(u"\32\3\3\2\2\2\33 \5\f\7\2\34\35\7\7\2\2\35\37\5\f\7\2")
-        buf.write(u"\36\34\3\2\2\2\37\"\3\2\2\2 \36\3\2\2\2 !\3\2\2\2!\5")
-        buf.write(u"\3\2\2\2\" \3\2\2\2#$\7\4\2\2$)\5\b\5\2%&\7\21\2\2&(")
-        buf.write(u"\5\b\5\2\'%\3\2\2\2(+\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*,")
-        buf.write(u"\3\2\2\2+)\3\2\2\2,-\7\22\2\2-\7\3\2\2\2./\7\24\2\2/")
-        buf.write(u"\60\7\23\2\2\60\61\7\20\2\2\61\62\7\23\2\2\62\63\7\25")
-        buf.write(u"\2\2\63\t\3\2\2\2\64\66\5\2\2\2\65\64\3\2\2\2\669\3\2")
-        buf.write(u"\2\2\67\65\3\2\2\2\678\3\2\2\28\13\3\2\2\29\67\3\2\2")
-        buf.write(u"\2:F\7\t\2\2;<\7\f\2\2<A\5\16\b\2=>\7\7\2\2>@\5\16\b")
-        buf.write(u"\2?=\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2BD\3\2\2\2")
-        buf.write(u"CA\3\2\2\2DE\7\r\2\2EG\3\2\2\2F;\3\2\2\2FG\3\2\2\2G\r")
-        buf.write(u"\3\2\2\2HM\7\t\2\2IM\7\b\2\2JM\5\f\7\2KM\7\13\2\2LH\3")
-        buf.write(u"\2\2\2LI\3\2\2\2LJ\3\2\2\2LK\3\2\2\2M\17\3\2\2\2\n\24")
-        buf.write(u"\31 )\67AFL")
+        buf.write(u"\27b\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write(u"\4\b\t\b\4\t\t\t\3\2\3\2\3\2\7\2\26\n\2\f\2\16\2\31\13")
+        buf.write(u"\2\3\2\3\2\3\2\3\2\3\2\5\2 \n\2\3\2\5\2#\n\2\3\3\3\3")
+        buf.write(u"\3\3\3\3\7\3)\n\3\f\3\16\3,\13\3\5\3.\n\3\3\3\3\3\5\3")
+        buf.write(u"\62\n\3\3\4\3\4\3\4\3\4\7\48\n\4\f\4\16\4;\13\4\3\4\3")
+        buf.write(u"\4\3\5\3\5\3\5\3\5\3\5\3\5\3\6\7\6F\n\6\f\6\16\6I\13")
+        buf.write(u"\6\3\7\3\7\3\7\3\7\3\7\7\7P\n\7\f\7\16\7S\13\7\3\7\3")
+        buf.write(u"\7\5\7W\n\7\3\b\3\b\3\b\3\b\5\b]\n\b\3\t\3\t\3\t\3\t")
+        buf.write(u"\2\2\n\2\4\6\b\n\f\16\20\2\2\2f\2\"\3\2\2\2\4$\3\2\2")
+        buf.write(u"\2\6\63\3\2\2\2\b>\3\2\2\2\nG\3\2\2\2\fJ\3\2\2\2\16\\")
+        buf.write(u"\3\2\2\2\20^\3\2\2\2\22\27\7\17\2\2\23\24\7\6\2\2\24")
+        buf.write(u"\26\7\17\2\2\25\23\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2")
+        buf.write(u"\2\27\30\3\2\2\2\30\32\3\2\2\2\31\27\3\2\2\2\32\33\7")
+        buf.write(u"\f\2\2\33\34\7\23\2\2\34\37\7\25\2\2\35 \7\24\2\2\36")
+        buf.write(u" \5\20\t\2\37\35\3\2\2\2\37\36\3\2\2\2 #\3\2\2\2!#\5")
+        buf.write(u"\4\3\2\"\22\3\2\2\2\"!\3\2\2\2#\3\3\2\2\2$-\7\r\2\2%")
+        buf.write(u"*\5\f\7\2&\'\7\6\2\2\')\5\f\7\2(&\3\2\2\2),\3\2\2\2*")
+        buf.write(u"(\3\2\2\2*+\3\2\2\2+.\3\2\2\2,*\3\2\2\2-%\3\2\2\2-.\3")
+        buf.write(u"\2\2\2./\3\2\2\2/\61\7\16\2\2\60\62\5\6\4\2\61\60\3\2")
+        buf.write(u"\2\2\61\62\3\2\2\2\62\5\3\2\2\2\63\64\7\7\2\2\649\5\b")
+        buf.write(u"\5\2\65\66\7\6\2\2\668\5\b\5\2\67\65\3\2\2\28;\3\2\2")
+        buf.write(u"\29\67\3\2\2\29:\3\2\2\2:<\3\2\2\2;9\3\2\2\2<=\7\b\2")
+        buf.write(u"\2=\7\3\2\2\2>?\7\n\2\2?@\7\t\2\2@A\7\5\2\2AB\7\t\2\2")
+        buf.write(u"BC\7\13\2\2C\t\3\2\2\2DF\5\2\2\2ED\3\2\2\2FI\3\2\2\2")
+        buf.write(u"GE\3\2\2\2GH\3\2\2\2H\13\3\2\2\2IG\3\2\2\2JV\7\17\2\2")
+        buf.write(u"KL\7\21\2\2LQ\5\16\b\2MN\7\6\2\2NP\5\16\b\2OM\3\2\2\2")
+        buf.write(u"PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3\2\2\2TU")
+        buf.write(u"\7\22\2\2UW\3\2\2\2VK\3\2\2\2VW\3\2\2\2W\r\3\2\2\2X]")
+        buf.write(u"\7\17\2\2Y]\7\t\2\2Z]\5\f\7\2[]\7\20\2\2\\X\3\2\2\2\\")
+        buf.write(u"Y\3\2\2\2\\Z\3\2\2\2\\[\3\2\2\2]\17\3\2\2\2^_\7\27\2")
+        buf.write(u"\2_`\5\4\3\2`\21\3\2\2\2\r\27\37\"*-\619GQV\\")
         return buf.getvalue()
 
 
@@ -47,16 +52,19 @@ class DLVHEXParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'{'", u"'<'", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"'}'", u"<INVALID>", 
-                     u"'('", u"')'", u"<INVALID>", u"<INVALID>", u"':'", 
-                     u"<INVALID>", u"'>'", u"<INVALID>", u"'['", u"']'" ]
+    literalNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"':'", u"','", 
+                     u"'<'", u"'>'", u"<INVALID>", u"'['", u"']'", u"' is '", 
+                     u"'{'", u"'}'", u"<INVALID>", u"<INVALID>", u"'('", 
+                     u"')'", u"<INVALID>", u"'.'", u"<INVALID>", u"<INVALID>", 
+                     u"', evidenced by'" ]
 
-    symbolicNames = [ u"<INVALID>", u"START", u"COST_LABEL", u"ANY", u"IGNORE", 
-                      u"COMMA", u"INTEGER_CONSTANT", u"IDENTIFIER", u"ANSWER_SET_END", 
+    symbolicNames = [ u"<INVALID>", u"HEADER", u"WHITE_SPACE", u"COLON", 
+                      u"COMMA", u"COST_BEGIN", u"COST_END", u"INTEGER", 
+                      u"LEVEL_BEGIN", u"LEVEL_END", u"GROUND_QUERY_BEGIN", 
+                      u"ANSWER_SET_BEGIN", u"ANSWER_SET_END", u"IDENTIFIER", 
                       u"STRING_CONSTANT", u"TERMS_BEGIN", u"TERMS_END", 
-                      u"WHITE_SPACE", u"BLANK_SPACE", u"COLON", u"COMMA_IN_COST", 
-                      u"COST_END", u"INTEGER", u"LEVEL_BEGIN", u"LEVEL_END" ]
+                      u"REASONING", u"DOT", u"BOOLEAN", u"WHITESPACE_IN_GROUND_QUERY", 
+                      u"WITNESS_LABEL" ]
 
     RULE_answer_set = 0
     RULE_atoms = 1
@@ -65,30 +73,33 @@ class DLVHEXParser ( Parser ):
     RULE_output = 4
     RULE_predicate_atom = 5
     RULE_term = 6
+    RULE_witness = 7
 
     ruleNames =  [ u"answer_set", u"atoms", u"cost", u"level", u"output", 
-                   u"predicate_atom", u"term" ]
+                   u"predicate_atom", u"term", u"witness" ]
 
     EOF = Token.EOF
-    START=1
-    COST_LABEL=2
-    ANY=3
-    IGNORE=4
-    COMMA=5
-    INTEGER_CONSTANT=6
-    IDENTIFIER=7
-    ANSWER_SET_END=8
-    STRING_CONSTANT=9
-    TERMS_BEGIN=10
-    TERMS_END=11
-    WHITE_SPACE=12
-    BLANK_SPACE=13
-    COLON=14
-    COMMA_IN_COST=15
-    COST_END=16
-    INTEGER=17
-    LEVEL_BEGIN=18
-    LEVEL_END=19
+    HEADER=1
+    WHITE_SPACE=2
+    COLON=3
+    COMMA=4
+    COST_BEGIN=5
+    COST_END=6
+    INTEGER=7
+    LEVEL_BEGIN=8
+    LEVEL_END=9
+    GROUND_QUERY_BEGIN=10
+    ANSWER_SET_BEGIN=11
+    ANSWER_SET_END=12
+    IDENTIFIER=13
+    STRING_CONSTANT=14
+    TERMS_BEGIN=15
+    TERMS_END=16
+    REASONING=17
+    DOT=18
+    BOOLEAN=19
+    WHITESPACE_IN_GROUND_QUERY=20
+    WITNESS_LABEL=21
 
     def __init__(self, input, output=sys.stdout):
         super(DLVHEXParser, self).__init__(input, output=output)
@@ -104,32 +115,66 @@ class DLVHEXParser ( Parser ):
             super(DLVHEXParser.Answer_setContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def START(self):
-            return self.getToken(DLVHEXParser.START, 0)
-
-        def ANSWER_SET_END(self):
-            return self.getToken(DLVHEXParser.ANSWER_SET_END, 0)
-
-        def atoms(self, i=None):
-            if i is None:
-                return self.getTypedRuleContexts(DLVHEXParser.AtomsContext)
-            else:
-                return self.getTypedRuleContext(DLVHEXParser.AtomsContext,i)
-
-
-        def cost(self):
-            return self.getTypedRuleContext(DLVHEXParser.CostContext,0)
-
 
         def getRuleIndex(self):
             return DLVHEXParser.RULE_answer_set
 
+     
+        def copyFrom(self, ctx):
+            super(DLVHEXParser.Answer_setContext, self).copyFrom(ctx)
+
+
+
+    class GroundQueryContext(Answer_setContext):
+
+        def __init__(self, parser, ctx): # actually a DLVHEXParser.Answer_setContext)
+            super(DLVHEXParser.GroundQueryContext, self).__init__(parser)
+            self.copyFrom(ctx)
+
+        def IDENTIFIER(self, i=None):
+            if i is None:
+                return self.getTokens(DLVHEXParser.IDENTIFIER)
+            else:
+                return self.getToken(DLVHEXParser.IDENTIFIER, i)
+        def GROUND_QUERY_BEGIN(self):
+            return self.getToken(DLVHEXParser.GROUND_QUERY_BEGIN, 0)
+        def REASONING(self):
+            return self.getToken(DLVHEXParser.REASONING, 0)
+        def BOOLEAN(self):
+            return self.getToken(DLVHEXParser.BOOLEAN, 0)
+        def DOT(self):
+            return self.getToken(DLVHEXParser.DOT, 0)
+        def witness(self):
+            return self.getTypedRuleContext(DLVHEXParser.WitnessContext,0)
+
+        def COMMA(self, i=None):
+            if i is None:
+                return self.getTokens(DLVHEXParser.COMMA)
+            else:
+                return self.getToken(DLVHEXParser.COMMA, i)
+
         def accept(self, visitor):
-            if hasattr(visitor, "visitAnswer_set"):
-                return visitor.visitAnswer_set(self)
+            if hasattr(visitor, "visitGroundQuery"):
+                return visitor.visitGroundQuery(self)
             else:
                 return visitor.visitChildren(self)
 
+
+    class ModelContext(Answer_setContext):
+
+        def __init__(self, parser, ctx): # actually a DLVHEXParser.Answer_setContext)
+            super(DLVHEXParser.ModelContext, self).__init__(parser)
+            self.copyFrom(ctx)
+
+        def atoms(self):
+            return self.getTypedRuleContext(DLVHEXParser.AtomsContext,0)
+
+
+        def accept(self, visitor):
+            if hasattr(visitor, "visitModel"):
+                return visitor.visitModel(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -139,28 +184,55 @@ class DLVHEXParser ( Parser ):
         self.enterRule(localctx, 0, self.RULE_answer_set)
         self._la = 0 # Token type
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 14
-            self.match(DLVHEXParser.START)
-            self.state = 18
+            self.state = 32
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==DLVHEXParser.IDENTIFIER:
-                self.state = 15
-                self.atoms()
-                self.state = 20
+            token = self._input.LA(1)
+            if token in [DLVHEXParser.IDENTIFIER]:
+                localctx = DLVHEXParser.GroundQueryContext(self, localctx)
+                self.enterOuterAlt(localctx, 1)
+                self.state = 16
+                self.match(DLVHEXParser.IDENTIFIER)
+                self.state = 21
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
+                while _la==DLVHEXParser.COMMA:
+                    self.state = 17
+                    self.match(DLVHEXParser.COMMA)
+                    self.state = 18
+                    self.match(DLVHEXParser.IDENTIFIER)
+                    self.state = 23
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
 
-            self.state = 21
-            self.match(DLVHEXParser.ANSWER_SET_END)
-            self.state = 23
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==DLVHEXParser.COST_LABEL:
-                self.state = 22
-                self.cost()
+                self.state = 24
+                self.match(DLVHEXParser.GROUND_QUERY_BEGIN)
+                self.state = 25
+                self.match(DLVHEXParser.REASONING)
+                self.state = 26
+                self.match(DLVHEXParser.BOOLEAN)
+                self.state = 29
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [DLVHEXParser.DOT]:
+                    self.state = 27
+                    self.match(DLVHEXParser.DOT)
+                    pass
+                elif token in [DLVHEXParser.WITNESS_LABEL]:
+                    self.state = 28
+                    self.witness()
+                    pass
+                else:
+                    raise NoViableAltException(self)
 
+                pass
+            elif token in [DLVHEXParser.ANSWER_SET_BEGIN]:
+                localctx = DLVHEXParser.ModelContext(self, localctx)
+                self.enterOuterAlt(localctx, 2)
+                self.state = 31
+                self.atoms()
+                pass
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -176,11 +248,21 @@ class DLVHEXParser ( Parser ):
             super(DLVHEXParser.AtomsContext, self).__init__(parent, invokingState)
             self.parser = parser
 
+        def ANSWER_SET_BEGIN(self):
+            return self.getToken(DLVHEXParser.ANSWER_SET_BEGIN, 0)
+
+        def ANSWER_SET_END(self):
+            return self.getToken(DLVHEXParser.ANSWER_SET_END, 0)
+
         def predicate_atom(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(DLVHEXParser.Predicate_atomContext)
             else:
                 return self.getTypedRuleContext(DLVHEXParser.Predicate_atomContext,i)
+
+
+        def cost(self):
+            return self.getTypedRuleContext(DLVHEXParser.CostContext,0)
 
 
         def COMMA(self, i=None):
@@ -208,19 +290,37 @@ class DLVHEXParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 25
-            self.predicate_atom()
-            self.state = 30
+            self.state = 34
+            self.match(DLVHEXParser.ANSWER_SET_BEGIN)
+            self.state = 43
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==DLVHEXParser.COMMA:
-                self.state = 26
-                self.match(DLVHEXParser.COMMA)
-                self.state = 27
+            if _la==DLVHEXParser.IDENTIFIER:
+                self.state = 35
                 self.predicate_atom()
-                self.state = 32
+                self.state = 40
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
+                while _la==DLVHEXParser.COMMA:
+                    self.state = 36
+                    self.match(DLVHEXParser.COMMA)
+                    self.state = 37
+                    self.predicate_atom()
+                    self.state = 42
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+
+
+            self.state = 45
+            self.match(DLVHEXParser.ANSWER_SET_END)
+            self.state = 47
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==DLVHEXParser.COST_BEGIN:
+                self.state = 46
+                self.cost()
+
 
         except RecognitionException as re:
             localctx.exception = re
@@ -236,8 +336,8 @@ class DLVHEXParser ( Parser ):
             super(DLVHEXParser.CostContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def COST_LABEL(self):
-            return self.getToken(DLVHEXParser.COST_LABEL, 0)
+        def COST_BEGIN(self):
+            return self.getToken(DLVHEXParser.COST_BEGIN, 0)
 
         def level(self, i=None):
             if i is None:
@@ -249,11 +349,11 @@ class DLVHEXParser ( Parser ):
         def COST_END(self):
             return self.getToken(DLVHEXParser.COST_END, 0)
 
-        def COMMA_IN_COST(self, i=None):
+        def COMMA(self, i=None):
             if i is None:
-                return self.getTokens(DLVHEXParser.COMMA_IN_COST)
+                return self.getTokens(DLVHEXParser.COMMA)
             else:
-                return self.getToken(DLVHEXParser.COMMA_IN_COST, i)
+                return self.getToken(DLVHEXParser.COMMA, i)
 
         def getRuleIndex(self):
             return DLVHEXParser.RULE_cost
@@ -274,23 +374,23 @@ class DLVHEXParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 33
-            self.match(DLVHEXParser.COST_LABEL)
-            self.state = 34
+            self.state = 49
+            self.match(DLVHEXParser.COST_BEGIN)
+            self.state = 50
             self.level()
-            self.state = 39
+            self.state = 55
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==DLVHEXParser.COMMA_IN_COST:
-                self.state = 35
-                self.match(DLVHEXParser.COMMA_IN_COST)
-                self.state = 36
+            while _la==DLVHEXParser.COMMA:
+                self.state = 51
+                self.match(DLVHEXParser.COMMA)
+                self.state = 52
                 self.level()
-                self.state = 41
+                self.state = 57
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 42
+            self.state = 58
             self.match(DLVHEXParser.COST_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -339,15 +439,15 @@ class DLVHEXParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_level)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 44
+            self.state = 60
             self.match(DLVHEXParser.LEVEL_BEGIN)
-            self.state = 45
+            self.state = 61
             self.match(DLVHEXParser.INTEGER)
-            self.state = 46
+            self.state = 62
             self.match(DLVHEXParser.COLON)
-            self.state = 47
+            self.state = 63
             self.match(DLVHEXParser.INTEGER)
-            self.state = 48
+            self.state = 64
             self.match(DLVHEXParser.LEVEL_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -389,13 +489,13 @@ class DLVHEXParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 53
+            self.state = 69
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==DLVHEXParser.START:
-                self.state = 50
+            while _la==DLVHEXParser.ANSWER_SET_BEGIN or _la==DLVHEXParser.IDENTIFIER:
+                self.state = 66
                 self.answer_set()
-                self.state = 55
+                self.state = 71
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -454,29 +554,29 @@ class DLVHEXParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 56
+            self.state = 72
             self.match(DLVHEXParser.IDENTIFIER)
-            self.state = 68
+            self.state = 84
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==DLVHEXParser.TERMS_BEGIN:
-                self.state = 57
+                self.state = 73
                 self.match(DLVHEXParser.TERMS_BEGIN)
-                self.state = 58
+                self.state = 74
                 self.term()
-                self.state = 63
+                self.state = 79
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==DLVHEXParser.COMMA:
-                    self.state = 59
+                    self.state = 75
                     self.match(DLVHEXParser.COMMA)
-                    self.state = 60
+                    self.state = 76
                     self.term()
-                    self.state = 65
+                    self.state = 81
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 66
+                self.state = 82
                 self.match(DLVHEXParser.TERMS_END)
 
 
@@ -497,8 +597,8 @@ class DLVHEXParser ( Parser ):
         def IDENTIFIER(self):
             return self.getToken(DLVHEXParser.IDENTIFIER, 0)
 
-        def INTEGER_CONSTANT(self):
-            return self.getToken(DLVHEXParser.INTEGER_CONSTANT, 0)
+        def INTEGER(self):
+            return self.getToken(DLVHEXParser.INTEGER, 0)
 
         def predicate_atom(self):
             return self.getTypedRuleContext(DLVHEXParser.Predicate_atomContext,0)
@@ -524,34 +624,77 @@ class DLVHEXParser ( Parser ):
         localctx = DLVHEXParser.TermContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_term)
         try:
-            self.state = 74
+            self.state = 90
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 70
+                self.state = 86
                 self.match(DLVHEXParser.IDENTIFIER)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 71
-                self.match(DLVHEXParser.INTEGER_CONSTANT)
+                self.state = 87
+                self.match(DLVHEXParser.INTEGER)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 72
+                self.state = 88
                 self.predicate_atom()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 73
+                self.state = 89
                 self.match(DLVHEXParser.STRING_CONSTANT)
                 pass
 
 
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+    class WitnessContext(ParserRuleContext):
+
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(DLVHEXParser.WitnessContext, self).__init__(parent, invokingState)
+            self.parser = parser
+
+        def WITNESS_LABEL(self):
+            return self.getToken(DLVHEXParser.WITNESS_LABEL, 0)
+
+        def atoms(self):
+            return self.getTypedRuleContext(DLVHEXParser.AtomsContext,0)
+
+
+        def getRuleIndex(self):
+            return DLVHEXParser.RULE_witness
+
+        def accept(self, visitor):
+            if hasattr(visitor, "visitWitness"):
+                return visitor.visitWitness(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def witness(self):
+
+        localctx = DLVHEXParser.WitnessContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_witness)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 92
+            self.match(DLVHEXParser.WITNESS_LABEL)
+            self.state = 93
+            self.atoms()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

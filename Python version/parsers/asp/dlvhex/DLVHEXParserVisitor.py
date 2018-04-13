@@ -5,8 +5,13 @@ from antlr4 import *
 
 class DLVHEXParserVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by DLVHEXParser#answer_set.
-    def visitAnswer_set(self, ctx):
+    # Visit a parse tree produced by DLVHEXParser#GroundQuery.
+    def visitGroundQuery(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DLVHEXParser#Model.
+    def visitModel(self, ctx):
         return self.visitChildren(ctx)
 
 
@@ -37,6 +42,11 @@ class DLVHEXParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by DLVHEXParser#term.
     def visitTerm(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by DLVHEXParser#witness.
+    def visitWitness(self, ctx):
         return self.visitChildren(ctx)
 
 

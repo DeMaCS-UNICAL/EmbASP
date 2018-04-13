@@ -12,7 +12,7 @@ class DLVHEXParserVisitorImplementation(DLVHEXParserVisitor):
     def __init__(self, answerSets):
         self._answerSets = answerSets
         
-    def visitAnswer_set(self, ctx):
+    def visitModel(self, ctx):
         self._answerSets.addAnswerSet()
         
         return self.visitChildren(ctx)
