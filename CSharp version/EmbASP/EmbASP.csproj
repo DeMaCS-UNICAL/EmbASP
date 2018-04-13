@@ -60,6 +60,8 @@
     <Compile Include="it\unical\mat\embasp\languages\Param.cs" />
     <Compile Include="it\unical\mat\embasp\platforms\desktop\DesktopHandler.cs" />
     <Compile Include="it\unical\mat\embasp\platforms\desktop\DesktopService.cs" />
+    <Compile Include="it\unical\mat\embasp\specializations\clingo\ClingoAnswerSets.cs" />
+    <Compile Include="it\unical\mat\embasp\specializations\clingo\desktop\ClingoDesktopService.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\dlv2\desktop\DLV2DesktopService.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\dlv2\DLV2AnswerSets.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\dlv\desktop\DLVDesktopService.cs" />
