@@ -12,7 +12,7 @@ namespace it.unical.mat.embasp.languages
 
 		protected internal abstract string GetActualString(string predicate, Dictionary<int, object> parametersMap);
 
-		public virtual Type getClass(string predicate)
+		public virtual Type GetClass(string predicate)
 		{
       if (predicateClass.ContainsKey(predicate))
         return predicateClass[predicate];
@@ -22,11 +22,11 @@ namespace it.unical.mat.embasp.languages
 		public virtual object GetObject(string @string)
 		{
 			string predicate = GetPredicate(@string);
-			if (string.ReferenceEquals(predicate, null))
+			if (predicate is null)
 				return null;
 			
 			// Not exist mapping between the predicate and the class
-      Type cl = getClass(predicate);
+      Type cl = GetClass(predicate);
 			if (cl == null)
 				return null;
 
