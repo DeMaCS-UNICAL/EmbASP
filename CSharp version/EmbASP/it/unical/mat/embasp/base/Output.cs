@@ -23,10 +23,8 @@ namespace it.unical.mat.embasp.@base
 
     public virtual string ErrorsString { get => errors; set => errors = value; }
 
-    public virtual string OutputString => output;
+    public virtual string OutputString { get => output; set => output = value; }
 
     protected internal virtual void Parse() { }
-
-    public virtual void SetOutput(string output) => this.output = output;
   }
 }

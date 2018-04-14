@@ -293,3 +293,5 @@ ENV/
 Java version/.idea
 Python version/.idea
 Python version/.vscode
+/CSharp version/.vs/CSharp version/v15
+/CSharp version/EmbASP/obj/Debug

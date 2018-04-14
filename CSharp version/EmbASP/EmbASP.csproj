@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +63,12 @@
     <Compile Include="it\unical\mat\embasp\languages\Mapper.cs" />
     <Compile Include="it\unical\mat\embasp\languages\ObjectNotValidException.cs" />
     <Compile Include="it\unical\mat\embasp\languages\Param.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\Action.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\PDDLException.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\PDDLInputProgram.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\PDDLMapper.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\PDDLProgramType.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\pddl\Plan.cs" />
     <Compile Include="it\unical\mat\embasp\platforms\desktop\DesktopHandler.cs" />
     <Compile Include="it\unical\mat\embasp\platforms\desktop\DesktopService.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\clingo\ClingoAnswerSets.cs" />
@@ -67,7 +78,13 @@
     <Compile Include="it\unical\mat\embasp\specializations\dlv\desktop\DLVDesktopService.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\dlv\DLVAnswerSets.cs" />
     <Compile Include="it\unical\mat\embasp\specializations\dlv\DLVFilterOption.cs" />
+    <Compile Include="it\unical\mat\embasp\specializations\solver_planning_domains\desktop\SPDDesktopService.cs" />
+    <Compile Include="it\unical\mat\embasp\specializations\solver_planning_domains\SPDPlan.cs" />
+    <Compile Include="it\unical\mat\embasp\specializations\solver_planning_domains\SPDUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
