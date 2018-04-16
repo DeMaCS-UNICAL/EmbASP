@@ -58,6 +58,7 @@
     <Compile Include="it\unical\mat\embasp\languages\asp\ASPMapper.cs" />
     <Compile Include="it\unical\mat\embasp\languages\asp\IllegalTermException.cs" />
     <Compile Include="it\unical\mat\embasp\languages\asp\PredicateNotValidException.cs" />
+    <Compile Include="it\unical\mat\embasp\languages\asp\SymbolicConstant.cs" />
     <Compile Include="it\unical\mat\embasp\languages\Id.cs" />
     <Compile Include="it\unical\mat\embasp\languages\IllegalAnnotationException.cs" />
     <Compile Include="it\unical\mat\embasp\languages\Mapper.cs" />

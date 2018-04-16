@@ -36,7 +36,9 @@ namespace it.unical.mat.embasp.languages.asp
 				
         if (objectTerm is int?)
 					atom += objectTerm + "";
-				else
+        else if (objectTerm is SymbolicConstant)
+          atom += objectTerm.ToString();
+        else
 					atom += "\"" + objectTerm.ToString() + "\"";
 			}
 			atom += ")";

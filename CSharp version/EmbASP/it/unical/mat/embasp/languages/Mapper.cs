@@ -82,7 +82,9 @@ namespace it.unical.mat.embasp.languages
 
           if (method.GetParameters()[0].ParameterType.ToString().Equals(typeof(int).FullName))
             method.Invoke(obj, new object[] { Convert.ToInt32(parameters[term])});
-					else
+          else if (method.GetParameters()[0].ParameterType.ToString().Equals(typeof(SymbolicConstant).FullName))
+            method.Invoke(obj, new object[] { new SymbolicConstant(parameters[term]) });
+          else
 						method.Invoke(obj, new object[] { parameters[term]});
 				}
 			}
