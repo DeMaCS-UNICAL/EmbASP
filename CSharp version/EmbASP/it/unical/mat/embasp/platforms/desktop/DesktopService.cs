@@ -73,7 +73,7 @@ namespace it.unical.mat.embasp.platforms.desktop {
 
         StringBuilder stringBuffer = new StringBuilder();
         StringBuilder options_string = new StringBuilder();
-        if (string.ReferenceEquals(exe_path, null)) {
+        if (exe_path is null) {
           return new Output("", "Error: executable not found");
         }
 
@@ -84,7 +84,7 @@ namespace it.unical.mat.embasp.platforms.desktop {
           
         if (final_program.Length > 0) {
           tmpFile = WriteToFile("tmp", final_program);
-          options_string.Append(" ").Append(tmpFile.Name);
+          //options_string.Append(" ").Append(tmpFile.Name);
           stringBuffer.Append(" ").Append(tmpFile.Name);
         }
 
