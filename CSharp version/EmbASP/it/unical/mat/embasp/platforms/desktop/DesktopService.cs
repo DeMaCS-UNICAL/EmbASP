@@ -84,7 +84,7 @@ namespace it.unical.mat.embasp.platforms.desktop {
           
         if (final_program.Length > 0) {
           tmpFile = WriteToFile("tmp", final_program);
-          //options_string.Append(" ").Append(tmpFile.Name);
+          options_string.Append(" ").Append(tmpFile.Name);
           stringBuffer.Append(" ").Append(tmpFile.Name);
         }
 
