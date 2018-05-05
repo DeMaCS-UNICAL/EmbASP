@@ -1,6 +1,7 @@
 package it.unical.mat.parsers.asp.dlv2;
 
 import it.unical.mat.parsers.asp.ASPDataCollection;
+import java.util.HashMap;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -10,7 +11,8 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.atn.PredictionMode;
 
 public class DLV2ParserBaseVisitorImplementation extends DLV2ParserBaseVisitor <Void> {
-    private final ASPDataCollection answerSets;
+	private final ASPDataCollection answerSets;
+	private HashMap <Integer, Integer> costs;
     
     private DLV2ParserBaseVisitorImplementation(final ASPDataCollection answerSets) {
         this.answerSets = answerSets;
@@ -21,18 +23,25 @@ public class DLV2ParserBaseVisitorImplementation extends DLV2ParserBaseVisitor <
         answerSets.addAnswerSet();
         
         if(ctx.cost() != null && !ctx.cost().isEmpty()) {
+        	costs = new HashMap <> ();
         	final String[] firstCost = ctx.cost().COST_LABEL().getText().split(" ")[1].split("@");
         	
-        	answerSets.storeCost(Integer.parseInt(firstCost[1]), Integer.parseInt(firstCost[0]));
-        }
+        	costs.put(Integer.parseInt(firstCost[1]), Integer.parseInt(firstCost[0]));
+        } 
+        
+        if(costs != null)
+        	costs.forEach((level, cost) -> answerSets.storeCost(level, cost));
         
         return visitChildren(ctx);
     }
 
     @Override
     public Void visitLevel(DLV2Parser.LevelContext ctx) {
-    	answerSets.storeCost(Integer.parseInt(ctx.INTEGER(1).getText()), Integer.parseInt(ctx.INTEGER(0).getText()));
-
+    	final int level = Integer.parseInt(ctx.INTEGER(1).getText()), cost = Integer.parseInt(ctx.INTEGER(0).getText());
+    	
+    	costs.put(level, cost);
+    	answerSets.storeCost(level, cost);
+    	
         return null;
     }
 

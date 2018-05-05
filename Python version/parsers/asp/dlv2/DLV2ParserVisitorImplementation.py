@@ -11,19 +11,29 @@ from antlr4.InputStream import InputStream
 class DLV2ParserVisitorImplementation(DLV2ParserVisitor):
     def __init__(self, answerSets):
         self._answerSets = answerSets
+        self._costs = None
         
     def visitAnswer_set(self, ctx):
         self._answerSets.addAnswerSet()
         
         if ctx.cost() is not None and not ctx.cost().isEmpty():
+            self._costs = {}
             firstCost = ctx.cost().COST_LABEL().getText().split(' ')[1].split('@')
             
-            self._answerSets.storeCost(firstCost[1], firstCost[0])
+            self._costs[firstCost[1]] = firstCost[0]
+        
+        if self._costs is not None:
+            for level, cost in self._costs.items():
+                self._answerSets.storeCost(level, cost)
         
         return self.visitChildren(ctx)
     
     def visitLevel(self, ctx):
-        self._answerSets.storeCost(ctx.INTEGER(1).getText(), ctx.INTEGER(0).getText())
+        level = ctx.INTEGER(1).getText()
+        cost = ctx.INTEGER(0).getText()
+        
+        self._costs[level] = cost
+        self._answerSets.storeCost(level, cost)
     
     def visitPredicate_atom(self, ctx):
         self._answerSets.storeAtom(ctx.getText())
