@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+VisualStudioVersion = 15.0.27703.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbASP", "EmbASP\EmbASP.csproj", "{AFB8ACB3-383E-4D4B-8BC2-1F70CFBACCCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbASP", "EmbASP.csproj", "{AFB8ACB3-383E-4D4B-8BC2-1F70CFBACCCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {458FF369-85E2-4E43-A1EF-C2059472F446}
+		SolutionGuid = {0DCF52EC-D57A-43D5-B405-73425C9AB757}
 	EndGlobalSection
 EndGlobal
