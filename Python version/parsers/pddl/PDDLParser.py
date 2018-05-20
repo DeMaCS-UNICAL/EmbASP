@@ -9,49 +9,38 @@ from antlr4.error.ErrorStrategy import BailErrorStrategy, DefaultErrorStrategy
 from antlr4.InputStream import InputStream
 
 class PDDLParser(PDDLGrammarVisitor):
-    def __init__(self, atomsList):
-        self._contexts = PDDLParser._getContexts(atomsList)
-        self._identifier = None
-        self._iterator = iter(self._contexts)
-        self._parameters = None
+    def __init__(self):
+        self._parameters = []
     
     @staticmethod
-    def _getContexts(atomsList):
+    def parse(atomsList):
         tokens = CommonTokenStream(PDDLGrammarLexer(InputStream(atomsList)))
         parser = PDDLGrammarParser(tokens)
+        visitor = PDDLParser()
         parser._interp.predictionMode = PredictionMode.SLL
+        
         parser.removeErrorListeners()
+        
         parser._errHandler = BailErrorStrategy()
         
         try:
-            return parser.output().atom()
+            visitor.visit(parser.output())
         except RuntimeError as exception:
             if isinstance(exception, RecognitionException):
                 tokens.seek(0)
                 parser.addErrorListener(ConsoleErrorListener.INSTANCE)
+                
                 parser._errHandler = DefaultErrorStrategy()
                 parser._interp.predictionMode = PredictionMode.LL
                 
-                return parser.output().atom()
-    
-    def getIdentifier(self):
-        current = next(self._iterator, None)
+                visitor.visit(parser.output())
         
-        if current is not None:
-            self._parameters = list()
-            
-            self.visitAtom(current)
-            
-            return self._identifier
-        
-        return None
+        return visitor
     
     def getParameters(self):
         return self._parameters
     
     def visitAtom(self, ctx):
-        self._identifier = ctx.IDENTIFIER(0).getText()
-        
         for index in range(1, len(ctx.IDENTIFIER())):
             self._parameters.append(ctx.IDENTIFIER(index).getText())
         

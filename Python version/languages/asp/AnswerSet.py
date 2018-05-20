@@ -22,7 +22,13 @@ class AnswerSet(object):
         The method return a set of Object filled with atoms data
         """
         if self.__atoms is None:
-            self.__atoms = ASPMapper.getInstance().getObjects('\n'.join(self.__value))
+            self.__atoms = set()
+            
+            for atom in self.__value:
+                obj = ASPMapper.getInstance().getObject(atom)
+                
+                if obj is not None:
+                    self.__atoms.add(obj)
             
         return self.__atoms
     
@@ -33,6 +39,3 @@ class AnswerSet(object):
     def __str__(self):
         """Overload string method"""
         return str(self.__value)
-    
-
-

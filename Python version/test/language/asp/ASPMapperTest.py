@@ -13,23 +13,25 @@ class ASPMapperTest(unittest.TestCase):
         try:
             instance.registerClass(Cell)
             
-            objs = instance.getObjects("cell(1,2,5)")
+            obj = instance.getObject("cell(1,2,5)")
             
-            self.assertTrue(isinstance(objs, set))
-            self.assertEqual(1, len(objs))
-            
-            for obj in objs:
-                self.assertTrue(isinstance(obj, Cell))
-                self.assertEqual(1, obj.getRow())
-                self.assertEqual(2, obj.getColumn())
-                self.assertEqual(5, obj.getValue())
-                self.assertEqual("cell(1,2,5)", instance.getString(obj))
-            
+            self.assertTrue(isinstance(obj, Cell))
+
+            self.assertEqual(1, obj.getRow())
+
+            self.assertEqual(2, obj.getColumn())
+
+            self.assertEqual(5, obj.getValue())
+
+            print(instance.getString(obj))
+
+            self.assertEqual("cell(1,2,5)", instance.getString(obj))
+
             instance.unregisterClass(Cell)
-            
-            noneObject = instance.getObjects("cell(1,2,5)")
-            
-            self.assertEqual(0, len(noneObject))
+
+            noneObject = instance.getObject("cell(1,2,5)")
+
+            self.assertIsNone(noneObject)
             
         except Exception as e:
             self.fail(str(e))

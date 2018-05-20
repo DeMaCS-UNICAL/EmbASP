@@ -34,17 +34,13 @@ class ASPMapper(Mapper):
         atom += ")"
         return atom
     
-    def _addToCollection(self, obj):
-        self._objects.add(obj)
+    def _getId(self, atom):
+        """Return a string representing a predicate"""
+        if '(' not in atom:
+            return atom
         
-    def _initialize(self, atomsList):
-        self._objects = set()
-        self._parser = ASPParser(atomsList)
+        return atom[:atom.index('(')]
     
-    def _getId(self):
-        """Returns a string representing an id"""
-        return self._parser.getIdentifier()
-    
-    def _getParam(self):
-        """Returns strings representing parameters"""
-        return self._parser.getParameters()
+    def _getParam(self, atom):
+        """Return a set of parameter string name"""
+        return ASPParser.parse(atom).getParameters()

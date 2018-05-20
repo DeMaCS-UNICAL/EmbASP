@@ -15,10 +15,6 @@ class Mapper(object):
         pass
     
     @abstractmethod
-    def _initialize(self, atomsList):
-        pass
-    
-    @abstractmethod
     def _getId(self):
         pass
     
@@ -26,15 +22,11 @@ class Mapper(object):
     def _getParam(self):
         pass
     
-    @abstractmethod
-    def _addToCollection(self, obj):
-        pass
-    
     def getClass(self, predicate):
         """Returns a string for the given predicate name string"""
         return self._predicateClass.get(predicate)
     
-    def __populateObject(self, cl, parameters, obj):
+    def __populateObject(self, parameters, obj):
         """Sets a fields of object from set of parameters given, by invoking setters methods of object"""
         for key, value in obj.getTermsType().items():
             if isinstance(value, tuple) and len(value) == 2:
@@ -45,28 +37,31 @@ class Mapper(object):
                 getattr(obj, nameMethod)(parameters[key])
                 
             
-    def getObjects(self, atomsList):
-        """Returns a collection of objects for the given string
+    def getObject(self, atom):
+        """Returns an Object for the given string
         The parameter string is a string from witch data are extrapolated
+        The method return a Object for the given string data
         """
-        self._initialize(atomsList)
+        predicate = self._getId(atom)
         
-        predicate = self._getId()
+        if predicate is None:
+            return None
         
-        while predicate is not None:
-            cl = self.getClass(predicate)
-            parameters = self._getParam()
-            predicate = self._getId()
-            
-            if cl is None or parameters is None:
-                continue
-            
-            obj = cl()
-            
-            self.__populateObject(cl, parameters, obj)
-            self._addToCollection(obj)
-            
-        return self._objects
+        cl = self.getClass(predicate)
+        
+        if cl is None:
+            return None
+        
+        parameters = self._getParam(atom)
+        
+        if parameters is None:
+            return None
+        
+        obj = cl()
+        
+        self.__populateObject(parameters, obj)
+        
+        return obj
     
     def registerClass(self, cl):
         """Insert an object into _predicateClass

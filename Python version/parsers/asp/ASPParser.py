@@ -9,50 +9,36 @@ from antlr4.error.ErrorStrategy import BailErrorStrategy, DefaultErrorStrategy
 from antlr4.InputStream import InputStream
 
 class ASPParser(ASPGrammarVisitor):
-    def __init__(self, atomsList):
-        self._contexts = ASPParser._getContexts(atomsList)
-        self._identifier = None
-        self._iterator = iter(self._contexts)
-        self._parameters = None
+    def __init__(self):
+        self._parameters = []
     
     @staticmethod
-    def _getContexts(atomsList):
-        tokens = CommonTokenStream(ASPGrammarLexer(InputStream(atomsList)))
+    def parse(atom):
+        tokens = CommonTokenStream(ASPGrammarLexer(InputStream(atom)))
         parser = ASPGrammarParser(tokens)
+        visitor = ASPParser()
         parser._interp.predictionMode = PredictionMode.SLL
+        
         parser.removeErrorListeners()
+        
         parser._errHandler = BailErrorStrategy()
         
         try:
-            return parser.output().predicate_atom()
+            visitor.visit(parser.output())
         except RuntimeError as exception:
             if isinstance(exception, RecognitionException):
                 tokens.seek(0)
                 parser.addErrorListener(ConsoleErrorListener.INSTANCE)
+                
                 parser._errHandler = DefaultErrorStrategy()
                 parser._interp.predictionMode = PredictionMode.LL
                 
-                return parser.output().predicate_atom()
+                visitor.visit(parser.output())
     
-    def getIdentifier(self):
-        current = next(self._iterator, None)
-        
-        if current is not None:
-            self._parameters = list()
-            
-            self.visitPredicate_atom(current)
-            
-            return self._identifier
-        
-        return None
-        
+        return visitor
+    
     def getParameters(self):
         return self._parameters
-    
-    def visitPredicate_atom(self, ctx):
-        self._identifier = ctx.IDENTIFIER().getText()
-        
-        return self.visitChildren(ctx)
     
     def visitTerm(self, ctx):
         self._parameters.append(ctx.getText())

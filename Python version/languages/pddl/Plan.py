@@ -24,12 +24,13 @@ class Plan(Output, PDDLDataCollection):
     def getActionsObjects(self):
         """Return a list of objects representing Actions"""
         if self.__actionsObjects is None:
-            atomsList = ""
+            self.__actionsObjects = []
             
-            for action in self._actionSequence:
-                atomsList += action.getName() + '\n'
+            for action in self.getActions():
+                obj = PDDLMapper.getInstance().getObject(action.getName())
             
-            self.__actionsObjects = PDDLMapper.getInstance().getObjects(atomsList)
+                if obj is not None:
+                    self.__actionsObjects.append(obj)
             
         return self.__actionsObjects
     

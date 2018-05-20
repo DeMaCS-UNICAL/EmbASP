@@ -20,17 +20,13 @@ class PDDLMapper(Mapper):
     def _getActualString(self, predicate, parametersMap):
         return None
     
-    def _addToCollection(self, obj):
-        self._objects.append(obj)
+    def _getId(self, action):
+        """Return a string representing a predicate"""
+        if action.index('(') != 0:
+            raise ("Wrong format")
         
-    def _initialize(self, atomsList):
-        self._objects = list()
-        self._parser = PDDLParser(atomsList)
+        return action[1:action.index(" ")]
     
-    def _getId(self):
-        """Returns a string representing an id"""
-        return self._parser.getIdentifier()
-    
-    def _getParam(self):
-        """Returns strings representing parameters"""
-        return self._parser.getParameters()
+    def _getParam(self, action):
+        """Return a set of parameter string name"""
+        return PDDLParser.parse(action).getParameters()
