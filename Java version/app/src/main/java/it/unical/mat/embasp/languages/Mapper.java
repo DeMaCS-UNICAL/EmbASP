@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,49 +34,38 @@ public abstract class Mapper {
 	 * @return Collection of Objects for the given String data
 	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
 	 */
-	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-		buildParseTree(atomsList);
+	public Object getObject(final String atom) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		final String predicate = getId(atom);
 		
-		final Collection<Object> objects = getCollectionImplementation();
-		String predicate = getId();
+		if(predicate == null)
+			return null;
 		
-		while(predicate != null) {
-			final Class<?> cl = getClass(predicate);
-			final String[] parameters = getParam();
-			predicate = getId();
-			
-			if (cl == null || parameters == null)
-				continue;
-			
-			final Object obj = cl.newInstance();
+		final Class<?> _class = getClass(predicate);
 
-			populateObject(cl, parameters, obj);
-			objects.add(obj);
-		}
+		if(_class == null)
+			return null;
+		
+		final String[] parameters = getParam(atom);
+			
+		if(parameters == null)
+			return null;
 
-		return objects;
+		final Object object = _class.newInstance();
+
+		populateObject(_class, parameters, object);
+
+		return object;
 	}
-	
-	/**
-	 * @return The appropriate data structure depending on the Mapper subclass in use
-	 */
-	protected abstract Collection<Object> getCollectionImplementation();
-	
-	/**
-	 * @param string
-	 *            The string representing a list of atoms received as parameter of getObjects
-	 */
-	protected abstract void buildParseTree(final String atomsList);
 	
 	/**
 	 * @return The predicate name
 	 */
-	protected abstract String getId();
+	protected abstract String getId(final String atom);
 	
 	/**
 	 * @return All the Terms
 	 */
-	protected abstract String[] getParam();
+	protected abstract String[] getParam(final String atom);
 	
 	/**
 	 * Returns data for the given Object

@@ -29,13 +29,15 @@ public abstract class Plan extends Output implements PDDLDataCollection {
 	}
 
 	public List<Object> getActionsObjects() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-		if (actionsObjects == null) {
-			String atomsList = "";
-			
-			for(final Action action : actionSequence)
-				atomsList += action.getName() + '\n';
-			
-			actionsObjects = (List<Object>) PDDLMapper.getInstance().getObjects(atomsList);
+		if(actionsObjects == null) {
+			actionsObjects = new ArrayList <> ();
+
+			for(final Action action : getActions()) {
+				final Object object = PDDLMapper.getInstance().getObject(action.getName());
+				
+				if (object != null)
+					actionsObjects.add(object);
+			}
 		}
 
 		return actionsObjects;

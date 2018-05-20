@@ -1,17 +1,12 @@
 package it.unical.mat.embasp.languages.pddl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import it.unical.mat.embasp.languages.Mapper;
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
 import it.unical.mat.parsers.pddl.PDDLParser;
+import java.util.HashMap;
 
 public class PDDLMapper extends Mapper {
-
 	private static PDDLMapper mapper;
-	private PDDLParser parser;
 	
 	public static PDDLMapper getInstance() {
 		if (PDDLMapper.mapper == null)
@@ -24,28 +19,23 @@ public class PDDLMapper extends Mapper {
 	}
 
 	@Override
-	protected List<Object> getCollectionImplementation() {
-		return new ArrayList <> ();
-	}
-
-	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected void buildParseTree(String atomsList) {
-		parser = new PDDLParser(atomsList);
+	protected String getId(final String action) {
+		final int openBracketIndex = action.indexOf("(");
+
+		if(openBracketIndex != 0)
+			throw new IllegalArgumentException("Wrong format");
+
+		return action.substring(1, action.indexOf(" "));
 	}
 
 	@Override
-	protected String getId() {
-		return parser.getIdentifier();
-	}
-
-	@Override
-	protected String[] getParam() {
-		return parser.getParameters();
+	protected String[] getParam(final String action) {
+		return PDDLParser.parse(action).getParameters();
 	}
 }

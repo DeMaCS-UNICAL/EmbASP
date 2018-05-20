@@ -3,9 +3,7 @@ package it.unical.mat.parsers.pddl;
 import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarBaseVisitor;
 import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarLexer;
 import it.unical.mat.parsers.pddl.pddl_parser_base.PDDLGrammarParser;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -15,60 +13,42 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.atn.PredictionMode;
 
 public class PDDLParser extends PDDLGrammarBaseVisitor <Void> {
-    private final List <PDDLGrammarParser.AtomContext> contexts;
-    private final Iterator<PDDLGrammarParser.AtomContext> iterator;
-    private List <String> parameters;
-    private String identifier;
-
-    public PDDLParser(final String atomsList) {
-    	contexts = getContexts(atomsList);
-    	iterator = contexts.iterator();
+    private ArrayList <String> parameters = new ArrayList <> ();
+    
+    private PDDLParser() {
+    	
     }
 
-    private static final List <PDDLGrammarParser.AtomContext> getContexts(final String atomsList) {
-		final CommonTokenStream tokens = new CommonTokenStream(new PDDLGrammarLexer(CharStreams.fromString(atomsList)));
+    public static final PDDLParser parse(final String action) {
+		final CommonTokenStream tokens = new CommonTokenStream(new PDDLGrammarLexer(CharStreams.fromString(action)));
         final PDDLGrammarParser parser = new PDDLGrammarParser(tokens);
+        final PDDLParser visitor = new PDDLParser();
         
         parser.getInterpreter().setPredictionMode(PredictionMode.SLL); 
         parser.removeErrorListeners();
         parser.setErrorHandler(new BailErrorStrategy());
      
         try {
-        	return parser.output().atom();
+        	visitor.visit(parser.output());
         } catch (final RuntimeException exception) {
         	if(exception.getClass() == RuntimeException.class && exception.getCause() instanceof RecognitionException) {
         		tokens.seek(0);
         		parser.addErrorListener(ConsoleErrorListener.INSTANCE);
         		parser.setErrorHandler(new DefaultErrorStrategy());
         		parser.getInterpreter().setPredictionMode(PredictionMode.LL); 
-        		
-        		return parser.output().atom();
+        		visitor.visit(parser.output());
         	}
         }
         
-        return null;
+        return visitor;
 	}
     
-    public String getIdentifier() {
-        if(iterator.hasNext()) {
-            parameters = new LinkedList <> ();
-
-            visitAtom(iterator.next());
-
-            return identifier;
-        }
-
-        return null;
-    }
-
     public String [] getParameters() {
         return parameters.toArray(new String [0]);
     }
 
     @Override
     public Void visitAtom(PDDLGrammarParser.AtomContext ctx) {
-        identifier = ctx.IDENTIFIER(0).getText();
-
         for(int index = 1; index < ctx.IDENTIFIER().size(); index++)
             parameters.add(ctx.IDENTIFIER(index).getText());
 
