@@ -1,5 +1,4 @@
 from .AnswerSet import AnswerSet
-from _collections import defaultdict
 from abc import ABCMeta
 from base.Output import Output
 from parsers.asp.ASPDataCollection import ASPDataCollection
@@ -24,7 +23,6 @@ class AnswerSets(Output, ASPDataCollection):
     def get_optimal_answer_sets(self):
         answer_sets = self.getAnswerSets()
         levels = 0
-        minimum_cost_per_level = defaultdict(int)
         optimal_answer_sets = []
         
         for answer_set in answer_sets:
@@ -34,36 +32,21 @@ class AnswerSets(Output, ASPDataCollection):
                 levels = max_level
         
         for level in range(levels, 0, -1):
-            minimum = sys.maxsize
+            minimum_cost = sys.maxsize
             
             for answer_set in answer_sets:
-                not_optimal = False
-                weights = answer_set.getWeights()
+                cost = int(answer_set.getWeights().get(level, 0))
                 
-                for previous_level in range(levels, level, -1):
-                    if minimum_cost_per_level[previous_level] != int(weights.get(previous_level, 0)):
-                        not_optimal = True
-                        
-                        break
-                                            
-                if not not_optimal:
-                    current = int(weights.get(level, 0))
-                
-                    if current < minimum:
-                        minimum_cost_per_level[level] = minimum = current 
-
-        for answer_set in answer_sets:
-            not_optimal = False
-            
-            for level in minimum_cost_per_level:
-                if int(answer_set.getWeights().get(level, 0)) != minimum_cost_per_level[level]:
-                    not_optimal = True
+                if cost < minimum_cost:
+                    optimal_answer_sets.clear()
                     
-                    break
+                    minimum_cost = cost
                 
-            if not not_optimal:
-                optimal_answer_sets.append(answer_set)
-        
+                if cost == minimum_cost:
+                    optimal_answer_sets.append(answer_set)
+                
+            answer_sets = list(optimal_answer_sets)
+                
         return optimal_answer_sets
     
     def getAnswerSetsString(self):

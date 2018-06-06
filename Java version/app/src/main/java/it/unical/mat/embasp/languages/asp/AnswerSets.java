@@ -2,9 +2,7 @@ package it.unical.mat.embasp.languages.asp;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import it.unical.mat.embasp.base.Output;
 import it.unical.mat.parsers.asp.ASPDataCollection;
@@ -38,44 +36,34 @@ public abstract class AnswerSets extends Output implements ASPDataCollection {
 	}
 
 	public List<AnswerSet> getOptimalAnswerSets() {
-		final List <AnswerSet> answerSets = getAnswersets(), optimalAnswerSets = new ArrayList <> ();
-		int levels = 0;
+		int level = 0;
+		List <AnswerSet> answerSets = getAnswersets(), optimalAnswerSets = new ArrayList <> ();
 		
 		for(final AnswerSet answerSet : answerSets) {
 			final int maxLevel = Collections.max(answerSet.getWeights().keySet());
 			
-			if(levels < maxLevel)
-				levels = maxLevel;
+			if(level < maxLevel)
+				level = maxLevel;
 		}
 		
-		final HashMap <Integer, Integer> minimumCostPerLevel = new HashMap <> (levels);
-		
-		for(int level = levels; level >= 1; level--) {
-			int current, minimum = Integer.MAX_VALUE;
+		for(; level >= 1; level--) {
+			int minimumCost = Integer.MAX_VALUE;
 			
 			for(final AnswerSet answerSet : answerSets) {
-				boolean notOptimal = false;
-				final Map <Integer, Integer> weights = answerSet.getWeights();
+				final int cost = answerSet.getWeights().getOrDefault(level, 0);
 				
-				for(int previousLevel = levels; previousLevel > level; previousLevel--)
-					if(minimumCostPerLevel.getOrDefault(previousLevel, 0) != weights.getOrDefault(previousLevel, 0)) {
-						notOptimal = true;
-						
-						break;
-					}
+				if(cost < minimumCost) {
+					optimalAnswerSets.clear();
+					
+					minimumCost = cost;
+				}
 				
-				if(!notOptimal && (current = weights.getOrDefault(level, 0)) < minimum)
-					minimumCostPerLevel.put(level, (minimum = current));
+				if(cost == minimumCost)
+					optimalAnswerSets.add(answerSet);
 			}
+
+			answerSets = new ArrayList <> (optimalAnswerSets);
 		}
-		
-		answerSets.forEach(answerSet -> {
-			for(final int level : minimumCostPerLevel.keySet())
-				if(answerSet.getWeights().getOrDefault(level, 0) != minimumCostPerLevel.get(level))
-					return;
-			
-			optimalAnswerSets.add(answerSet);
-		});
 		
 		return optimalAnswerSets;
 	}
