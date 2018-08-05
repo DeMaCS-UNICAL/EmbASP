@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.languages.asp.SymbolicConstant;
 
 /**
  * Base class
@@ -104,6 +105,8 @@ public abstract class Mapper {
 				if (method.getParameterTypes()[0].getName().equals(int.class.getName())
 						|| method.getParameterTypes()[0].getName().equals(Integer.class.getName()))
 					method.invoke(obj, Integer.valueOf(parameters[term]));
+				else if (method.getParameterTypes()[0].getName().equals(SymbolicConstant.class.getName()))
+						method.invoke(obj, new SymbolicConstant(parameters[term]));
 				else
 					method.invoke(obj, parameters[term]);
 

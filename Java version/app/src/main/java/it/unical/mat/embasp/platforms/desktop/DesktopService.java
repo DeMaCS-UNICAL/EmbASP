@@ -1,6 +1,9 @@
 package it.unical.mat.embasp.platforms.desktop;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -82,9 +85,15 @@ public abstract class DesktopService implements Service {
 		for (final InputProgram p : programs)
 			if (p != null) {
 				final_program += p.getPrograms();
-				final String program_file = p.getStringOfFilesPaths();
-				if (program_file != null)
-					files_paths += program_file;
+				for(final String program_file: p.getFilesPaths()){
+					File f = new File(program_file);
+					if(f.exists() && !f.isDirectory()) { 
+						files_paths += program_file;
+						files_paths += " ";
+					}
+					else
+						System.err.println("Warning : the file " + f.getAbsolutePath() + " does not exists.");
+				}
 			} else
 				System.err.println("Warning : wrong " + InputProgram.class.getName());
 
@@ -94,18 +103,22 @@ public abstract class DesktopService implements Service {
 		try {
 
 			final long startTime = System.nanoTime();
+			
+			File tmpFile = null;
 
 			final StringBuffer stringBuffer = new StringBuffer();
 			if (exe_path == null)
 				return new Output("", "Error: executable not found");
-			stringBuffer.append(exe_path).append(" ").append(option).append(files_paths);
-			if (!final_program.isEmpty())
-				stringBuffer.append(" ").append(load_from_STDIN_option);
+			stringBuffer.append(exe_path).append(" ").append(option).append(" ").append(files_paths);
+			if (!final_program.isEmpty()){
+				tmpFile=writeToFile("tmp", final_program);
+				stringBuffer.append(" ").append(tmpFile.getAbsolutePath());
+			}
 
 			System.err.println(stringBuffer.toString());
 			final Process solver_process = Runtime.getRuntime().exec(stringBuffer.toString());
 
-			new Thread() {
+			Thread threadOutput=new Thread() {
 				@Override
 				public void run() {
 					try {
@@ -116,16 +129,16 @@ public abstract class DesktopService implements Service {
 						String currentLine;
 						while ((currentLine = bufferedReaderOutput.readLine()) != null)
 							solverOutput.append(currentLine + "\n");
-
 					} catch (final IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				}
-			}.start();
-
-			new Thread() {
+			};
+			threadOutput.start();
+			threadOutput.join();
+			
+			Thread threadError = new Thread() {
 				@Override
 				public void run() {
 					try {
@@ -137,13 +150,14 @@ public abstract class DesktopService implements Service {
 							solverError.append(currentErrLine + "\n");
 
 					} catch (final IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				}
-			}.start();
-
+			};
+			threadError.start();
+			threadError.join();
+			
 			final PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
 			writer.println(final_program);
 			if (writer != null)
@@ -153,7 +167,9 @@ public abstract class DesktopService implements Service {
 
 			final long stopTime = System.nanoTime();
 			System.err.println("Total time : " + (stopTime - startTime));
-
+			
+			if(tmpFile!=null) tmpFile.delete();
+			
 			return getOutput(solverOutput.toString(), solverError.toString());
 
 		} catch (final IOException e2) {
@@ -165,6 +181,16 @@ public abstract class DesktopService implements Service {
 
 		return getOutput("", "");
 
+	}
+	
+	protected File writeToFile(String pFilename, String sb) throws IOException {
+	    File tempDir = new File(System.getProperty("java.io.tmpdir"));
+	    File tempFile = File.createTempFile(pFilename, ".tmp", tempDir);
+	    FileWriter fileWriter = new FileWriter(tempFile, true);
+	    BufferedWriter bw = new BufferedWriter(fileWriter);
+	    bw.write(sb);
+	    bw.close();
+	    return tempFile;
 	}
 
 }
