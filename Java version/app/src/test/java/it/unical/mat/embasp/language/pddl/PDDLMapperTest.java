@@ -60,7 +60,7 @@ public class PDDLMapperTest {
 			Assert.assertTrue(object instanceof PickUp);
 			Assert.assertEquals("b", ((PickUp) object).getBlock());
 		} catch (ObjectNotValidException | IllegalAnnotationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| SecurityException | InstantiationException e) {
+				| NoSuchMethodException | SecurityException | InstantiationException e) {
 			Assert.fail(e.getMessage());
 		}
 

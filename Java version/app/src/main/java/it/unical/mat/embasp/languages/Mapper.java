@@ -28,22 +28,24 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Returns a Collection of Objects for the given string representing a list of atoms
+	 * Returns an Object for the given string
 	 *
 	 * @param string
 	 *            String from witch data are extrapolated
-	 * @return Collection of Objects for the given String data
-	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
+	 * @return Object for the given String data
+	 * @throws IllegalAccessException,
+	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
 	 */
-	public Object getObject(final String atom) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+	public Object getObject(final String atom) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+			SecurityException, InstantiationException {
 		final String predicate = getId(atom);
 		
 		if(predicate == null)
 			return null;
 		
-		final Class<?> _class = getClass(predicate);
+		final Class<?> cl = getClass(predicate);
 
-		if(_class == null)
+		if(cl == null)
 			return null;
 		
 		final String[] parameters = getParam(atom);
@@ -51,9 +53,9 @@ public abstract class Mapper {
 		if(parameters == null)
 			return null;
 
-		final Object object = _class.newInstance();
+		final Object object = cl.newInstance();
 
-		populateObject(_class, parameters, object);
+		populateObject(cl, parameters, object);
 
 		return object;
 	}

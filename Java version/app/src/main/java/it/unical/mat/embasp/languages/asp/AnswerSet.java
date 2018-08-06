@@ -58,10 +58,10 @@ public class AnswerSet {
 			atoms = new HashSet <> ();
 
 			for(final String atom : value) {
-				final Object object = ASPMapper.getInstance().getObject(atom);
+				final Object obj = ASPMapper.getInstance().getObject(atom);
 				
-					if(object != null)
-						atoms.add(object);
+					if(obj != null)
+						atoms.add(obj);
 			}
 		}
 

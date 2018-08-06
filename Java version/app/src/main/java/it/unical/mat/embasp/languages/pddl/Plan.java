@@ -33,10 +33,10 @@ public abstract class Plan extends Output implements PDDLDataCollection {
 			actionsObjects = new ArrayList <> ();
 
 			for(final Action action : getActions()) {
-				final Object object = PDDLMapper.getInstance().getObject(action.getName());
+				final Object obj = PDDLMapper.getInstance().getObject(action.getName());
 				
-				if (object != null)
-					actionsObjects.add(object);
+				if (obj != null)
+					actionsObjects.add(obj);
 			}
 		}
 
