@@ -23,7 +23,6 @@ public class DLV2DesktopService extends DesktopService {
 	}
 
 	public void startAsync(final Callback callback, final List<InputProgram> programs, final List<OptionDescriptor> options) {
-		options.add(competitionOutputOption);
 		super.startAsync(callback, programs, options);
 	}
 
