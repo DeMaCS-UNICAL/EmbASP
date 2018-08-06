@@ -1,5 +1,5 @@
 from languages.mapper import Mapper
-
+from parsers.pddl.PDDLParser import PDDLParser
 
 class PDDLMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
@@ -17,7 +17,7 @@ class PDDLMapper(Mapper):
             cls.__instance = PDDLMapper()
         return cls.__instance
 
-    def _get_actual_string(self, predicate, parametersMap):
+    def _get_actual_string(self, predicate, parameters_map):
         return None
 
     def _get_id(self, action):
@@ -29,4 +29,4 @@ class PDDLMapper(Mapper):
 
     def _get_param(self, action):
         """Return a set of parameter string name"""
-        return PDDLParser.parse(action).getParameters()
+        return PDDLParser.parse(action).get_parameters()

@@ -4,13 +4,13 @@ class ASPDataCollection(object):
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def addAnswerSet(self):
+    def add_answer_set(self):
         pass
     
     @abstractmethod
-    def storeAtom(self, atom):
+    def store_atom(self, atom):
         pass
     
     @abstractmethod
-    def storeCost(self, level, weight):
+    def store_cost(self, level, weight):
         pass

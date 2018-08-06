@@ -1,15 +1,15 @@
 from languages.mapper import Mapper
 from languages.asp.symbolic_constant import SymbolicConstant
-
+from parsers.asp.ASPParser import ASPParser
 
 class ASPMapper(Mapper):
     """Contains methods used to transform Objects into InputProgram"""
-
+    
     __instance = None
 
     def __init__(self):
         if ASPMapper.__instance:
-            raise "Instance already exists"
+            raise("Instance already exists")
         super(ASPMapper, self).__init__()
 
     @classmethod
@@ -18,7 +18,7 @@ class ASPMapper(Mapper):
         if not cls.__instance:
             cls.__instance = ASPMapper()
         return cls.__instance
-
+    
     def _get_actual_string(self, predicate, parameters_map):
         """Return a string representing atom, from given predicate string name, and set of parameters"""
         atom = predicate + "("
@@ -36,13 +36,14 @@ class ASPMapper(Mapper):
                 atom += "\"" + str(object_term) + "\""
         atom += ")"
         return atom
-
-    def _get_parameters(self, string):
-        """Return a set of parameter string name"""
-        return string[string.index("(")+1:string.index(")")].split(",")
-
-    def _get_predicate(self, string):
+    
+    def _get_id(self, atom):
         """Return a string representing a predicate"""
-        if "(" not in string:
-            return string
-        return string[:string.index("(")]
+        if '(' not in atom:
+            return atom
+        
+        return atom[:atom.index('(')]
+    
+    def _get_param(self, atom):
+        """Return a set of parameter string name"""
+        return ASPParser.parse(atom).get_parameters()

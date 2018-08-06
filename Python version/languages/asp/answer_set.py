@@ -4,8 +4,8 @@ class AnswerSet(object):
     """A collection of data representing a generic Answer Set"""
 
     def __init__(self, value, weight_map = None):
-        if weightMap is None:
-            weightMap = dict()
+        if weight_map is None:
+            weight_map = dict()
 
         self.__value = value  # Where data of answer set is stored
         self.__weight_map = weight_map  # Where weights of the answer set are stored

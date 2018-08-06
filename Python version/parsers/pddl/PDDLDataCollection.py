@@ -4,5 +4,5 @@ class PDDLDataCollection(object):
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def storeAction(self, action):
+    def store_action(self, action):
         pass

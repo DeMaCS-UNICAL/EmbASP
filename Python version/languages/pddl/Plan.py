@@ -1,38 +1,34 @@
-from .Action import Action
+from .action import Action
+from base.output import Output
+from languages.pddl.pddl_mapper import PDDLMapper
 from abc import ABCMeta
-from base.Output import Output
-from languages.pddl.PDDLMapper import PDDLMapper
-from parsers.pddl.PDDLDataCollection import PDDLDataCollection
 
-class Plan(Output, PDDLDataCollection):
+class Plan(Output):
     """A simplified solution to a PDDL problem"""
-    
     __metaclass__ = ABCMeta
-    
+
     def __init__(self, plan, error):
         super(Plan, self).__init__(plan, error)
-        self._actionSequence = None
-        self.__actionsObjects = None
-        
-    def getActions(self):
+        self._action_sequence = None
+        self.__actions_objects = None
+
+    def get_actions(self):
         """Return a set of Actions"""
-        if self._actionSequence == None:
-            self._actionSequence = list()
+        if self._action_sequence == None:
+            self._action_sequence = list()
             self._parse()
-        return self._actionSequence
+        return self._action_sequence
+
+    def get_actions_objects(self):
+        """Return a set of Objects represents Actions"""
+        if self.__actions_objects == None:
+            self.__actions_objects = list()
+            mapper = PDDLMapper.get_instance()
+            for a in self.get_actions():
+                obj = mapper.get_object(a.get_name())
+                if obj != None:
+                    self.__actions_objects.append(obj)
+        return self.__actions_objects
     
-    def getActionsObjects(self):
-        """Return a list of objects representing Actions"""
-        if self.__actionsObjects is None:
-            self.__actionsObjects = []
-            
-            for action in self.getActions():
-                obj = PDDLMapper.getInstance().getObject(action.getName())
-            
-                if obj is not None:
-                    self.__actionsObjects.append(obj)
-            
-        return self.__actionsObjects
-    
-    def storeAction(self, action):
-        self._actionSequence.append(Action(action))
+    def store_action(self, action):
+        self._action_sequence.append(Action(action))

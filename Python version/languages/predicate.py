@@ -3,6 +3,7 @@ from abc import ABCMeta
 
 class Predicate(object):
     """This class have to be implemented by subclasses want it represent a predicate"""
+    
     __metaclass__ = ABCMeta
 
     def __init__(self, terms):

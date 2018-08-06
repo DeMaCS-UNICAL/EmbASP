@@ -37,7 +37,7 @@ class ASPParser(ASPGrammarVisitor):
     
         return visitor
     
-    def getParameters(self):
+    def get_parameters(self):
         return self._parameters
     
     def visitTerm(self, ctx):

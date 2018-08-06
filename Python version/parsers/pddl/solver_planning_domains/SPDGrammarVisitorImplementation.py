@@ -33,7 +33,7 @@ class SPDGrammarVisitorImplementation(SPDGrammarVisitor):
                 self._errors += SPDGrammarVisitorImplementation._trim(valueContext.getText());
         elif self._status == SPDGrammarVisitorImplementation.OK_STATUS:
             if string == '"name"':
-                self._actions.storeAction(SPDGrammarVisitorImplementation._trim(valueContext.getText()));
+                self._actions.store_action(SPDGrammarVisitorImplementation._trim(valueContext.getText()));
             elif string == '"plan"' or string == '"result"':
                 return self.visitChildren(ctx);
     

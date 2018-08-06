@@ -13,7 +13,7 @@ class ClingoParserVisitorImplementation(ClingoParserVisitor):
         self._answerSets = answerSets
         
     def visitAnswer_set(self, ctx):
-        self._answerSets.addAnswerSet()
+        self._answerSets.add_answer_set()
         
         return self.visitChildren(ctx)
         
@@ -25,13 +25,13 @@ class ClingoParserVisitorImplementation(ClingoParserVisitor):
             levels = len(tokens) - 1
             
             for index in range(1, len(tokens)):
-                self._answerSets.storeCost(levels, tokens[index])
+                self._answerSets.store_cost(levels, tokens[index])
                 levels -= 1
         
         return self.visitChildren(ctx)
     
     def visitPredicate_atom(self, ctx):
-        self._answerSets.storeAtom(ctx.getText())
+        self._answerSets.store_atom(ctx.getText())
     
     @staticmethod
     def parse(answerSets, clingoOutput, two_stageParsing):

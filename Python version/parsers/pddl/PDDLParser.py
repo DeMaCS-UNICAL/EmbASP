@@ -37,7 +37,7 @@ class PDDLParser(PDDLGrammarVisitor):
         
         return visitor
     
-    def getParameters(self):
+    def get_parameters(self):
         return self._parameters
     
     def visitAtom(self, ctx):

@@ -14,7 +14,7 @@ class DLV2ParserVisitorImplementation(DLV2ParserVisitor):
         self._costs = None
         
     def visitAnswer_set(self, ctx):
-        self._answerSets.addAnswerSet()
+        self._answerSets.add_answer_set()
         
         if ctx.cost() is not None and not ctx.cost().isEmpty():
             self._costs = {}
@@ -24,7 +24,7 @@ class DLV2ParserVisitorImplementation(DLV2ParserVisitor):
         
         if self._costs is not None:
             for level, cost in self._costs.items():
-                self._answerSets.storeCost(level, cost)
+                self._answerSets.store_cost(level, cost)
         
         return self.visitChildren(ctx)
     
@@ -33,10 +33,10 @@ class DLV2ParserVisitorImplementation(DLV2ParserVisitor):
         cost = ctx.INTEGER(0).getText()
         
         self._costs[level] = cost
-        self._answerSets.storeCost(level, cost)
+        self._answerSets.store_cost(level, cost)
     
     def visitPredicate_atom(self, ctx):
-        self._answerSets.storeAtom(ctx.getText())
+        self._answerSets.store_atom(ctx.getText())
     
     @staticmethod
     def parse(answerSets, dlv2Output, two_stageParsing):

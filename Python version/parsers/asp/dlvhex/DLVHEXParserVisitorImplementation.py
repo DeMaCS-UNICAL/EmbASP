@@ -13,18 +13,18 @@ class DLVHEXParserVisitorImplementation(DLVHEXParserVisitor):
         self._answerSets = answerSets
         
     def visitModel(self, ctx):
-        self._answerSets.addAnswerSet()
+        self._answerSets.add_answer_set()
         
         return self.visitChildren(ctx)
 
     def visitLevel(self, ctx):
-        self._answerSets.storeCost(ctx.INTEGER(1).getText(), ctx.INTEGER(0).getText())
+        self._answerSets.store_cost(ctx.INTEGER(1).getText(), ctx.INTEGER(0).getText())
         
     def visitPredicate_atom(self, ctx):
-        self._answerSets.storeAtom(ctx.getText())
+        self._answerSets.store_atom(ctx.getText())
     
     def visitWitness(self, ctx):
-        self._answerSets.addAnswerSet()
+        self._answerSets.add_answer_set()
     
         return self.visitChildren(ctx)
     

@@ -3,6 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 class Service(object):
     """Contains generic methods for ASP Solver execution."""
+    
     __metaclass__ = ABCMeta
 
     @abstractmethod

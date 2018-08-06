@@ -1,4 +1,4 @@
-from languages.asp.AnswerSets import AnswerSets
+from languages.asp.answer_sets import AnswerSets
 from parsers.asp.ASPSolversParser import ASPSolversParser
 
 class DLVAnswerSets(AnswerSets):
@@ -8,4 +8,4 @@ class DLVAnswerSets(AnswerSets):
         super(DLVAnswerSets, self).__init__(out, err)
 
     def _parse(self):
-        ASPSolversParser.parseDLV(self, self._output, True)
+        ASPSolversParser.parse_dlv(self, self._output, True)

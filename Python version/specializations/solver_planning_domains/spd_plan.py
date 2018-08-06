@@ -1,4 +1,4 @@
-from languages.pddl.Plan import Plan
+from languages.pddl.plan import Plan
 from parsers.pddl.PDDLSolversParser import PDDLSolversParser
 
 class SPDPlan(Plan):
@@ -11,4 +11,4 @@ class SPDPlan(Plan):
         if self._errors or not self._output:
             return
 
-        self._errors += PDDLSolversParser.parseSolverPlanningDomains(self, self._output, True)
+        self._errors += PDDLSolversParser.parse_solver_planning_domains(self, self._output, True)

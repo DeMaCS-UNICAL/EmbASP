@@ -2,8 +2,8 @@ import unittest
 from languages.asp.asp_input_program import ASPInputProgram
 from platforms.desktop.desktop_handler import DesktopHandler
 from base.output import Output
-from cell import Cell
-from my_callback import MyCallback
+from .cell import Cell
+from .my_callback import MyCallback
 import sys
 import os
 from specializations.clingo.desktop.clingo_desktop_service import ClingoDesktopService
