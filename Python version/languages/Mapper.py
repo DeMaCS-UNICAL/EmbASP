@@ -8,6 +8,8 @@ class Mapper(object):
     __metaclass__ = ABCMeta
 
     def __init__(self):
+		self._objects = None
+        self._parser = None
         # Represents a dict, where are stored a string name of a predicate as a key, and a corresponding Class element
         self._predicate_class = dict()
 

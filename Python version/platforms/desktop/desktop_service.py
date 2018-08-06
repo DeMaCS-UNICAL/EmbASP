@@ -47,7 +47,7 @@ class DesktopService(Service):
         """Start a new process for the _exe_path and starts solving in Syncronously way"""
         option = ""
         for o in options:
-            if o != None:
+            if o is not None:
                 option += o.get_options()
                 option += o.get_separator()
             else:

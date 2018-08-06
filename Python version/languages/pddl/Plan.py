@@ -26,7 +26,7 @@ class Plan(Output):
             mapper = PDDLMapper.get_instance()
             for a in self.get_actions():
                 obj = mapper.get_object(a.get_name())
-                if obj != None:
+                if obj is not None:
                     self.__actions_objects.append(obj)
         return self.__actions_objects
     

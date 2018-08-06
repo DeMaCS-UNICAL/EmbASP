@@ -14,7 +14,7 @@ class AnswerSets(Output, ASPDataCollection):
         
     def get_answer_sets(self):
         """Return a set of AnswerSet"""
-        if(self._answer_sets is None):
+        if self._answer_sets is None:
             self._answer_sets = list()
             self._parse()
         return self._answer_sets
@@ -59,4 +59,4 @@ class AnswerSets(Output, ASPDataCollection):
         self._answer_sets[-1].get_answer_set().append(result)
     
     def store_cost(self, level, weight):
-        self._answer_sets[-1].getWeights()[level] = weight
+        self._answer_sets[-1].get_weights()[level] = weight
