@@ -9,7 +9,7 @@ class OptionDescriptor(object):
         """Concatenate a new option in a string format to the current _options
         The parameter option is the string to be concatenated
         """
-        if self._options == None or self._options == "":
+        if self._options is None or self._options == "":
             self.set_options(option)
         else:
             self._options += self._separator + option
