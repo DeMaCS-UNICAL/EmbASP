@@ -1,10 +1,8 @@
 ﻿using it.unical.mat.embasp.languages.pddl;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Security.Policy;
 using System.Text;
 
 namespace it.unical.mat.embasp.specializations.solver_planning_domains
@@ -19,7 +17,46 @@ namespace it.unical.mat.embasp.specializations.solver_planning_domains
 
 		public SPDUtility() { }
 
-		public virtual JObject CreateJson(IList<InputProgram> pddlInputProgram)
+        private static string Escape(string escapable)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < escapable.Length; i++)
+            {
+                char character = escapable[i];
+
+                switch (character)
+                {
+                    case '"': builder.Append("\\\""); break;
+                    case '\\': builder.Append("\\\\"); break;
+                    case '\b': builder.Append("\\b"); break;
+                    case '\f': builder.Append("\\f"); break;
+                    case '\n': builder.Append("\\n"); break;
+                    case '\r': builder.Append("\\r"); break;
+                    case '\t': builder.Append("\\t"); break;
+                    case '/': builder.Append("\\/"); break;
+                    default:
+                        if (((character >= '\u0000') && (character <= '\u001F')) || ((character >= '\u007F') && (character <= '\u009F')) || ((character >= '\u2000') && (character <= '\u20FF')))
+                        {
+                            string characterHexCode = Convert.ToInt32(character).ToString("X");
+                            
+                            builder.Append("\\u");
+
+                            for (int k = 0; k < (4 - characterHexCode.Length); k++)
+                                builder.Append("0");
+
+                            builder.Append(characterHexCode.ToUpper());
+                        }
+                        else
+                            builder.Append(character);
+                        break;
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        public virtual string CreateJson(IList<InputProgram> pddlInputProgram)
 		{
 			string problem = "";
 			string domain = "";
@@ -29,7 +66,7 @@ namespace it.unical.mat.embasp.specializations.solver_planning_domains
 				if (!(ip is PDDLInputProgram))
 					continue;
 			
-        PDDLInputProgram pip = (PDDLInputProgram) ip;
+                PDDLInputProgram pip = (PDDLInputProgram) ip;
 				switch (pip.ProgramsType)
 				{
 					case PDDLProgramType.DOMAIN:
@@ -50,11 +87,7 @@ namespace it.unical.mat.embasp.specializations.solver_planning_domains
 			if (domain.Equals(""))
 				throw new PDDLException("Domain file not specified");
 
-			JObject obj = new JObject();
-			obj.Add("problem", problem);
-			obj.Add("domain", domain);
-
-			return obj;
+			return "{\"problem\":\"" + Escape(problem) + "\", \"domain\":\"" + Escape(domain) + "\"}"; ;
 		}
 
 		private string GetFromFile(IList<string> filesPaths, string separator)
@@ -80,37 +113,37 @@ namespace it.unical.mat.embasp.specializations.solver_planning_domains
 			string result = "";
 			try
 			{
-        System.Uri myUri = new Uri(solverUrl);
-        HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(myUri);
+                System.Uri myUri = new Uri(solverUrl);
+                HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(myUri);
 
-        //If this line is decommented an exception is thrown (option not allowed)
-        //httpRequest.AllowReadStreamBuffering = false;
-        httpRequest.AllowWriteStreamBuffering = true;
+                //If this line is decommented an exception is thrown (option not allowed)
+                //httpRequest.AllowReadStreamBuffering = false;
+                httpRequest.AllowWriteStreamBuffering = true;
 
-        httpRequest.ContentType = "application/json";
-        //httpRequest.Accept = "application/json,text/plain";
+                httpRequest.ContentType = "application/json";
+                //httpRequest.Accept = "application/json,text/plain";
 
-        httpRequest.Method = "POST";
+                httpRequest.Method = "POST";
 
-        Stream os = httpRequest.GetRequestStream();
-        UTF8Encoding encoding = new UTF8Encoding();
-        byte[] json_bytes = encoding.GetBytes(json);
-        os.Write(json_bytes, 0, json_bytes.Length);
+                Stream os = httpRequest.GetRequestStream();
+                UTF8Encoding encoding = new UTF8Encoding();
+                byte[] json_bytes = encoding.GetBytes(json);
+                os.Write(json_bytes, 0, json_bytes.Length);
 				os.Flush();
 				os.Close();
 
 				StringBuilder sb = new StringBuilder();
-        HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
         
 				if (httpResponse.StatusCode == HttpStatusCode.OK)
 				{
 					StreamReader br = new StreamReader(httpResponse.GetResponseStream(), Encoding.UTF8);
 					string line = null;
 					
-          while (!((line = br.ReadLine()) is null))
+                    while (!((line = br.ReadLine()) is null))
 						sb.Append(line + "\n");
 					
-          br.Close();
+                    br.Close();
 					result = sb.ToString();
 				}
 				else

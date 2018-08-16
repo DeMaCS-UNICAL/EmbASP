@@ -22,9 +22,11 @@ namespace it.unical.mat.embasp.languages.asp
 			weight_map = weightMap;
 		}
 
-    public virtual IList<string> GetAnswerSet() => new ReadOnlyCollection<string>(value);
+        public virtual IList<string> GetAnswerSet() => new ReadOnlyCollection<string>(value);
 
-    public virtual ISet<object> Atoms
+        public virtual IList<string> Value => value;
+
+        public virtual ISet<object> Atoms
 		{
 			get
 			{
