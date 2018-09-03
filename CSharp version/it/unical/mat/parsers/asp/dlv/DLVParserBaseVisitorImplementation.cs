@@ -2,7 +2,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 
-namespace Parsers.ASP.DLV
+namespace it.unical.mat.parsers.asp.dlv
 {
 	public class DLVParserBaseVisitorImplementation : DLVParserBaseVisitor <object> 
 	{

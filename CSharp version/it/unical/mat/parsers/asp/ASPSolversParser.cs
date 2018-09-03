@@ -1,9 +1,9 @@
-using Parsers.ASP.Clingo;
-using Parsers.ASP.DLV;
-using Parsers.ASP.DLV2;
-using Parsers.ASP.DLVHEX;
+using it.unical.mat.parsers.asp.clingo;
+using it.unical.mat.parsers.asp.dlv;
+using it.unical.mat.parsers.asp.dlv2;
+using it.unical.mat.parsers.asp.dlvhex;
 
-namespace Parsers.ASP
+namespace it.unical.mat.parsers.asp
 {
     public static class ASPSolversParser
     {

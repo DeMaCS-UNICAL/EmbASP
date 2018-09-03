@@ -1,6 +1,6 @@
-﻿using Parsers.PDDL.Solver_Planning_Domains;
+﻿using it.unical.mat.parsers.pddl.solver_planning_domains;
 
-namespace Parsers.PDDL
+namespace it.unical.mat.parsers.pddl
 {
     public static class PDDLSolversParser
     {

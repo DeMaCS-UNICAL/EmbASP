@@ -1,4 +1,4 @@
-﻿using Parsers.ASP;
+﻿using it.unical.mat.parsers.asp;
 
 namespace it.unical.mat.embasp.specializations.clingo
 {
@@ -14,5 +14,5 @@ namespace it.unical.mat.embasp.specializations.clingo
         {
             ASPSolversParser.ParseClingo(this, output, true);
         }
-    }
+	}
 }

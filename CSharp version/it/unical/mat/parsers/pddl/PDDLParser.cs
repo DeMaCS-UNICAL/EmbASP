@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 
-namespace Parsers.PDDL
+namespace it.unical.mat.parsers.pddl
 {
 	public class PDDLParser : PDDLGrammarBaseVisitor <object> 
 	{

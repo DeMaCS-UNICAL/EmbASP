@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 
-namespace Parsers.ASP
+namespace it.unical.mat.parsers.asp
 {
 	public class ASPParser : ASPGrammarBaseVisitor <object> 
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 
-namespace Parsers.ASP.DLV2
+namespace it.unical.mat.parsers.asp.dlv2
 {
 	public class DLV2ParserBaseVisitorImplementation : DLV2ParserBaseVisitor <object> 
 	{

@@ -1,4 +1,4 @@
-namespace Parsers.PDDL
+namespace it.unical.mat.parsers.pddl
 {
     public interface IPDDLDataCollection
     {

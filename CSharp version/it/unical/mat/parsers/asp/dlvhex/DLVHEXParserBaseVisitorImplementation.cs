@@ -2,7 +2,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 
-namespace Parsers.ASP.DLVHEX
+namespace it.unical.mat.parsers.asp.dlvhex
 {
 	public class DLVHEXParserBaseVisitorImplementation : DLVHEXParserBaseVisitor <object> 
 	{

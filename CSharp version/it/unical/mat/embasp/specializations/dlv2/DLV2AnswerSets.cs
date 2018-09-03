@@ -1,4 +1,4 @@
-﻿using Parsers.ASP;
+﻿using it.unical.mat.parsers.asp;
 
 namespace it.unical.mat.embasp.specializations.dlv2
 {

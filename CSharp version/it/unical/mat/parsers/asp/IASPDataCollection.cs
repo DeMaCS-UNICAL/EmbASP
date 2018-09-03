@@ -1,4 +1,4 @@
-namespace Parsers.ASP
+namespace it.unical.mat.parsers.asp
 {
     public interface IASPDataCollection
     {
