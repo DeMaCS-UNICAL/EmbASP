@@ -60,7 +60,7 @@ namespace it.unical.mat.parsers.pddl.solver_planning_domains
 
             if (!two_stageParsing)
             {
-                visitor.VisitPair(parser.pair());
+                visitor.Visit(parser.json());
 
                 return visitor.errors;
             }
@@ -73,7 +73,7 @@ namespace it.unical.mat.parsers.pddl.solver_planning_domains
 
             try
             {
-                visitor.VisitJson(parser.json());
+                visitor.Visit(parser.json());
             }
             catch (SystemException exception)
             {
