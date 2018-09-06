@@ -4,6 +4,6 @@ namespace it.unical.mat.parsers.asp
     {
         void AddAnswerSet();
         void StoreAtom(string atom);
-        void StoreCost(int level, int weight); 
+        void StoreCost(int level, int weight);
     }
 }

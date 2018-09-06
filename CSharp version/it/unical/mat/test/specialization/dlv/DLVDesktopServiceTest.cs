@@ -22,7 +22,7 @@ namespace it.unical.mat.test
                                                 {0, 1, 0, 0, 8, 0, 0, 0, 2},
                                                 {6, 0, 0, 0, 0, 4, 0, 0, 0},
                                                 {3, 0, 0, 0, 0, 0, 0, 1, 0},
-                                                {0, 4, 1, 0, 0, 0, 0, 0, 7}, 
+                                                {0, 4, 1, 0, 0, 0, 0, 0, 7},
                                                 {0, 0, 7, 0, 0, 0, 3, 0, 0}};
         private AnswerSets answerSets;
 
@@ -35,14 +35,14 @@ namespace it.unical.mat.test
             path.Append(Path.DirectorySeparatorChar);
             path.Append("dlv");
             path.Append(Path.DirectorySeparatorChar);
-            
-            if(OS.IndexOf("win", StringComparison.CurrentCultureIgnoreCase) >= 0)
+
+            if (OS.IndexOf("win", StringComparison.CurrentCultureIgnoreCase) >= 0)
                 path.Append("dlv.mingw.exe");
-            else if(OS.IndexOf("mac", StringComparison.CurrentCultureIgnoreCase) >= 0)
+            else if (OS.IndexOf("mac", StringComparison.CurrentCultureIgnoreCase) >= 0)
                 path.Append("dlv.i386-apple-darwin.bin");
-            else if(OS.IndexOf("nux", StringComparison.CurrentCultureIgnoreCase) >= 0)
+            else if (OS.IndexOf("nux", StringComparison.CurrentCultureIgnoreCase) >= 0)
             {
-                if(!System.Environment.Is64BitOperatingSystem)
+                if (!System.Environment.Is64BitOperatingSystem)
                     path.Append("dlv.x86-64-linux-elf-static.bin");
                 else
                     path.Append("dlv.i386-linux-elf-static.bin");
@@ -60,16 +60,17 @@ namespace it.unical.mat.test
             {
                 Handler handler = new DesktopHandler(new DLVDesktopService(GetPath()));
                 InputProgram inputProgram = new ASPInputProgram();
-                
+
                 for (int i = 0; i < N; i++)
-                    for(int j = 0; j < N; j++)
-                        if(sudokuMatrix[i, j] != 0)
+                    for (int j = 0; j < N; j++)
+                        if (sudokuMatrix[i, j] != 0)
                             inputProgram.AddObjectInput(new Cell(i, j, sudokuMatrix[i, j]));
-                
+
                 inputProgram.AddFilesPath(".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "test-resources" + Path.DirectorySeparatorChar + "asp" + Path.DirectorySeparatorChar + "sudoku");
                 handler.AddProgram(inputProgram);
-                handler.StartAsync(new CallbackAction(o => {
-                    if(!(o is AnswerSets))
+                handler.StartAsync(new CallbackAction(o =>
+                {
+                    if (!(o is AnswerSets))
                         return;
 
                     answerSets = (AnswerSets)o;
@@ -80,19 +81,21 @@ namespace it.unical.mat.test
                 Assert.IsNotNull(answerSets);
                 Assert.IsTrue(String.IsNullOrEmpty(answerSets.ErrorsString), "Found error in the Plan\n" + answerSets.ErrorsString);
 
-                if(answerSets.Answersets.Count == 0)
+                if (answerSets.Answersets.Count == 0)
                     return;
 
                 AnswerSet @as = answerSets.Answersets[0];
 
-                foreach(object obj in @as.Atoms)
+                foreach (object obj in @as.Atoms)
                 {
                     Cell cell = (Cell)obj;
                     sudokuMatrix[cell.getRow(), cell.getColumn()] = cell.getValue();
                 }
 
-                for (int i = 0; i < N; i++) {
-                    for (int j = 0; j < N; j++) {
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < N; j++)
+                    {
                         Console.Write(sudokuMatrix[i, j] + " ");
 
                         if (sudokuMatrix[i, j] == 0)

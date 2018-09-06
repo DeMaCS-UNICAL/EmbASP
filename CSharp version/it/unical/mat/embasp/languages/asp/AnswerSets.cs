@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace it.unical.mat.embasp.languages.asp
 {
-	using Output = it.unical.mat.embasp.@base.Output;
+    using Output = it.unical.mat.embasp.@base.Output;
 
     public abstract class AnswerSets : Output, IASPDataCollection
     {
@@ -72,7 +72,7 @@ namespace it.unical.mat.embasp.languages.asp
 
         public void AddAnswerSet()
         {
-            answersets.Add(new AnswerSet(new List <string>()));
+            answersets.Add(new AnswerSet(new List<string>()));
         }
 
         public void StoreAtom(string result)

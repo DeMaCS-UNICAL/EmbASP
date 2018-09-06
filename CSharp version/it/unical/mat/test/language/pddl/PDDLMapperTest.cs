@@ -16,12 +16,12 @@ namespace it.unical.mat.test
             {
                 instance.RegisterClass(typeof(PickUp));
 
-			    object @object = instance.GetObject("(pick-up b)");
-                
-			    Assert.IsTrue(@object is PickUp);
+                object @object = instance.GetObject("(pick-up b)");
+
+                Assert.IsTrue(@object is PickUp);
                 Assert.AreEqual("b", ((PickUp)@object).getBlock());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }

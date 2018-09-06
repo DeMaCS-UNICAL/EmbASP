@@ -5,47 +5,47 @@ using System.Collections.Generic;
 
 namespace it.unical.mat.embasp.languages.asp
 {
-	public class ASPMapper : Mapper
-	{
-		private static ASPMapper mapper;
+    public class ASPMapper : Mapper
+    {
+        private static ASPMapper mapper;
 
-		public static ASPMapper Instance
-		{
-			get
-			{
-				if (ASPMapper.mapper == null)
-					ASPMapper.mapper = new ASPMapper();
-				return ASPMapper.mapper;
-			}
-		}
+        public static ASPMapper Instance
+        {
+            get
+            {
+                if (ASPMapper.mapper == null)
+                    ASPMapper.mapper = new ASPMapper();
+                return ASPMapper.mapper;
+            }
+        }
 
-		private ASPMapper() : base() { }
+        private ASPMapper() : base() { }
 
-		protected internal override string GetActualString(string predicate, Dictionary<int, object> parametersMap)
-		{
-			if (parametersMap.Count == 0)
-				return predicate;
+        protected internal override string GetActualString(string predicate, Dictionary<int, object> parametersMap)
+        {
+            if (parametersMap.Count == 0)
+                return predicate;
 
-			string atom = predicate + "(";
-			for (int i = 0; i < parametersMap.Count; i++)
-			{
-				if (i != 0)
-					atom += ",";
-				
+            string atom = predicate + "(";
+            for (int i = 0; i < parametersMap.Count; i++)
+            {
+                if (i != 0)
+                    atom += ",";
+
                 object objectTerm = parametersMap[i];
-				if (objectTerm == null)
-					throw new IllegalTermException("Wrong term number of predicate " + predicate);
-				
+                if (objectTerm == null)
+                    throw new IllegalTermException("Wrong term number of predicate " + predicate);
+
                 if (objectTerm is int?)
-					atom += objectTerm + "";
+                    atom += objectTerm + "";
                 else if (objectTerm is SymbolicConstant)
                     atom += objectTerm.ToString();
                 else
-					atom += "\"" + objectTerm.ToString() + "\"";
-			}
-			atom += ")";
-			return atom;
-		}
+                    atom += "\"" + objectTerm.ToString() + "\"";
+            }
+            atom += ")";
+            return atom;
+        }
 
         protected internal override string GetId(string @string)
         {
@@ -57,8 +57,8 @@ namespace it.unical.mat.embasp.languages.asp
         }
 
         protected internal override string[] GetParam(string @string)
-		{
+        {
             return ASPParser.Parse(@string).GetParameters();
-		}
-	}
+        }
+    }
 }

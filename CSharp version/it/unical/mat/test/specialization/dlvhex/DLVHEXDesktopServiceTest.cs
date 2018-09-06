@@ -61,7 +61,8 @@ namespace it.unical.mat.test
 
                 inputProgram.AddFilesPath(".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "test-resources" + Path.DirectorySeparatorChar + "asp" + Path.DirectorySeparatorChar + "sudoku_alt");
                 handler.AddProgram(inputProgram);
-                handler.StartAsync(new CallbackAction(o => {
+                handler.StartAsync(new CallbackAction(o =>
+                {
                     if (!(o is AnswerSets))
                         return;
 

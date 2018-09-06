@@ -12,7 +12,7 @@ namespace it.unical.mat.embasp.specializations.solver_planning_domains
         {
             if (!string.IsNullOrEmpty(errors) || string.IsNullOrEmpty(output))
                 return;
-            
+
             errors += PDDLSolversParser.ParseSolverPlanningDomains(this, output, true);
         }
     }

@@ -68,7 +68,8 @@ namespace it.unical.mat.test
 
                 inputProgram.AddFilesPath(".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "test-resources" + Path.DirectorySeparatorChar + "asp" + Path.DirectorySeparatorChar + "sudoku");
                 handler.AddProgram(inputProgram);
-                handler.StartAsync(new CallbackAction(o => {
+                handler.StartAsync(new CallbackAction(o =>
+                {
                     if (!(o is AnswerSets))
                         return;
 
@@ -84,7 +85,7 @@ namespace it.unical.mat.test
                     return;
 
                 AnswerSet @as = answerSets.Answersets[0];
-                
+
                 foreach (object obj in @as.Atoms)
                 {
                     Cell cell = (Cell)obj;

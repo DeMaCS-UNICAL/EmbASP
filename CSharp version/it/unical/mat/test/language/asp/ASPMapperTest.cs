@@ -29,14 +29,14 @@ namespace it.unical.mat.test
 
                 Assert.IsNull(nullObject);
                 instance.RegisterClass(typeof(Arity0));
-			
-			    object object1= instance.GetObject("a");
-			
-			    Assert.IsNotNull(object1);
-			    Assert.IsTrue(object1 is Arity0);
+
+                object object1 = instance.GetObject("a");
+
+                Assert.IsNotNull(object1);
+                Assert.IsTrue(object1 is Arity0);
                 Assert.AreEqual("a", instance.GetString(object1));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
