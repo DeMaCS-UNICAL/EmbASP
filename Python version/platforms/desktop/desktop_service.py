@@ -9,15 +9,15 @@ from threading import Thread
 
 
 class DesktopService(Service):
-    """Is a specialization for a Desktop platform."""
+    """Specialization for a desktop platform."""
 
     def __init__(self, exe_path):
         self._exe_path = exe_path  # Stores solver's executable path
-        # Stores option string for enable solver to read from standard input
+        # Stores option string in order to enable solver to read from standard input
         self._load_from_STDIN_option = None
 
     def get_exe_path(self):
-        """Return a execution path of DesktopService."""
+        """Return execution path of DesktopService."""
         return self._exe_path
 
     @abstractmethod

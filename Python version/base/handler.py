@@ -5,8 +5,7 @@ class Handler(object):
     """A collection of InputProgram and OptionDescriptor.
 
     The subclasses have to implement start_async(Callback, List, List)
-    and start_sync(List, List) methods. Each instance inside _programs
-    and _options are represented by an integer (id) , respectively.
+    and start_sync(List, List) methods.
     """
     __metaclass__ = ABCMeta
 
@@ -18,7 +17,7 @@ class Handler(object):
         """Add a new element inside _options dict.
 
         The o parameter is the new OptionDescriptor instance. The method
-        return the id associate to the new added OptionDescriptor
+        return the id associated whit the added OptionDescriptor
         instance.
         """
         last_index = len(self._options)
@@ -30,7 +29,7 @@ class Handler(object):
         """Add a new element inside _programs dict.
 
         The program param is the InputProgram instance added to the
-        collection. The method return the id associate to the new added
+        collection. The method return the id associated whit the added
         InputProgram instance.
         """
         last_index = len(self._programs)
@@ -74,7 +73,7 @@ class Handler(object):
         """Returns the specified InputProgram element.
 
         The parameter key represents the id. The method return the
-        InputProgram element associate with the given key.
+        InputProgram element associated with the given key.
         """
         return self._programs.get(key)
 
@@ -82,23 +81,23 @@ class Handler(object):
         """Returns the specified OptionDescriptor element.
 
         The parameter key represents the id. The method return the
-        OptionDescriptor element associate with the given key.
+        OptionDescriptor element associated with the given key.
         """
         return self._options.get(key)
 
     def remove_all(self):
-        """Removes all of the elements from _programs and _options.
+        """Removes all the elements from _programs and _options.
 
-        Both of the collections will be empty after this method returns.
+        Both the collections will be empty after this method returns.
         """
         self._options.clear()
         self._programs.clear()
 
     def remove_option_from_id(self, option_id):
-        """Removes the element associate within the given id from _options
+        """Removes the element associated with the given id from _options
         dict.
 
-        option_id represents the id associate within an element.
+        option_id represents the id associated with an element.
         """
         self._options.pop(option_id)
 
@@ -133,17 +132,17 @@ class Handler(object):
         return result
 
     def remove_program_from_id(self, program_id):
-        """Removes the element associate within the given id from _programs}
+        """Removes the element associated with the given id from _programs}
         dict.
 
-        The parameter program_id represents the id associate within an
+        The parameter program_id represents the id associated with an
         element
         """
         self._programs.pop(program_id)
 
     def start_async(self, c, program_index=None, option_index=None):
         """This method have to be implemented by subclasses to execute solver
-        in a asynchronous way, if no parameters are given, the entire sets of
+        in an asynchronous way, if no parameters are given, the entire sets of
         programs and option are used."""
         pass
 

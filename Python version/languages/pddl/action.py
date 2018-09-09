@@ -1,5 +1,5 @@
 class Action(object):
-    """Represent a generic Action."""
+    """Represents a generic Action."""
 
     def __init__(self, name):
         self.__name = name

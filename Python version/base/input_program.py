@@ -2,7 +2,7 @@ class InputProgram(object):
     """Represents a generic option."""
 
     def __init__(self):
-        """Creates a new programs , setting space as default separator."""
+        """Creates new programs setting space as default separator."""
         self._programs = ""  # Where programs data is stored
         self.__files_paths = list()  # Where associated files are stored
         self._separator = " "  # Used as separator for programs
@@ -24,7 +24,7 @@ class InputProgram(object):
     def add_program(self, new_instruction):
         """Adds a new instruction directly into _programs.
 
-        The parameter new_instruction represents a new programs
+        The parameter new_instruction represents a new program
         instruction.
         """
         if self._programs is None:
@@ -55,7 +55,7 @@ class InputProgram(object):
         return self._programs
 
     def get_separator(self):
-        """Separator the _separator character."""
+        """Returns the _separator character."""
         return self._separator
 
     def get_string_of_files_paths(self):
@@ -67,14 +67,14 @@ class InputProgram(object):
         return to_return
 
     def set_programs(self, programs):
-        """Sets _programs value to the new given one.
+        """Sets _programs value to the given one.
 
-        The parameter programs, represents new value.
+        The parameter programs represents a new value.
         """
         self._programs = programs
 
     def set_separator(self, separator):
-        """Set programs separator to current value.
+        """Set programs separator to the given one.
 
         The parameter separator is used as new separator.
         """

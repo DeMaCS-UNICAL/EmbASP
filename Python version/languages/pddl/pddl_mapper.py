@@ -29,5 +29,5 @@ class PDDLMapper(Mapper):
         return action[1:action.index(" ")]
 
     def _get_param(self, action):
-        """Return a set of parameter string name."""
+        """Return a set of parameters."""
         return PDDLParser.parse(action).get_parameters()

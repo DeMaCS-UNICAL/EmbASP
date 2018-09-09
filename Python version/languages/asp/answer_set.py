@@ -10,7 +10,7 @@ class AnswerSet(object):
 
         self.__value = value  # Where data of answer set is stored
         self.__weight_map = weight_map  # Where weights of the answer set are stored
-        self.__atoms = set()  # Where Answer set's atoms are stored
+        self.__atoms = set()  # Where answer set's atoms are stored
 
     def get_answer_set(self):
         """Return the current __value data.

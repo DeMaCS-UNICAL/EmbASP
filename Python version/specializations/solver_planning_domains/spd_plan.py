@@ -3,7 +3,7 @@ from parsers.pddl.pddl_solvers_parser import PDDLSolversParser
 
 
 class SPDPlan(Plan):
-    """Represent a solution to a SPD problem."""
+    """Represents a solution to a SPD problem."""
 
     def __init__(self, plan, error):
         super(SPDPlan, self).__init__(plan, error)

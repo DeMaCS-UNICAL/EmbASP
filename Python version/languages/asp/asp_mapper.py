@@ -21,7 +21,7 @@ class ASPMapper(Mapper):
         return cls.__instance
 
     def _get_actual_string(self, predicate, parameters_map):
-        """Return a string representing atom, from given predicate string name,
+        """Return a string representing atom, from given predicate name,
         and set of parameters."""
         atom = predicate + "("
         for i in range(0, len(parameters_map)):

@@ -9,5 +9,5 @@ class PDDLInputProgram(InputProgram):
         self.__programs_type = progType  # Where type of program are stored
 
     def get_programs_type(self):
-        """Return type of program."""
+        """Return type of programs."""
         return self.__programs_type

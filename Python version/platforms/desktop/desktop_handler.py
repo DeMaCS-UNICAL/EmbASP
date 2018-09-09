@@ -2,7 +2,7 @@ from base.handler import Handler
 
 
 class DesktopHandler(Handler):
-    """Is a Handler specialization for a Desktop platform."""
+    """Handler specialization for desktop platforms."""
 
     def __init__(self, service):
         super(DesktopHandler, self).__init__()
@@ -11,8 +11,8 @@ class DesktopHandler(Handler):
     def start_async(self, c, program_index=None, option_index=None):
         """Specialization of superclass start_async method.
 
-        Starts ASP solving asynchronously on a subset of data and
-        options for a Desktop platform.
+        Starts ASP solving asynchronously a subset of data and
+        options for a desktop platform.
         """
         input_programs = self._collect_programs(program_index)
         input_options = self._collect_options(option_index)
@@ -21,8 +21,8 @@ class DesktopHandler(Handler):
     def start_sync(self, program_index=None, option_index=None):
         """Specialization of superclass start_sync method.
 
-        Starts ASP solving synchronously on a subset of data and options
-        for a Desktop platform.
+        Starts ASP solving synchronously a subset of data and options
+        for a desktop platform.
         """
         input_programs = self._collect_programs(program_index)
         input_options = self._collect_options(option_index)

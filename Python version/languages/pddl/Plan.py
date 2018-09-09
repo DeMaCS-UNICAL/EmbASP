@@ -14,14 +14,14 @@ class Plan(Output):
         self.__actions_objects = None
 
     def get_actions(self):
-        """Return a set of Actions."""
+        """Returns a set of Actions."""
         if self._action_sequence is None:
             self._action_sequence = list()
             self._parse()
         return self._action_sequence
 
     def get_actions_objects(self):
-        """Return a set of Objects represents Actions."""
+        """Returns a set of Objects representing Actions."""
         if self.__actions_objects is None:
             self.__actions_objects = list()
             mapper = PDDLMapper.get_instance()

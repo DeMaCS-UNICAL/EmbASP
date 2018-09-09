@@ -50,7 +50,7 @@ class AnswerSets(Output, ASPDataCollection):
         return optimal_answer_sets
 
     def get_answer_sets_string(self):
-        """Return a string which contains all AnswerSet."""
+        """Return a string which contains every AnswerSet."""
         return self._output
 
     def add_answer_set(self):

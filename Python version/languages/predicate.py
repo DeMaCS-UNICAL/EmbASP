@@ -2,15 +2,14 @@ from abc import ABCMeta
 
 
 class Predicate(object):
-    """This class have to be implemented by subclasses want it represent a
-    predicate."""
+    """This class have to be implemented by subclasses in order to 
+	represent a predicate."""
 
     __metaclass__ = ABCMeta
 
     def __init__(self, terms):
         index = 0
-        # Dict where positional id and set of terms string name and optionally
-        # int type are stored
+        # Dict where positional id and set of terms are stored
         self.__map_terms_type = dict()
         for val in terms:
             if isinstance(val, tuple) and len(terms) > 1 and len(val) > 2:

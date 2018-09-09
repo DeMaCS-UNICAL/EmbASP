@@ -3,14 +3,14 @@ from languages.asp.asp_mapper import ASPMapper
 
 
 class ASPInputProgram(InputProgram):
-    """A generic ASP program, with the capabilities of retrieve data by
+    """A generic ASP program, with the capability of retrieving data by
     objects."""
 
     def __init__(self):
         super(ASPInputProgram, self).__init__()
 
     def add_object_input(self, input_obj):
-        """Transforms a given Object class into a InputProgram and adds it to
+        """Transforms a given Object class into an InputProgram and adds it to
         the current _programs.
 
         The parameter input_obj is an object to be transformed.

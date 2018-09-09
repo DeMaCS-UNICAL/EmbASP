@@ -3,7 +3,7 @@ from parsers.asp.asp_solvers_parser import ASPSolversParser
 
 
 class DLVAnswerSets(AnswerSets):
-    """Represent an AnswerSet specific for DLV."""
+    """Represents an AnswerSet for DLV."""
 
     def __init__(self, out, err=None):
         super(DLVAnswerSets, self).__init__(out, err)

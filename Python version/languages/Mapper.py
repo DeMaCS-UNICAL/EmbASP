@@ -12,7 +12,7 @@ class Mapper(object):
         self._objects = None
         self._parser = None
         # Represents a dict, where are stored a string name of a predicate as a
-        # key, and a corresponding Class element
+        # key and the corresponding Class element
         self._predicate_class = dict()
 
     @abstractmethod
@@ -34,7 +34,7 @@ class Mapper(object):
     @staticmethod
     def __populate_object(parameters, obj):
         """Sets a fields of object from set of parameters given, by invoking
-        setters methods of object."""
+        setters methods of the object."""
         for key, value in obj.get_terms_type().items():
             if isinstance(value, tuple) and len(value) == 2:
                 name_method = "set_" + value[0]
@@ -50,7 +50,7 @@ class Mapper(object):
     def get_object(self, atom):
         """Returns an Object for the given string.
 
-        The parameter string is a string from witch data are
+        The parameter string is a string from which data are
         extrapolated. The method return a Object for the given string
         data.
         """
@@ -99,7 +99,7 @@ class Mapper(object):
     def get_string(self, obj):
         """Returns data for the given Object.
 
-        The parameter obj is the Object from witch data are
+        The parameter obj is the Object from which data are
         extrapolated. The method return a string data for the given
         Object in a String format.
         """
