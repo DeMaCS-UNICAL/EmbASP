@@ -1,5 +1,5 @@
 from languages.asp.answer_sets import AnswerSets
-from parsers.asp.ASPSolversParser import ASPSolversParser
+from parsers.asp.asp_solvers_parser import ASPSolversParser
 
 
 class DLV2AnswerSets(AnswerSets):

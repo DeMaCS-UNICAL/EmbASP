@@ -1,5 +1,5 @@
 from languages.mapper import Mapper
-from parsers.pddl.PDDLParser import PDDLParser
+from parsers.pddl.pddl_parser import PDDLParser
 
 
 class PDDLMapper(Mapper):

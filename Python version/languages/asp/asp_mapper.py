@@ -1,6 +1,6 @@
 from languages.mapper import Mapper
 from languages.asp.symbolic_constant import SymbolicConstant
-from parsers.asp.ASPParser import ASPParser
+from parsers.asp.asp_parser import ASPParser
 
 
 class ASPMapper(Mapper):

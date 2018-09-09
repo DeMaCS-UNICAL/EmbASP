@@ -1,5 +1,5 @@
 from languages.pddl.plan import Plan
-from parsers.pddl.PDDLSolversParser import PDDLSolversParser
+from parsers.pddl.pddl_solvers_parser import PDDLSolversParser
 
 
 class SPDPlan(Plan):

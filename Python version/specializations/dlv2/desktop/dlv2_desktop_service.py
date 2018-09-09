@@ -1,5 +1,4 @@
 from platforms.desktop.desktop_service import DesktopService
-from base.option_descriptor import OptionDescriptor
 from specializations.dlv2.dlv2_answer_sets import DLV2AnswerSets
 
 

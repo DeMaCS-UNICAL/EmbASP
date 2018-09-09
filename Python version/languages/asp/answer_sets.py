@@ -1,7 +1,7 @@
 from .answer_set import AnswerSet
 from abc import ABCMeta
 from base.output import Output
-from parsers.asp.ASPDataCollection import ASPDataCollection
+from parsers.asp.asp_data_collection import ASPDataCollection
 import sys
 
 
