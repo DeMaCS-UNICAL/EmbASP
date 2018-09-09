@@ -72,8 +72,8 @@ class ClingoDesktopServiceTest(unittest.TestCase):
             self.assertTrue(isinstance(out, Output),
                             "Error, result object is not Output")
 
-            self.assertIsNone(
-                out.get_errors(), "Found error in the Plan\n" + str(out.get_errors()))
+            self.assertIsNone(out.get_errors(),
+                              "Found error in the Plan\n" + str(out.get_errors()))
 
             if (len(out.get_answer_sets()) == 0):
                 return

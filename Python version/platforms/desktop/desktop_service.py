@@ -9,7 +9,7 @@ from threading import Thread
 
 
 class DesktopService(Service):
-    """Is a specialization for a Desktop platform"""
+    """Is a specialization for a Desktop platform."""
 
     def __init__(self, exe_path):
         self._exe_path = exe_path  # Stores solver's executable path
@@ -17,7 +17,7 @@ class DesktopService(Service):
         self._load_from_STDIN_option = None
 
     def get_exe_path(self):
-        """Return a execution path of DesktopService"""
+        """Return a execution path of DesktopService."""
         return self._exe_path
 
     @abstractmethod
@@ -25,13 +25,16 @@ class DesktopService(Service):
         pass
 
     def set_exe_path(self, exe_path):
-        """Set _exe_path to a new path
-        The parameter exe_path is a string representing the path for the new solver
+        """Set _exe_path to a new path.
+
+        The parameter exe_path is a string representing the path for the
+        new solver.
         """
         self._exe_path = exe_path
 
     def start_async(self, callback, programs, options):
-        """Start a new process for the _exe_path and starts solving in Asyncronously way"""
+        """Start a new process for the _exe_path and starts solving
+        asyncronously."""
         class MyThread(Thread):
             def __init__(self, start_sync):
                 Thread.__init__(self)
@@ -44,7 +47,8 @@ class DesktopService(Service):
         th.start()
 
     def start_sync(self, programs, options):
-        """Start a new process for the _exe_path and starts solving in Syncronously way"""
+        """Start a new process for the _exe_path and starts solving
+        syncronously."""
         option = ""
         for o in options:
             if o is not None:
@@ -62,7 +66,8 @@ class DesktopService(Service):
                 if program_file is not None:
                     files_paths += program_file
             else:
-                print("Warning : wrong " + str(InputProgram().__class__.__name__))
+                print("Warning : wrong " +
+                      str(InputProgram().__class__.__name__))
 
         if self._exe_path is None:
             return Output("", "Error: executable not found")
@@ -82,14 +87,18 @@ class DesktopService(Service):
         print(exep + " " + opt + " " + files_paths +
               self._load_from_stdin_option)
 
-        start = int(time.time()*1e+9)
+        start = int(time.time() * 1e+9)
 
         proc = subprocess.Popen(
-            lis, universal_newlines=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, )
+            lis,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stdin=subprocess.PIPE,
+        )
 
         output, error = proc.communicate(final_program)
 
-        end = int(time.time()*1e+9)
+        end = int(time.time() * 1e+9)
 
         print("Total time : " + str(end - start))
         print("")

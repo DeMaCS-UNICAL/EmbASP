@@ -17,7 +17,7 @@ class PDDLMapperTest(unittest.TestCase):
             self.assertTrue(isinstance(obj, PickUp))
 
             self.assertEqual("b", obj.get_block())
-            
+
         except Exception as e:
             self.fail(str(e))
 
