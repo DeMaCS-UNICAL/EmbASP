@@ -1,24 +1,31 @@
-from languages.Predicate import Predicate
+from languages.predicate import Predicate
+
 
 class Cell(Predicate):
-      
-    predicateName="cell"
-    
+
+    predicate_name = "cell"
+
     def __init__(self, row=None, column=None, value=None):
-        super(Cell, self).__init__([("row", int), ("column", int), ("value", int)])
+        super(Cell, self).__init__(
+            [("row", int), ("column", int), ("value", int)])
         self.row = row
         self.value = value
         self.column = column
-          
-    def getRow(self):
+
+    def get_row(self):
         return self.row
-    def getColumn(self):
+
+    def get_column(self):
         return self.column
-    def getValue(self):
+
+    def get_value(self):
         return self.value
-    def setRow(self, row):
+
+    def set_row(self, row):
         self.row = row
-    def setColumn(self, column):
+
+    def set_column(self, column):
         self.column = column
-    def setValue(self, value):
+
+    def set_value(self, value):
         self.value = value

@@ -14,5 +14,5 @@ TERMS_END       : ')';
 WHITE_SPACE     : WS-> skip;
 
 fragment INT: '0'|[1-9][0-9]*;
-fragment NL : [\n\r];
+fragment NL : ('\n'|'\r'|'\r\n');
 fragment WS : [ \t];

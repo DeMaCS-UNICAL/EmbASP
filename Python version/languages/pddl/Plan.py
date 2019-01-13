@@ -1,32 +1,35 @@
-from base.Output import Output
-from languages.pddl.PDDLMapper import PDDLMapper
+from .action import Action
+from base.output import Output
+from languages.pddl.pddl_mapper import PDDLMapper
 from abc import ABCMeta
 
+
 class Plan(Output):
-    """A simplified solution to a PDDL problem"""
-    
+    """A simplified solution to a PDDL problem."""
     __metaclass__ = ABCMeta
-    
+
     def __init__(self, plan, error):
         super(Plan, self).__init__(plan, error)
-        self._actionSequence = None
-        self.__actionsObjects = None
-        
-    def getActions(self):
-        """Return a set of Actions"""
-        if self._actionSequence == None:
-            self._actionSequence = list()
+        self._action_sequence = None
+        self.__actions_objects = None
+
+    def get_actions(self):
+        """Returns a set of Actions."""
+        if self._action_sequence is None:
+            self._action_sequence = list()
             self._parse()
-        return self._actionSequence
-    
-    def getActionsObjects(self):
-        """Return a list of objects representing Actions"""
-        if self.__actionsObjects is None:
-            atomsList = ""
-            
-            for action in self._actionSequence:
-                atomsList += action.getName() + '\n'
-            
-            self.__actionsObjects = PDDLMapper.getInstance().getObjects(atomsList)
-            
-        return self.__actionsObjects
+        return self._action_sequence
+
+    def get_actions_objects(self):
+        """Returns a set of Objects representing Actions."""
+        if self.__actions_objects is None:
+            self.__actions_objects = list()
+            mapper = PDDLMapper.get_instance()
+            for a in self.get_actions():
+                obj = mapper.get_object(a.get_name())
+                if obj is not None:
+                    self.__actions_objects.append(obj)
+        return self.__actions_objects
+
+    def store_action(self, action):
+        self._action_sequence.append(Action(action))

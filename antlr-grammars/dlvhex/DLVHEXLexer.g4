@@ -1,29 +1,31 @@
 lexer grammar DLVHEXLexer;
 
-START     : '{'-> mode(ANSWER_SET);
-COST_LABEL: '<'-> mode(COST);
-ANY       : .+?-> skip;
-IGNORE    : (NL|WS)-> skip;
+HEADER     : 'DLVHEX '.*?NL-> skip;
+WHITE_SPACE: (NL|WS)-> skip;
 
-mode ANSWER_SET;
-COMMA           : ',';
-INTEGER_CONSTANT: INT;
+COLON      : ':';
+COMMA      : ',';
+COST_BEGIN : '<';
+COST_END   : '>';
+INTEGER    : '0'|[1-9][0-9]*;
+LEVEL_BEGIN: '[';
+LEVEL_END  : ']';
+
+GROUND_QUERY_BEGIN: ' is '-> mode(IN_GROUND_QUERY);
+
+ANSWER_SET_BEGIN: '{';
+ANSWER_SET_END  : '}';
 IDENTIFIER      : [a-zA-Z][a-zA-Z0-9_]*;
-ANSWER_SET_END  : '}'-> mode(DEFAULT_MODE);
 STRING_CONSTANT : '"'~["]*'"';
 TERMS_BEGIN     : '(';
 TERMS_END       : ')';
-WHITE_SPACE     : (WS|NL)-> skip;
 
-mode COST;
-BLANK_SPACE  : (NL|WS)-> skip;
-COLON        : ':';
-COMMA_IN_COST: ',';
-COST_END     : '>'-> mode(DEFAULT_MODE);
-INTEGER      : INT;
-LEVEL_BEGIN  : '[';
-LEVEL_END    : ']';
+mode IN_GROUND_QUERY;
+REASONING                 : 'bravely'|'cautiously';
+DOT                       : '.'-> mode(DEFAULT_MODE);
+BOOLEAN                   : 'false'|'true';
+WHITESPACE_IN_GROUND_QUERY: (NL|WS)-> skip;
+WITNESS_LABEL             : ', evidenced by'-> mode(DEFAULT_MODE);
 
-fragment INT: '0'|[1-9][0-9]*;
-fragment NL : [\n\r];
-fragment WS : [ \t];
+fragment NL: [\n\r];
+fragment WS: [ \t];

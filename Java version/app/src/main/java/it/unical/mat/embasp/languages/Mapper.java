@@ -4,11 +4,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import it.unical.mat.embasp.languages.asp.IllegalTermException;
+import it.unical.mat.embasp.languages.asp.SymbolicConstant;
 
 /**
  * Base class
@@ -28,56 +28,47 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Returns a Collection of Objects for the given string representing a list of atoms
+	 * Returns an Object for the given string
 	 *
 	 * @param string
 	 *            String from witch data are extrapolated
-	 * @return Collection of Objects for the given String data
-	 * @throws IllegalAccessException, InstantiationException, InvocationTargetException
+	 * @return Object for the given String data
+	 * @throws IllegalAccessException,
+	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
 	 */
-	public Collection<Object> getObjects(final String atomsList) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-		buildParseTree(atomsList);
+	public Object getObject(final String atom) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+			SecurityException, InstantiationException {
+		final String predicate = getId(atom);
 		
-		final Collection<Object> objects = getCollectionImplementation();
-		String predicate = getId();
+		if(predicate == null)
+			return null;
 		
-		while(predicate != null) {
-			final Class<?> cl = getClass(predicate);
-			final String[] parameters = getParam();
-			predicate = getId();
-			
-			if (cl == null || parameters == null)
-				continue;
-			
-			final Object obj = cl.newInstance();
+		final Class<?> cl = getClass(predicate);
 
-			populateObject(cl, parameters, obj);
-			objects.add(obj);
-		}
+		if(cl == null)
+			return null;
+		
+		final String[] parameters = getParam(atom);
+			
+		if(parameters == null)
+			return null;
 
-		return objects;
+		final Object object = cl.newInstance();
+
+		populateObject(cl, parameters, object);
+
+		return object;
 	}
-	
-	/**
-	 * @return The appropriate data structure depending on the Mapper subclass in use
-	 */
-	protected abstract Collection<Object> getCollectionImplementation();
-	
-	/**
-	 * @param string
-	 *            The string representing a list of atoms received as parameter of getObjects
-	 */
-	protected abstract void buildParseTree(final String atomsList);
 	
 	/**
 	 * @return The predicate name
 	 */
-	protected abstract String getId();
+	protected abstract String getId(final String atom);
 	
 	/**
 	 * @return All the Terms
 	 */
-	protected abstract String[] getParam();
+	protected abstract String[] getParam(final String atom);
 	
 	/**
 	 * Returns data for the given Object
@@ -116,6 +107,8 @@ public abstract class Mapper {
 				if (method.getParameterTypes()[0].getName().equals(int.class.getName())
 						|| method.getParameterTypes()[0].getName().equals(Integer.class.getName()))
 					method.invoke(obj, Integer.valueOf(parameters[term]));
+				else if (method.getParameterTypes()[0].getName().equals(SymbolicConstant.class.getName()))
+						method.invoke(obj, new SymbolicConstant(parameters[term]));
 				else
 					method.invoke(obj, parameters[term]);
 
