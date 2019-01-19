@@ -147,7 +147,7 @@ public class SPDDesktopServiceTest {
 
 	@Test
 	public void test_depots() throws InterruptedException {
-		final int[] results_sizes = { 11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 52, 0, 36, 54, 103, 56, 146, 55, 0 };
+		final int[] results_sizes = { 11, 16, 44, 48, 154, 64, 33, 56, 83, 25, 74, 133, 30, 63, 0, 36, 54, 103, 56, 146, 55, 0 };
 		test(results_sizes, "depots");
 	}
 
@@ -159,7 +159,7 @@ public class SPDDesktopServiceTest {
 
 	@Test
 	public void test_logistics() throws InterruptedException {
-		final int[] results_sizes = { 24, 27, 15, 34, 19, 10, 30, 14, 33, 34, 58, 58, 48, 68, 46, 49, 74, 55, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
+		final int[] results_sizes = { 24, 27, 15, 34, 17, 10, 30, 14, 33, 34, 58, 53, 48, 68, 46, 49, 74, 48, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
 		test(results_sizes, "logistics");
 	}
 
