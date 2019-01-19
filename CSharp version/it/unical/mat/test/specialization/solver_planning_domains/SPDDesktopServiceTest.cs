@@ -57,7 +57,7 @@ namespace it.unical.mat.test
 
                         @lock.Signal();
                     }));
-                    @lock.Wait(new TimeSpan(0, 0, 0, 0, 5000));
+                    @lock.Wait(new TimeSpan(0, 0, 0, 0, 15000));
                     Assert.IsNotNull(plan);
 
                     if (results_sizes[i - 1] != 0)
@@ -93,7 +93,7 @@ namespace it.unical.mat.test
         [TestMethod()]
         public void TestDepots()
         {
-            int[] results_sizes = { 11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 52, 0, 36, 54, 103, 56, 146, 55, 0 };
+            int[] results_sizes = { 11, 16, 44, 48, 154, 64, 33, 56, 83, 25, 74, 133, 30, 63, 0, 36, 54, 103, 56, 146, 55, 0 };
 
             Test(results_sizes, "depots");
         }
@@ -109,7 +109,7 @@ namespace it.unical.mat.test
         [TestMethod()]
         public void TestLogistics()
         {
-            int[] results_sizes = { 24, 27, 15, 34, 19, 10, 30, 14, 33, 34, 58, 58, 48, 68, 46, 49, 74, 55, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
+            int[] results_sizes = { 24, 27, 15, 34, 17, 10, 30, 14, 33, 34, 58, 53, 48, 68, 46, 49, 74, 48, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
 
             Test(results_sizes, "logistics");
         }
