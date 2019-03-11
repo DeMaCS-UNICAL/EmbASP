@@ -48,7 +48,7 @@ public class SPDDesktopServiceTest {
 
 	private Plan plan;
 
-	private final String base_path = ".." + File.separator + "test-resources" + File.separator + "pddl" + File.separator;;
+	private final String base_path = ".." + File.separator + ".." + File.separator + "test-resources" + File.separator + "pddl" + File.separator;
 
 	/**
 	 * @throws java.lang.Exception
