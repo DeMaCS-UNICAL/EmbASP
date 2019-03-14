@@ -1,0 +1,27 @@
+sizeBlock(3).
+pos(0..8).
+symbol(1..9).
+
+cell(X,Y,N) v nocell(X,Y,N)
+         :- pos(X), pos(Y), symbol(N).
+
+:- cell(X,Y,N), cell(X,Y,N1), N1 <> N.
+
+assigned(X,Y):- cell(X,Y,N).
+:- pos(X),pos(Y),not assigned(X,Y).
+
+:- cell(X,Y1,Z), cell(X,Y2,Z), Y1<>Y2.
+:- cell(X1,Y,Z), cell(X2,Y,Z), X1<>X2.
+
+insquare(Z,X,Y) :- pos(Z), pos(X), pos(Y),
+   div(X,N,R), div(Y,N,S), Y1 = S * N,
+   Z = R + Y1,sizeBlock(N).
+samesquare(X1,Y1,X2,Y2)
+    :- insquare(Z,X1,Y1), insquare(Z,X2,Y2).
+
+:- cell(X1,Y1,Z), cell(X2,Y2,Z),
+   Y1 <> Y2, samesquare(X1,Y1,X2,Y2).
+:- cell(X1,Y1,Z), cell(X2,Y2,Z),
+   X1 <> X2, samesquare(X1,Y1,X2,Y2).
+
+div(X,Y,Z) :- XminusDelta = Y*Z, X = XminusDelta + Delta, Delta < Y,pos(X),pos(Y),pos(Z),pos(XminusDelta),pos(Delta).

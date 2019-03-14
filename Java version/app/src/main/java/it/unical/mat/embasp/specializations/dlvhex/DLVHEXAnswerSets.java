@@ -1,7 +1,7 @@
 package it.unical.mat.embasp.specializations.dlvhex;
 
 import it.unical.mat.embasp.languages.asp.AnswerSets;
-import it.unical.mat.embasp.specializations.dlvhex.parser.DLVHEXParserBaseVisitorImplementation;
+import it.unical.mat.parsers.asp.ASPSolversParser;
 
 public class DLVHEXAnswerSets extends AnswerSets {
 	public DLVHEXAnswerSets(final String answerSets) {
@@ -14,6 +14,6 @@ public class DLVHEXAnswerSets extends AnswerSets {
 
 	@Override
 	protected void parse() {
-		DLVHEXParserBaseVisitorImplementation.parse(answersets, output);
+		ASPSolversParser.parseDLVHEX(this, output, true);
 	}
 }

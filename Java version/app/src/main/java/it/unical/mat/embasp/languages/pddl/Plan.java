@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unical.mat.embasp.base.Output;
+import it.unical.mat.parsers.pddl.PDDLDataCollection;
 
 /** A simplified solution to a PDDL problem */
 
-public abstract class Plan extends Output {
+public abstract class Plan extends Output implements PDDLDataCollection {
 	protected List<Action> actionSequence;
 
 	private List<Object> actionsObjects;
@@ -28,15 +29,22 @@ public abstract class Plan extends Output {
 	}
 
 	public List<Object> getActionsObjects() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-		if (actionsObjects == null) {
-			String atomsList = "";
-			
-			for(final Action action : actionSequence)
-				atomsList += action.getName() + '\n';
-			
-			actionsObjects = (List<Object>) PDDLMapper.getInstance().getObjects(atomsList);
+		if(actionsObjects == null) {
+			actionsObjects = new ArrayList <> ();
+
+			for(final Action action : getActions()) {
+				final Object obj = PDDLMapper.getInstance().getObject(action.getName());
+				
+				if (obj != null)
+					actionsObjects.add(obj);
+			}
 		}
 
 		return actionsObjects;
+	}
+	
+	@Override
+	public void storeAction(final String action) {
+		actionSequence.add(new Action(action));
 	}
 }

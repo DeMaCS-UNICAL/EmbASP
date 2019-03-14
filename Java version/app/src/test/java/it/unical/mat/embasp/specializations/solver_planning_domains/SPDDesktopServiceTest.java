@@ -48,6 +48,8 @@ public class SPDDesktopServiceTest {
 
 	private Plan plan;
 
+	private final String base_path = ".." + File.separator + ".." + File.separator + "test-resources" + File.separator + "pddl" + File.separator;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -62,9 +64,11 @@ public class SPDDesktopServiceTest {
 	public void tearDown() throws Exception {
 	}
 
-	private void test(final int[] results_sizes, final String base_path) {
+	private void test(final int[] results_sizes, final String instance_name) {
 
-		System.out.println("Testing " + results_sizes.length + " files for " + base_path);
+		final String instance_path = base_path + instance_name + File.separator;
+
+		System.out.println("Testing " + results_sizes.length + " files for " + instance_path);
 
 		for (int i = 1; i <= results_sizes.length; i++)
 			try {
@@ -76,11 +80,11 @@ public class SPDDesktopServiceTest {
 
 				final InputProgram inputProgramDomain = new PDDLInputProgram(PDDLProgramType.DOMAIN);
 
-				inputProgramDomain.addFilesPath(base_path + "domain.pddl");
+				inputProgramDomain.addFilesPath(instance_path + "domain.pddl");
 
 				final InputProgram inputProgramProblem = new PDDLInputProgram(PDDLProgramType.PROBLEM);
 
-				final String problem = base_path + "p" + (i < 10 ? 0 : "") + i + ".pddl";
+				final String problem = instance_path + "p" + (i < 10 ? 0 : "") + i + ".pddl";
 
 				System.out.println(problem);
 				Assert.assertTrue("File not found: " + problem, new File(problem).exists());
@@ -136,40 +140,27 @@ public class SPDDesktopServiceTest {
 
 	@Test
 	public void test_blocksworld() throws InterruptedException {
-
 		final int[] results_sizes = { 6, 10, 6, 12, 10, 16, 12, 10, 20, 20, 24, 22, 18, 24, 16, 34, 28, 26, 42, 36, 36, 32, 46, 34, 40, 34, 58, 50, 44, 38, 46,
 				58, 66, 56, 56 };
-		final String base_path = "app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pddl"
-				+ File.separator;
-		test(results_sizes, base_path + "blocksworld" + File.separator);
-
+		test(results_sizes, "blocksworld");
 	}
 
 	@Test
 	public void test_depots() throws InterruptedException {
-
-		final int[] results_sizes = { 11, 16, 44, 36, 122, 64, 33, 56, 83, 25, 74, 133, 30, 52, 0, 36, 54, 103, 56, 146, 55, 0 };
-		final String base_path = "app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pddl"
-				+ File.separator;
-		test(results_sizes, base_path + "depots" + File.separator);
+		final int[] results_sizes = { 11, 16, 44, 48, 154, 64, 33, 56, 83, 25, 74, 133, 30, 63, 0, 36, 54, 103, 56, 146, 55, 0 };
+		test(results_sizes, "depots");
 	}
 
 	@Test
 	public void test_gripper() throws InterruptedException {
-
 		final int[] results_sizes = { 15, 23, 31, 39, 47, 55, 63, 71, 79, 87, 95, 103, 111, 119, 127, 135, 143, 151, 159, 167 };
-		final String base_path = "app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pddl"
-				+ File.separator;
-		test(results_sizes, base_path + "gripper" + File.separator);
+		test(results_sizes, "gripper");
 	}
 
 	@Test
 	public void test_logistics() throws InterruptedException {
-
-		final int[] results_sizes = { 24, 27, 15, 34, 19, 10, 30, 14, 33, 34, 58, 58, 48, 68, 46, 49, 74, 55, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
-		final String base_path = "app" + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pddl"
-				+ File.separator;
-		test(results_sizes, base_path + "logistics" + File.separator);
+		final int[] results_sizes = { 24, 27, 15, 34, 17, 10, 30, 14, 33, 34, 58, 53, 48, 68, 46, 49, 74, 48, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128 };
+		test(results_sizes, "logistics");
 	}
 
 }

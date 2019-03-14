@@ -1,20 +1,15 @@
 package it.unical.mat.embasp.languages.asp;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import it.unical.mat.embasp.languages.Mapper;
-import it.unical.mat.embasp.languages.asp.parser.ASPGrammarBaseVisitorImplementation;
+import it.unical.mat.parsers.asp.ASPParser;
+import java.util.HashMap;
 
 /**
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}
  */
 
 public class ASPMapper extends Mapper {
-
 	private static ASPMapper mapper;
-	private ASPGrammarBaseVisitorImplementation parser;
 	
 	public static ASPMapper getInstance() {
 		if (ASPMapper.mapper == null)
@@ -26,11 +21,6 @@ public class ASPMapper extends Mapper {
 		super();
 	}
 
-	@Override
-	protected Set<Object> getCollectionImplementation() {
-		return new HashSet<> ();
-	}
-	
 	@Override
 	protected String getActualString(final String predicate, final HashMap<Integer, Object> parametersMap) throws IllegalTermException {
 		if (parametersMap.isEmpty())
@@ -45,6 +35,8 @@ public class ASPMapper extends Mapper {
 				throw new IllegalTermException("Wrong term number of predicate " + predicate);
 			if (objectTerm instanceof Integer)
 				atom += objectTerm + "";
+			else if(objectTerm instanceof SymbolicConstant)
+				atom += objectTerm.toString() + "";
 			else
 				atom += "\"" + objectTerm.toString() + "\"";
 		}
@@ -54,18 +46,17 @@ public class ASPMapper extends Mapper {
 	}
 
 	@Override
-	protected void buildParseTree(final String atomsList) {
-		parser = new ASPGrammarBaseVisitorImplementation(atomsList);
+	protected String getId(final String atom) {
+		final int openBracketIndex = atom.indexOf("(");
+
+		if(openBracketIndex == -1)
+			return atom;
+
+		return atom.substring(0, openBracketIndex);
 	}
 	
-	
 	@Override
-	protected String getId() {
-		return parser.getIdentifier();
-	}
-	
-	@Override
-	protected String[] getParam() {
-		return parser.getParameters();
+	protected String[] getParam(final String atom) {
+		return ASPParser.parse(atom).getParameters();
 	}
 }
