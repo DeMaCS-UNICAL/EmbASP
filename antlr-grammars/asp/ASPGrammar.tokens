@@ -1,0 +1,14 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+T__4=5
+IDENTIFIER=6
+INTEGER=7
+STRING=8
+WHITESPACE=9
+'('=1
+','=2
+')'=3
+'['=4
+']'=5

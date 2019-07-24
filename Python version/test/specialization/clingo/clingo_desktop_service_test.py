@@ -2,8 +2,8 @@ import unittest
 from languages.asp.asp_input_program import ASPInputProgram
 from platforms.desktop.desktop_handler import DesktopHandler
 from base.output import Output
-from cell import Cell
-from my_callback import MyCallback
+from .cell import Cell
+from .my_callback import MyCallback
 import sys
 import os
 from specializations.clingo.desktop.clingo_desktop_service import ClingoDesktopService
@@ -72,8 +72,8 @@ class ClingoDesktopServiceTest(unittest.TestCase):
             self.assertTrue(isinstance(out, Output),
                             "Error, result object is not Output")
 
-            self.assertIsNone(
-                out.get_errors(), "Found error in the Plan\n" + str(out.get_errors()))
+            self.assertIsNone(out.get_errors(),
+                              "Found error in the Plan\n" + str(out.get_errors()))
 
             if (len(out.get_answer_sets()) == 0):
                 return

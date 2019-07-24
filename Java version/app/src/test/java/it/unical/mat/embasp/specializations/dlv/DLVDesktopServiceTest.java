@@ -59,7 +59,7 @@ public class DLVDesktopServiceTest {
 		final String OS = System.getProperty("os.name").toLowerCase();
 		final StringBuffer path = new StringBuffer();
 
-		path.append(".." + File.separator + "test-resources" + File.separator + "asp" + File.separator + "executables");
+		path.append(".." + File.separator + ".." + File.separator + "test-resources" + File.separator + "asp" + File.separator + "executables");
 		path.append(File.separator);
 		path.append("dlv");
 		path.append(File.separator);
@@ -103,7 +103,7 @@ public class DLVDesktopServiceTest {
 					if (sudokuMatrix[i][j] != 0)
 						inputProgram.addObjectInput(new Cell(i, j, sudokuMatrix[i][j]));
 
-			inputProgram.addFilesPath(".." + File.separator + "test-resources" + File.separator + "asp" + File.separator + "sudoku");
+			inputProgram.addFilesPath(".." + File.separator + ".." + File.separator + "test-resources" + File.separator + "asp" + File.separator + "sudoku");
 
 			handler.addProgram(inputProgram);
 

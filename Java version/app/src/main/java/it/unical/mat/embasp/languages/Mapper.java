@@ -26,7 +26,7 @@ public abstract class Mapper {
 	public Class<?> getClass(final String predicate) {
 		return predicateClass.get(predicate);
 	}
-
+	
 	/**
 	 * Returns an Object for the given string
 	 *
@@ -36,48 +36,40 @@ public abstract class Mapper {
 	 * @throws IllegalAccessException,
 	 *             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IllegalTermException
 	 */
-	public Object getObject(final String string) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+	public Object getObject(final String atom) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
 			SecurityException, InstantiationException {
-
-		final String predicate = getPredicate(string);
-
-		if (predicate == null)
+		final String predicate = getId(atom);
+		
+		if(predicate == null)
 			return null;
-
+		
 		final Class<?> cl = getClass(predicate);
 
-		// Not exist mapping between the predicate and the class
-		if (cl == null)
+		if(cl == null)
+			return null;
+		
+		final String[] parameters = getParam(atom);
+			
+		if(parameters == null)
 			return null;
 
-		final String[] parameters = getParameters(string);
+		final Object object = cl.newInstance();
 
-		if (parameters == null)
-			return null;
+		populateObject(cl, parameters, object);
 
-		final Object obj = cl.newInstance();
-
-		populateObject(cl, parameters, obj);
-
-		return obj;
-
+		return object;
 	}
-
+	
 	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
+	 * @return The predicate name
+	 */
+	protected abstract String getId(final String atom);
+	
+	/**
 	 * @return All the Terms
 	 */
-	protected abstract String[] getParameters(final String string);
-
-	/**
-	 * @param string
-	 *            The full value received as parameter of getObject
-	 * @return The predicate name
-	 * @throws IllegalArgumentException
-	 */
-	protected abstract String getPredicate(final String string) throws IllegalArgumentException;
-
+	protected abstract String[] getParam(final String atom);
+	
 	/**
 	 * Returns data for the given Object
 	 *

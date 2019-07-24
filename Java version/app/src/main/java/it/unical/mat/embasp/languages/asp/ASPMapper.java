@@ -1,17 +1,16 @@
 package it.unical.mat.embasp.languages.asp;
 
-import java.util.HashMap;
-
 import it.unical.mat.embasp.languages.Mapper;
+import it.unical.mat.parsers.asp.ASPParser;
+import java.util.HashMap;
 
 /**
  * Contains methods used to transform Objects into {@link it.unical.mat.embasp.base.InputProgram}
  */
 
 public class ASPMapper extends Mapper {
-
 	private static ASPMapper mapper;
-
+	
 	public static ASPMapper getInstance() {
 		if (ASPMapper.mapper == null)
 			ASPMapper.mapper = new ASPMapper();
@@ -47,23 +46,17 @@ public class ASPMapper extends Mapper {
 	}
 
 	@Override
-	protected String[] getParameters(final String string) {
-		final int start = string.indexOf("(") + 1;
-		final int end = string.lastIndexOf(")");
-		// FIXME Not work with "a("asd,"). fix the split
-		return start == 0 || end == -1 || end < start ? new String[0] : string.substring(start, end).split(",");
-	}
+	protected String getId(final String atom) {
+		final int openBracketIndex = atom.indexOf("(");
 
+		if(openBracketIndex == -1)
+			return atom;
+
+		return atom.substring(0, openBracketIndex);
+	}
+	
 	@Override
-	protected String getPredicate(final String string) throws IllegalArgumentException {
-
-		final int indexOf = string.indexOf("(");
-
-		if (indexOf == -1) // Arity 0
-			return string;
-
-		return string.substring(0, string.indexOf("("));
-
+	protected String[] getParam(final String atom) {
+		return ASPParser.parse(atom).getParameters();
 	}
-
 }

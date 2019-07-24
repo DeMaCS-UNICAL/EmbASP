@@ -42,7 +42,11 @@ public class AnswerSet {
 	public List<String> getAnswerSet() {
 		return Collections.unmodifiableList(value);
 	}
-
+	
+	public List <String> getValue() {
+		return value;
+	}
+	
 	/**
 	 * Return atoms stored in {@link #atoms}
 	 *
@@ -50,13 +54,14 @@ public class AnswerSet {
 	 */
 	public Set<Object> getAtoms() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException,
 			InstantiationException {
-		if (atoms == null) {
-			atoms = new HashSet<>();
-			final ASPMapper mapper = ASPMapper.getInstance();
-			for (final String atom : value) {
-				final Object obj = mapper.getObject(atom);
-				if (obj != null)
-					atoms.add(obj);
+		if(atoms == null) {
+			atoms = new HashSet <> ();
+
+			for(final String atom : value) {
+				final Object obj = ASPMapper.getInstance().getObject(atom);
+				
+					if(obj != null)
+						atoms.add(obj);
 			}
 		}
 

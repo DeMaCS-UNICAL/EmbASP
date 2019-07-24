@@ -1,4 +1,3 @@
-from languages.asp import symbolic_constant
 from languages.asp.symbolic_constant import SymbolicConstant
 from languages.predicate import Predicate
 

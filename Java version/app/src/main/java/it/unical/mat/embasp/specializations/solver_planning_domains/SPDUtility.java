@@ -7,9 +7,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
-import org.json.simple.JsonObject;
-
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.pddl.PDDLException;
 import it.unical.mat.embasp.languages.pddl.PDDLInputProgram;
@@ -21,7 +18,40 @@ public abstract class SPDUtility {
 	public SPDUtility() {
 	}
 
-	public JsonObject createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
+	private static final String escape(final String escapable) {
+		final StringBuilder builder = new StringBuilder();
+		
+		for(int i = 0; i < escapable.length(); i++) {
+			final char character = escapable.charAt(i);
+			
+			switch(character) {
+				case '"': builder.append("\\\""); break;
+				case '\\': builder.append("\\\\"); break;
+				case '\b': builder.append("\\b"); break;
+				case '\f': builder.append("\\f"); break;
+				case '\n': builder.append("\\n"); break;
+				case '\r': builder.append("\\r"); break;
+				case '\t': builder.append("\\t"); break;
+				case '/': builder.append("\\/"); break;
+				default:
+					if(((character >= '\u0000') && (character <= '\u001F')) || ((character >= '\u007F') && (character <= '\u009F')) || ((character >= '\u2000') && (character <= '\u20FF'))) {
+						final String characterHexCode = Integer.toHexString(character);
+						
+						builder.append("\\u");
+						
+						for(int k = 0; k < (4 - characterHexCode.length()); k++)
+							builder.append("0");
+						
+						builder.append(characterHexCode.toUpperCase());
+					} else
+						builder.append(character);
+			}
+		}
+		
+		return builder.toString();
+	}
+	
+	public String createJson(final List<InputProgram> pddlInputProgram) throws PDDLException {
 
 		String problem = "";
 		String domain = "";
@@ -49,11 +79,7 @@ public abstract class SPDUtility {
 		if (domain.equals(""))
 			throw new PDDLException("Domain file not specified");
 
-		final JsonObject obj = new JsonObject();
-		obj.put("problem", problem);
-		obj.put("domain", domain);
-
-		return obj;
+		return "{\"problem\":\"" + escape(problem) + "\", \"domain\":\"" + escape(domain) + "\"}";
 	}
 
 	private String getFromFile(final List<String> filesPaths, final String separator) {

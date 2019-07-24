@@ -85,15 +85,15 @@ class SPDDesktopServiceTest(unittest.TestCase):
         self.core(results_sizes, base_path)
 
     def test_depots(self):
-        results_sizes = (11, 16, 44, 36, 122, 64, 33, 56, 83,
-                         25, 74, 133, 30, 0, 0, 36, 54, 103, 56, 146, 55, 0)
+        results_sizes = (11, 16, 44, 48, 154, 64, 33, 56, 83, 
+                         25, 74, 133, 30, 63, 0, 36, 54, 103, 56, 146, 55, 0)
         base_path = os.path.join(
             "..", "..", "..", "..", "test-resources", "pddl", "depots", "")
         self.core(results_sizes, base_path)
 
     def test_logistics(self):
-        results_sizes = (24, 27, 15, 34, 19, 10, 30, 14, 33, 34, 58, 58, 48,
-                         68, 46, 49, 74, 55, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128)
+        results_sizes = (24, 27, 15, 34, 17, 10, 30, 14, 33, 34, 58, 53, 48,
+                         68, 46, 49, 74, 48, 0, 84, 69, 117, 134, 102, 109, 127, 141, 128)
         base_path = os.path.join(
             "..", "..", "..", "..", "test-resources", "pddl", "logistics", "")
         self.core(results_sizes, base_path)
