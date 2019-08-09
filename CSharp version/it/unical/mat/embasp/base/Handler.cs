@@ -102,6 +102,7 @@ namespace it.unical.mat.embasp.@base
 
         public virtual Output StartSync(IList<int> program_index, IList<int> option_index) => null;
 
-        public virtual void Quit();
+        public virtual void Quit(){}
+        
     }
 }

@@ -1,18 +1,19 @@
 using System.Collections.Generic;
-
-namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
+using System;
+namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 {
     using ICallback = it.unical.mat.embasp.@base.ICallback;
     using Handler = it.unical.mat.embasp.@base.Handler;
     using InputProgram = it.unical.mat.embasp.@base.InputProgram;
     using OptionDescriptor = it.unical.mat.embasp.@base.OptionDescriptor;
     using Output = it.unical.mat.embasp.@base.Output;
+    using DesktopService = it.unical.mat.embasp.platforms.desktop.DesktopService;
 
     public class IDLVDesktopHandler : Handler
     {
         private readonly DesktopService service;
 
-        public DesktopHandler(DesktopService service) => this.service = service;
+        public IDLVDesktopHandler(DesktopService service) => this.service = service;
 
         public override int AddProgram(InputProgram program)
         {

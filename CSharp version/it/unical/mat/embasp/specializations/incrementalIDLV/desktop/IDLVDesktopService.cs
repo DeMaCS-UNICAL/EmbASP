@@ -1,18 +1,30 @@
 using System.Collections.Generic;
-
-namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Threading;
+namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 {
     using Output = it.unical.mat.embasp.@base.Output;
     using DesktopService = it.unical.mat.embasp.platforms.desktop.DesktopService;
+    using InputProgram = it.unical.mat.embasp.@base.InputProgram;
+    using OptionDescriptor = it.unical.mat.embasp.@base.OptionDescriptor;
+    using ClingoAnswerSets = it.unical.mat.embasp.specializations.clingo.ClingoAnswerSets;
 
     public class IDLVDesktopService : DesktopService
     {
 
         Process grounder_process;
+        string grounder_path;
+        string solver_path;
 
-        public IDLVDesktopService(string exe_path) : base(exe_path)
+        public IDLVDesktopService(string grounder_path,string solver_path) : base(grounder_path)
         {
             load_from_STDIN_option = "--stdin";
+            this.grounder_path = grounder_path;
+            this.solver_path = solver_path;
             RunGrounderProcess();
         }
 
@@ -21,7 +33,7 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
             try
             {
                 grounder_process = new Process();
-                grounder_process.StartInfo.FileName = "lib/idlv.exe";
+                grounder_process.StartInfo.FileName = @grounder_path;
                 grounder_process.EnableRaisingEvents = true;
                 grounder_process.StartInfo.Arguments = "--no-simplify --check-edb-duplication --output=7";
                 grounder_process.StartInfo.UseShellExecute = false;
@@ -31,6 +43,8 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
                 grounder_process.StartInfo.RedirectStandardOutput = true;
                 grounder_process.StartInfo.RedirectStandardError = true;
                 grounder_process.Start();
+
+                
             }
             catch (Win32Exception e2)
             {
@@ -45,21 +59,20 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
             StringBuilder stringBuffer = new StringBuilder();
             char quote = '"';
             FileStream tmpFile = null;
+            
 
 
 
             if (program != null)
             {
+                StreamWriter writer = grounder_process.StandardInput;
                 if (program.Programs.Length > 0)
                 {
                     tmpFile = WriteToFile("tmp", program.Programs);
-                    stringBuffer.Append("<load_data path=").Append(quote).Append(tmpFile.Name).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append(" ").Append("/>");
-                    StreamWriter writer = grounder_process.StandardInput;
+                    stringBuffer.Append("<load_data path=").Append(quote).Append(tmpFile.Name).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
+                    writer = grounder_process.StandardInput;
                     writer.WriteLine(stringBuffer.ToString());
-                    if (writer != null)
-                    {
-                        writer.Close();
-                    }
+                    
                     if (tmpFile != null && File.Exists(tmpFile.Name))
                         File.Delete(tmpFile.Name);
 
@@ -71,21 +84,25 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
                     FileAttributes f = File.GetAttributes(@program_file);
                     if (File.Exists(program_file) && !f.HasFlag(FileAttributes.Directory))
                     {
-                        stringBuffer.Append("<load_data path=").Append(quote).Append(program_file).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append(" ").Append("/>");
-                        StreamWriter writer = grounder_process.StandardInput;
+                        stringBuffer.Append("<load_data path=").Append(quote).Append(program_file).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
+                        writer = grounder_process.StandardInput;
                         writer.WriteLine(stringBuffer.ToString());
-                        if (writer != null)
-                        {
-                            writer.Close();
-                        }
                         stringBuffer.Clear();
+                        
                     }
                     else
                         Console.Error.WriteLine("Warning : the file " + Path.GetFullPath(@program_file) + " does not exists.");
                 }
+
+                if (writer != null)
+                {
+                    writer.Close();
+                }
             }
             else
                 Console.Error.WriteLine("Warning : wrong " + typeof(InputProgram).FullName);
+
+            
 
         }
 
@@ -102,6 +119,7 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
             string resetCommand = "<reset/>";
             runCommand.Append("<run permanently =").Append(" ").Append(quote).Append("true").Append(quote).Append(" ").Append("/>");
 
+            
             StreamWriter writer = grounder_process.StandardInput;
             writer.WriteLine(runCommand.ToString());
 
@@ -115,9 +133,11 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
             {
                 writer.Close();
             }
+            
 
             grounderOutput = grounder_process.StandardOutput.ReadToEnd().ToString();
             grounderError = grounder_process.StandardError.ReadToEnd().ToString();
+
 
             string solverOutput = "EMPTY_OUTPUT";
             string solverError = "EMPTY_ERROR";
@@ -126,7 +146,7 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
             {
                 StringBuilder stringBuffer = new StringBuilder();
                 Process solver_process = new Process();
-                solver_process.StartInfo.FileName = "lib/clingo.exe";
+                solver_process.StartInfo.FileName = @solver_path;
 
                 string option = "";
                 foreach (OptionDescriptor o in options)
@@ -144,7 +164,7 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
 
                 FileStream tmpFile = null;
 
-                if (solverOutput.Length > 0)
+                if (grounderOutput.Length > 0)
                 {
                     tmpFile = WriteToFile("tmp", grounderOutput);
                     stringBuffer.Append(tmpFile.Name);
@@ -183,17 +203,8 @@ namespace it.unical.mat.embasp.specializations.idlv_clasp.desktop
 
         public override void StopGrounderProcess()
         {
-
             try
             {
-                string exitCommand = "<exit/>";
-                StreamWriter writer = grounder_process.StandardInput;
-                writer.WriteLine(exitCommand);
-
-                if (writer != null)
-                {
-                    writer.Close();
-                }
                 grounder_process.WaitForExit();
                 grounder_process.Close();
             }
