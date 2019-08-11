@@ -154,5 +154,9 @@ namespace it.unical.mat.embasp.platforms.desktop
             bw.Close();
             return tempFile;
         }
+
+        public virtual void LoadProgram(InputProgram program){}
+        public virtual void StopGrounderProcess(){}
+        
     }
 }
