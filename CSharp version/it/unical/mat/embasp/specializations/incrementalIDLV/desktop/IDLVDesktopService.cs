@@ -20,8 +20,8 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
         string grounder_path;
         string solver_path;
 
-        public IDLVDesktopService(string grounder_path,string solver_path) : base(grounder_path)
-        {
+        public IDLVDesktopService(string grounder_path, string solver_path) : base(grounder_path)
+        {   
             load_from_STDIN_option = "--stdin";
             this.grounder_path = grounder_path;
             this.solver_path = solver_path;
@@ -43,8 +43,6 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
                 grounder_process.StartInfo.RedirectStandardOutput = true;
                 grounder_process.StartInfo.RedirectStandardError = true;
                 grounder_process.Start();
-
-                
             }
             catch (Win32Exception e2)
             {
@@ -102,8 +100,6 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
             else
                 Console.Error.WriteLine("Warning : wrong " + typeof(InputProgram).FullName);
 
-            
-
         }
 
         protected internal override Output GetOutput(string output, string error) => new ClingoAnswerSets(output, error);
@@ -111,6 +107,7 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 
         public override Output StartSync(IList<InputProgram> programs, IList<OptionDescriptor> options)
         {
+
             string grounderOutput = "EMPTY_OUTPUT";
             string grounderError = "EMPTY_ERROR";
 
@@ -137,7 +134,6 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 
             grounderOutput = grounder_process.StandardOutput.ReadToEnd().ToString();
             grounderError = grounder_process.StandardError.ReadToEnd().ToString();
-
 
             string solverOutput = "EMPTY_OUTPUT";
             string solverError = "EMPTY_ERROR";
