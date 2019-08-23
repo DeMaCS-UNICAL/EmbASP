@@ -54,50 +54,51 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 
         public override void LoadProgram(InputProgram program)
         {
-            try{
-                    StringBuilder stringBuffer = new StringBuilder();
-                    char quote = '"';
-                    FileStream tmpFile = null;
+            StringBuilder stringBuffer = new StringBuilder();
+            char quote = '"';
+            FileStream tmpFile = null;
+            
 
-                    if (program != null)
+
+
+            if (program != null)
+            {
+                StreamWriter writer = grounder_process.StandardInput;
+                if (program.Programs.Length > 0)
+                {
+                    tmpFile = WriteToFile("tmp", program.Programs);
+                    stringBuffer.Append("<load_data path=").Append(quote).Append(tmpFile.Name).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
+                    writer = grounder_process.StandardInput;
+                    writer.WriteLine(stringBuffer.ToString());
+                    
+                    if (tmpFile != null && File.Exists(tmpFile.Name))
+                        File.Delete(tmpFile.Name);
+
+                    stringBuffer.Clear();
+                }
+
+                foreach (String program_file in program.FilesPaths)
+                {
+                    FileAttributes f = File.GetAttributes(@program_file);
+                    if (File.Exists(program_file) && !f.HasFlag(FileAttributes.Directory))
                     {
-                
-                        if (program.Programs.Length > 0)
-                        {
-                            tmpFile = WriteToFile("tmp", program.Programs);
-                            stringBuffer.Append("<load_data path=").Append(quote).Append(tmpFile.Name).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
-
-                            grounder_process.StandardInput.WriteLine(stringBuffer.ToString());
-
-
-                            stringBuffer.Clear();
-                        }
-
-                        foreach (String program_file in program.FilesPaths)
-                        {
-                            FileAttributes f = File.GetAttributes(@program_file);
-                            if (File.Exists(program_file) && !f.HasFlag(FileAttributes.Directory))
-                            {
-                                stringBuffer.Append("<load_data path=").Append(quote).Append(program_file).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
-
-                                grounder_process.StandardInput.WriteLine(stringBuffer.ToString());
-
-                                stringBuffer.Clear();
-
-                            }
-                            else
-                                Console.Error.WriteLine("Warning : the file " + Path.GetFullPath(@program_file) + " does not exists.");
-                        }
-
+                        stringBuffer.Append("<load_data path=").Append(quote).Append(program_file).Append(quote).Append(" ").Append("permanently=").Append(quote).Append("true").Append(quote).Append(" ").Append("format=").Append(quote).Append("asp").Append(quote).Append("/>");
+                        writer = grounder_process.StandardInput;
+                        writer.WriteLine(stringBuffer.ToString());
+                        stringBuffer.Clear();
+                        
                     }
                     else
-                        Console.Error.WriteLine("Warning : wrong " + typeof(InputProgram).FullName);
+                        Console.Error.WriteLine("Warning : the file " + Path.GetFullPath(@program_file) + " does not exists.");
+                }
 
+                if (writer != null)
+                {
+                    writer.Close();
+                }
             }
-            catch(Win32Exception e){
-                     Console.Error.WriteLine(e.ToString());
-                     Console.Error.Write(e.StackTrace);
-            }
+            else
+                Console.Error.WriteLine("Warning : wrong " + typeof(InputProgram).FullName);
 
         }
 
@@ -106,37 +107,39 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 
         public override Output StartSync(IList<InputProgram> programs, IList<OptionDescriptor> options)
         {
-           
+
+            string grounderOutput = "EMPTY_OUTPUT";
+            string grounderError = "EMPTY_ERROR";
+
             char quote = '"';
             StringBuilder runCommand = new StringBuilder();
-            runCommand.Append("<run permanently =").Append(" ").Append(quote).Append("true").Append(quote).Append(" ").Append("/>\n");
-            grounder_process.StandardInput.WriteLine(runCommand.ToString());
+            string resetCommand = "<reset/>";
+            runCommand.Append("<run permanently =").Append(" ").Append(quote).Append("true").Append(quote).Append(" ").Append("/>");
 
+            
+            StreamWriter writer = grounder_process.StandardInput;
+            writer.WriteLine(runCommand.ToString());
 
-            string grounderOutput = "";
+            //////////////////////////////////////
+            ////    <RESET/> PER OGNI RUN ?  /////
+            //////////////////////////////////////
+            ///
+            // writer.WriteLine(resetCommand);
 
-            while (true)
+            if (writer != null)
             {
-                string currentLine = "";
-                grounder_process.StandardOutput.BaseStream.Flush();
-                currentLine = grounder_process.StandardOutput.ReadLine() + Environment.NewLine;
-
-                if (currentLine.Contains("<run"))
-                    break;
-
-                if(!currentLine.Contains("<load_data"))
-                    grounderOutput += currentLine;
+                writer.Close();
             }
+            
 
-           
+            grounderOutput = grounder_process.StandardOutput.ReadToEnd().ToString();
+            grounderError = grounder_process.StandardError.ReadToEnd().ToString();
 
             string solverOutput = "EMPTY_OUTPUT";
             string solverError = "EMPTY_ERROR";
 
             try
             {
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-
                 StringBuilder stringBuffer = new StringBuilder();
                 Process solver_process = new Process();
                 solver_process.StartInfo.FileName = @solver_path;
@@ -162,10 +165,6 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
                     tmpFile = WriteToFile("tmp", grounderOutput);
                     stringBuffer.Append(tmpFile.Name);
                 }
-                else{
-                    Console.Error.WriteLine("Grounder output is empty");
-                }
-
 
                 solver_process.EnableRaisingEvents = true;
                 solver_process.StartInfo.Arguments = @stringBuffer.ToString();
@@ -182,10 +181,6 @@ namespace it.unical.mat.embasp.specializations.incrementalIDLV.desktop
 
                 solver_process.WaitForExit();
                 solver_process.Close();
-
-                watch.Stop();
-
-                Console.Error.WriteLine("Total time : " + watch.ElapsedMilliseconds);
 
                 if (tmpFile != null && File.Exists(tmpFile.Name))
                     File.Delete(tmpFile.Name);
