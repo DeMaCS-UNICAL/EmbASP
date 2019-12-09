@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class DLVAndroidReasoner extends IntentService {
 
 
-    private static final String FILENAME = "tmp_program";
+    public static final String FILENAME = "tmp_program";
 
 
     //load the static library that contains DLV code compiled for arm processors
@@ -25,13 +25,12 @@ public class DLVAndroidReasoner extends IntentService {
 
 
     //Intent messages/actions/extras for ASPService start and BroadcastReceiver communication
-    // TODO change package name
-    public static final String ACTION_SOLVE = "it.unical.mat.embasp.SOLVE";
-    public static final String PROGRAM = "it.unical.mat.embasp.PROGRAM";
-    public static final String OPTION = "it.unical.mat.embasp.OPTION";
-    public static final String FILES = "it.unical.mat.embasp.FILES";
-    public static final String SOLVER_RESULT = "it.unical.mat.embasp.SOLVER_RESULT";
-    public static final String RESULT_NOTIFICATION = "it.unical.mat.embasp.RESULT_NOTIFICATION";
+    public static final String ACTION_SOLVE = "it.unical.mat.embasp.specializations.dlv.android.SOLVE";
+    public static final String PROGRAM = "it.unical.mat.embasp.specializations.dlv.android.PROGRAM";
+    public static final String OPTION = "it.unical.mat.embasp.specializations.dlv.android.OPTION";
+    public static final String FILES = "it.unical.mat.embasp.specializations.dlv.android.FILES";
+    public static final String SOLVER_RESULT = "it.unical.mat.embasp.specializations.dlv.android.SOLVER_RESULT";
+    public static final String RESULT_NOTIFICATION = "it.unical.mat.embasp.specializations.dlv.android.RESULT_NOTIFICATION";
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -59,7 +58,7 @@ public class DLVAndroidReasoner extends IntentService {
     }
 
     protected String handleActionSolve(String program, String options, String filesPath) {
-        Log.i("DlvSevice", "Launch service");
+        Log.i("DLV", "Launching DLV");
         File file = new File(this.getFilesDir(), FILENAME);
 
         FileOutputStream outputStream;
@@ -82,7 +81,7 @@ public class DLVAndroidReasoner extends IntentService {
         long startTime = System.nanoTime();
         String result = dlvMain(completeProgram.toString());
         long stopTime = System.nanoTime();
-        Log.i("DLV Execution Time", Long.toString(TimeUnit.NANOSECONDS.toMillis(stopTime - startTime)));
+        Log.i("DLV", "Execution Time: "+Long.toString(TimeUnit.NANOSECONDS.toMillis(stopTime - startTime)));
         return result;
     }
 

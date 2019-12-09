@@ -15,6 +15,13 @@
             android:exported="false"
             android:process=":remote">
         </service>
+        
+        <service
+            android:name=".specializations.dlv2.android.DLV2AndroidReasoner"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote">
+        </service>
 
     </application>
 
