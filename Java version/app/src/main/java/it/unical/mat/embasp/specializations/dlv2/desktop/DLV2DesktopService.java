@@ -9,7 +9,7 @@ import it.unical.mat.embasp.base.Output;
 import it.unical.mat.embasp.platforms.desktop.DesktopService;
 import it.unical.mat.embasp.specializations.dlv2.DLV2AnswerSets;
 
-/** is an extention of {@link DesktopService} for DLV2 's solver */
+/** is an extention of {@link DesktopService} for DLV2 solver */
 
 public class DLV2DesktopService extends DesktopService {
 	public DLV2DesktopService(final String exe_path) {
