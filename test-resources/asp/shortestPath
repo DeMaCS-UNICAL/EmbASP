@@ -1,0 +1,11 @@
+path(X,Y,W) | notPath(X,Y,W) :- from(X), edge(X,Y,W).
+
+path(X,Y,W) | notPath(X,Y,W) :- path(_,X,_), edge(X,Y,W).
+
+start(X) :- from(X), path(X,_,_).
+:- from(X), not start(X).
+
+end(X) :- path(_,X,_).
+:- to(X), not end(X).
+
+:~ path(X,Y,W). [W@1 ,X,Y]
