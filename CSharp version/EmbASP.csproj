@@ -143,6 +143,11 @@
     <Compile Include="it\unical\mat\test\specialization\dlv\CallbackAction.cs" />
     <Compile Include="it\unical\mat\test\specialization\dlv\Cell.cs" />
     <Compile Include="it\unical\mat\test\specialization\dlv\DLVDesktopServiceTest.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\DLV2DesktopServiceTest.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\Edge.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\From.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\Path.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\To.cs" />
     <Compile Include="it\unical\mat\test\specialization\solver_planning_domains\PickUp.cs" />
     <Compile Include="it\unical\mat\test\specialization\solver_planning_domains\SPDDesktopServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
