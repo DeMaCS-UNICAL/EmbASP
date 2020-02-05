@@ -8,9 +8,13 @@ The framework has been designed to be easily extensible and adaptable to differe
 
 # How to cite EmbASP
 
-[<img src="https://cdn.iconscout.com/icon/free/png-256/quote-16-433627.png" alt="    https://dblp.org/rec/conf/aiia/CalimeriFPZ16" width="13" height="13" />](https://dblp.org/rec/journals/ngc/CalimeriFGPZ19) [Francesco Calimeri, Davide Fuscà, Stefano Germano, Simona Perri, Jessica Zangari: Fostering the Use of Declarative Formalisms for Real-World Applications: The EmbASP Framework. New Generation Comput. 37(1): 29-65 (2019)](https://dblp.org/rec/journals/ngc/CalimeriFGPZ19)
 
-[<img src="https://cdn.iconscout.com/icon/free/png-256/quote-16-433627.png" alt="    https://dblp.org/rec/conf/aiia/CalimeriFPZ16" width="13" height="13" />](https://dblp.org/rec/conf/ruleml/CalimeriGIPPZ18) [Francesco Calimeri, Stefano Germano, Giovambattista Ianni, Francesco Pacenza, Simona Perri, Jessica Zangari: Integrating Rule-Based AI Tools into Mainstream Game Development. RuleML+RR 2018: 310-317](https://dblp.org/rec/conf/ruleml/CalimeriGIPPZ18)
+[<img src="https://magentaorg.com/wp-content/uploads/2019/05/cropped-Pink-Square@20x-250x250.png" alt title="Journal Article" width="12" height="12" />](https://dblp.org/rec/journals/ngc/CalimeriFGPZ19) [<img src="https://dblp.org/img/paper.dark.hollow.16x16.png" alt title="Download Article" />](https://doi.org/10.1007/s00354-018-0046-2) [<img src="https://dblp.org/img/download.dark.hollow.16x16.png" alt title="Export Citation" />](https://dblp.org/rec/bibtex/journals/ngc/CalimeriFGPZ19) [Francesco Calimeri, Davide Fuscà, Stefano Germano, Simona Perri, Jessica Zangari: Fostering the Use of Declarative Formalisms for Real-World Applications: The EmbASP Framework. New Generation Comput. 37(1): 29-65 (2019)](https://dblp.org/rec/journals/ngc/CalimeriFGPZ19)
+
+
+
+
+[<img src="https://www.americasfinestlabels.com/includes/work/image_cache/bacf5e49815c98b8fc5f347cabf7a54b.thumb.jpg" alt title="Conference Paper" width="12" height="12" />](https://dblp.org/rec/conf/ruleml/CalimeriGIPPZ18) [<img src="https://dblp.org/img/paper.dark.hollow.16x16.png" alt title="Download Paper" />](https://doi.org/10.1007/978-3-319-99906-7_23) [<img src="https://dblp.org/img/download.dark.hollow.16x16.png" alt title="Export Citation" />](https://dblp.org/rec/bibtex/conf/ruleml/CalimeriGIPPZ18) [Francesco Calimeri, Stefano Germano, Giovambattista Ianni, Francesco Pacenza, Simona Perri, Jessica Zangari: Integrating Rule-Based AI Tools into Mainstream Game Development. RuleML+RR 2018: 310-317](https://dblp.org/rec/conf/ruleml/CalimeriGIPPZ18)
 
 # Contacts
 For further information, visit https://www.mat.unical.it/calimeri/projects/embasp
