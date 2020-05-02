@@ -1,9 +1,7 @@
 package it.unical.mat.embasp.platforms.desktop;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -104,20 +102,28 @@ public abstract class DesktopService implements Service {
 
 			final long startTime = System.nanoTime();
 			
-			File tmpFile = null;
-
-			final StringBuffer stringBuffer = new StringBuffer();
 			if (exe_path == null)
 				return new Output("", "Error: executable not found");
+			
+			final StringBuffer stringBuffer = new StringBuffer();
 			stringBuffer.append(exe_path).append(" ").append(option).append(" ").append(files_paths);
+			
 			if (!final_program.isEmpty()){
-				tmpFile=writeToFile("tmp", final_program);
-				stringBuffer.append(" ").append(tmpFile.getAbsolutePath());
+				stringBuffer.append(this.load_from_STDIN_option);
 			}
 
 			System.err.println(stringBuffer.toString());
+			
 			final Process solver_process = Runtime.getRuntime().exec(stringBuffer.toString());
-
+			
+			if(!final_program.isEmpty()) {
+				final PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
+				writer.println(final_program);
+				if (writer != null)
+					writer.close();
+				solver_process.waitFor();
+			}
+			
 			Thread threadOutput=new Thread() {
 				@Override
 				public void run() {
@@ -157,40 +163,20 @@ public abstract class DesktopService implements Service {
 			};
 			threadError.start();
 			threadError.join();
-			
-			final PrintWriter writer = new PrintWriter(solver_process.getOutputStream());
-			writer.println(final_program);
-			if (writer != null)
-				writer.close();
-
-			solver_process.waitFor();
 
 			final long stopTime = System.nanoTime();
 			System.err.println("Total time : " + (stopTime - startTime));
-			
-			if(tmpFile!=null) tmpFile.delete();
 			
 			return getOutput(solverOutput.toString(), solverError.toString());
 
 		} catch (final IOException e2) {
 			e2.printStackTrace();
 		} catch (final InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return getOutput("", "");
 
-	}
-	
-	protected File writeToFile(String pFilename, String sb) throws IOException {
-	    File tempDir = new File(System.getProperty("java.io.tmpdir"));
-	    File tempFile = File.createTempFile(pFilename, ".tmp", tempDir);
-	    FileWriter fileWriter = new FileWriter(tempFile, true);
-	    BufferedWriter bw = new BufferedWriter(fileWriter);
-	    bw.write(sb);
-	    bw.close();
-	    return tempFile;
 	}
 
 }
