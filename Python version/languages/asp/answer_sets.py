@@ -26,7 +26,7 @@ class AnswerSets(Output, ASPDataCollection):
         optimal_answer_sets = []
 
         for answer_set in answer_sets:
-            max_level = max(answer_set.getWeights().keys())
+            max_level = max(answer_set.get_weights().keys())
 
             if levels < max_level:
                 levels = max_level
@@ -35,7 +35,7 @@ class AnswerSets(Output, ASPDataCollection):
             minimum_cost = sys.maxsize
 
             for answer_set in answer_sets:
-                cost = int(answer_set.getWeights().get(level, 0))
+                cost = answer_set.get_weights().get(level, 0)
 
                 if cost < minimum_cost:
                     optimal_answer_sets.clear()
@@ -60,4 +60,4 @@ class AnswerSets(Output, ASPDataCollection):
         self._answer_sets[-1].get_answer_set().append(result)
 
     def store_cost(self, level, weight):
-        self._answer_sets[-1].get_weights()[level] = weight
+        self._answer_sets[-1].get_weights()[int(level)] = int(weight)
