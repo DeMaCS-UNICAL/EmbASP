@@ -7,7 +7,7 @@ class DLV2DesktopService(DesktopService):
 
     def __init__(self, exe_path):
         super(DLV2DesktopService, self).__init__(exe_path)
-        self._load_from_stdin_option = "--"
+        self._load_from_stdin_option = "--stdin"
 
     def _get_output(self, output, error):
         """Returns a new DLV2AnwerSets from given output and error."""
