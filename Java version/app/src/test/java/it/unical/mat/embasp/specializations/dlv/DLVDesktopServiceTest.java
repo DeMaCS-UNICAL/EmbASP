@@ -78,8 +78,6 @@ public class DLVDesktopServiceTest {
 						path.append("dlv.i386-linux-elf-static.bin");
 				}
 
-		System.out.println("Full path: " + path.toString()); // debug string
-
 		return path.toString();
 
 	}
@@ -124,8 +122,8 @@ public class DLVDesktopServiceTest {
 
 			Assert.assertTrue("Found error in the Plan\n" + answerSets.getErrors(), answerSets.getErrors().isEmpty());
 
-			if (answerSets.getAnswersets().size() == 0)
-				return;
+			Assert.assertTrue(answerSets.getAnswersets().size() != 0);
+			
 			final AnswerSet as = answerSets.getAnswersets().get(0);
 			for (final Object obj : as.getAtoms()) {
 				final Cell cell = (Cell) obj;
