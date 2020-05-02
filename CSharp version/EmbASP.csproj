@@ -139,6 +139,9 @@
     <Compile Include="it\unical\mat\test\language\asp\ASPMapperTest.cs" />
     <Compile Include="it\unical\mat\test\language\pddl\PDDLMapperTest.cs" />
     <Compile Include="it\unical\mat\test\specialization\clingo\ClingoDesktopServiceTest.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\DLV2DesktopServiceTest.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\Edge.cs" />
+    <Compile Include="it\unical\mat\test\specialization\dlv2\Path.cs" />
     <Compile Include="it\unical\mat\test\specialization\dlvhex\DLVHEXDesktopServiceTest.cs" />
     <Compile Include="it\unical\mat\test\specialization\dlv\CallbackAction.cs" />
     <Compile Include="it\unical\mat\test\specialization\dlv\Cell.cs" />
