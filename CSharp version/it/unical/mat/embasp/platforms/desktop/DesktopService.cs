@@ -73,7 +73,6 @@ namespace it.unical.mat.embasp.platforms.desktop
 
             string solverOutput = "EMPTY_OUTPUT";
             string solverError = "EMPTY_ERROR";
-            FileStream tmpFile = null;
 
             try
             {
@@ -93,9 +92,8 @@ namespace it.unical.mat.embasp.platforms.desktop
 
                 if (final_program.Length > 0)
                 {
-                    tmpFile = WriteToFile("tmp", final_program);
-                    options_string.Append(" ").Append(tmpFile.Name);
-                    stringBuffer.Append(" ").Append(tmpFile.Name);
+                    options_string.Append(this.load_from_STDIN_option);
+                    stringBuffer.Append(this.load_from_STDIN_option);
                 }
 
                 Console.Error.WriteLine(stringBuffer.ToString());
@@ -109,14 +107,18 @@ namespace it.unical.mat.embasp.platforms.desktop
                 solver_process.StartInfo.RedirectStandardError = true;
                 solver_process.Start();
 
+                if (final_program.Length > 0)
+                {
+                    StreamWriter writer = solver_process.StandardInput;
+                    writer.WriteLine(final_program);
+                    if (writer != null)
+                    {
+                        writer.Close();
+                    }
+                }
+
                 solverOutput = solver_process.StandardOutput.ReadToEnd().ToString();
                 solverError = solver_process.StandardError.ReadToEnd().ToString();
-
-                //StreamWriter writer = solver_process.StandardInput;
-                //writer.WriteLine(final_program);
-                //if (writer != null) {
-                //  writer.Close();
-                //}
 
                 solver_process.WaitForExit();
                 solver_process.Close();
@@ -125,17 +127,10 @@ namespace it.unical.mat.embasp.platforms.desktop
 
                 Console.Error.WriteLine("Total time : " + watch.ElapsedMilliseconds);
 
-                if (tmpFile != null && File.Exists(tmpFile.Name))
-                    File.Delete(tmpFile.Name);
-
                 return GetOutput(solverOutput.ToString(), solverError.ToString());
             }
             catch (Win32Exception e2)
             {
-                //if (tmpFile != null && File.Exists(tmpFile.Name)) {
-                //  File.Delete(tmpFile.Name);
-                //}
-                //return GetOutput(tmpFile.Name + " STRING: " + e2.ToString() + "\n\nSTACK TRACE\n\n " + e2.StackTrace + "\n\nINNER: \n\n" +e2.InnerException, "");
                 Console.Error.WriteLine(e2.ToString());
                 Console.Error.Write(e2.StackTrace);
             }
@@ -144,15 +139,6 @@ namespace it.unical.mat.embasp.platforms.desktop
 
         }
 
-        protected internal virtual FileStream WriteToFile(string pFilename, string sb)
-        {
-            string filename = System.IO.Path.GetTempPath() + pFilename + Guid.NewGuid().ToString() + ".tmp";
-            FileStream tempFile = File.Create(filename);
-            tempFile.Close();
-            System.IO.StreamWriter bw = new System.IO.StreamWriter(filename, append: true);
-            bw.Write(sb);
-            bw.Close();
-            return tempFile;
-        }
+
     }
 }
