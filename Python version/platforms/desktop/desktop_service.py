@@ -57,14 +57,15 @@ class DesktopService(Service):
             else:
                 print("Warning : wrong " +
                       str(OptionDescriptor().__class__.__name__))
-        files_paths = ""
+                
+        files_paths = list()
         final_program = ""
         for p in programs:
             if p is not None:
                 final_program += p.get_programs()
-                program_file = p.get_string_of_files_paths()
-                if program_file is not None:
-                    files_paths += program_file
+                for path in p.get_files_paths():
+                    if len(path) != 0:
+                        files_paths.append(path)
             else:
                 print("Warning : wrong " +
                       str(InputProgram().__class__.__name__))
@@ -73,33 +74,34 @@ class DesktopService(Service):
             return Output("", "Error: executable not found")
 
         exep = str(self._exe_path)
-
         opt = str(option)
 
         lis = list()
         lis.append(exep)
         if opt != "":
             lis.append(opt)
-        if files_paths != "":
-            paths = files_paths[:-1].split(' ')
-            for path in paths:
-                lis.append(path)
+        for path in files_paths:
+            lis.append(path)
         if self._load_from_stdin_option != "" and final_program != "":
             lis.append(self._load_from_stdin_option)
 
-        print(exep + " " + opt + " " + files_paths, end='')
-        
+        print(exep + " ", end='')
+        if opt != "":
+            print(opt + " ", end='')
+        for path in files_paths:
+            print(path + " ", end='')
         if final_program != "":
             print(self._load_from_stdin_option)
         else:
             print()
-       
+            
         start = int(time.time() * 1e+9)
 
         proc = subprocess.Popen(
             lis,
             universal_newlines=True,
             stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             stdin=subprocess.PIPE,
         )
 
