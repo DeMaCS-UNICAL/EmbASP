@@ -14,7 +14,7 @@ class DesktopService(Service):
     def __init__(self, exe_path):
         self._exe_path = exe_path  # Stores solver's executable path
         # Stores option string in order to enable solver to read from standard input
-        self._load_from_STDIN_option = None
+        self._load_from_stdin_option = None
 
     def get_exe_path(self):
         """Return execution path of DesktopService."""
