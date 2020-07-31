@@ -1,0 +1,10 @@
+T__0=1
+T__1=2
+T__2=3
+IDENTIFIER=4
+INTEGER=5
+STRING=6
+WHITESPACE=7
+'('=1
+','=2
+')'=3
