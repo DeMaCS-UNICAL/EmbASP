@@ -10,7 +10,8 @@ The framework has been designed to be easily extensible and adaptable to differe
 
 ### User Guide
 
-The latest stable version can be dowloaded [here](https://github.com/DeMaCS-UNICAL/EmbASP/releases). For the Desktop platform a JAR file, a wheel file and a DLL file have been released, while for the Android platform a AAR file has been released.
+The [latest stable version](https://github.com/DeMaCS-UNICAL/EmbASP/releases/latest) can be dowloaded from the [Releases page](https://github.com/DeMaCS-UNICAL/EmbASP/releases) on GitHub.
+A JAR file, a wheel file and a DLL file are available for the Desktop platform, while for the Android platform a AAR file has been released.
 
 ### Developer Guide
 
