@@ -1,12 +1,12 @@
 [submodule "EmbASP-Java"]
 	path = EmbASP-Java
-	url = https://github.com/DeMaCS-Unical/EmbASP-Java.git
+	url = https://github.com/DeMaCS-UNICAL/EmbASP-Java.git
 [submodule "EmbASP-Python"]
 	path = EmbASP-Python
-	url = https://github.com/DeMaCS-Unical/EmbASP-Python.git
+	url = https://github.com/DeMaCS-UNICAL/EmbASP-Python.git
 [submodule "EmbASP-CSharp"]
 	path = EmbASP-CSharp
-	url = https://github.com/DeMaCS-Unical/EmbASP-CSharp.git
+	url = https://github.com/DeMaCS-UNICAL/EmbASP-CSharp.git
 [submodule "EmbASP-antlr-grammars"]
 	path = EmbASP-antlr-grammars
-	url = https://github.com/demacs-unical/EmbASP-antlr-grammars
+	url = https://github.com/DeMaCS-UNICAL/EmbASP-antlr-grammars
